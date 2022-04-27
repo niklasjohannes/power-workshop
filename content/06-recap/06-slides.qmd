@@ -1,3 +1,15 @@
 ---
-title: "Recap"
+title: "Slides"
 ---
+
+Below you can find the slides for intro to simulations:
+
+<div>
+
+```{=html}
+<iframe class="slide-deck" src="slides/" width = "800" height = "450"></iframe>
+```
+
+</div>
+
+If you want to see the slides in full screen, you can click [here](slides/){target="_blank"}. To download them as PDFs, hit the 'e' button when you got the presentation open and then Ctrl+P print to PDF. This will work best in Chrome (in Firefox, it didn't print the headings for me).

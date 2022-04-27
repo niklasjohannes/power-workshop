@@ -494,14 +494,14 @@
     "href": "content/03-simulations-in-r/slides/index.html#some-basic-commands-first",
     "title": "Simulations in R",
     "section": "Some basic commands first",
-    "text": "Some basic commands first\nSampling a certain number of elements from a set.\n\nmy_sample <- 1:20\n\nsample(\n  x = my_sample,\n  size = 2\n)\n\n[1] 10  8"
+    "text": "Some basic commands first\nSampling a certain number of elements from a set.\n\nmy_sample <- 1:20\n\nsample(\n  x = my_sample,\n  size = 2\n)\n\n[1] 17  4"
   },
   {
     "objectID": "content/03-simulations-in-r/slides/index.html#sampling",
     "href": "content/03-simulations-in-r/slides/index.html#sampling",
     "title": "Simulations in R",
     "section": "Sampling",
-    "text": "Sampling\nWith or without replacement?\n\nmy_sample <- c(\"a\", \"b\", \"c\")\n\nsample(\n  x = my_sample,\n  size = 4,\n  replace = TRUE\n)\n\n[1] \"a\" \"a\" \"c\" \"b\""
+    "text": "Sampling\nWith or without replacement?\n\nmy_sample <- c(\"a\", \"b\", \"c\")\n\nsample(\n  x = my_sample,\n  size = 4,\n  replace = TRUE\n)\n\n[1] \"b\" \"c\" \"b\" \"c\""
   },
   {
     "objectID": "content/03-simulations-in-r/slides/index.html#on-those-letters",
@@ -515,14 +515,14 @@
     "href": "content/03-simulations-in-r/slides/index.html#sampling-1",
     "title": "Simulations in R",
     "section": "Sampling",
-    "text": "Sampling\nUsing those letters.\n\nmy_sample <- letters[1:3]\n\nsample(\n  x = my_sample,\n  size = 4,\n  replace = TRUE\n)\n\n[1] \"a\" \"b\" \"c\" \"c\""
+    "text": "Sampling\nUsing those letters.\n\nmy_sample <- letters[1:3]\n\nsample(\n  x = my_sample,\n  size = 4,\n  replace = TRUE\n)\n\n[1] \"a\" \"a\" \"b\" \"c\""
   },
   {
     "objectID": "content/03-simulations-in-r/slides/index.html#sampling-2",
     "href": "content/03-simulations-in-r/slides/index.html#sampling-2",
     "title": "Simulations in R",
     "section": "Sampling",
-    "text": "Sampling\nAssigning different probabilities.\n\nmy_sample <- c(\"black\", \"blue\")\n\nsample(\n  x = my_sample,\n  size = 10,\n  replace = TRUE,\n  prob = c(0.2, 0.8)\n)\n\n [1] \"blue\"  \"black\" \"blue\"  \"blue\"  \"blue\"  \"black\" \"blue\"  \"blue\"  \"black\"\n[10] \"blue\""
+    "text": "Sampling\nAssigning different probabilities.\n\nmy_sample <- c(\"black\", \"blue\")\n\nsample(\n  x = my_sample,\n  size = 10,\n  replace = TRUE,\n  prob = c(0.2, 0.8)\n)\n\n [1] \"blue\"  \"blue\"  \"black\" \"blue\"  \"blue\"  \"blue\"  \"black\" \"blue\"  \"blue\" \n[10] \"blue\""
   },
   {
     "objectID": "content/03-simulations-in-r/slides/index.html#remember-seeds",
@@ -2014,6 +2014,55 @@
     "title": "Alpha, beta, and sensitivity",
     "section": "References",
     "text": "References\n\n\nBenjamin, Daniel J., James O. Berger, Magnus Johannesson, Brian A. Nosek, E.-J. Wagenmakers, Richard Berk, Kenneth A. Bollen, et al. 2018. “Redefine Statistical Significance.” Nature Human Behaviour 2 (1): 6–10. https://doi.org/10.1038/s41562-017-0189-z.\n\n\nCohen, J. 1988. Statistical Power Analysis for the Behavioral Sciences. 2nd ed. Hillsdale, NJ: Lawrence Erlbaum.\n\n\nField, Scott A., Andrew J. Tyre, Niclas Jonzen, Jonathan R. Rhodes, and Hugh P. Possingham. 2004. “Minimizing the Cost of Environmental Management Decisions by Optimizing Statistical Thresholds.” Ecology Letters 7 (8): 669–75. https://doi.org/10.1111/j.1461-0248.2004.00625.x.\n\n\nFisher, Ronald A. 1926. “The Arrangement of Field Experiments.” Journal of the Ministry of Agriculture 33: 503–15.\n\n\nLakens, Daniël. 2022. “Sample Size Justification.” Collabra: Psychology 8 (1): 33267. https://doi.org/10.1525/collabra.33267.\n\n\nLakens, Daniël, Federico G. Adolfi, Casper J. Albers, Farid Anvari, Matthew A. J. Apps, Shlomo E. Argamon, Thom Baguley, et al. 2018. “Justify Your Alpha.” Nature Human Behaviour 2 (3): 168–71. https://doi.org/10.1038/s41562-018-0311-x.\n\n\nMaier, Maximilian, and Daniel Lakens. 2021. “Justify Your Alpha: A Primer on Two Practical Approaches,” June. https://doi.org/10.31234/osf.io/ts4r6.\n\n\n\n\nhttps://niklasjohannes.github.io/power-workshop/"
+  },
+  {
+    "objectID": "content/06-recap/06-slides.html",
+    "href": "content/06-recap/06-slides.html",
+    "title": "Slides",
+    "section": "",
+    "text": "Below you can find the slides for intro to simulations:\n\n\n\nIf you want to see the slides in full screen, you can click here. To download them as PDFs, hit the ‘e’ button when you got the presentation open and then Ctrl+P print to PDF. This will work best in Chrome (in Firefox, it didn’t print the headings for me)."
+  },
+  {
+    "objectID": "content/06-recap/slides/index.html#why-this-workshop",
+    "href": "content/06-recap/slides/index.html#why-this-workshop",
+    "title": "Recap",
+    "section": "Why this workshop",
+    "text": "Why this workshop\n\nDesigning an informative study is a key skill\nA study is rarely informative if it can’t detect what you’re after\nNeglecting power means not knowing what our results mean"
+  },
+  {
+    "objectID": "content/06-recap/slides/index.html#so-why-are-we-here",
+    "href": "content/06-recap/slides/index.html#so-why-are-we-here",
+    "title": "Recap",
+    "section": "So why are we here?",
+    "text": "So why are we here?\nThe goal of the workshop is for you to (1) have an understanding of the philosophy behind using data to test claims, (2) get an intuition of how data generation processes work, (3) learn the technical skills to turn these processes into data, and (4) use these skills to simulate power for an informative study."
+  },
+  {
+    "objectID": "content/06-recap/slides/index.html#whats-power",
+    "href": "content/06-recap/slides/index.html#whats-power",
+    "title": "Recap",
+    "section": "What’s power",
+    "text": "What’s power\n\nUnderstanding of the logic behind NHST\nIntuition about what power is\nSee why power, perhaps, potentially isn’t just a hoop to jump through"
+  },
+  {
+    "objectID": "content/06-recap/slides/index.html#simulations-in-r",
+    "href": "content/06-recap/slides/index.html#simulations-in-r",
+    "title": "Recap",
+    "section": "Simulations in R",
+    "text": "Simulations in R\n\nUnderstand why simulations are useful\nLogic of Monte Carlo Simulations\nBasic tools"
+  },
+  {
+    "objectID": "content/06-recap/slides/index.html#effect-sizes",
+    "href": "content/06-recap/slides/index.html#effect-sizes",
+    "title": "Recap",
+    "section": "Effect sizes",
+    "text": "Effect sizes\n\nUnderstand the importance of effect sizes\nHow to formulate a smallest effect size of interest\nKnow when you don’t have enough information"
+  },
+  {
+    "objectID": "content/06-recap/slides/index.html#alpha-beta-sensitivity",
+    "href": "content/06-recap/slides/index.html#alpha-beta-sensitivity",
+    "title": "Recap",
+    "section": "Alpha, beta, sensitivity",
+    "text": "Alpha, beta, sensitivity\n\nQuestion the default of \\(\\alpha\\) = 0.05 and power = 80%\nUnderstand how terribly complex designing an informative study is\nKnow where to turn when you don’t have enough information"
   },
   {
     "objectID": "index.html",
