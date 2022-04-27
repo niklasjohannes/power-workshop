@@ -2,13 +2,49 @@ project:
   type: website
 
 website:
-  title: "power-workshop"
-  navbar:
-    background: primary
-    left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
+  sidebar:
+    title: "Power analysis through simulation in R"
+    subtitle: "A 2-day workshop"
+    style: "docked"
+    search: true
+    contents:
+      - section: "Overview"
+        contents:
+          - index.qmd
+          - "content/01-intro/01-slides.qmd"
+      - section: "What's power?"
+        contents:
+          - "content/02-whats-power/02-slides.qmd"
+      - section: "Simulations in R"
+        contents:
+          - "content/03-simulations-in-r/03-slides.qmd"
+          - "content/03-simulations-in-r/03-exercise.qmd"
+      - section: "Effect sizes"
+        contents:
+          - "content/04-effect-sizes/04-slides.qmd"
+          - "content/04-effect-sizes/04-exercise.qmd"
+      - section: "Alpha, beta, sensitivity"
+        contents:
+          - "content/05-alpha-beta-sensitivity/05-slides.qmd"
+          - "content/05-alpha-beta-sensitivity/05-exercise.qmd"
+      - section: "Recap I"
+        contents:
+          - "content/06-recap/06-slides.qmd"
+      - section: "Categorical predictors"
+        contents:
+          - "content/07-categorical-predictors/07-slides.qmd"
+          - "content/07-categorical-predictors/07-exercise.qmd"
+      - section: "Interactions"
+        contents:
+          - "content/08-interactions/08-slides.qmd"
+          - "content/08-interactions/08-exercise.qmd"
+      - section: "Continuous predictors"
+        contents:
+          - "content/09-continuous-predictors/09-slides.qmd"
+          - "content/09-continuous-predictors/09-exercise.qmd"
+      - section: "Recap II"
+        contents:
+          - "content/10-goodbye/10-slides.qmd"
 
 format:
   html:
