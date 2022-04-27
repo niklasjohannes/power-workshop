@@ -413,6 +413,531 @@
     "text": "References\n\n\nBaker, Monya. 2016. “1,500 Scientists Lift the Lid on Reproducibility.” Nature 533 (7604): 452–54. https://doi.org/10.1038/533452a.\n\n\nVazire, Simine. 2017. “Quality uncertainty erodes trust in science.” Collabra: Psychology 3 (1): 1. https://doi.org/10.1525/collabra.74.\n\n\n\n\nhttps://niklasjohannes.github.io/power-workshop/"
   },
   {
+    "objectID": "content/03-simulations-in-r/03-exercise.html#block-1",
+    "href": "content/03-simulations-in-r/03-exercise.html#block-1",
+    "title": "Exercise I",
+    "section": "0.1 Block 1",
+    "text": "0.1 Block 1\n\n0.1.1 Exercise\nYou have three groups. Name the groups, randomly sample ten cases (total), and then create a simple data frame that contains a variable for the group called condition.\n\ngroups <- letters[1:3]\nmy_sample <- sample(groups, 10, TRUE)\nd <- data.frame(condition = as.factor(my_sample))\n\n\n\n0.1.2 Exercise\nSame three groups. This time you want each case to have a 70% to be in the first group, a 20% to be in the second group, and a 10% to be in the third group. Get 100 participants (no need for a data frame). Use set.seed(1). How many are in the first group?\n\nset.seed(1)\ngroups <- letters[1:3]\nmy_sample <- \n  sample(\n    groups,\n    100,\n    TRUE,\n    prob = c(0.7, 0.2, 0.1)\n  )\nsum(my_sample==groups[1])\n\n[1] 68\n\n\n\n\n0.1.3 Exercise\nShow that sample with assigned probability (prob = argument) is the same as rbinom. Conduct 10 coin flips with a an unfair coin that has a 60% of landing heads. Remember to set a seed (tip: twice).\n\nset.seed(1)\nsample(0:1, 10, replace = TRUE, prob = c(0.4, 0.6))\n\n [1] 1 1 1 0 1 0 0 0 0 1\n\nset.seed(1)\nrbinom(10, 1, 0.6)\n\n [1] 1 1 1 0 1 0 0 0 0 1\n\n\n\n\n0.1.4 Exercise\nDraw random letters from the alphabet until the alphabet is empty.\n\nsample(letters, length(letters))\n\n [1] \"s\" \"a\" \"u\" \"x\" \"j\" \"n\" \"v\" \"g\" \"i\" \"o\" \"e\" \"p\" \"r\" \"w\" \"q\" \"l\" \"b\" \"m\" \"d\"\n[20] \"z\" \"y\" \"h\" \"c\" \"t\" \"k\" \"f\"\n\n\n\n\n0.1.5 Exercise\nDraw all letters from the alphabet and explicitly assign the same probability for each letter (tip: repeat the same probability).\n\nprobs <- rep(1/length(letters), length(letters))\nsample(letters, prob = probs)\n\n [1] \"r\" \"v\" \"o\" \"n\" \"w\" \"b\" \"l\" \"t\" \"s\" \"k\" \"y\" \"i\" \"f\" \"c\" \"e\" \"j\" \"q\" \"u\" \"m\"\n[20] \"a\" \"g\" \"p\" \"h\" \"x\" \"d\" \"z\"\n\n\n\n\n0.1.6 Exercise\nCreate a data set. In the data set, each participant has an identifier (called id), a group identifier (condition), and an identifier what number of measurement we have for this participant (trial). There are 3 participants in each of three groups with 5 trials in each group.\n\ngroups <- letters[1:3]\nparticipants <- length(groups) * 3\ntrials <- 5\n\nd <- \n  data.frame(\n    id = rep(1:participants, each = trials),\n    condition = rep(groups, each = trials, times = 3),\n    trial = rep(1:trials, times = participants)\n  )\n\nd\n\n   id condition trial\n1   1         a     1\n2   1         a     2\n3   1         a     3\n4   1         a     4\n5   1         a     5\n6   2         b     1\n7   2         b     2\n8   2         b     3\n9   2         b     4\n10  2         b     5\n11  3         c     1\n12  3         c     2\n13  3         c     3\n14  3         c     4\n15  3         c     5\n16  4         a     1\n17  4         a     2\n18  4         a     3\n19  4         a     4\n20  4         a     5\n21  5         b     1\n22  5         b     2\n23  5         b     3\n24  5         b     4\n25  5         b     5\n26  6         c     1\n27  6         c     2\n28  6         c     3\n29  6         c     4\n30  6         c     5\n31  7         a     1\n32  7         a     2\n33  7         a     3\n34  7         a     4\n35  7         a     5\n36  8         b     1\n37  8         b     2\n38  8         b     3\n39  8         b     4\n40  8         b     5\n41  9         c     1\n42  9         c     2\n43  9         c     3\n44  9         c     4\n45  9         c     5\n\n\n\n\n0.1.7 Exercise\nYou have two groups, a control and a treatment group. In each group, there are 10 participants. Each participant flips a coin 10 times. The control group has a fair coin: 50% heads. The treatment group has an unfair coin: 70% heads. Create a data frame with a participant identifier (id), group membership (condition), and a total head count for that participant (heads). Check that the two groups indeed have different means on the number of heads (roughly corresponding to the two probabilities)\n\ngroups <- c(\"control\", \"treatment\")\nn <- 20\nflips <- 10\nfair <- 0.5\nunfair <- 0.7\nprobs <- rep(c(fair, unfair), each = n/2)\n\n\nd <- \n  data.frame(\n    id = 1:20,\n    condition = rep(groups, each = n/2),\n    heads = rbinom(n, flips, prob = probs)\n  )\n\naggregate(d$heads, by = list(d$condition), mean)\n\n    Group.1   x\n1   control 5.4\n2 treatment 6.5\n\n\n\n\n0.1.8 Exercise\nYou have 100 participants. Each participants reports their age which lies uniformly between 20 and 40. They also report grumpiness on a 100-point scale (with a 10-point SD). Each extra year predicts 0.5 higher grumpiness. Create the two variables (no need for a data frame) and conduct a correlation with cor. What’s the correlation?\n\nn <- 100\nage <- runif(n, 20, 40)\ngrumpiness <- age*0.5 + rnorm(n, 100, 10)\ncor(age, grumpiness)\n\n[1] 0.2127516\n\n\n\n\n0.1.9 Exercise\nWe track how many calls you get during this exercise. Nobody calls anymore, so there’ll be very few. Create a data frame with 20 participants, a participant number and the number of calls per participant. Plot the calls and show that 0 is the most common value.\n\nn <- 20\n\nd <- data.frame(\n  id = 1:n,\n  calls = rpois(n, 0.5)\n)\n\nplot(density(d$calls)) \n\n\n\n\n\n\n0.1.10 Exercise\nProfessors get more calls. Add 20 more participants who have much higher call numbers. Also include a condition variable that marks whether participants are students (first 20 people) or professors (new 20 people). Conduct an independent sample t-test (t.test) and also plot the different groups as a boxplot.\n\nd <- rbind(\n  d,\n    data.frame(\n    id = n+1:2*n,\n    calls = rpois(n, 3)\n  )\n)\n\nd$condition <- \n  rep(c(\"students\", \"profs\"), each = 20)\n\nt.test(d$calls ~ d$condition)\n\n\n    Welch Two Sample t-test\n\ndata:  d$calls by d$condition\nt = 5.8023, df = 26.202, p-value = 3.989e-06\nalternative hypothesis: true difference in means between group profs and group students is not equal to 0\n95 percent confidence interval:\n 1.679272 3.520728\nsample estimates:\n   mean in group profs mean in group students \n                  3.25                   0.65 \n\nboxplot(d$calls ~ d$condition)"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/03-exercise.html#block-2",
+    "href": "content/03-simulations-in-r/03-exercise.html#block-2",
+    "title": "Exercise I",
+    "section": "0.2 Block 2",
+    "text": "0.2 Block 2\nIn this section, you’ll use the basics from above to perform your first power analysis. You’ll apply repeated simulations over a range of values and extracting and storing results to summarize them.\n\n0.2.1 Exercise\nThere are four groups. Each group comes from a different normal distribution. The means are c(100, 105, 107, 109). The SDs are c(9, 12, 10, 17). Each group should be 20 cases. Store everything in a data frame and have a variable that indicates the group. Tip: Remember that R uses vectors, even for arguments in a function.\n\nmeans <- c(100, 105, 107, 109)\nsds <- c(9, 12, 10, 17)\nn <- 20\n\nd <- \n  data.frame(\n    group = rep(c(letters[1:4]), times = n),\n    score = rnorm(n*4, means, sds)\n  )\n\n\n\n0.2.2 Exercise\nYou need 5 samples. Each sample contains 10 unique letters from the alphabet. (Use replicate.)\n\nreplicate(5, sample(letters, 10))\n\n      [,1] [,2] [,3] [,4] [,5]\n [1,] \"o\"  \"u\"  \"p\"  \"l\"  \"e\" \n [2,] \"p\"  \"e\"  \"g\"  \"j\"  \"w\" \n [3,] \"q\"  \"l\"  \"z\"  \"a\"  \"f\" \n [4,] \"s\"  \"c\"  \"q\"  \"f\"  \"s\" \n [5,] \"n\"  \"r\"  \"k\"  \"q\"  \"t\" \n [6,] \"f\"  \"n\"  \"i\"  \"m\"  \"l\" \n [7,] \"k\"  \"m\"  \"h\"  \"b\"  \"c\" \n [8,] \"h\"  \"o\"  \"m\"  \"o\"  \"d\" \n [9,] \"e\"  \"b\"  \"f\"  \"d\"  \"o\" \n[10,] \"b\"  \"t\"  \"x\"  \"z\"  \"n\" \n\n\n\n\n0.2.3 Exercise\nSame as before, but this time you need 10 samples from a normal distribution with a mean of 10 and an SD of 2. Use replicate first, then a for loop.\n\nreplicate(5, rnorm(10, 10, 2))\n\n           [,1]      [,2]      [,3]      [,4]      [,5]\n [1,] 10.629034 10.077856 10.916251 11.087316  8.782663\n [2,] 10.444436 10.029294  7.095943 12.082121  9.397606\n [3,]  8.312769  9.627366 10.154685 10.395012 11.952405\n [4,] 10.887611 12.801182 11.119791  6.740843 10.912017\n [5,] 10.111594 10.036971  9.850107 10.242080 12.588816\n [6,] 10.135945 10.498392 11.565395  6.725156  7.733596\n [7,]  9.596077 10.298441  9.654663  8.937914  8.261079\n [8,]  7.683969  8.073534  7.897412 11.907360  8.490059\n [9,]  8.814513  9.867066 11.458903  6.558699  9.740729\n[10,] 11.532131 12.573844 10.525330 10.212641  7.996397\n\nfor (i in 1:5) {\n  print(rnorm(10, 10, 2))\n}\n\n [1]  8.360263  8.050895 11.208619 11.097575 11.832865 15.323133  9.639486\n [8] 11.370030 16.532829 11.121201\n [1]  9.861965  8.055114  8.906827  6.622615  6.855255  9.190026 10.638573\n [8] 10.080855  9.219981  6.361556\n [1] 11.318361 10.919243 13.233253  6.287619  9.426352 13.500644 10.232827\n [8] 12.768506 11.148442 10.272982\n [1] 11.828432  6.398347  9.320239 11.212529 12.682261 11.534575 10.387451\n [8] 12.281133 10.027730  7.789388\n [1]  9.949675  9.672653 10.740119  9.238351 11.305905 14.122684  6.406710\n [8] 11.168154  8.554494  8.741671\n\n\n\n\n0.2.4 Exercise\nAssume we know the population mean in height (168cm) and its standard deviation (20). Assume we draw 10,000 samples from this distribution. Each sample has 50 participants. The standard deviation of these 10,000 sample means is the standard error.\nSimulate the standard error and compare it to the theoretical value: \\(SE = \\frac{\\sigma}{\\sqrt{n}}\\). (\\(\\sigma\\) is the standard deviation of the population.)\n\nn <- 50\nmu <- 168\nsd <- 20\nse <- sd / sqrt(n)\nmeans <- NULL \ndraws <- 1e5\n\nfor (i in 1:draws) {\n  means[i] <- mean(rnorm(n, mu, sd))\n}\n\ncat(\"The real SE is:\", round(se, digits = 2), \". The simulated SE is:\", round(sd(means), digits = 2), \".\")\n\nThe real SE is: 2.83 . The simulated SE is: 2.83 .\n\n# with replicate\nmeans <- \n  replicate(\n    draws,\n    rnorm(n, mu, sd)\n  )\n\nsd(colMeans(means))\n\n[1] 2.827195\n\n\n\n\n0.2.5 Exercise\nSame population. Draw 1,000 observations for each sample size between 20 and 100. Calculate the standard error for each sample size (like you did above) and plot it against the sample size. (Tip: You’ll need to iterate over two things.)\n\nmu <- 168\nsd <- 20\ndraws <- 1e3\nmin_sample <- 20\nmax_sample <- 100\n\nresults <- \n  data.frame(\n    sample_size = NULL,\n    se = NULL\n  )\n\nfor (i in min_sample:max_sample) {\n  \n  sample_means <- NULL\n  \n  for (j in 1:draws) {\n    sample_means[j] <- mean(rnorm(i, mu, sd))\n  }\n  \n  se <- sd(sample_means)\n  \n  results <- rbind(\n    results,\n    data.frame(\n      sample_size = i,\n      se = se\n    )\n  )\n}\n\nplot(results$sample_size, results$se)\n\n\n\n\n\n\n0.2.6 Exercise\nTurn the above into a function so that you can change the population effect size, SD, number of simulations, and sample size range. The function should also return the plot from above.\n\nsample_against_se <- \n  function(\n    mu = 168,\n    sd = 20,\n    draws = 1e3,\n    min_sample = 20,\n    max_sample = 100\n  ) {\n    results <- \n      data.frame(\n        sample_size = NULL,\n        se = NULL\n      )\n    \n    for (i in min_sample:max_sample) {\n      \n      sample_means <- NULL\n      \n      for (j in 1:draws) {\n        sample_means[j] <- mean(rnorm(i, mu, sd))\n      }\n      \n      se <- sd(sample_means)\n      \n      results <- rbind(\n        results,\n        data.frame(\n          sample_size = i,\n          se = se\n        )\n      )\n    }\n    \n    return(plot(results$sample_size, results$se))\n  }\n\n\n\n0.2.7 Exercise\nTry out the function with two plots: when the population SD is 5 and when you do 10 draws. What changes?\n\nsample_against_se(sd = 5)\n\n\n\nsample_against_se(draws = 10)\n\n\n\n\n\n\n0.2.8 Exercise\nThe average height of men in Spain is 173cm (says Wikipedia). The population standard deviation is probablay around 7cm (source).\nYou draw a sample of men and want to test whether they’re significantly different from that mean (our H0). In fact, these men you have sampled are truly French (175.6cm, our true “effect size”). In other words, can we reject the null hypothesis that these men we sampled come from a different country in favor of our alternative hypothesis that the true population value is greater than the Spanish population mean?\nYou calculate the z-statistic, which is calculated as follows: \\(\\frac{\\bar{X} - \\mu_0}{\\sigma/\\sqrt{N}}\\) This simply tells us how far from the population mean (well, the suspected population mean under the null hypothesis) our sample mean is in terms of standard errors. \\(\\bar{X}\\) is the sample mean, \\(\\mu_0\\) is the population mean under H0, \\(\\sigma\\) is the population standard deviation, and \\(N\\) is the sample size.\nThen we can look up the z-score to see what the probability is to score this high or higher (does that definition ring a bell?). In R, you can simply do that with a built-in function: pnorm(). For example, if we have a z-score of 1.645, our probability of obtaining such a value (or higher) is pnorm(1.645, lower.tail = FALSE) = 0.0499849 – our p-value for a one-sided test.\nWe can simulate the power of our statistical test (in this case, the z-statistic). Take a sample of 30 people from the French population, calculate the z-statistic, it’s p-value, and store the p-value. Do this 1,000 times. Plot the distribution of p-values. What can we conclude about the sample size?\n\n# sample size\nn <- 30\nh0 <- 173 # test against this null\nh1 <- 175.6 # true population  effect\nsd <- 7\nalpha <- 0.05\ndraws <- 1e3\n\npvalues <- NULL\n\nfor (i in 1:draws) {\n  d <- rnorm(n, h1, sd)\n  z <- (mean(d) - h0) / (sd / sqrt(n))\n  pvalues[i] <- pnorm(z, lower.tail = FALSE)\n}\n\nplot(density(pvalues))\n\n\n\n\n\n\n0.2.9 Exercise\nNow calculate the power by calculating the proportion of pvalues that are below 0.05. That’s your power: The proportion of tests that will detect that there’s a true effect. In our case, that effect is a difference of 2.6cm.\n\nsum(pvalues < 0.05)/length(pvalues)\n\n[1] 0.668\n\n\n\n\n0.2.10 Exercise\nNow let’s do what we did before: Put the loop from above inside another loop that iterates over different sample sizes. Then put that all into a function that let’s you set the parameters of interest (sample size range, h0, h1, etc.). Then simulate power (1,000 simulations each) for samples between 30 and 100. Plot the sample size against power.\n\npower_function <- \n  function(\n    h0 = 173,\n    h1 = 175.6,\n    sd = 7,\n    alpha = 0.05,\n    draws = 1e3,\n    min_sample = 30,\n    max_sample = 100\n  ) {\n    results <- \n      data.frame(\n        sample_size = NULL,\n        power = NULL\n      )\n    \n    for (i in min_sample:max_sample) {\n      \n      pvalues <- NULL\n      \n      for (j in 1:draws) {\n        d <- rnorm(i, h1, sd)\n        z <- (mean(d) - h0) / (sd / sqrt(i))\n        pvalues[j] <- pnorm(z, lower.tail = FALSE)\n      }\n      \n      results <- rbind(\n        results,\n        data.frame(\n          sample_size = i,\n          power = sum(pvalues < 0.05)/length(pvalues)\n        )\n      )\n    }\n    \n    return(plot(results$sample_size, results$power, type = \"l\"))\n  }\n\npower_function()\n\n\n\n\n\n\n0.2.11 Exercise\nNow do the same thing with a one-sample t-test. (Tip: You only need to replace the z-scores with a t.test from which you can extract the p-value). (Another tip: Use the $ sign on where you stored the t-test results.)\n\npower_function_t <- \n  function(\n    h0 = 173,\n    h1 = 175.6,\n    sd = 7,\n    alpha = 0.05,\n    draws = 1e3,\n    min_sample = 30,\n    max_sample = 100\n  ) {\n    results <- \n      data.frame(\n        sample_size = NULL,\n        power = NULL\n      )\n    \n    for (i in min_sample:max_sample) {\n      \n      pvalues <- NULL\n      \n      for (j in 1:draws) {\n        d <- rnorm(i, h1, sd)\n        t <- t.test(d, mu = h0,alternative = \"greater\")\n        pvalues[j] <- t$p.value\n      }\n      \n      results <- rbind(\n        results,\n        data.frame(\n          sample_size = i,\n          power = sum(pvalues < 0.05)/length(pvalues)\n        )\n      )\n    }\n    \n    return(plot(results$sample_size, results$power, type = \"l\"))\n  }\n\npower_function()\n\n\n\n\n\n\n0.2.12 Exercise\nJust for funsies (and for our next session), see what happens when the true effect is only 1cm in difference.\n\npower_function_t(h1 = h0+1)"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/03-slides.html",
+    "href": "content/03-simulations-in-r/03-slides.html",
+    "title": "Slides",
+    "section": "",
+    "text": "Below you can find the slides for intro to simulations:\n\n\n\nIf you want to see the slides in full screen, you can click here. To download them as PDFs, hit the ‘e’ button when you got the presentation open and then Ctrl+P print to PDF. This will work best in Chrome (in Firefox, it didn’t print the headings for me)."
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#why-should-i-simulate",
+    "href": "content/03-simulations-in-r/slides/index.html#why-should-i-simulate",
+    "title": "Simulations in R",
+    "section": "Why should I simulate",
+    "text": "Why should I simulate\n\nCooking vs. eating\nMakes you truly understand what you’re doing\nForces you to put a number on things"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#going-through-the-motions",
+    "href": "content/03-simulations-in-r/slides/index.html#going-through-the-motions",
+    "title": "Simulations in R",
+    "section": "Going through the motions",
+    "text": "Going through the motions\n\nYou’ll often find that you don’t know nearly enough for a prediction–or even a study\nIf we can’t generate the pattern we’re interested in how can we explain a pattern?\nI take a proper description over a flawed confirmation"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#technicalities",
+    "href": "content/03-simulations-in-r/slides/index.html#technicalities",
+    "title": "Simulations in R",
+    "section": "Technicalities",
+    "text": "Technicalities\nAbove all, you want to be able to reproduce your analysis–much later, on a different computer, etc. (Trisovic et al. 2022)"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#computational-reproducibility",
+    "href": "content/03-simulations-in-r/slides/index.html#computational-reproducibility",
+    "title": "Simulations in R",
+    "section": "Computational reproducibility",
+    "text": "Computational reproducibility\n\nEnvironment\nPackages for project\nPackages for script\nVersion control"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#for-now",
+    "href": "content/03-simulations-in-r/slides/index.html#for-now",
+    "title": "Simulations in R",
+    "section": "For now",
+    "text": "For now\n\nset.seed(): Reproduce random numbers within same script\nsessionInfo(): Prints computational environment\nRelative paths (here package)\nExplicit caching or markdown"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#monte-carlo-simulations",
+    "href": "content/03-simulations-in-r/slides/index.html#monte-carlo-simulations",
+    "title": "Simulations in R",
+    "section": "Monte Carlo simulations",
+    "text": "Monte Carlo simulations\n\nMonte Carlo methods, or Monte Carlo experiments, are a broad class of computational algorithms that rely on repeated random sampling to obtain numerical results. The underlying concept is to use randomness to solve problems that might be deterministic in principle. Wikipedia\n\n\n\nSource"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#in-plain-english",
+    "href": "content/03-simulations-in-r/slides/index.html#in-plain-english",
+    "title": "Simulations in R",
+    "section": "In plain English",
+    "text": "In plain English\n\nDefine relevant outcome, the process leading to outcome, and potential inputs that go into the process\nThen decide what inputs you want to vary\nRun the process many, many times, with different inputs, summarize and plot the outcomes"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#a-simple-example",
+    "href": "content/03-simulations-in-r/slides/index.html#a-simple-example",
+    "title": "Simulations in R",
+    "section": "A simple example",
+    "text": "A simple example\nTotally unrelated to why you are here:\n\nOutcome: How much power do I have?\nProcess: The statistical test I plan to do\nInputs: Effect size, sample size, \\(\\alpha\\)"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#some-basic-commands-first",
+    "href": "content/03-simulations-in-r/slides/index.html#some-basic-commands-first",
+    "title": "Simulations in R",
+    "section": "Some basic commands first",
+    "text": "Some basic commands first\nSampling a certain number of elements from a set.\n\nmy_sample <- 1:20\n\nsample(\n  x = my_sample,\n  size = 2\n)\n\n[1] 13 20"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#sampling",
+    "href": "content/03-simulations-in-r/slides/index.html#sampling",
+    "title": "Simulations in R",
+    "section": "Sampling",
+    "text": "Sampling\nWith or without replacement?\n\nmy_sample <- c(\"a\", \"b\", \"c\")\n\nsample(\n  x = my_sample,\n  size = 4,\n  replace = TRUE\n)\n\n[1] \"a\" \"a\" \"b\" \"a\""
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#on-those-letters",
+    "href": "content/03-simulations-in-r/slides/index.html#on-those-letters",
+    "title": "Simulations in R",
+    "section": "On those letters",
+    "text": "On those letters\nR has some neat built-in stuff.\n\nletters[5]\n\n[1] \"e\"\n\nletters[7:10]\n\n[1] \"g\" \"h\" \"i\" \"j\"\n\nLETTERS[20:26]\n\n[1] \"T\" \"U\" \"V\" \"W\" \"X\" \"Y\" \"Z\""
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#sampling-1",
+    "href": "content/03-simulations-in-r/slides/index.html#sampling-1",
+    "title": "Simulations in R",
+    "section": "Sampling",
+    "text": "Sampling\nUsing those letters.\n\nmy_sample <- letters[1:3]\n\nsample(\n  x = my_sample,\n  size = 4,\n  replace = TRUE\n)\n\n[1] \"c\" \"a\" \"c\" \"c\""
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#sampling-2",
+    "href": "content/03-simulations-in-r/slides/index.html#sampling-2",
+    "title": "Simulations in R",
+    "section": "Sampling",
+    "text": "Sampling\nAssigning different probabilities.\n\nmy_sample <- c(\"black\", \"blue\")\n\nsample(\n  x = my_sample,\n  size = 10,\n  replace = TRUE,\n  prob = c(0.2, 0.8)\n)\n\n [1] \"blue\"  \"black\" \"blue\"  \"blue\"  \"blue\"  \"blue\"  \"blue\"  \"blue\"  \"black\"\n[10] \"blue\""
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#remember-seeds",
+    "href": "content/03-simulations-in-r/slides/index.html#remember-seeds",
+    "title": "Simulations in R",
+    "section": "Remember seeds?",
+    "text": "Remember seeds?\n\nmy_sample <- c(\"black\", \"blue\")\n\nset.seed(42)\nsample(\n  x = my_sample,\n  size = 10,\n  replace = TRUE,\n  prob = c(0.2, 0.8)\n)\n\n [1] \"black\" \"black\" \"blue\"  \"black\" \"blue\"  \"blue\"  \"blue\"  \"blue\"  \"blue\" \n[10] \"blue\" \n\nset.seed(42)\nsample(\n  x = my_sample,\n  size = 10,\n  replace = TRUE,\n  prob = c(0.2, 0.8)\n)\n\n [1] \"black\" \"black\" \"blue\"  \"black\" \"blue\"  \"blue\"  \"blue\"  \"blue\"  \"blue\" \n[10] \"blue\""
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#how-do-we-generate-randomness",
+    "href": "content/03-simulations-in-r/slides/index.html#how-do-we-generate-randomness",
+    "title": "Simulations in R",
+    "section": "How do we generate randomness?",
+    "text": "How do we generate randomness?\nBuilt-in R functions that create a random number following a process with a given probability distribution.\n\nrnorm: Normal distribution\nrbinom: Binomial distribution\nrpois: Poissong distribution\nrunif: Uniform distribution"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#normal-distribution",
+    "href": "content/03-simulations-in-r/slides/index.html#normal-distribution",
+    "title": "Simulations in R",
+    "section": "Normal distribution",
+    "text": "Normal distribution\nDraw n numbers from a normal distribution.\n\nrnorm(\n  n = 5,\n  mean = 0,\n  sd = 1\n)\n\n[1] -0.10612452  1.51152200 -0.09465904  2.01842371 -0.06271410"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#once-more-seed",
+    "href": "content/03-simulations-in-r/slides/index.html#once-more-seed",
+    "title": "Simulations in R",
+    "section": "Once more: seed",
+    "text": "Once more: seed\n\nrnorm(1)\n\n[1] 1.30487\n\nrnorm(1)\n\n[1] 2.286645\n\nset.seed(42)\nrnorm(1)\n\n[1] 1.370958\n\nset.seed(42)\nrnorm(1)\n\n[1] 1.370958"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#r-uses-vectors",
+    "href": "content/03-simulations-in-r/slides/index.html#r-uses-vectors",
+    "title": "Simulations in R",
+    "section": "R uses vectors",
+    "text": "R uses vectors\nGives us 4 draws total: 1 draw from a normal distribution with mean = 0 and sd = 1, 1 draw from a normal distribution with mean = 10 and sd = 50, and so on.\n\nrnorm(\n  n = 4,\n  mean = c(0, 10, 20, 30),\n  sd = c(1, 50, 100, 150)\n)\n\n[1] -0.5646982 28.1564206 83.2862605 90.6402485"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#what-would-i-use-this-for",
+    "href": "content/03-simulations-in-r/slides/index.html#what-would-i-use-this-for",
+    "title": "Simulations in R",
+    "section": "What would I use this for?",
+    "text": "What would I use this for?\nSimulating different groups.\n\ncontrol <- \n  rnorm(\n    n = 100,\n    mean = 100,\n    sd = 15\n  )\n\ntreatment <- \n  rnorm(\n    n = 100,\n    mean = 150,\n    sd = 15\n  )"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#what-would-i-use-this-for-1",
+    "href": "content/03-simulations-in-r/slides/index.html#what-would-i-use-this-for-1",
+    "title": "Simulations in R",
+    "section": "What would I use this for?",
+    "text": "What would I use this for?\nSimulating different groups.\n\nboxplot(control, treatment)"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#what-would-i-use-this-for-2",
+    "href": "content/03-simulations-in-r/slides/index.html#what-would-i-use-this-for-2",
+    "title": "Simulations in R",
+    "section": "What would I use this for?",
+    "text": "What would I use this for?\nSimulating a correlation.\n\ncontrol <- \n  rnorm(\n    n = 1000,\n    mean = 100,\n    sd = 15\n  )\n\ntreatment <- \n  control*0.5 + rnorm(\n    n = 1000,\n    mean = 100,\n    sd = 15\n  )"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#what-would-i-use-this-for-3",
+    "href": "content/03-simulations-in-r/slides/index.html#what-would-i-use-this-for-3",
+    "title": "Simulations in R",
+    "section": "What would I use this for?",
+    "text": "What would I use this for?\n\nsummary(lm(treatment~control))\n\n\nCall:\nlm(formula = treatment ~ control)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-42.531  -9.904  -0.444  10.315  53.874 \n\nCoefficients:\n             Estimate Std. Error t value Pr(>|t|)    \n(Intercept) 100.71554    3.15133   31.96   <2e-16 ***\ncontrol       0.49205    0.03129   15.72   <2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 14.86 on 998 degrees of freedom\nMultiple R-squared:  0.1985,    Adjusted R-squared:  0.1977 \nF-statistic: 247.2 on 1 and 998 DF,  p-value: < 2.2e-16"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#teaser-for-later",
+    "href": "content/03-simulations-in-r/slides/index.html#teaser-for-later",
+    "title": "Simulations in R",
+    "section": "Teaser for later",
+    "text": "Teaser for later\nSame data, different conventions."
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#uniform-distribution",
+    "href": "content/03-simulations-in-r/slides/index.html#uniform-distribution",
+    "title": "Simulations in R",
+    "section": "Uniform distribution",
+    "text": "Uniform distribution\nDraw n numbers from a uniform distribution.\n\nrunif(\n  n = 5,\n  min = 0,\n  max = 1\n)\n\n[1] 0.06866080 0.05036072 0.98707779 0.63460261 0.94782652"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#lets-inspect-that",
+    "href": "content/03-simulations-in-r/slides/index.html#lets-inspect-that",
+    "title": "Simulations in R",
+    "section": "Let’s inspect that",
+    "text": "Let’s inspect that\n\nhist(runif(1000))"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#what-would-i-use-this-for-4",
+    "href": "content/03-simulations-in-r/slides/index.html#what-would-i-use-this-for-4",
+    "title": "Simulations in R",
+    "section": "What would I use this for?",
+    "text": "What would I use this for?\nKeeping a range on predictor variables.\n\nage <- runif(n = 1000, min = 18, max = 100)\n\nhist(age, breaks = 30, xlim = c(18, 100))"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#what-would-i-use-this-for-5",
+    "href": "content/03-simulations-in-r/slides/index.html#what-would-i-use-this-for-5",
+    "title": "Simulations in R",
+    "section": "What would I use this for?",
+    "text": "What would I use this for?\nKeeping a range on predictor variables.\n\nage <- runif(n = 1000, min = 18, max = 100)\ny <- age*0.5 + rnorm(1000)\n\nsummary(lm(y~age))\n\n\nCall:\nlm(formula = y ~ age)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-3.0665 -0.6815 -0.0112  0.6320  3.4804 \n\nCoefficients:\n             Estimate Std. Error t value Pr(>|t|)    \n(Intercept) -0.026915   0.082359  -0.327    0.744    \nage          0.499389   0.001297 384.986   <2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.9858 on 998 degrees of freedom\nMultiple R-squared:  0.9933,    Adjusted R-squared:  0.9933 \nF-statistic: 1.482e+05 on 1 and 998 DF,  p-value: < 2.2e-16"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#binomial-distribution",
+    "href": "content/03-simulations-in-r/slides/index.html#binomial-distribution",
+    "title": "Simulations in R",
+    "section": "Binomial distribution",
+    "text": "Binomial distribution\nLet’s flip a coin 100 times. That’s one “experiment”. How often will I get heads?\n\nrbinom(\n  n = 1,\n  size = 100,\n  prob = 0.50\n)\n\n[1] 43"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#many-experiments",
+    "href": "content/03-simulations-in-r/slides/index.html#many-experiments",
+    "title": "Simulations in R",
+    "section": "Many experiments",
+    "text": "Many experiments\nLet’s run 1000 experiments where we flip a coin 100 times each.\n\nexperiments <- \n  rbinom(\n    n = 1000,\n    size = 100,\n    prob = 0.50\n  )\n\nhead(experiments)\n\n[1] 46 56 49 48 53 58"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#always-inspect-and-summarize",
+    "href": "content/03-simulations-in-r/slides/index.html#always-inspect-and-summarize",
+    "title": "Simulations in R",
+    "section": "Always inspect and summarize",
+    "text": "Always inspect and summarize\nMakes sense.\n\nhist(experiments, breaks = 20)"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#what-would-i-use-this-for-6",
+    "href": "content/03-simulations-in-r/slides/index.html#what-would-i-use-this-for-6",
+    "title": "Simulations in R",
+    "section": "What would I use this for?",
+    "text": "What would I use this for?\nCompare groups on their probabilities.\n\ncontrol <- \n  rbinom(\n    n = 100,\n    size = 10,\n    prob = 0.5\n  )\n\ntreatment <- \n  rbinom(\n    n = 100,\n    size = 10,\n    prob = 0.9\n  )"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#what-would-i-use-this-for-7",
+    "href": "content/03-simulations-in-r/slides/index.html#what-would-i-use-this-for-7",
+    "title": "Simulations in R",
+    "section": "What would I use this for?",
+    "text": "What would I use this for?\nCompare groups on their probabilities.\n\nboxplot(control, treatment)"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#what-would-i-use-this-for-8",
+    "href": "content/03-simulations-in-r/slides/index.html#what-would-i-use-this-for-8",
+    "title": "Simulations in R",
+    "section": "What would I use this for?",
+    "text": "What would I use this for?\nBernoulli trials.\n\nrbinom(\n  n = 10,\n  size = 1,\n  prob = 0.5\n)\n\n [1] 1 0 0 1 0 0 1 0 1 0"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#what-would-i-use-this-for-9",
+    "href": "content/03-simulations-in-r/slides/index.html#what-would-i-use-this-for-9",
+    "title": "Simulations in R",
+    "section": "What would I use this for?",
+    "text": "What would I use this for?\nBernoulli trials and logistic regression: Does age predict our binary outcome? (Explanation here.)\n\nage <- rnorm(n = 10000, mean = 50, sd = 15)\n\nxb <- 1 + 0.2*age\n\np <- 1/(1 + exp(-xb))\n\ny <- \n  rbinom(\n    n = 10000,\n    size = 1,\n    prob = p\n  )"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#what-would-i-use-this-for-10",
+    "href": "content/03-simulations-in-r/slides/index.html#what-would-i-use-this-for-10",
+    "title": "Simulations in R",
+    "section": "What would I use this for?",
+    "text": "What would I use this for?\n\nm <- \n  glm(\n    y ~ age,\n    family = binomial()\n  )\n\nsummary(m)\n\n\nCall:\nglm(formula = y ~ age, family = binomial())\n\nDeviance Residuals: \n    Min       1Q   Median       3Q      Max  \n-3.6531   0.0002   0.0011   0.0047   1.0001  \n\nCoefficients:\n            Estimate Std. Error z value Pr(>|z|)    \n(Intercept)  0.13900    0.56322   0.247    0.805    \nage          0.28512    0.04927   5.787 7.18e-09 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 171.86  on 9999  degrees of freedom\nResidual deviance:  66.03  on 9998  degrees of freedom\nAIC: 70.03\n\nNumber of Fisher Scoring iterations: 13"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#poisson-distribution",
+    "href": "content/03-simulations-in-r/slides/index.html#poisson-distribution",
+    "title": "Simulations in R",
+    "section": "Poisson distribution",
+    "text": "Poisson distribution\nLet’s see how many emails we get in an hour. We check for 10 different hours.\n\nrpois(\n  n = 10,\n  lambda = 5\n)\n\n [1] 3 4 5 2 8 5 7 5 5 5"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#lets-visualize",
+    "href": "content/03-simulations-in-r/slides/index.html#lets-visualize",
+    "title": "Simulations in R",
+    "section": "Let’s visualize",
+    "text": "Let’s visualize\n\nemails <- \n  rpois(\n    n = 1000,\n    lambda = 5\n  )\n\nhist(emails)"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#why-would-you-use-this",
+    "href": "content/03-simulations-in-r/slides/index.html#why-would-you-use-this",
+    "title": "Simulations in R",
+    "section": "Why would you use this?",
+    "text": "Why would you use this?\nCompare two groups on how many emails they get.\n\nhr <- rpois(n = 1000, lambda = 5)\nit <- rpois(n = 1000, lambda = 10)\n\n\n\n\nhist(hr)\n\n\n\n\n\n\nhist(it)"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#what-would-i-use-this-for-11",
+    "href": "content/03-simulations-in-r/slides/index.html#what-would-i-use-this-for-11",
+    "title": "Simulations in R",
+    "section": "What would I use this for?",
+    "text": "What would I use this for?\nPoisson regression. (More on rep in a moment.)\n\nd <- \n  data.frame(\n    emails = c(hr, it),\n    group = factor(rep(c(\"HR\", \"IT\"), each = 1000))\n  )\n\nd[c(1:5, 1001:1005),]\n\n     emails group\n1         5    HR\n2         7    HR\n3         4    HR\n4         8    HR\n5         2    HR\n1001     10    IT\n1002      9    IT\n1003      5    IT\n1004      6    IT\n1005      7    IT"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#what-would-i-use-this-for-12",
+    "href": "content/03-simulations-in-r/slides/index.html#what-would-i-use-this-for-12",
+    "title": "Simulations in R",
+    "section": "What would I use this for?",
+    "text": "What would I use this for?\n\nm <- \n  glm(\n    emails ~ group,\n    data = d,\n    family = poisson()\n  )\n\nsummary(m)\n\n\nCall:\nglm(formula = emails ~ group, family = poisson(), data = d)\n\nDeviance Residuals: \n    Min       1Q   Median       3Q      Max  \n-3.6837  -0.6850  -0.0559   0.5814   2.9916  \n\nCoefficients:\n            Estimate Std. Error z value Pr(>|z|)    \n(Intercept)  1.63433    0.01397  117.01   <2e-16 ***\ngroupIT      0.67791    0.01715   39.53   <2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for poisson family taken to be 1)\n\n    Null deviance: 3652.0  on 1999  degrees of freedom\nResidual deviance: 1998.5  on 1998  degrees of freedom\nAIC: 9517.7\n\nNumber of Fisher Scoring iterations: 4"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#making-data-sets-with-rep",
+    "href": "content/03-simulations-in-r/slides/index.html#making-data-sets-with-rep",
+    "title": "Simulations in R",
+    "section": "Making data sets with rep",
+    "text": "Making data sets with rep\nReplicates numbers and characters.\n\nrep(\n  x = \"Control Group\",\n  times = 3\n  )\n\n[1] \"Control Group\" \"Control Group\" \"Control Group\"\n\nrep(\n  x = 1,\n  times = 3\n  )\n\n[1] 1 1 1"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#making-data-sets-with-rep-1",
+    "href": "content/03-simulations-in-r/slides/index.html#making-data-sets-with-rep-1",
+    "title": "Simulations in R",
+    "section": "Making data sets with rep",
+    "text": "Making data sets with rep\nReplicates an entire vector several times.\n\nrep(\n  x = c(\"Control Group\", \"Treatment Group\"),\n  times = 3\n  )\n\n[1] \"Control Group\"   \"Treatment Group\" \"Control Group\"   \"Treatment Group\"\n[5] \"Control Group\"   \"Treatment Group\""
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#making-data-sets-with-rep-2",
+    "href": "content/03-simulations-in-r/slides/index.html#making-data-sets-with-rep-2",
+    "title": "Simulations in R",
+    "section": "Making data sets with rep",
+    "text": "Making data sets with rep\nReplicate different elements different times.\n\nrep(\n  x = c(\"Control Group\", \"Treatment Group\"),\n  times = c(1,2)\n  )\n\n[1] \"Control Group\"   \"Treatment Group\" \"Treatment Group\""
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#making-data-sets-with-rep-3",
+    "href": "content/03-simulations-in-r/slides/index.html#making-data-sets-with-rep-3",
+    "title": "Simulations in R",
+    "section": "Making data sets with rep",
+    "text": "Making data sets with rep\nReplicates an entire vector several times.\n\nrep(\n  x = c(\"Control Group\", \"Treatment Group\"),\n  each = 3\n  )\n\n[1] \"Control Group\"   \"Control Group\"   \"Control Group\"   \"Treatment Group\"\n[5] \"Treatment Group\" \"Treatment Group\""
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#making-data-sets-with-rep-4",
+    "href": "content/03-simulations-in-r/slides/index.html#making-data-sets-with-rep-4",
+    "title": "Simulations in R",
+    "section": "Making data sets with rep",
+    "text": "Making data sets with rep\nControlling the length of our output.\n\nrep(\n  x = c(\"Control Group\", \"Treatment Group\"),\n  each = 3,\n  length.out = 4\n  )\n\n[1] \"Control Group\"   \"Control Group\"   \"Control Group\"   \"Treatment Group\""
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#making-data-sets-with-rep-5",
+    "href": "content/03-simulations-in-r/slides/index.html#making-data-sets-with-rep-5",
+    "title": "Simulations in R",
+    "section": "Making data sets with rep",
+    "text": "Making data sets with rep\nCombining times with each.\n\nrep(\n  x = c(\"Control Group\", \"Treatment Group\"),\n  each = 3,\n  times = 2\n  )\n\n [1] \"Control Group\"   \"Control Group\"   \"Control Group\"   \"Treatment Group\"\n [5] \"Treatment Group\" \"Treatment Group\" \"Control Group\"   \"Control Group\"  \n [9] \"Control Group\"   \"Treatment Group\" \"Treatment Group\" \"Treatment Group\""
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#what-would-i-use-this-for-13",
+    "href": "content/03-simulations-in-r/slides/index.html#what-would-i-use-this-for-13",
+    "title": "Simulations in R",
+    "section": "What would I use this for?",
+    "text": "What would I use this for?\nLet’s create a group.\n\ncondition <- rep(\"control\", each = 4)\noutcome <- rnorm(4)\nd <- data.frame(condition, outcome)\nd\n\n  condition     outcome\n1   control -0.04723942\n2   control -0.12307634\n3   control  1.11130209\n4   control  1.07619064"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#what-would-i-use-this-for-14",
+    "href": "content/03-simulations-in-r/slides/index.html#what-would-i-use-this-for-14",
+    "title": "Simulations in R",
+    "section": "What would I use this for?",
+    "text": "What would I use this for?\nLet’s create two groups.\n\ncondition <- rep(c(\"control\", \"treatment\"), each = 2)\noutcome <- rnorm(4)\nd <- data.frame(condition, outcome)\nd\n\n  condition       outcome\n1   control  0.0313900684\n2   control  0.0001993327\n3 treatment -0.7676236790\n4 treatment  0.8964049160"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#different-groups",
+    "href": "content/03-simulations-in-r/slides/index.html#different-groups",
+    "title": "Simulations in R",
+    "section": "Different groups",
+    "text": "Different groups\nTwo groups from different distributions.\n\ncontrol_outcome <- rnorm(5, 100, 15)\ntreatment_outcome <- rnorm(5, 115, 15)\n\nd <- data.frame(outcome = c(control_outcome, treatment_outcome))"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#different-groups-1",
+    "href": "content/03-simulations-in-r/slides/index.html#different-groups-1",
+    "title": "Simulations in R",
+    "section": "Different groups",
+    "text": "Different groups\nNow we add group membership.\n\ncontrol_outcome <- rnorm(5, 100, 15)\ntreatment_outcome <- rnorm(5, 115, 15)\ncondition <- rep(c(\"control\", \"treatment\"), each = 5)\n\n\nd <- data.frame(\n  condition = condition,\n  outcome = c(control_outcome, treatment_outcome)\n)\nd\n\n   condition   outcome\n1    control 102.60947\n2    control 105.91958\n3    control 140.17591\n4    control  89.69311\n5    control  94.72799\n6  treatment 122.12078\n7  treatment 120.31591\n8  treatment 118.34136\n9  treatment  91.22117\n10 treatment  94.38544"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#remember-vectors",
+    "href": "content/03-simulations-in-r/slides/index.html#remember-vectors",
+    "title": "Simulations in R",
+    "section": "Remember vectors?",
+    "text": "Remember vectors?\nGets us there faster.\n\nd <- \n  data.frame(\n    condition = rep(c(\"control\", \"treatment\"), times = 5),\n    outcome = rnorm(10, mean = c(100, 115), sd = 15)\n  )\nd\n\n   condition   outcome\n1    control  88.88867\n2  treatment 118.51307\n3    control  98.56411\n4  treatment  99.00802\n5    control  75.87184\n6  treatment 129.97625\n7    control  91.31636\n8  treatment 120.37524\n9    control  94.46493\n10 treatment 125.81974"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#now-how-do-we-get-to-monte-carlo",
+    "href": "content/03-simulations-in-r/slides/index.html#now-how-do-we-get-to-monte-carlo",
+    "title": "Simulations in R",
+    "section": "Now how do we get to Monte Carlo?",
+    "text": "Now how do we get to Monte Carlo?\nCreating one “data set” isn’t enough. We need many more.\n\nreplicate(\n  n = 5,\n  expr = sample(1:4, size = 2),\n  simplify = FALSE\n)\n\n[[1]]\n[1] 1 3\n\n[[2]]\n[1] 3 4\n\n[[3]]\n[1] 1 3\n\n[[4]]\n[1] 2 3\n\n[[5]]\n[1] 3 2"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#replicating-variables",
+    "href": "content/03-simulations-in-r/slides/index.html#replicating-variables",
+    "title": "Simulations in R",
+    "section": "Replicating variables",
+    "text": "Replicating variables\nCreating one “data set” isn’t enough. We need many more.\n\nreplicate(\n  n = 5,\n  expr = rnorm(5),\n  simplify = FALSE\n)\n\n[[1]]\n[1] -1.24072975 -0.13173024  1.39906593  0.08828747  0.40500180\n\n[[2]]\n[1]  0.3126241 -0.1319878  0.4697315  0.4992376 -0.6715315\n\n[[3]]\n[1] -0.2262588 -0.1617954 -1.3745364 -1.1833134  0.8182783\n\n[[4]]\n[1]  1.2439504  1.5819136  0.6209595 -1.4514988  1.3820336\n\n[[5]]\n[1] -0.3496984  0.5724784  2.2198495 -1.2908316 -1.5562072"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#replicating-data-sets",
+    "href": "content/03-simulations-in-r/slides/index.html#replicating-data-sets",
+    "title": "Simulations in R",
+    "section": "Replicating data sets",
+    "text": "Replicating data sets\nCreating one “data set” isn’t enough. We need more.\n\nreplicate(\n  n = 5,\n  expr = data.frame(\n    condition = rep(c(\"control\", \"treatment\"), each = 2),\n    outcome = rnorm(4, c(100, 115), sd = 15)\n  ),\n  simplify = FALSE\n)\n\n[[1]]\n  condition   outcome\n1   control  86.38442\n2   control 144.21596\n3 treatment 100.04792\n4 treatment 112.80507\n\n[[2]]\n  condition  outcome\n1   control 113.5496\n2   control 114.7502\n3 treatment 101.7030\n4 treatment 127.2264\n\n[[3]]\n  condition   outcome\n1   control 128.53812\n2   control 119.93447\n3 treatment  99.95619\n4 treatment 102.77010\n\n[[4]]\n  condition   outcome\n1   control  92.93538\n2   control 112.54882\n3 treatment  99.87659\n4 treatment 120.94084\n\n[[5]]\n  condition   outcome\n1   control  60.82896\n2   control 110.58693\n3 treatment 119.18822\n4 treatment 126.65385"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#for-loops",
+    "href": "content/03-simulations-in-r/slides/index.html#for-loops",
+    "title": "Simulations in R",
+    "section": "for loops",
+    "text": "for loops\nFor each element in a vector, do the following:\n\nfor (variable in vector) {\n  \n}\n\n\nfor (i in 1:10) {\n  print(i)\n}\n\n[1] 1\n[1] 2\n[1] 3\n[1] 4\n[1] 5\n[1] 6\n[1] 7\n[1] 8\n[1] 9\n[1] 10"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#same-as-replicate",
+    "href": "content/03-simulations-in-r/slides/index.html#same-as-replicate",
+    "title": "Simulations in R",
+    "section": "Same as replicate",
+    "text": "Same as replicate\nFive times we sample and store it in a list. Equivalent to replicate example.\n\noutcome <- NULL\n\nfor (i in 1:5) {\n  outcome[[i]] <- sample(1:4, size = 2)\n}\n\noutcome\n\n[[1]]\n[1] 3 2\n\n[[2]]\n[1] 1 2\n\n[[3]]\n[1] 1 2\n\n[[4]]\n[1] 4 3\n\n[[5]]\n[1] 1 4"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#get-our-data-sets",
+    "href": "content/03-simulations-in-r/slides/index.html#get-our-data-sets",
+    "title": "Simulations in R",
+    "section": "Get our data sets",
+    "text": "Get our data sets\n\ndatasets <- NULL\n\nfor (i in 1:5) {\n  datasets[[i]] <- \n    data.frame(\n      condition = rep(c(\"control\", \"treatment\"), each = 2),\n      outcome = rnorm(4, c(100, 115), sd = 15)\n    )\n}\n\ndatasets\n\n[[1]]\n  condition   outcome\n1   control  97.99421\n2   control 111.00762\n3 treatment  99.06100\n4 treatment  81.91246\n\n[[2]]\n  condition  outcome\n1   control 113.0777\n2   control 126.1959\n3 treatment 102.3874\n4 treatment 104.5351\n\n[[3]]\n  condition   outcome\n1   control 123.36611\n2   control 134.27978\n3 treatment  70.14792\n4 treatment 112.37140\n\n[[4]]\n  condition   outcome\n1   control 103.39652\n2   control 119.44954\n3 treatment  81.99905\n4 treatment  97.97151\n\n[[5]]\n  condition  outcome\n1   control 112.8112\n2   control 119.5977\n3 treatment 112.1696\n4 treatment 113.9696"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#a-concrete-example",
+    "href": "content/03-simulations-in-r/slides/index.html#a-concrete-example",
+    "title": "Simulations in R",
+    "section": "A concrete example",
+    "text": "A concrete example\nLet’s model the growth of our department. This year, we have 12 PhD students. Each year, our 4 professors write one grant application. If they get the money, they’ll hire one new PhD student. Their chance of getting the money is 15%. But academia also sucks sometimes, so each PhD student each year has a 5% chance of quitting and finally doing something with their lives. How large is the department after 25 years?"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#lets-put-that-into-numbers",
+    "href": "content/03-simulations-in-r/slides/index.html#lets-put-that-into-numbers",
+    "title": "Simulations in R",
+    "section": "Let’s put that into numbers",
+    "text": "Let’s put that into numbers\n\nstarting <- 12\nprofs <- 4\nmoney <- 0.15\nquitting <- 0.05\nyears <- 25\nresults <- NULL\nresults[1] <- starting"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#into-a-loop",
+    "href": "content/03-simulations-in-r/slides/index.html#into-a-loop",
+    "title": "Simulations in R",
+    "section": "Into a loop",
+    "text": "Into a loop\n\nset.seed(42)\nfor (current_year in 2:years) {\n  # how many new phds (15% chance in 4 \"trials\")\n  newbies <- rbinom(n = 1, size = profs, prob = money)\n  \n  # how many see the light and quit\n  enlightened <- rbinom(n = 1, size = results, prob = quitting)\n  \n  # new total\n  results[current_year] <- results[current_year - 1] + newbies - enlightened\n  \n  cat(\"Current year:\", current_year, \"Newbies:\", newbies, \"Enlightened:\", enlightened, \"Total:\", results[current_year], \"\\n\")\n}\n\nCurrent year: 2 Newbies: 2 Enlightened: 2 Total: 12 \nCurrent year: 3 Newbies: 0 Enlightened: 1 Total: 11 \nCurrent year: 4 Newbies: 1 Enlightened: 0 Total: 12 \nCurrent year: 5 Newbies: 1 Enlightened: 0 Total: 13 \nCurrent year: 6 Newbies: 1 Enlightened: 1 Total: 13 \nCurrent year: 7 Newbies: 0 Enlightened: 1 Total: 12 \nCurrent year: 8 Newbies: 2 Enlightened: 0 Total: 14 \nCurrent year: 9 Newbies: 0 Enlightened: 2 Total: 12 \nCurrent year: 10 Newbies: 2 Enlightened: 0 Total: 14 \nCurrent year: 11 Newbies: 0 Enlightened: 1 Total: 13 \nCurrent year: 12 Newbies: 2 Enlightened: 0 Total: 15 \nCurrent year: 13 Newbies: 3 Enlightened: 2 Total: 16 \nCurrent year: 14 Newbies: 0 Enlightened: 0 Total: 16 \nCurrent year: 15 Newbies: 0 Enlightened: 2 Total: 14 \nCurrent year: 16 Newbies: 0 Enlightened: 1 Total: 13 \nCurrent year: 17 Newbies: 1 Enlightened: 1 Total: 13 \nCurrent year: 18 Newbies: 0 Enlightened: 1 Total: 12 \nCurrent year: 19 Newbies: 0 Enlightened: 1 Total: 11 \nCurrent year: 20 Newbies: 0 Enlightened: 0 Total: 11 \nCurrent year: 21 Newbies: 2 Enlightened: 1 Total: 12 \nCurrent year: 22 Newbies: 0 Enlightened: 0 Total: 12 \nCurrent year: 23 Newbies: 0 Enlightened: 2 Total: 10 \nCurrent year: 24 Newbies: 0 Enlightened: 2 Total: 8 \nCurrent year: 25 Newbies: 1 Enlightened: 1 Total: 8"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#plot-and-summarize-the-results",
+    "href": "content/03-simulations-in-r/slides/index.html#plot-and-summarize-the-results",
+    "title": "Simulations in R",
+    "section": "Plot and summarize the results",
+    "text": "Plot and summarize the results\n\nmean(results)\n\n[1] 12.36\n\nplot(results, type = \"l\", xlab = \"Year\", ylab = \"Number of PhDs\")"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#lets-repeat-those-repetitions",
+    "href": "content/03-simulations-in-r/slides/index.html#lets-repeat-those-repetitions",
+    "title": "Simulations in R",
+    "section": "Let’s repeat those repetitions",
+    "text": "Let’s repeat those repetitions\nLet’s run the above simulation several times: a loop in a loop.\n\nset.seed(42)\n\nexperiments <- 3\noutcomes <- list()\n\nfor (i in 1:experiments) {\n  \n  results <- NULL\n  results[1] <- starting\n  \n  for (current_year in 2:years) {\n    # how many new phds (15% chance in 4 \"trials\")\n    newbies <- rbinom(n = 1, size = profs, prob = money)\n    \n    # how many see the light and quit\n    enlightened <- rbinom(n = 1, size = results, prob = quitting)\n    \n    # new total\n    results[current_year] <- results[current_year - 1] + newbies - enlightened\n    \n    # store in overall outcomes\n    outcomes[[i]] <- results\n  }\n}"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#what-did-we-just-do",
+    "href": "content/03-simulations-in-r/slides/index.html#what-did-we-just-do",
+    "title": "Simulations in R",
+    "section": "What did we just do?",
+    "text": "What did we just do?\n\n# what we created\noutcomes\n\n[[1]]\n [1] 12 12 11 12 13 13 12 14 12 14 13 15 16 16 14 13 13 12 11 11 12 12 10  8  8\n\n[[2]]\n [1] 12 13 13 12 11 12 12 10 10 11 10 11 11 11 10 10 10 11 10 10 10 10 11  9 10\n\n[[3]]\n [1] 12 12 12 13 13 13 13 14 14 15 16 16 16 16 16 17 17 16 17 16 16 17 17 17 16\n\n# the means per \"experiment\"\nlapply(outcomes, mean)\n\n[[1]]\n[1] 12.36\n\n[[2]]\n[1] 10.8\n\n[[3]]\n[1] 15.08"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#lets-have-a-look",
+    "href": "content/03-simulations-in-r/slides/index.html#lets-have-a-look",
+    "title": "Simulations in R",
+    "section": "Let’s have a look",
+    "text": "Let’s have a look\n\n# the mean of the means\nmean(sapply(outcomes, mean))\n\n[1] 12.74667\n\nmatplot(matrix(unlist(outcomes), ncol = 3), type = \"l\", xlab = \"Year\", ylab = \"Number of PhDs\")"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#what-if-we-want-to-change-stuff",
+    "href": "content/03-simulations-in-r/slides/index.html#what-if-we-want-to-change-stuff",
+    "title": "Simulations in R",
+    "section": "What if we want to change stuff?",
+    "text": "What if we want to change stuff?\nIf we want to quickly change a parameter, it makes sense to turn this all into a function.\n\ncounting_phds <- \n  function(\n    starting = 12,\n    profs = 4,\n    money = 0.15,\n    quitting = 0.05,\n    years = 25\n  ) {\n    \n    # create our output vector\n    results <- NULL\n    results[1] <- starting\n    \n    # then our loop\n    for (current_year in 2:years) {\n      # how many new phds\n      newbies <- rbinom(n = 1, size = profs, prob = money)\n      \n      # how many see the light and quit\n      enlightened <- rbinom(n = 1, size = results, prob = quitting)\n      \n      # new total\n      results[current_year] <- results[current_year - 1] + newbies - enlightened\n    }\n    \n    return(results)\n  }"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#lets-call-that-function",
+    "href": "content/03-simulations-in-r/slides/index.html#lets-call-that-function",
+    "title": "Simulations in R",
+    "section": "Let’s call that function",
+    "text": "Let’s call that function\nNow we can change parameters of the “experiment” as we wish.\n\ncounting_phds()\n\n [1] 12 12 10 10 11 12 12 12 11 12 13 14 14 14 15 15 15 15 15 16 16 16 17 17 16\n\ncounting_phds(profs = 10)\n\n [1] 12 12 12 13 14 17 20 20 24 25 25 26 26 28 28 29 28 28 29 29 30 31 35 34 36\n\ncounting_phds(years = 10)\n\n [1] 12 11 11 12 12 10 10 10  9  9\n\ncounting_phds(quitting = 0)\n\n [1] 12 13 14 15 15 15 17 17 17 18 18 20 21 21 22 22 22 23 23 23 23 23 23 23 23"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#running-experiments-one-more-time",
+    "href": "content/03-simulations-in-r/slides/index.html#running-experiments-one-more-time",
+    "title": "Simulations in R",
+    "section": "Running experiments one more time",
+    "text": "Running experiments one more time\nWe can do the loop in a loop again, but this time we just call the function.\n\nset.seed(42)\n\nexperiments <- 3\noutcomes <- list()\n\nfor (i in 1:experiments) {\n  \n  # run one experiment and store the results\n  results <- counting_phds()\n  \n  # put results into our outcomes\n  outcomes[[i]] <- results\n\n}\n\noutcomes\n\n[[1]]\n [1] 12 12 11 12 13 13 12 14 12 14 13 15 16 16 14 13 13 12 11 11 12 12 10  8  8\n\n[[2]]\n [1] 12 13 13 12 11 12 12 10 10 11 10 11 11 11 10 10 10 11 10 10 10 10 11  9 10\n\n[[3]]\n [1] 12 12 12 13 13 13 13 14 14 15 16 16 16 16 16 17 17 16 17 16 16 17 17 17 16"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#combining-it-all",
+    "href": "content/03-simulations-in-r/slides/index.html#combining-it-all",
+    "title": "Simulations in R",
+    "section": "Combining it all",
+    "text": "Combining it all\nNow we can iterate (aka loop) over different arguments of our experiment. Let’s see what happens if we run 3 experiments, each with a different number of profs. We’ll store the total at the end of the time period for each run.\n\nset.seed(42)\n\nexperiments <- 3\nprofs <- 4\nyears <- 10\noutcomes <- data.frame(\n  experiment = NULL,\n  prof = NULL,\n  total = NULL\n)\n\nfor (i in 1:experiments) {\n  \n  # for each run/experiment, we store the results for each number of professors\n  for (aprof in 1:profs) {\n    results <- counting_phds(profs = aprof, years = years)\n    \n    # get the total at the last year\n    total <- results[years]\n    \n    # turn into a row and add to outcomes\n    our_row <- data.frame(experiment = i, prof = aprof, total = total)\n    outcomes <- rbind(outcomes, our_row)\n  }\n}"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#lets-plot",
+    "href": "content/03-simulations-in-r/slides/index.html#lets-plot",
+    "title": "Simulations in R",
+    "section": "Let’s plot",
+    "text": "Let’s plot"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#now-lets-expand",
+    "href": "content/03-simulations-in-r/slides/index.html#now-lets-expand",
+    "title": "Simulations in R",
+    "section": "Now let’s expand",
+    "text": "Now let’s expand\n\nset.seed(42)\n\nexperiments <- 1000\nprofs <- 4\nyears <- 10\noutcomes <- data.frame(\n  experiment = NULL,\n  prof = NULL,\n  total = NULL\n)\n\nfor (i in 1:experiments) {\n  \n  # for each run/experiment, we store the results for each number of professors\n  for (aprof in 1:profs) {\n    results <- counting_phds(profs = aprof, years = years)\n    \n    # get the total at the last year\n    total <- results[years]\n    \n    # turn into a row and add to outcomes\n    our_row <- data.frame(experiment = i, prof = aprof, total = total)\n    outcomes <- rbind(outcomes, our_row)\n  }\n}"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#lets-summarize-and-plot",
+    "href": "content/03-simulations-in-r/slides/index.html#lets-summarize-and-plot",
+    "title": "Simulations in R",
+    "section": "Let’s summarize and plot",
+    "text": "Let’s summarize and plot\nWith those parameters, does it make sense to have more profs?\n\n\n\n  Group.1      x\n1       1  7.873\n2       2  9.285\n3       3 10.527\n4       4 12.042"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#references",
+    "href": "content/03-simulations-in-r/slides/index.html#references",
+    "title": "Simulations in R",
+    "section": "References",
+    "text": "References\n\n\nTrisovic, Ana, Matthew K. Lau, Thomas Pasquier, and Mercè Crosas. 2022. “A Large-Scale Study on Research Code Quality and Execution.” Scientific Data 9 (1): 60. https://doi.org/10.1038/s41597-022-01143-6.\n\n\n\n\nhttps://niklasjohannes.github.io/power-workshop/"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Welcome",

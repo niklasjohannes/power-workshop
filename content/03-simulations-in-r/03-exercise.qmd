@@ -1,3 +1,467 @@
 ---
 title: "Exercise I"
+format: 
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+execute: 
+  eval: false
+  echo: false
 ---
+
+# Overview {.unnumbered}
+
+This is the first set of exercises where you get familiar with basic commands that you'll need for data simulation. It'll make it easier later on when you do more complicated designs to have a good intuition how these commands work.
+
+This part might be really boring to you if you're already a seasoned R user. In that case, I recommend you get a coffee, tea, and/or nap.
+
+## Block 1
+
+### Exercise
+
+You have three groups. Name the groups, randomly sample ten cases (total), and then create a simple data frame that contains a variable for the group called `condition`.
+
+```{r}
+groups <- letters[1:3]
+my_sample <- sample(groups, 10, TRUE)
+d <- data.frame(condition = as.factor(my_sample))
+```
+
+### Exercise
+
+Same three groups. This time you want each case to have a 70% to be in the first group, a 20% to be in the second group, and a 10% to be in the third group. Get 100 participants (no need for a data frame). Use `set.seed(1)`. How many are in the first group?
+
+```{r}
+set.seed(1)
+groups <- letters[1:3]
+my_sample <- 
+  sample(
+    groups,
+    100,
+    TRUE,
+    prob = c(0.7, 0.2, 0.1)
+  )
+sum(my_sample==groups[1])
+```
+
+### Exercise
+
+Show that `sample` with assigned probability (`prob = ` argument) is the same as `rbinom`. Conduct 10 coin flips with a an unfair coin that has a 60% of landing heads. Remember to set a seed (tip: twice).
+
+```{r}
+set.seed(1)
+sample(0:1, 10, replace = TRUE, prob = c(0.4, 0.6))
+
+set.seed(1)
+rbinom(10, 1, 0.6)
+```
+
+### Exercise
+
+Draw random letters from the alphabet until the alphabet is empty.
+
+```{r}
+sample(letters, length(letters))
+```
+
+### Exercise
+
+Draw all letters from the alphabet and explicitly assign the same probability for each letter (tip: repeat the same probability).
+
+```{r}
+probs <- rep(1/length(letters), length(letters))
+sample(letters, prob = probs)
+```
+
+### Exercise
+
+Create a data set. In the data set, each participant has an identifier (called `id`), a group identifier (`condition`), and an identifier what number of measurement we have for this participant (`trial`). There are 3 participants in each of three groups with 5 trials in each group.
+
+```{r}
+groups <- letters[1:3]
+participants <- length(groups) * 3
+trials <- 5
+
+d <- 
+  data.frame(
+    id = rep(1:participants, each = trials),
+    condition = rep(groups, each = trials, times = 3),
+    trial = rep(1:trials, times = participants)
+  )
+
+d
+```
+
+### Exercise
+
+You have two groups, a control and a treatment group. In each group, there are 10 participants. Each participant flips a coin 10 times. The control group has a fair coin: 50% heads. The treatment group has an unfair coin: 70% heads. Create a data frame with a participant identifier (`id`), group membership (`condition`), and a total head count for that participant (`heads`). Check that the two groups indeed have different means on the number of heads (roughly corresponding to the two probabilities)
+
+```{r}
+groups <- c("control", "treatment")
+n <- 20
+flips <- 10
+fair <- 0.5
+unfair <- 0.7
+probs <- rep(c(fair, unfair), each = n/2)
+
+
+d <- 
+  data.frame(
+    id = 1:20,
+    condition = rep(groups, each = n/2),
+    heads = rbinom(n, flips, prob = probs)
+  )
+
+aggregate(d$heads, by = list(d$condition), mean)
+```
+
+### Exercise
+
+You have 100 participants. Each participants reports their age which lies uniformly between 20 and 40. They also report grumpiness on a 100-point scale (with a 10-point SD). Each extra year predicts 0.5 higher grumpiness. Create the two variables (no need for a data frame) and conduct a correlation with `cor`. What's the correlation?
+
+```{r}
+n <- 100
+age <- runif(n, 20, 40)
+grumpiness <- age*0.5 + rnorm(n, 100, 10)
+cor(age, grumpiness)
+```
+
+### Exercise
+
+We track how many calls you get during this exercise. Nobody calls anymore, so there'll be very few. Create a data frame with 20 participants, a participant number and the number of calls per participant. Plot the calls and show that 0 is the most common value.
+
+```{r}
+n <- 20
+
+d <- data.frame(
+  id = 1:n,
+  calls = rpois(n, 0.5)
+)
+
+plot(density(d$calls)) 
+```
+
+### Exercise
+
+Professors get more calls. Add 20 more participants who have much higher call numbers. Also include a `condition` variable that marks whether participants are students (first 20 people) or professors (new 20 people). Conduct an independent sample t-test (`t.test`) and also plot the different groups as a boxplot.
+
+```{r}
+d <- rbind(
+  d,
+    data.frame(
+    id = n+1:2*n,
+    calls = rpois(n, 3)
+  )
+)
+
+d$condition <- 
+  rep(c("students", "profs"), each = 20)
+
+t.test(d$calls ~ d$condition)
+
+boxplot(d$calls ~ d$condition)
+```
+
+## Block 2
+
+In this section, you'll use the basics from above to perform your first power analysis. You'll apply repeated simulations over a range of values and extracting and storing results to summarize them.
+
+### Exercise
+
+There are four groups. Each group comes from a different normal distribution. The means are c(100, 105, 107, 109). The SDs are c(9, 12, 10, 17). Each group should be 20 cases. Store everything in a data frame and have a variable that indicates the group. Tip: Remember that R uses vectors, even for arguments in a function.
+
+```{r}
+means <- c(100, 105, 107, 109)
+sds <- c(9, 12, 10, 17)
+n <- 20
+
+d <- 
+  data.frame(
+    group = rep(c(letters[1:4]), times = n),
+    score = rnorm(n*4, means, sds)
+  )
+```
+
+
+### Exercise
+
+You need 5 samples. Each sample contains 10 unique letters from the alphabet. (Use `replicate`.)
+
+```{r}
+replicate(5, sample(letters, 10))
+```
+
+### Exercise
+
+Same as before, but this time you need 10 samples from a normal distribution with a mean of 10 and an SD of 2. Use `replicate` first, then a `for` loop.
+
+```{r}
+replicate(5, rnorm(10, 10, 2))
+
+for (i in 1:5) {
+  print(rnorm(10, 10, 2))
+}
+```
+
+### Exercise
+
+Assume we know the population mean in height (168cm) and its standard deviation (20). Assume we draw 10,000 samples from this distribution. Each sample has 50 participants. The standard deviation of these 10,000 sample means is the standard error.
+
+Simulate the standard error and compare it to the theoretical value: $SE = \frac{\sigma}{\sqrt{n}}$. ($\sigma$ is the standard deviation of the population.)
+
+```{r}
+n <- 50
+mu <- 168
+sd <- 20
+se <- sd / sqrt(n)
+means <- NULL 
+draws <- 1e5
+
+for (i in 1:draws) {
+  means[i] <- mean(rnorm(n, mu, sd))
+}
+
+cat("The real SE is:", round(se, digits = 2), ". The simulated SE is:", round(sd(means), digits = 2), ".")
+
+# with replicate
+means <- 
+  replicate(
+    draws,
+    rnorm(n, mu, sd)
+  )
+
+sd(colMeans(means))
+```
+
+### Exercise
+
+Same population. Draw 1,000 observations for each sample size between 20 and 100. Calculate the standard error for each sample size (like you did above) and plot it against the sample size. (Tip: You'll need to iterate over two things.)
+
+```{r}
+mu <- 168
+sd <- 20
+draws <- 1e3
+min_sample <- 20
+max_sample <- 100
+
+results <- 
+  data.frame(
+    sample_size = NULL,
+    se = NULL
+  )
+
+for (i in min_sample:max_sample) {
+  
+  sample_means <- NULL
+  
+  for (j in 1:draws) {
+    sample_means[j] <- mean(rnorm(i, mu, sd))
+  }
+  
+  se <- sd(sample_means)
+  
+  results <- rbind(
+    results,
+    data.frame(
+      sample_size = i,
+      se = se
+    )
+  )
+}
+
+plot(results$sample_size, results$se)
+```
+
+### Exercise
+
+Turn the above into a function so that you can change the population effect size, SD, number of simulations, and sample size range. The function should also return the plot from above.
+
+```{r}
+sample_against_se <- 
+  function(
+    mu = 168,
+    sd = 20,
+    draws = 1e3,
+    min_sample = 20,
+    max_sample = 100
+  ) {
+    results <- 
+      data.frame(
+        sample_size = NULL,
+        se = NULL
+      )
+    
+    for (i in min_sample:max_sample) {
+      
+      sample_means <- NULL
+      
+      for (j in 1:draws) {
+        sample_means[j] <- mean(rnorm(i, mu, sd))
+      }
+      
+      se <- sd(sample_means)
+      
+      results <- rbind(
+        results,
+        data.frame(
+          sample_size = i,
+          se = se
+        )
+      )
+    }
+    
+    return(plot(results$sample_size, results$se))
+  }
+```
+
+### Exercise
+
+Try out the function with two plots: when the population SD is 5 and when you do 10 draws. What changes?
+
+```{r}
+sample_against_se(sd = 5)
+sample_against_se(draws = 10)
+```
+
+### Exercise
+
+The average height of men in Spain is 173cm (says [Wikipedia](https://en.wikipedia.org/wiki/Average_human_height_by_country)). The population standard deviation is probablay around 7cm ([source](https://biology.stackexchange.com/questions/9730/what-is-the-standard-deviation-of-adult-human-heights-for-males-and-females)).
+
+You draw a sample of men and want to test whether they're significantly different from that mean (our H~0~). In fact, these men you have sampled are truly French (175.6cm, our true "effect size"). In other words, can we reject the null hypothesis that these men we sampled come from a different country in favor of our alternative hypothesis that the true population value is greater than the Spanish population mean?
+
+You calculate the z-statistic, which is calculated as follows: $\frac{\bar{X} - \mu_0}{\sigma/\sqrt{N}}$
+This simply tells us how far from the population mean (well, the suspected population mean under the null hypothesis) our sample mean is in terms of standard errors. 
+$\bar{X}$ is the sample mean, $\mu_0$ is the population mean under H~0~, $\sigma$ is the population standard deviation, and $N$ is the sample size.
+
+Then we can look up the z-score to see what the probability is to score this high or higher (does that definition ring a bell?). In R, you can simply do that with a built-in function: `pnorm()`. For example, if we have a z-score of 1.645, our probability of obtaining such a value (or higher) is `pnorm(1.645, lower.tail = FALSE)` = `r pnorm(1.645, lower.tail = FALSE)` -- our p-value for a one-sided test.
+
+We can simulate the power of our statistical test (in this case, the z-statistic). Take a sample of 30 people from the French population, calculate the z-statistic, it's p-value, and store the p-value. Do this 1,000 times. Plot the distribution of p-values. What can we conclude about the sample size?
+
+```{r}
+# sample size
+n <- 30
+h0 <- 173 # test against this null
+h1 <- 175.6 # true population  effect
+sd <- 7
+alpha <- 0.05
+draws <- 1e3
+
+pvalues <- NULL
+
+for (i in 1:draws) {
+  d <- rnorm(n, h1, sd)
+  z <- (mean(d) - h0) / (sd / sqrt(n))
+  pvalues[i] <- pnorm(z, lower.tail = FALSE)
+}
+
+plot(density(pvalues))
+```
+
+### Exercise
+
+Now calculate the power by calculating the proportion of pvalues that are below 0.05. That's your power: The proportion of tests that will detect that there's a true effect. In our case, that effect is a difference of 2.6cm.
+
+```{r}
+sum(pvalues < 0.05)/length(pvalues)
+```
+
+### Exercise
+
+Now let's do what we did before: Put the loop from above inside another loop that iterates over different sample sizes. Then put that all into a function that let's you set the parameters of interest (sample size range, h0, h1, etc.). Then simulate power (1,000 simulations each) for samples between 30 and 100. Plot the sample size against power.
+
+```{r}
+power_function <- 
+  function(
+    h0 = 173,
+    h1 = 175.6,
+    sd = 7,
+    alpha = 0.05,
+    draws = 1e3,
+    min_sample = 30,
+    max_sample = 100
+  ) {
+    results <- 
+      data.frame(
+        sample_size = NULL,
+        power = NULL
+      )
+    
+    for (i in min_sample:max_sample) {
+      
+      pvalues <- NULL
+      
+      for (j in 1:draws) {
+        d <- rnorm(i, h1, sd)
+        z <- (mean(d) - h0) / (sd / sqrt(i))
+        pvalues[j] <- pnorm(z, lower.tail = FALSE)
+      }
+      
+      results <- rbind(
+        results,
+        data.frame(
+          sample_size = i,
+          power = sum(pvalues < 0.05)/length(pvalues)
+        )
+      )
+    }
+    
+    return(plot(results$sample_size, results$power, type = "l"))
+  }
+
+power_function()
+```
+
+### Exercise
+
+Now do the same thing with a one-sample t-test. (Tip: You only need to replace the z-scores with a `t.test` from which you can extract the p-value). (Another tip: Use the $ sign on where you stored the t-test results.)
+
+```{r}
+power_function_t <- 
+  function(
+    h0 = 173,
+    h1 = 175.6,
+    sd = 7,
+    alpha = 0.05,
+    draws = 1e3,
+    min_sample = 30,
+    max_sample = 100
+  ) {
+    results <- 
+      data.frame(
+        sample_size = NULL,
+        power = NULL
+      )
+    
+    for (i in min_sample:max_sample) {
+      
+      pvalues <- NULL
+      
+      for (j in 1:draws) {
+        d <- rnorm(i, h1, sd)
+        t <- t.test(d, mu = h0,alternative = "greater")
+        pvalues[j] <- t$p.value
+      }
+      
+      results <- rbind(
+        results,
+        data.frame(
+          sample_size = i,
+          power = sum(pvalues < 0.05)/length(pvalues)
+        )
+      )
+    }
+    
+    return(plot(results$sample_size, results$power, type = "l"))
+  }
+
+power_function()
+```
+### Exercise
+
+Just for funsies (and for our next session), see what happens when the true effect is only 1cm in difference.
+
+```{r}
+power_function_t(h1 = h0+1)
+```
+

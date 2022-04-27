@@ -1,0 +1,979 @@
+---
+title: "Simulations in R"
+subtitle: "Power analysis through simulation in R"
+author: "Niklas Johannes"
+format: 
+  revealjs:
+    theme: ../../slidetheme.scss
+    slide-number: true
+    chalkboard: 
+      buttons: false
+    footer: <https://niklasjohannes.github.io/power-workshop/>
+execute:
+  echo: true
+bibliography: references.bib
+---
+
+# Takeaways
+
+-   Understand why simulations are useful
+-   Logic of Monte Carlo Simulations
+-   Basic tools
+
+## Why should I simulate
+
+-   Cooking vs. eating
+-   Makes you truly understand what you're doing
+-   Forces you to put a number on things
+
+## Going through the motions
+
+-   You'll often find that you don't know nearly enough for a prediction--or even a study
+-   If we can't generate the pattern we're interested in how can we explain a pattern?
+-   I take a proper description over a flawed confirmation
+
+## Technicalities
+
+Above all, you want to be able to reproduce your analysis--much later, on a different computer, etc. [@trisovic2022]
+
+[![](https://media.springernature.com/full/springer-static/image/art%253A10.1038%252Fs41597-022-01143-6/MediaObjects/41597_2022_1143_Fig8_HTML.png?as=webp)](https://www.nature.com/articles/s41597-022-01143-6)
+
+## Computational reproducibility
+
+-   [Environment](https://www.docker.com/){preview-link="true"}
+-   [Packages for project](https://rstudio.github.io/renv/articles/renv.html){preview-link="true"}
+-   [Packages for script](http://datacolada.org/95){preview-link="\"true"}
+-   [Version control](https://happygitwithr.com/){preview-link="true"}
+
+## For now
+
+-   `set.seed()`: Reproduce random numbers within same script
+-   `sessionInfo()`: Prints computational environment
+-   Relative paths ([here package](https://here.r-lib.org/){preview-link="true"})
+-   Explicit caching or markdown
+
+## Monte Carlo simulations
+
+> Monte Carlo methods, or Monte Carlo experiments, are a broad class of computational algorithms that rely on repeated random sampling to obtain numerical results. The underlying concept is to use randomness to solve problems that might be deterministic in principle. [Wikipedia](https://en.wikipedia.org/wiki/Monte_Carlo_method)
+
+[![](https://miro.medium.com/max/1400/1*zeE59zfjRJmIngwvJsvMRQ.png)](https://towardsdatascience.com/monte-carlo-simulation-in-r-with-focus-on-financial-data-ad43e2a4aedf)
+
+::: aside
+[Source](https://towardsdatascience.com/monte-carlo-simulation-in-r-with-focus-on-financial-data-ad43e2a4aedf?gi=6fb071654f81)
+:::
+
+## In plain English
+
+-   Define relevant outcome, the process leading to outcome, and potential inputs that go into the process
+-   Then decide what inputs you want to vary
+-   Run the process many, many times, with different inputs, summarize and plot the outcomes
+
+## A simple example
+
+Totally unrelated to why you are here:
+
+-   Outcome: How much power do I have?
+-   Process: The statistical test I plan to do
+-   Inputs: Effect size, sample size, $\alpha$
+
+## Some basic commands first
+
+Sampling a certain number of elements from a set.
+
+```{r}
+my_sample <- 1:20
+
+sample(
+  x = my_sample,
+  size = 2
+)
+```
+
+## Sampling
+
+With or without replacement?
+
+```{r}
+my_sample <- c("a", "b", "c")
+
+sample(
+  x = my_sample,
+  size = 4,
+  replace = TRUE
+)
+```
+
+## On those letters
+
+R has some neat built-in stuff.
+
+```{r}
+letters[5]
+letters[7:10]
+LETTERS[20:26]
+```
+
+## Sampling
+
+Using those letters.
+
+```{r}
+my_sample <- letters[1:3]
+
+sample(
+  x = my_sample,
+  size = 4,
+  replace = TRUE
+)
+```
+
+## Sampling
+
+Assigning different probabilities.
+
+```{r}
+my_sample <- c("black", "blue")
+
+sample(
+  x = my_sample,
+  size = 10,
+  replace = TRUE,
+  prob = c(0.2, 0.8)
+)
+```
+
+## Remember seeds?
+
+```{r}
+my_sample <- c("black", "blue")
+
+set.seed(42)
+sample(
+  x = my_sample,
+  size = 10,
+  replace = TRUE,
+  prob = c(0.2, 0.8)
+)
+
+set.seed(42)
+sample(
+  x = my_sample,
+  size = 10,
+  replace = TRUE,
+  prob = c(0.2, 0.8)
+)
+```
+
+## How do we generate randomness?
+
+Built-in R functions that create a random number following a process with a given probability distribution.
+
+-   `rnorm`: Normal distribution
+-   `rbinom`: Binomial distribution
+-   `rpois`: Poissong distribution
+-   `runif`: Uniform distribution
+
+## Normal distribution
+
+Draw n numbers from a normal distribution.
+
+```{r}
+rnorm(
+  n = 5,
+  mean = 0,
+  sd = 1
+)
+```
+
+## Once more: seed
+
+```{r}
+rnorm(1)
+rnorm(1)
+
+set.seed(42)
+rnorm(1)
+set.seed(42)
+rnorm(1)
+```
+
+## R uses vectors
+
+Gives us 4 draws total: 1 draw from a normal distribution with mean = 0 and sd = 1, 1 draw from a normal distribution with mean = 10 and sd = 50, and so on.
+
+```{r}
+rnorm(
+  n = 4,
+  mean = c(0, 10, 20, 30),
+  sd = c(1, 50, 100, 150)
+)
+```
+
+## What would I use this for?
+
+Simulating different groups.
+
+```{r}
+control <- 
+  rnorm(
+    n = 100,
+    mean = 100,
+    sd = 15
+  )
+
+treatment <- 
+  rnorm(
+    n = 100,
+    mean = 150,
+    sd = 15
+  )
+```
+
+## What would I use this for?
+
+Simulating different groups.
+
+```{r}
+boxplot(control, treatment)
+```
+
+## What would I use this for?
+
+Simulating a correlation.
+
+```{r}
+control <- 
+  rnorm(
+    n = 1000,
+    mean = 100,
+    sd = 15
+  )
+
+treatment <- 
+  control*0.5 + rnorm(
+    n = 1000,
+    mean = 100,
+    sd = 15
+  )
+```
+
+## What would I use this for?
+
+```{r}
+summary(lm(treatment~control))
+```
+
+## Teaser for later
+
+Same data, different conventions.
+
+::: columns
+::: column
+```{r}
+#| echo: false
+boxplot(control, treatment)
+```
+:::
+
+::: column
+```{r}
+#| echo: false
+plot(control, treatment)
+```
+:::
+:::
+
+## Uniform distribution
+
+Draw n numbers from a uniform distribution.
+
+```{r}
+runif(
+  n = 5,
+  min = 0,
+  max = 1
+)
+```
+
+## Let's inspect that
+
+```{r}
+hist(runif(1000))
+```
+
+## What would I use this for?
+
+Keeping a range on predictor variables.
+
+```{r}
+age <- runif(n = 1000, min = 18, max = 100)
+
+hist(age, breaks = 30, xlim = c(18, 100))
+```
+
+## What would I use this for?
+
+Keeping a range on predictor variables.
+
+```{r}
+age <- runif(n = 1000, min = 18, max = 100)
+y <- age*0.5 + rnorm(1000)
+
+summary(lm(y~age))
+```
+
+## Binomial distribution
+
+Let's flip a coin 100 times. That's one "experiment". How often will I get heads?
+
+```{r}
+rbinom(
+  n = 1,
+  size = 100,
+  prob = 0.50
+)
+```
+
+## Many experiments
+
+Let's run 1000 experiments where we flip a coin 100 times each.
+
+```{r}
+experiments <- 
+  rbinom(
+    n = 1000,
+    size = 100,
+    prob = 0.50
+  )
+
+head(experiments)
+```
+
+## Always inspect and summarize
+
+Makes sense.
+
+```{r}
+hist(experiments, breaks = 20)
+```
+
+## What would I use this for?
+
+Compare groups on their probabilities.
+
+```{r}
+control <- 
+  rbinom(
+    n = 100,
+    size = 10,
+    prob = 0.5
+  )
+
+treatment <- 
+  rbinom(
+    n = 100,
+    size = 10,
+    prob = 0.9
+  )
+```
+
+## What would I use this for?
+
+Compare groups on their probabilities.
+
+```{r}
+boxplot(control, treatment)
+```
+
+## What would I use this for?
+
+Bernoulli trials.
+
+```{r}
+rbinom(
+  n = 10,
+  size = 1,
+  prob = 0.5
+)
+```
+
+## What would I use this for?
+
+Bernoulli trials and logistic regression: Does age predict our binary outcome? (Explanation [here](https://data.library.virginia.edu/simulating-a-logistic-regression-model/).)
+
+```{r}
+age <- rnorm(n = 10000, mean = 50, sd = 15)
+
+xb <- 1 + 0.2*age
+
+p <- 1/(1 + exp(-xb))
+
+y <- 
+  rbinom(
+    n = 10000,
+    size = 1,
+    prob = p
+  )
+```
+
+## What would I use this for?
+
+```{r}
+m <- 
+  glm(
+    y ~ age,
+    family = binomial()
+  )
+
+summary(m)
+```
+
+## Poisson distribution
+
+Let's see how many emails we get in an hour. We check for 10 different hours.
+
+```{r}
+rpois(
+  n = 10,
+  lambda = 5
+)
+```
+
+## Let's visualize
+
+```{r}
+emails <- 
+  rpois(
+    n = 1000,
+    lambda = 5
+  )
+
+hist(emails)
+```
+
+## Why would you use this?
+
+Compare two groups on how many emails they get.
+
+```{r}
+hr <- rpois(n = 1000, lambda = 5)
+it <- rpois(n = 1000, lambda = 10)
+```
+
+::: columns
+::: column
+```{r}
+hist(hr)
+```
+:::
+
+::: column
+```{r}
+hist(it)
+```
+:::
+:::
+
+## What would I use this for?
+
+Poisson regression. (More on `rep` in a moment.)
+
+```{r}
+d <- 
+  data.frame(
+    emails = c(hr, it),
+    group = factor(rep(c("HR", "IT"), each = 1000))
+  )
+
+d[c(1:5, 1001:1005),]
+```
+
+## What would I use this for?
+
+```{r}
+m <- 
+  glm(
+    emails ~ group,
+    data = d,
+    family = poisson()
+  )
+
+summary(m)
+```
+
+## Making data sets with `rep`
+
+Replicates numbers and characters.
+
+```{r}
+rep(
+  x = "Control Group",
+  times = 3
+  )
+
+rep(
+  x = 1,
+  times = 3
+  )
+```
+
+## Making data sets with `rep`
+
+Replicates an entire vector several times.
+
+```{r}
+rep(
+  x = c("Control Group", "Treatment Group"),
+  times = 3
+  )
+```
+
+## Making data sets with `rep`
+
+Replicate different elements different times.
+
+```{r}
+rep(
+  x = c("Control Group", "Treatment Group"),
+  times = c(1,2)
+  )
+```
+
+## Making data sets with `rep`
+
+Replicates an entire vector several times.
+
+```{r}
+rep(
+  x = c("Control Group", "Treatment Group"),
+  each = 3
+  )
+```
+
+## Making data sets with `rep`
+
+Controlling the length of our output.
+
+```{r}
+rep(
+  x = c("Control Group", "Treatment Group"),
+  each = 3,
+  length.out = 4
+  )
+```
+
+## Making data sets with `rep`
+
+Combining `times` with `each`.
+
+```{r}
+rep(
+  x = c("Control Group", "Treatment Group"),
+  each = 3,
+  times = 2
+  )
+```
+
+## What would I use this for?
+
+Let's create a group.
+
+```{r}
+condition <- rep("control", each = 4)
+outcome <- rnorm(4)
+d <- data.frame(condition, outcome)
+d
+```
+
+## What would I use this for?
+
+Let's create two groups.
+
+```{r}
+condition <- rep(c("control", "treatment"), each = 2)
+outcome <- rnorm(4)
+d <- data.frame(condition, outcome)
+d
+```
+
+# Interlude: First short exercises
+
+## Different groups
+
+Two groups from different distributions.
+
+```{r}
+control_outcome <- rnorm(5, 100, 15)
+treatment_outcome <- rnorm(5, 115, 15)
+
+d <- data.frame(outcome = c(control_outcome, treatment_outcome))
+```
+
+## Different groups
+
+Now we add group membership.
+
+```{r}
+control_outcome <- rnorm(5, 100, 15)
+treatment_outcome <- rnorm(5, 115, 15)
+condition <- rep(c("control", "treatment"), each = 5)
+
+
+d <- data.frame(
+  condition = condition,
+  outcome = c(control_outcome, treatment_outcome)
+)
+d
+```
+
+## Remember vectors?
+
+Gets us there faster.
+
+```{r}
+d <- 
+  data.frame(
+    condition = rep(c("control", "treatment"), times = 5),
+    outcome = rnorm(10, mean = c(100, 115), sd = 15)
+  )
+d
+```
+
+## Now how do we get to Monte Carlo?
+
+Creating one "data set" isn't enough. We need many more.
+
+```{r}
+replicate(
+  n = 5,
+  expr = sample(1:4, size = 2),
+  simplify = FALSE
+)
+```
+
+## Replicating variables
+
+Creating one "data set" isn't enough. We need many more.
+
+```{r}
+replicate(
+  n = 5,
+  expr = rnorm(5),
+  simplify = FALSE
+)
+```
+
+## Replicating data sets
+
+Creating one "data set" isn't enough. We need more.
+
+```{r}
+replicate(
+  n = 5,
+  expr = data.frame(
+    condition = rep(c("control", "treatment"), each = 2),
+    outcome = rnorm(4, c(100, 115), sd = 15)
+  ),
+  simplify = FALSE
+)
+```
+
+## `for` loops
+
+For each element in a vector, do the following:
+
+```{r}
+#| eval: false
+
+for (variable in vector) {
+  
+}
+```
+
+```{r}
+for (i in 1:10) {
+  print(i)
+}
+```
+
+## Same as `replicate`
+
+Five times we sample and store it in a list. Equivalent to `replicate` example.
+
+```{r}
+outcome <- NULL
+
+for (i in 1:5) {
+  outcome[[i]] <- sample(1:4, size = 2)
+}
+
+outcome
+```
+
+## Get our data sets
+
+```{r}
+datasets <- NULL
+
+for (i in 1:5) {
+  datasets[[i]] <- 
+    data.frame(
+      condition = rep(c("control", "treatment"), each = 2),
+      outcome = rnorm(4, c(100, 115), sd = 15)
+    )
+}
+
+datasets
+```
+
+## A concrete example
+
+Let's model the growth of our department. This year, we have **12** PhD students. Each year, our **4** professors write one grant application. If they get the money, they'll hire one new PhD student. Their chance of getting the money is **15%**. But academia also sucks sometimes, so each PhD student each year has a **5%** chance of quitting and finally doing something with their lives. How large is the department after **25** years?
+
+## Let's put that into numbers
+
+```{r}
+starting <- 12
+profs <- 4
+money <- 0.15
+quitting <- 0.05
+years <- 25
+results <- NULL
+results[1] <- starting
+```
+
+## Into a loop {.scrollable}
+
+```{r}
+set.seed(42)
+for (current_year in 2:years) {
+  # how many new phds (15% chance in 4 "trials")
+  newbies <- rbinom(n = 1, size = profs, prob = money)
+  
+  # how many see the light and quit
+  enlightened <- rbinom(n = 1, size = results, prob = quitting)
+  
+  # new total
+  results[current_year] <- results[current_year - 1] + newbies - enlightened
+  
+  cat("Current year:", current_year, "Newbies:", newbies, "Enlightened:", enlightened, "Total:", results[current_year], "\n")
+}
+```
+
+## Plot and summarize the results
+
+```{r}
+mean(results)
+
+plot(results, type = "l", xlab = "Year", ylab = "Number of PhDs")
+```
+
+## Let's repeat those repetitions
+
+Let's run the above simulation several times: a loop in a loop.
+
+```{r}
+set.seed(42)
+
+experiments <- 3
+outcomes <- list()
+
+for (i in 1:experiments) {
+  
+  results <- NULL
+  results[1] <- starting
+  
+  for (current_year in 2:years) {
+    # how many new phds (15% chance in 4 "trials")
+    newbies <- rbinom(n = 1, size = profs, prob = money)
+    
+    # how many see the light and quit
+    enlightened <- rbinom(n = 1, size = results, prob = quitting)
+    
+    # new total
+    results[current_year] <- results[current_year - 1] + newbies - enlightened
+    
+    # store in overall outcomes
+    outcomes[[i]] <- results
+  }
+}
+```
+
+## What did we just do?
+
+```{r}
+# what we created
+outcomes
+
+# the means per "experiment"
+lapply(outcomes, mean)
+```
+
+## Let's have a look
+
+```{r}
+# the mean of the means
+mean(sapply(outcomes, mean))
+
+matplot(matrix(unlist(outcomes), ncol = 3), type = "l", xlab = "Year", ylab = "Number of PhDs")
+```
+
+## What if we want to change stuff?
+
+If we want to quickly change a parameter, it makes sense to turn this all into a function.
+
+```{r}
+counting_phds <- 
+  function(
+    starting = 12,
+    profs = 4,
+    money = 0.15,
+    quitting = 0.05,
+    years = 25
+  ) {
+    
+    # create our output vector
+    results <- NULL
+    results[1] <- starting
+    
+    # then our loop
+    for (current_year in 2:years) {
+      # how many new phds
+      newbies <- rbinom(n = 1, size = profs, prob = money)
+      
+      # how many see the light and quit
+      enlightened <- rbinom(n = 1, size = results, prob = quitting)
+      
+      # new total
+      results[current_year] <- results[current_year - 1] + newbies - enlightened
+    }
+    
+    return(results)
+  }
+```
+
+## Let's call that function
+
+Now we can change parameters of the "experiment" as we wish.
+
+```{r}
+counting_phds()
+
+counting_phds(profs = 10)
+
+counting_phds(years = 10)
+
+counting_phds(quitting = 0)
+```
+
+## Running experiments one more time
+
+We can do the loop in a loop again, but this time we just call the function.
+
+```{r}
+set.seed(42)
+
+experiments <- 3
+outcomes <- list()
+
+for (i in 1:experiments) {
+  
+  # run one experiment and store the results
+  results <- counting_phds()
+  
+  # put results into our outcomes
+  outcomes[[i]] <- results
+
+}
+
+outcomes
+```
+
+## Combining it all
+
+Now we can iterate (aka loop) over different arguments of our experiment. Let's see what happens if we run 3 experiments, each with a different number of profs. We'll store the total at the end of the time period for each run.
+
+```{r}
+set.seed(42)
+
+experiments <- 3
+profs <- 4
+years <- 10
+outcomes <- data.frame(
+  experiment = NULL,
+  prof = NULL,
+  total = NULL
+)
+
+for (i in 1:experiments) {
+  
+  # for each run/experiment, we store the results for each number of professors
+  for (aprof in 1:profs) {
+    results <- counting_phds(profs = aprof, years = years)
+    
+    # get the total at the last year
+    total <- results[years]
+    
+    # turn into a row and add to outcomes
+    our_row <- data.frame(experiment = i, prof = aprof, total = total)
+    outcomes <- rbind(outcomes, our_row)
+  }
+}
+```
+
+## Let's plot
+
+```{r}
+#| echo: false
+library(tidyverse)
+ggplot(outcomes, aes(x = experiment, y = total, color = as.factor(prof))) + geom_line() + theme_bw()
+```
+
+## Now let's expand
+
+```{r}
+set.seed(42)
+
+experiments <- 1000
+profs <- 4
+years <- 10
+outcomes <- data.frame(
+  experiment = NULL,
+  prof = NULL,
+  total = NULL
+)
+
+for (i in 1:experiments) {
+  
+  # for each run/experiment, we store the results for each number of professors
+  for (aprof in 1:profs) {
+    results <- counting_phds(profs = aprof, years = years)
+    
+    # get the total at the last year
+    total <- results[years]
+    
+    # turn into a row and add to outcomes
+    our_row <- data.frame(experiment = i, prof = aprof, total = total)
+    outcomes <- rbind(outcomes, our_row)
+  }
+}
+```
+
+## Let's summarize and plot
+
+With those parameters, does it make sense to have more profs?
+
+```{r}
+#| echo: false
+
+ggplot(outcomes, aes(x = experiment, y = total, color = as.factor(prof))) + geom_line() + theme_bw()
+
+aggregate(outcomes[, 3], list(outcomes$prof), mean)
+```
+
+# Let's get simulating
+
+## References
+
+::: {#refs}
+:::

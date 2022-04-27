@@ -11,6 +11,69 @@
     div.column{display: inline-block; vertical-align: top; width: 50%;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
 
   <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -48,12 +111,13 @@
       "search-submit-button-title": "Submit"
     }
   }</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
   <link rel="stylesheet" href="../../styles.css">
 </head>
-<body class="docked fullcontent">
+<body class="docked">
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -126,7 +190,7 @@
     <ul id="quarto-sidebar-section-simulations-in-r" class="collapse list-unstyled sidebar-section depth1 show">  
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../content/03-simulations-in-r/03-slides.html" class="sidebar-item-text sidebar-link">Simulations in R</a>
+  <a href="../../content/03-simulations-in-r/03-slides.html" class="sidebar-item-text sidebar-link">Slides</a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -270,14 +334,634 @@
     </div>
 </nav>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+<h2 id="toc-title">On this page</h2>
+<ul>
+<li><a href="#overview" class="nav-link active" data-scroll-target="#overview">Overview</a>
+<ul class="collapse">
+<li><a href="#block-1" class="nav-link" data-scroll-target="#block-1"> <span class="header-section-number">0.1</span> Block 1</a>
+<ul class="collapse">
+<li><a href="#exercise" class="nav-link" data-scroll-target="#exercise"> <span class="header-section-number">0.1.1</span> Exercise</a></li>
+<li><a href="#exercise-1" class="nav-link" data-scroll-target="#exercise-1"> <span class="header-section-number">0.1.2</span> Exercise</a></li>
+<li><a href="#exercise-2" class="nav-link" data-scroll-target="#exercise-2"> <span class="header-section-number">0.1.3</span> Exercise</a></li>
+<li><a href="#exercise-3" class="nav-link" data-scroll-target="#exercise-3"> <span class="header-section-number">0.1.4</span> Exercise</a></li>
+<li><a href="#exercise-4" class="nav-link" data-scroll-target="#exercise-4"> <span class="header-section-number">0.1.5</span> Exercise</a></li>
+<li><a href="#exercise-5" class="nav-link" data-scroll-target="#exercise-5"> <span class="header-section-number">0.1.6</span> Exercise</a></li>
+<li><a href="#exercise-6" class="nav-link" data-scroll-target="#exercise-6"> <span class="header-section-number">0.1.7</span> Exercise</a></li>
+<li><a href="#exercise-7" class="nav-link" data-scroll-target="#exercise-7"> <span class="header-section-number">0.1.8</span> Exercise</a></li>
+<li><a href="#exercise-8" class="nav-link" data-scroll-target="#exercise-8"> <span class="header-section-number">0.1.9</span> Exercise</a></li>
+<li><a href="#exercise-9" class="nav-link" data-scroll-target="#exercise-9"> <span class="header-section-number">0.1.10</span> Exercise</a></li>
+</ul></li>
+<li><a href="#block-2" class="nav-link" data-scroll-target="#block-2"> <span class="header-section-number">0.2</span> Block 2</a>
+<ul class="collapse">
+<li><a href="#exercise-10" class="nav-link" data-scroll-target="#exercise-10"> <span class="header-section-number">0.2.1</span> Exercise</a></li>
+<li><a href="#exercise-11" class="nav-link" data-scroll-target="#exercise-11"> <span class="header-section-number">0.2.2</span> Exercise</a></li>
+<li><a href="#exercise-12" class="nav-link" data-scroll-target="#exercise-12"> <span class="header-section-number">0.2.3</span> Exercise</a></li>
+<li><a href="#exercise-13" class="nav-link" data-scroll-target="#exercise-13"> <span class="header-section-number">0.2.4</span> Exercise</a></li>
+<li><a href="#exercise-14" class="nav-link" data-scroll-target="#exercise-14"> <span class="header-section-number">0.2.5</span> Exercise</a></li>
+<li><a href="#exercise-15" class="nav-link" data-scroll-target="#exercise-15"> <span class="header-section-number">0.2.6</span> Exercise</a></li>
+<li><a href="#exercise-16" class="nav-link" data-scroll-target="#exercise-16"> <span class="header-section-number">0.2.7</span> Exercise</a></li>
+<li><a href="#exercise-17" class="nav-link" data-scroll-target="#exercise-17"> <span class="header-section-number">0.2.8</span> Exercise</a></li>
+<li><a href="#exercise-18" class="nav-link" data-scroll-target="#exercise-18"> <span class="header-section-number">0.2.9</span> Exercise</a></li>
+<li><a href="#exercise-19" class="nav-link" data-scroll-target="#exercise-19"> <span class="header-section-number">0.2.10</span> Exercise</a></li>
+<li><a href="#exercise-20" class="nav-link" data-scroll-target="#exercise-20"> <span class="header-section-number">0.2.11</span> Exercise</a></li>
+<li><a href="#exercise-21" class="nav-link" data-scroll-target="#exercise-21"> <span class="header-section-number">0.2.12</span> Exercise</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 <header id="title-block-header" class="quarto-title-block default">
 
 <div class="quarto-title"><h1 class="title d-none d-lg-block display-7">Exercise I</h1></div></header>
 
+<section id="overview" class="level1 unnumbered">
+<h1 class="unnumbered">Overview</h1>
+<p>This is the first set of exercises where you get familiar with basic commands that you’ll need for data simulation. It’ll make it easier later on when you do more complicated designs to have a good intuition how these commands work.</p>
+<p>This part might be really boring to you if you’re already a seasoned R user. In that case, I recommend you get a coffee/tea/nap.</p>
+<section id="block-1" class="level2" data-number="0.1">
+<h2 data-number="0.1" class="anchored" data-anchor-id="block-1"><span class="header-section-number">0.1</span> Block 1</h2>
+<section id="exercise" class="level3" data-number="0.1.1">
+<h3 data-number="0.1.1" class="anchored" data-anchor-id="exercise"><span class="header-section-number">0.1.1</span> Exercise</h3>
+<p>You have three groups. Name the groups, randomly sample ten cases (total), and then create a simple data frame that contains a variable for the group called <code>condition</code>.</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>groups <span class="ot">&lt;-</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>my_sample <span class="ot">&lt;-</span> <span class="fu">sample</span>(groups, <span class="dv">10</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">condition =</span> <span class="fu">as.factor</span>(my_sample))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercise-1" class="level3" data-number="0.1.2">
+<h3 data-number="0.1.2" class="anchored" data-anchor-id="exercise-1"><span class="header-section-number">0.1.2</span> Exercise</h3>
+<p>Same three groups. This time you want each case to have a 70% to be in the first group, a 20% to be in the second group, and a 10% to be in the third group. Get 100 participants (no need for a data frame). Use <code>set.seed(1)</code>. How many are in the first group?</p>
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>groups <span class="ot">&lt;-</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>my_sample <span class="ot">&lt;-</span> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample</span>(</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    groups,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="dv">100</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.7</span>, <span class="fl">0.2</span>, <span class="fl">0.1</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(my_sample<span class="sc">==</span>groups[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 68</code></pre>
+</div>
+</div>
+</section>
+<section id="exercise-2" class="level3" data-number="0.1.3">
+<h3 data-number="0.1.3" class="anchored" data-anchor-id="exercise-2"><span class="header-section-number">0.1.3</span> Exercise</h3>
+<p>Show that <code>sample</code> with assigned probability (<code>prob =</code> argument) is the same as <code>rbinom</code>. Conduct 10 coin flips with a an unfair coin that has a 60% of landing heads. Remember to set a seed (tip: twice).</p>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, <span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.4</span>, <span class="fl">0.6</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code> [1] 1 1 1 0 1 0 0 0 0 1</code></pre>
+</div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rbinom</span>(<span class="dv">10</span>, <span class="dv">1</span>, <span class="fl">0.6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code> [1] 1 1 1 0 1 0 0 0 0 1</code></pre>
+</div>
+</div>
+</section>
+<section id="exercise-3" class="level3" data-number="0.1.4">
+<h3 data-number="0.1.4" class="anchored" data-anchor-id="exercise-3"><span class="header-section-number">0.1.4</span> Exercise</h3>
+<p>Draw random letters from the alphabet until the alphabet is empty.</p>
+<div class="cell">
+<div class="sourceCode" id="cb8"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(letters, <span class="fu">length</span>(letters))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code> [1] "s" "a" "u" "x" "j" "n" "v" "g" "i" "o" "e" "p" "r" "w" "q" "l" "b" "m" "d"
+[20] "z" "y" "h" "c" "t" "k" "f"</code></pre>
+</div>
+</div>
+</section>
+<section id="exercise-4" class="level3" data-number="0.1.5">
+<h3 data-number="0.1.5" class="anchored" data-anchor-id="exercise-4"><span class="header-section-number">0.1.5</span> Exercise</h3>
+<p>Draw all letters from the alphabet and explicitly assign the same probability for each letter (tip: repeat the same probability).</p>
+<div class="cell">
+<div class="sourceCode" id="cb10"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>probs <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">/</span><span class="fu">length</span>(letters), <span class="fu">length</span>(letters))</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(letters, <span class="at">prob =</span> probs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code> [1] "r" "v" "o" "n" "w" "b" "l" "t" "s" "k" "y" "i" "f" "c" "e" "j" "q" "u" "m"
+[20] "a" "g" "p" "h" "x" "d" "z"</code></pre>
+</div>
+</div>
+</section>
+<section id="exercise-5" class="level3" data-number="0.1.6">
+<h3 data-number="0.1.6" class="anchored" data-anchor-id="exercise-5"><span class="header-section-number">0.1.6</span> Exercise</h3>
+<p>Create a data set. In the data set, each participant has an identifier (called <code>id</code>), a group identifier (<code>condition</code>), and an identifier what number of measurement we have for this participant (<code>trial</code>). There are 3 participants in each of three groups with 5 trials in each group.</p>
+<div class="cell">
+<div class="sourceCode" id="cb12"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>groups <span class="ot">&lt;-</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>participants <span class="ot">&lt;-</span> <span class="fu">length</span>(groups) <span class="sc">*</span> <span class="dv">3</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>trials <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> </span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span>participants, <span class="at">each =</span> trials),</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">condition =</span> <span class="fu">rep</span>(groups, <span class="at">each =</span> trials, <span class="at">times =</span> <span class="dv">3</span>),</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">trial =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span>trials, <span class="at">times =</span> participants)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>d</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>   id condition trial
+1   1         a     1
+2   1         a     2
+3   1         a     3
+4   1         a     4
+5   1         a     5
+6   2         b     1
+7   2         b     2
+8   2         b     3
+9   2         b     4
+10  2         b     5
+11  3         c     1
+12  3         c     2
+13  3         c     3
+14  3         c     4
+15  3         c     5
+16  4         a     1
+17  4         a     2
+18  4         a     3
+19  4         a     4
+20  4         a     5
+21  5         b     1
+22  5         b     2
+23  5         b     3
+24  5         b     4
+25  5         b     5
+26  6         c     1
+27  6         c     2
+28  6         c     3
+29  6         c     4
+30  6         c     5
+31  7         a     1
+32  7         a     2
+33  7         a     3
+34  7         a     4
+35  7         a     5
+36  8         b     1
+37  8         b     2
+38  8         b     3
+39  8         b     4
+40  8         b     5
+41  9         c     1
+42  9         c     2
+43  9         c     3
+44  9         c     4
+45  9         c     5</code></pre>
+</div>
+</div>
+</section>
+<section id="exercise-6" class="level3" data-number="0.1.7">
+<h3 data-number="0.1.7" class="anchored" data-anchor-id="exercise-6"><span class="header-section-number">0.1.7</span> Exercise</h3>
+<p>You have two groups, a control and a treatment group. In each group, there are 10 participants. Each participant flips a coin 10 times. The control group has a fair coin: 50% heads. The treatment group has an unfair coin: 70% heads. Create a data frame with a participant identifier (<code>id</code>), group membership (<code>condition</code>), and a total head count for that participant (<code>heads</code>). Check that the two groups indeed have different means on the number of heads (roughly corresponding to the two probabilities)</p>
+<div class="cell">
+<div class="sourceCode" id="cb14"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>groups <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"control"</span>, <span class="st">"treatment"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>flips <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>fair <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>unfair <span class="ot">&lt;-</span> <span class="fl">0.7</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>probs <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(fair, unfair), <span class="at">each =</span> n<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> </span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">condition =</span> <span class="fu">rep</span>(groups, <span class="at">each =</span> n<span class="sc">/</span><span class="dv">2</span>),</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">heads =</span> <span class="fu">rbinom</span>(n, flips, <span class="at">prob =</span> probs)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(d<span class="sc">$</span>heads, <span class="at">by =</span> <span class="fu">list</span>(d<span class="sc">$</span>condition), mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>    Group.1   x
+1   control 5.4
+2 treatment 6.5</code></pre>
+</div>
+</div>
+</section>
+<section id="exercise-7" class="level3" data-number="0.1.8">
+<h3 data-number="0.1.8" class="anchored" data-anchor-id="exercise-7"><span class="header-section-number">0.1.8</span> Exercise</h3>
+<p>You have 100 participants. Each participants reports their age which lies uniformly between 20 and 40. They also report grumpiness on a 100-point scale (with a 10-point SD). Each extra year predicts 0.5 higher grumpiness. Create the two variables (no need for a data frame) and conduct a correlation with <code>cor</code>. What’s the correlation?</p>
+<div class="cell">
+<div class="sourceCode" id="cb16"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="fu">runif</span>(n, <span class="dv">20</span>, <span class="dv">40</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>grumpiness <span class="ot">&lt;-</span> age<span class="sc">*</span><span class="fl">0.5</span> <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">100</span>, <span class="dv">10</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(age, grumpiness)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 0.2127516</code></pre>
+</div>
+</div>
+</section>
+<section id="exercise-8" class="level3" data-number="0.1.9">
+<h3 data-number="0.1.9" class="anchored" data-anchor-id="exercise-8"><span class="header-section-number">0.1.9</span> Exercise</h3>
+<p>We track how many calls you get during this exercise. Nobody calls anymore, so there’ll be very few. Create a data frame with 20 participants, a participant number and the number of calls per participant. Plot the calls and show that 0 is the most common value.</p>
+<div class="cell">
+<div class="sourceCode" id="cb18"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span>n,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">calls =</span> <span class="fu">rpois</span>(n, <span class="fl">0.5</span>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(d<span class="sc">$</span>calls)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="03-exercise_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="exercise-9" class="level3" data-number="0.1.10">
+<h3 data-number="0.1.10" class="anchored" data-anchor-id="exercise-9"><span class="header-section-number">0.1.10</span> Exercise</h3>
+<p>Professors get more calls. Add 20 more participants who have much higher call numbers. Also include a <code>condition</code> variable that marks whether participants are students (first 20 people) or professors (new 20 people). Conduct an independent sample t-test (<code>t.test</code>) and also plot the different groups as a boxplot.</p>
+<div class="cell">
+<div class="sourceCode" id="cb19"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  d,</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data.frame</span>(</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> n<span class="sc">+</span><span class="dv">1</span><span class="sc">:</span><span class="dv">2</span><span class="sc">*</span>n,</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">calls =</span> <span class="fu">rpois</span>(n, <span class="dv">3</span>)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>condition <span class="ot">&lt;-</span> </span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"students"</span>, <span class="st">"profs"</span>), <span class="at">each =</span> <span class="dv">20</span>)</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(d<span class="sc">$</span>calls <span class="sc">~</span> d<span class="sc">$</span>condition)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
 
+data:  d$calls by d$condition
+t = 5.8023, df = 26.202, p-value = 3.989e-06
+alternative hypothesis: true difference in means between group profs and group students is not equal to 0
+95 percent confidence interval:
+ 1.679272 3.520728
+sample estimates:
+   mean in group profs mean in group students 
+                  3.25                   0.65 </code></pre>
+</div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(d<span class="sc">$</span>calls <span class="sc">~</span> d<span class="sc">$</span>condition)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="03-exercise_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="block-2" class="level2" data-number="0.2">
+<h2 data-number="0.2" class="anchored" data-anchor-id="block-2"><span class="header-section-number">0.2</span> Block 2</h2>
+<p>In this section, you’ll use the basics from above to perform your first power analysis. You’ll apply repeated simulations over a range of values and extracting and storing results to summarize them.</p>
+<section id="exercise-10" class="level3" data-number="0.2.1">
+<h3 data-number="0.2.1" class="anchored" data-anchor-id="exercise-10"><span class="header-section-number">0.2.1</span> Exercise</h3>
+<p>There are four groups. Each group comes from a different normal distribution. The means are c(100, 105, 107, 109). The SDs are c(9, 12, 10, 17). Each group should be 20 cases. Store everything in a data frame and have a variable that indicates the group. Tip: Remember that R uses vectors, even for arguments in a function.</p>
+<div class="cell">
+<div class="sourceCode" id="cb22"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">105</span>, <span class="dv">107</span>, <span class="dv">109</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>sds <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">12</span>, <span class="dv">10</span>, <span class="dv">17</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> </span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">group =</span> <span class="fu">rep</span>(<span class="fu">c</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]), <span class="at">times =</span> n),</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">score =</span> <span class="fu">rnorm</span>(n<span class="sc">*</span><span class="dv">4</span>, means, sds)</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercise-11" class="level3" data-number="0.2.2">
+<h3 data-number="0.2.2" class="anchored" data-anchor-id="exercise-11"><span class="header-section-number">0.2.2</span> Exercise</h3>
+<p>You need 5 samples. Each sample contains 10 unique letters from the alphabet. (Use <code>replicate</code>.)</p>
+<div class="cell">
+<div class="sourceCode" id="cb23"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">replicate</span>(<span class="dv">5</span>, <span class="fu">sample</span>(letters, <span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>      [,1] [,2] [,3] [,4] [,5]
+ [1,] "o"  "u"  "p"  "l"  "e" 
+ [2,] "p"  "e"  "g"  "j"  "w" 
+ [3,] "q"  "l"  "z"  "a"  "f" 
+ [4,] "s"  "c"  "q"  "f"  "s" 
+ [5,] "n"  "r"  "k"  "q"  "t" 
+ [6,] "f"  "n"  "i"  "m"  "l" 
+ [7,] "k"  "m"  "h"  "b"  "c" 
+ [8,] "h"  "o"  "m"  "o"  "d" 
+ [9,] "e"  "b"  "f"  "d"  "o" 
+[10,] "b"  "t"  "x"  "z"  "n" </code></pre>
+</div>
+</div>
+</section>
+<section id="exercise-12" class="level3" data-number="0.2.3">
+<h3 data-number="0.2.3" class="anchored" data-anchor-id="exercise-12"><span class="header-section-number">0.2.3</span> Exercise</h3>
+<p>Same as before, but this time you need 10 samples from a normal distribution with a mean of 10 and an SD of 2. Use <code>replicate</code> first, then a <code>for</code> loop.</p>
+<div class="cell">
+<div class="sourceCode" id="cb25"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">replicate</span>(<span class="dv">5</span>, <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>           [,1]      [,2]      [,3]      [,4]      [,5]
+ [1,] 10.629034 10.077856 10.916251 11.087316  8.782663
+ [2,] 10.444436 10.029294  7.095943 12.082121  9.397606
+ [3,]  8.312769  9.627366 10.154685 10.395012 11.952405
+ [4,] 10.887611 12.801182 11.119791  6.740843 10.912017
+ [5,] 10.111594 10.036971  9.850107 10.242080 12.588816
+ [6,] 10.135945 10.498392 11.565395  6.725156  7.733596
+ [7,]  9.596077 10.298441  9.654663  8.937914  8.261079
+ [8,]  7.683969  8.073534  7.897412 11.907360  8.490059
+ [9,]  8.814513  9.867066 11.458903  6.558699  9.740729
+[10,] 11.532131 12.573844 10.525330 10.212641  7.996397</code></pre>
+</div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) {</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">2</span>))</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code> [1]  8.360263  8.050895 11.208619 11.097575 11.832865 15.323133  9.639486
+ [8] 11.370030 16.532829 11.121201
+ [1]  9.861965  8.055114  8.906827  6.622615  6.855255  9.190026 10.638573
+ [8] 10.080855  9.219981  6.361556
+ [1] 11.318361 10.919243 13.233253  6.287619  9.426352 13.500644 10.232827
+ [8] 12.768506 11.148442 10.272982
+ [1] 11.828432  6.398347  9.320239 11.212529 12.682261 11.534575 10.387451
+ [8] 12.281133 10.027730  7.789388
+ [1]  9.949675  9.672653 10.740119  9.238351 11.305905 14.122684  6.406710
+ [8] 11.168154  8.554494  8.741671</code></pre>
+</div>
+</div>
+</section>
+<section id="exercise-13" class="level3" data-number="0.2.4">
+<h3 data-number="0.2.4" class="anchored" data-anchor-id="exercise-13"><span class="header-section-number">0.2.4</span> Exercise</h3>
+<p>Assume we know the population mean in height (168cm) and its standard deviation (20). Assume we draw 10,000 samples from this distribution. Each sample has 50 participants. The standard deviation of these 10,000 sample means is the standard error.</p>
+<p>Simulate the standard error and compare it to the theoretical value: <span class="math inline">\(SE = \frac{\sigma}{\sqrt{n}}\)</span>. (<span class="math inline">\(\sigma\)</span> is the standard deviation of the population.)</p>
+<div class="cell">
+<div class="sourceCode" id="cb29"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">168</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> sd <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="cn">NULL</span> </span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>draws <span class="ot">&lt;-</span> <span class="fl">1e5</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>draws) {</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>  means[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">rnorm</span>(n, mu, sd))</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"The real SE is:"</span>, <span class="fu">round</span>(se, <span class="at">digits =</span> <span class="dv">2</span>), <span class="st">". The simulated SE is:"</span>, <span class="fu">round</span>(<span class="fu">sd</span>(means), <span class="at">digits =</span> <span class="dv">2</span>), <span class="st">"."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>The real SE is: 2.83 . The simulated SE is: 2.83 .</code></pre>
+</div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># with replicate</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>means <span class="ot">&lt;-</span> </span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">replicate</span>(</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    draws,</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(n, mu, sd)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(<span class="fu">colMeans</span>(means))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 2.827195</code></pre>
+</div>
+</div>
+</section>
+<section id="exercise-14" class="level3" data-number="0.2.5">
+<h3 data-number="0.2.5" class="anchored" data-anchor-id="exercise-14"><span class="header-section-number">0.2.5</span> Exercise</h3>
+<p>Same population. Draw 1,000 observations for each sample size between 20 and 100. Calculate the standard error for each sample size (like you did above) and plot it against the sample size. (Tip: You’ll need to iterate over two things.)</p>
+<div class="cell">
+<div class="sourceCode" id="cb33"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">168</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>draws <span class="ot">&lt;-</span> <span class="fl">1e3</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>min_sample <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>max_sample <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> </span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">sample_size =</span> <span class="cn">NULL</span>,</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> <span class="cn">NULL</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> min_sample<span class="sc">:</span>max_sample) {</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>  sample_means <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>draws) {</span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>    sample_means[j] <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">rnorm</span>(i, mu, sd))</span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>  se <span class="ot">&lt;-</span> <span class="fu">sd</span>(sample_means)</span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>  results <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>    results,</span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data.frame</span>(</span>
+<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a>      <span class="at">sample_size =</span> i,</span>
+<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a>      <span class="at">se =</span> se</span>
+<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb33-30"><a href="#cb33-30" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb33-31"><a href="#cb33-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-32"><a href="#cb33-32" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(results<span class="sc">$</span>sample_size, results<span class="sc">$</span>se)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="03-exercise_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="exercise-15" class="level3" data-number="0.2.6">
+<h3 data-number="0.2.6" class="anchored" data-anchor-id="exercise-15"><span class="header-section-number">0.2.6</span> Exercise</h3>
+<p>Turn the above into a function so that you can change the population effect size, SD, number of simulations, and sample size range. The function should also return the plot from above.</p>
+<div class="cell">
+<div class="sourceCode" id="cb34"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>sample_against_se <span class="ot">&lt;-</span> </span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mu =</span> <span class="dv">168</span>,</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd =</span> <span class="dv">20</span>,</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">draws =</span> <span class="fl">1e3</span>,</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_sample =</span> <span class="dv">20</span>,</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">max_sample =</span> <span class="dv">100</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>  ) {</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>    results <span class="ot">&lt;-</span> </span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">data.frame</span>(</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">sample_size =</span> <span class="cn">NULL</span>,</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">se =</span> <span class="cn">NULL</span></span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i <span class="cf">in</span> min_sample<span class="sc">:</span>max_sample) {</span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>      sample_means <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>      <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>draws) {</span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>        sample_means[j] <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">rnorm</span>(i, mu, sd))</span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a>      se <span class="ot">&lt;-</span> <span class="fu">sd</span>(sample_means)</span>
+<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a>      results <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a>        results,</span>
+<span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a>        <span class="fu">data.frame</span>(</span>
+<span id="cb34-28"><a href="#cb34-28" aria-hidden="true" tabindex="-1"></a>          <span class="at">sample_size =</span> i,</span>
+<span id="cb34-29"><a href="#cb34-29" aria-hidden="true" tabindex="-1"></a>          <span class="at">se =</span> se</span>
+<span id="cb34-30"><a href="#cb34-30" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb34-31"><a href="#cb34-31" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb34-32"><a href="#cb34-32" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb34-33"><a href="#cb34-33" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb34-34"><a href="#cb34-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">plot</span>(results<span class="sc">$</span>sample_size, results<span class="sc">$</span>se))</span>
+<span id="cb34-35"><a href="#cb34-35" aria-hidden="true" tabindex="-1"></a>  }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercise-16" class="level3" data-number="0.2.7">
+<h3 data-number="0.2.7" class="anchored" data-anchor-id="exercise-16"><span class="header-section-number">0.2.7</span> Exercise</h3>
+<p>Try out the function with two plots: when the population SD is 5 and when you do 10 draws. What changes?</p>
+<div class="cell">
+<div class="sourceCode" id="cb35"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_against_se</span>(<span class="at">sd =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="03-exercise_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_against_se</span>(<span class="at">draws =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="03-exercise_files/figure-html/unnamed-chunk-34-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="exercise-17" class="level3" data-number="0.2.8">
+<h3 data-number="0.2.8" class="anchored" data-anchor-id="exercise-17"><span class="header-section-number">0.2.8</span> Exercise</h3>
+<p>The average height of men in Spain is 173cm (says <a href="https://en.wikipedia.org/wiki/Average_human_height_by_country">Wikipedia</a>). The population standard deviation is probablay around 7cm (<a href="https://biology.stackexchange.com/questions/9730/what-is-the-standard-deviation-of-adult-human-heights-for-males-and-females">source</a>).</p>
+<p>You draw a sample of men and want to test whether they’re significantly different from that mean (our H<sub>0</sub>). In fact, these men you have sampled are truly French (175.6cm, our true “effect size”). In other words, can we reject the null hypothesis that these men we sampled come from a different country in favor of our alternative hypothesis that the true population value is greater than the Spanish population mean?</p>
+<p>You calculate the z-statistic, which is calculated as follows: <span class="math inline">\(\frac{\bar{X} - \mu_0}{\sigma/\sqrt{N}}\)</span> This simply tells us how far from the population mean (well, the suspected population mean under the null hypothesis) our sample mean is in terms of standard errors. <span class="math inline">\(\bar{X}\)</span> is the sample mean, <span class="math inline">\(\mu_0\)</span> is the population mean under H<sub>0</sub>, <span class="math inline">\(\sigma\)</span> is the population standard deviation, and <span class="math inline">\(N\)</span> is the sample size.</p>
+<p>Then we can look up the z-score to see what the probability is to score this high or higher (does that definition ring a bell?). In R, you can simply do that with a built-in function: <code>pnorm()</code>. For example, if we have a z-score of 1.645, our probability of obtaining such a value (or higher) is <code>pnorm(1.645, lower.tail = FALSE)</code> = 0.0499849 – our p-value for a one-sided test.</p>
+<p>We can simulate the power of our statistical test (in this case, the z-statistic). Take a sample of 30 people from the French population, calculate the z-statistic, it’s p-value, and store the p-value. Do this 1,000 times. Plot the distribution of p-values. What can we conclude about the sample size?</p>
+<div class="cell">
+<div class="sourceCode" id="cb37"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sample size</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>h0 <span class="ot">&lt;-</span> <span class="dv">173</span> <span class="co"># test against this null</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>h1 <span class="ot">&lt;-</span> <span class="fl">175.6</span> <span class="co"># true population  effect</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="dv">7</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>draws <span class="ot">&lt;-</span> <span class="fl">1e3</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>pvalues <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>draws) {</span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>  d <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, h1, sd)</span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>  z <span class="ot">&lt;-</span> (<span class="fu">mean</span>(d) <span class="sc">-</span> h0) <span class="sc">/</span> (sd <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>  pvalues[i] <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(z, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(pvalues))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="03-exercise_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="exercise-18" class="level3" data-number="0.2.9">
+<h3 data-number="0.2.9" class="anchored" data-anchor-id="exercise-18"><span class="header-section-number">0.2.9</span> Exercise</h3>
+<p>Now calculate the power by calculating the proportion of pvalues that are below 0.05. That’s your power: The proportion of tests that will detect that there’s a true effect. In our case, that effect is a difference of 2.6cm.</p>
+<div class="cell">
+<div class="sourceCode" id="cb38"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(pvalues <span class="sc">&lt;</span> <span class="fl">0.05</span>)<span class="sc">/</span><span class="fu">length</span>(pvalues)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>[1] 0.668</code></pre>
+</div>
+</div>
+</section>
+<section id="exercise-19" class="level3" data-number="0.2.10">
+<h3 data-number="0.2.10" class="anchored" data-anchor-id="exercise-19"><span class="header-section-number">0.2.10</span> Exercise</h3>
+<p>Now let’s do what we did before: Put the loop from above inside another loop that iterates over different sample sizes. Then put that all into a function that let’s you set the parameters of interest (sample size range, h0, h1, etc.). Then simulate power (1,000 simulations each) for samples between 30 and 100. Plot the sample size against power.</p>
+<div class="cell">
+<div class="sourceCode" id="cb40"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>power_function <span class="ot">&lt;-</span> </span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">h0 =</span> <span class="dv">173</span>,</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">h1 =</span> <span class="fl">175.6</span>,</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd =</span> <span class="dv">7</span>,</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.05</span>,</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">draws =</span> <span class="fl">1e3</span>,</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_sample =</span> <span class="dv">30</span>,</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">max_sample =</span> <span class="dv">100</span></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>  ) {</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>    results <span class="ot">&lt;-</span> </span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">data.frame</span>(</span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">sample_size =</span> <span class="cn">NULL</span>,</span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">power =</span> <span class="cn">NULL</span></span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i <span class="cf">in</span> min_sample<span class="sc">:</span>max_sample) {</span>
+<span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a>      pvalues <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb40-21"><a href="#cb40-21" aria-hidden="true" tabindex="-1"></a>      <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>draws) {</span>
+<span id="cb40-22"><a href="#cb40-22" aria-hidden="true" tabindex="-1"></a>        d <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(i, h1, sd)</span>
+<span id="cb40-23"><a href="#cb40-23" aria-hidden="true" tabindex="-1"></a>        z <span class="ot">&lt;-</span> (<span class="fu">mean</span>(d) <span class="sc">-</span> h0) <span class="sc">/</span> (sd <span class="sc">/</span> <span class="fu">sqrt</span>(i))</span>
+<span id="cb40-24"><a href="#cb40-24" aria-hidden="true" tabindex="-1"></a>        pvalues[j] <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(z, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb40-25"><a href="#cb40-25" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb40-26"><a href="#cb40-26" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb40-27"><a href="#cb40-27" aria-hidden="true" tabindex="-1"></a>      results <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb40-28"><a href="#cb40-28" aria-hidden="true" tabindex="-1"></a>        results,</span>
+<span id="cb40-29"><a href="#cb40-29" aria-hidden="true" tabindex="-1"></a>        <span class="fu">data.frame</span>(</span>
+<span id="cb40-30"><a href="#cb40-30" aria-hidden="true" tabindex="-1"></a>          <span class="at">sample_size =</span> i,</span>
+<span id="cb40-31"><a href="#cb40-31" aria-hidden="true" tabindex="-1"></a>          <span class="at">power =</span> <span class="fu">sum</span>(pvalues <span class="sc">&lt;</span> <span class="fl">0.05</span>)<span class="sc">/</span><span class="fu">length</span>(pvalues)</span>
+<span id="cb40-32"><a href="#cb40-32" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb40-33"><a href="#cb40-33" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb40-34"><a href="#cb40-34" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb40-35"><a href="#cb40-35" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb40-36"><a href="#cb40-36" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">plot</span>(results<span class="sc">$</span>sample_size, results<span class="sc">$</span>power, <span class="at">type =</span> <span class="st">"l"</span>))</span>
+<span id="cb40-37"><a href="#cb40-37" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb40-38"><a href="#cb40-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-39"><a href="#cb40-39" aria-hidden="true" tabindex="-1"></a><span class="fu">power_function</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="03-exercise_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="exercise-20" class="level3" data-number="0.2.11">
+<h3 data-number="0.2.11" class="anchored" data-anchor-id="exercise-20"><span class="header-section-number">0.2.11</span> Exercise</h3>
+<p>Now do the same thing with a one-sample t-test. (Tip: You only need to replace the z-scores with a <code>t.test</code> from which you can extract the p-value). (Another tip: Use the $ sign on where you stored the t-test results.)</p>
+<div class="cell">
+<div class="sourceCode" id="cb41"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>power_function_t <span class="ot">&lt;-</span> </span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">h0 =</span> <span class="dv">173</span>,</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">h1 =</span> <span class="fl">175.6</span>,</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd =</span> <span class="dv">7</span>,</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.05</span>,</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">draws =</span> <span class="fl">1e3</span>,</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_sample =</span> <span class="dv">30</span>,</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">max_sample =</span> <span class="dv">100</span></span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>  ) {</span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>    results <span class="ot">&lt;-</span> </span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">data.frame</span>(</span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">sample_size =</span> <span class="cn">NULL</span>,</span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">power =</span> <span class="cn">NULL</span></span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i <span class="cf">in</span> min_sample<span class="sc">:</span>max_sample) {</span>
+<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a>      pvalues <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb41-20"><a href="#cb41-20" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb41-21"><a href="#cb41-21" aria-hidden="true" tabindex="-1"></a>      <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>draws) {</span>
+<span id="cb41-22"><a href="#cb41-22" aria-hidden="true" tabindex="-1"></a>        d <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(i, h1, sd)</span>
+<span id="cb41-23"><a href="#cb41-23" aria-hidden="true" tabindex="-1"></a>        t <span class="ot">&lt;-</span> <span class="fu">t.test</span>(d, <span class="at">mu =</span> h0,<span class="at">alternative =</span> <span class="st">"greater"</span>)</span>
+<span id="cb41-24"><a href="#cb41-24" aria-hidden="true" tabindex="-1"></a>        pvalues[j] <span class="ot">&lt;-</span> t<span class="sc">$</span>p.value</span>
+<span id="cb41-25"><a href="#cb41-25" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb41-26"><a href="#cb41-26" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb41-27"><a href="#cb41-27" aria-hidden="true" tabindex="-1"></a>      results <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb41-28"><a href="#cb41-28" aria-hidden="true" tabindex="-1"></a>        results,</span>
+<span id="cb41-29"><a href="#cb41-29" aria-hidden="true" tabindex="-1"></a>        <span class="fu">data.frame</span>(</span>
+<span id="cb41-30"><a href="#cb41-30" aria-hidden="true" tabindex="-1"></a>          <span class="at">sample_size =</span> i,</span>
+<span id="cb41-31"><a href="#cb41-31" aria-hidden="true" tabindex="-1"></a>          <span class="at">power =</span> <span class="fu">sum</span>(pvalues <span class="sc">&lt;</span> <span class="fl">0.05</span>)<span class="sc">/</span><span class="fu">length</span>(pvalues)</span>
+<span id="cb41-32"><a href="#cb41-32" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb41-33"><a href="#cb41-33" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb41-34"><a href="#cb41-34" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb41-35"><a href="#cb41-35" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb41-36"><a href="#cb41-36" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">plot</span>(results<span class="sc">$</span>sample_size, results<span class="sc">$</span>power, <span class="at">type =</span> <span class="st">"l"</span>))</span>
+<span id="cb41-37"><a href="#cb41-37" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb41-38"><a href="#cb41-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-39"><a href="#cb41-39" aria-hidden="true" tabindex="-1"></a><span class="fu">power_function</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="03-exercise_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="exercise-21" class="level3" data-number="0.2.12">
+<h3 data-number="0.2.12" class="anchored" data-anchor-id="exercise-21"><span class="header-section-number">0.2.12</span> Exercise</h3>
+<p>Just for funsies (and for our next session), see what happens when the true effect is only 1cm in difference.</p>
+<div class="cell">
+<div class="sourceCode" id="cb42"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">power_function_t</span>(<span class="at">h1 =</span> h0<span class="sc">+</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="03-exercise_files/figure-html/unnamed-chunk-44-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+
+
+</section>
+</section>
+</section>
 </main> <!-- /main -->
 <script type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
