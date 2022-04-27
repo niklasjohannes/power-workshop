@@ -48,6 +48,7 @@
       "search-submit-button-title": "Submit"
     }
   }</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
@@ -281,9 +282,199 @@
 <header id="title-block-header" class="quarto-title-block default">
 
 <div class="quarto-title"><h1 class="title d-none d-lg-block display-7">Welcome</h1></div></header>
-<p>Hello.</p>
+<p>Hello. Internet etiquette dictates that any website that deals with stats starts with a GIF to signal that this’ll be fun. I’m not one to deny etiquette, so here we go:</p>
+<p><img src="https://media.giphy.com/media/MCZ39lz83o5lC/giphy.gif" class="img-fluid"></p>
+<section id="this-website" class="level2">
+<h2 class="anchored" data-anchor-id="this-website">This website</h2>
+<p>This website collects the materials for a 2-day workshop on power that <a href="https://www.niklasjohannes.com/">I’m</a> giving at the <a href="https://vds-sosci.univie.ac.at/your-benefits/career-development-and-internationalisation/international-workshops/">University of Vienna May 4th and 5th 2022</a>. Rather than dumping the materials in zip folder somewhere, I thought this format will be better for a) participants to revisit, b) those who might be interested in the content but couldn’t make it. That’s also the reason most of the materials are so annoyingly verbose: I wanted readers to be able to follow.</p>
+</section>
+<section id="goal" class="level2">
+<h2 class="anchored" data-anchor-id="goal">Goal</h2>
+<p>The goal of the workshop is for you to (1) have an understanding of the philosophy behind using data to test claims, (2) get an intuition of how data generation processes work, (3) learn the technical skills in R to turn these processes into data, and (4) use these skills to simulate power for an informative study.</p>
+</section>
+<section id="schedule" class="level2">
+<h2 class="anchored" data-anchor-id="schedule">Schedule</h2>
+<p>Below is the 2-day schedule. The times are more suggestions and not set in stone.</p>
+<p><strong>Day 1</strong></p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>What?</th>
+<th>When?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>9:00-9:45</td>
+<td>Intro</td>
+</tr>
+<tr class="even">
+<td>10:00-10:45</td>
+<td>What’s power?</td>
+</tr>
+<tr class="odd">
+<td>11:00-11:45</td>
+<td>Simulations in R</td>
+</tr>
+<tr class="even">
+<td>12:00-13:00</td>
+<td>Exercise 1</td>
+</tr>
+<tr class="odd">
+<td>14:00-14:45</td>
+<td>Effect sizes</td>
+</tr>
+<tr class="even">
+<td>15:00-15:45</td>
+<td>Exercise 2</td>
+</tr>
+<tr class="odd">
+<td>16:00-16:45</td>
+<td>Alpha, beta, sensitivity</td>
+</tr>
+<tr class="even">
+<td>17:00-17:45</td>
+<td>Exercise 3</td>
+</tr>
+<tr class="odd">
+<td>17:45-18:00</td>
+<td>Recap</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Day 2</strong></p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>What?</th>
+<th>When?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>9:00-9:45</td>
+<td>Recap</td>
+</tr>
+<tr class="even">
+<td>10:00-10:45</td>
+<td>Categorical predictors</td>
+</tr>
+<tr class="odd">
+<td>11:00-11:45</td>
+<td>Exercise 4</td>
+</tr>
+<tr class="even">
+<td>12:00-13:00</td>
+<td>Interactions</td>
+</tr>
+<tr class="odd">
+<td>14:00-14:45</td>
+<td>Exercise 5</td>
+</tr>
+<tr class="even">
+<td>15:00-15:45</td>
+<td>Continuous predictors</td>
+</tr>
+<tr class="odd">
+<td>16:00-16:45</td>
+<td>Exercise 6</td>
+</tr>
+<tr class="even">
+<td>17:00-17:45</td>
+<td>Buffer</td>
+</tr>
+<tr class="odd">
+<td>17:45-18:00</td>
+<td>Recap</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="takeaways" class="level2">
+<h2 class="anchored" data-anchor-id="takeaways">Takeaways</h2>
+<p>Each of these blocks has a several learning outcomes. They are:</p>
+<section id="whats-power" class="level3">
+<h3 class="anchored" data-anchor-id="whats-power">What’s power</h3>
+<ul>
+<li>Understanding of the logic behind NHST</li>
+<li>Intuition about what power is</li>
+<li>See why power, perhaps, potentially isn’t just a hoop to jump through</li>
+</ul>
+</section>
+<section id="simulations-in-r" class="level3">
+<h3 class="anchored" data-anchor-id="simulations-in-r">Simulations in R</h3>
+<ul>
+<li>Understand why simulations are useful</li>
+<li>Logic of Monte Carlo Simulations</li>
+<li>Basic tools</li>
+</ul>
+</section>
+<section id="effect-sizes" class="level3">
+<h3 class="anchored" data-anchor-id="effect-sizes">Effect sizes</h3>
+<ul>
+<li>Understand the importance of effect sizes</li>
+<li>How to formulate a smallest effect size of interest</li>
+<li>Know when you don’t have enough information</li>
+</ul>
+</section>
+<section id="alpha-beta-sensitivity" class="level3">
+<h3 class="anchored" data-anchor-id="alpha-beta-sensitivity">Alpha, beta, sensitivity</h3>
+<ul>
+<li>Question the default of <span class="math inline">\(\alpha\)</span> = 0.05 and power = 80%</li>
+<li>Understand how terribly complex designing an informative study is</li>
+<li>Know where to turn when you don’t have enough information</li>
+</ul>
+</section>
+<section id="categorical-predictors" class="level3">
+<h3 class="anchored" data-anchor-id="categorical-predictors">Categorical predictors</h3>
+<ul>
+<li>Understand the logic behind the data generating process</li>
+<li>See how the linear model is our data generating process</li>
+<li>Apply this to a setting with multiple categories in a predictor</li>
+</ul>
+</section>
+<section id="interactions" class="level3">
+<h3 class="anchored" data-anchor-id="interactions">Interactions</h3>
+<ul>
+<li>Understand what an interaction is from the perspective of the linear model</li>
+<li>Make yourself think in more detail about the form of interactions</li>
+<li>Be able to translate that detail to generating data</li>
+</ul>
+</section>
+<section id="continuous-predictors" class="level3">
+<h3 class="anchored" data-anchor-id="continuous-predictors">Continuous predictors</h3>
+<ul>
+<li>Understand that continuous predictors are just another case of the linear model</li>
+<li>Extend this understanding to continuous (by categorical) interactions</li>
+<li>Be able to translate that extension to generating data</li>
+</ul>
+</section>
+</section>
+<section id="prerequisits" class="level2">
+<h2 class="anchored" data-anchor-id="prerequisits">Prerequisits</h2>
+<p>I expect that you’re somewhat familiar (though not deeply) with R and vaguely remember your undergrad stats classes. Other than that, you should be good to go.</p>
+<p>What you’ll need for the workshop:</p>
+<ul>
+<li>A laptop</li>
+<li>A working installation of <a href="https://www.r-project.org/">R</a> and preferably <a href="https://www.rstudio.com/">RStudio</a></li>
+<li><a href="https://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower">GPower</a> installed</li>
+</ul>
+</section>
+<section id="structure" class="level2">
+<h2 class="anchored" data-anchor-id="structure">Structure</h2>
+<p>The workshop will follow a structure of learn, do, recall. So typically, for each topic, I’ll introduce theoretical concepts; then you’ll do an exercise where you try to apply and extend these concepts; afterwards, there’ll be a short quiz.</p>
+<p>On this website, only the first two are present: On the left-hand side, you see the slides per topic and the exercises.</p>
+</section>
+<section id="getting-a-local-copy" class="level2">
+<h2 class="anchored" data-anchor-id="getting-a-local-copy">Getting a local copy</h2>
+<p>If you want a local copy of this website, just download the entire project from Github: <a href="https://github.com/niklasjohannes/power-workshop" class="uri">https://github.com/niklasjohannes/power-workshop</a> (Code –&gt; Download Zip). Unzip and then go to the <code>docs</code> folder, where you can double click on <code>index</code>. Alternatively, you can select individual slides/exercises within the docs folder. If you want to look at the source code, check the <code>content</code> folder. Depending on when you check this website, the exercises won’t have the solution yet rendered in the <code>docs</code> folder yet (aka on this website). You can find them in the <code>content</code> folder on Github.</p>
+</section>
+<section id="copyright" class="level2">
+<h2 class="anchored" data-anchor-id="copyright">Copyright</h2>
+<p>This content is licensed under a <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GPL-3.0 License</a>, so feel free to use the materials as you please (just not for commercial purposes). I’d appreciate attribution, though; making this workshop was a <strong>lot</strong> of work.</p>
 
 
+</section>
 </main> <!-- /main -->
 <script type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
