@@ -1,0 +1,170 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "content/01-intro/01-slides.html",
+    "href": "content/01-intro/01-slides.html",
+    "title": "Slides",
+    "section": "",
+    "text": "Below you can find the slides for the intro session:\n\n\n\nIf you want to see the slides in full screen, you can click here. To download them as PDFs, hit the ‘e’ button when you got the presentation open and then Ctrl+P print to PDF. This will work best in Chrome (in Firefox, it didn’t print the headings for me)."
+  },
+  {
+    "objectID": "content/01-intro/slides/slides.html#why-this-workshop",
+    "href": "content/01-intro/slides/slides.html#why-this-workshop",
+    "title": "Welcome",
+    "section": "Why this workshop",
+    "text": "Why this workshop\n\nDesigning an informative study is a key skill\nA study is rarely informative if it can’t detect what you’re after\nNeglecting power means not knowing what our results mean"
+  },
+  {
+    "objectID": "content/01-intro/slides/slides.html#okay-so-i-use-gpower",
+    "href": "content/01-intro/slides/slides.html#okay-so-i-use-gpower",
+    "title": "Welcome",
+    "section": "Okay, so I use GPower?",
+    "text": "Okay, so I use GPower?"
+  },
+  {
+    "objectID": "content/01-intro/slides/slides.html#gpower-is-great",
+    "href": "content/01-intro/slides/slides.html#gpower-is-great",
+    "title": "Welcome",
+    "section": "GPower is great",
+    "text": "GPower is great\n\nGPower works great!\nRuns the risk of treating power just as a hoop to jump through\nSimulating data instead forces us to be explicit about many more features than GPower asks for"
+  },
+  {
+    "objectID": "content/01-intro/slides/slides.html#so-why-are-we-here",
+    "href": "content/01-intro/slides/slides.html#so-why-are-we-here",
+    "title": "Welcome",
+    "section": "So why are we here?",
+    "text": "So why are we here?\nThe goal of the workshop is for you to (1) have an understanding of the philosophy behind using data to test claims, (2) get an intuition of how data generation processes work, (3) learn the technical skills to turn these processes into data, and (4) use these skills to simulate power for an informative study."
+  },
+  {
+    "objectID": "content/01-intro/slides/slides.html#so-what-will-you-learn",
+    "href": "content/01-intro/slides/slides.html#so-what-will-you-learn",
+    "title": "Welcome",
+    "section": "So what will you learn",
+    "text": "So what will you learn\nA bit of everything. It’ll be a weird mix:\n\nPhilosophy of science\nMeta-science\nStatistics\nR"
+  },
+  {
+    "objectID": "content/01-intro/slides/slides.html#what-i-expect-from-you",
+    "href": "content/01-intro/slides/slides.html#what-i-expect-from-you",
+    "title": "Welcome",
+    "section": "What I expect from you",
+    "text": "What I expect from you\n\nA vague memory of your stats courses\nSome familiarity with R (and RStudio)\nTolerance for confusion\nEnthusiasm for 2 days"
+  },
+  {
+    "objectID": "content/01-intro/slides/slides.html#what-you-can-expect-from-me",
+    "href": "content/01-intro/slides/slides.html#what-you-can-expect-from-me",
+    "title": "Welcome",
+    "section": "What you can expect from me",
+    "text": "What you can expect from me\n\nComprehensive overview\nLots of exercises to apply what you learned\nFlexible in schedule\nEnthusiasm for 2 days"
+  },
+  {
+    "objectID": "content/01-intro/slides/slides.html#principle",
+    "href": "content/01-intro/slides/slides.html#principle",
+    "title": "Welcome",
+    "section": "Principle",
+    "text": "Principle\nWe’ll follow the same routine over and over: Learn, do, recall.\n\nTheory (I talk)\nExercises (You apply)\nQuiz (You recall)"
+  },
+  {
+    "objectID": "content/01-intro/slides/slides.html#day-1",
+    "href": "content/01-intro/slides/slides.html#day-1",
+    "title": "Welcome",
+    "section": "Day 1",
+    "text": "Day 1\n\n\n\nWhat?\nWhen?\n\n\n\n\n9:00-9:45\nIntro (now)\n\n\n10:00-10:45\nWhat’s power?\n\n\n11:00-11:45\nSimulations in R\n\n\n12:00-13:00\nExercise 1\n\n\n14:00-14:45\nEffect sizes\n\n\n15:00-15:45\nExercise 2\n\n\n16:00-16:45\nAlpha, beta, sensitivity\n\n\n17:00-17:45\nExercise 3\n\n\n17:45-18:00\nRecap"
+  },
+  {
+    "objectID": "content/01-intro/slides/slides.html#day-2",
+    "href": "content/01-intro/slides/slides.html#day-2",
+    "title": "Welcome",
+    "section": "Day 2",
+    "text": "Day 2\n\n\n\nWhat?\nWhen?\n\n\n\n\n9:00-9:45\nRecap\n\n\n10:00-10:45\nCategorical predictors\n\n\n11:00-11:45\nExercise 4\n\n\n12:00-13:00\nInteractions\n\n\n14:00-14:45\nExercise 5\n\n\n15:00-15:45\nContinuous predictors\n\n\n16:00-16:45\nExercise 6\n\n\n17:00-17:45\nBuffer\n\n\n17:45-18:00\nRecap"
+  },
+  {
+    "objectID": "content/01-intro/slides/slides.html#whats-power",
+    "href": "content/01-intro/slides/slides.html#whats-power",
+    "title": "Welcome",
+    "section": "What’s power",
+    "text": "What’s power\n\nUnderstanding of the logic behind NHST\nIntuition about what power is\nSee why power, perhaps, potentially isn’t just a hoop to jump through"
+  },
+  {
+    "objectID": "content/01-intro/slides/slides.html#simulations-in-r",
+    "href": "content/01-intro/slides/slides.html#simulations-in-r",
+    "title": "Welcome",
+    "section": "Simulations in R",
+    "text": "Simulations in R\n\nUnderstand why simulations are useful\nLogic of Monte Carlo Simulations\nBasic tools"
+  },
+  {
+    "objectID": "content/01-intro/slides/slides.html#effect-sizes",
+    "href": "content/01-intro/slides/slides.html#effect-sizes",
+    "title": "Welcome",
+    "section": "Effect sizes",
+    "text": "Effect sizes\n\nUnderstand the importance of effect sizes\nHow to formulate a smallest effect size of interest\nKnow when you don’t have enough information"
+  },
+  {
+    "objectID": "content/01-intro/slides/slides.html#alpha-beta-sensitivity",
+    "href": "content/01-intro/slides/slides.html#alpha-beta-sensitivity",
+    "title": "Welcome",
+    "section": "Alpha, beta, sensitivity",
+    "text": "Alpha, beta, sensitivity\n\nQuestion the default of \\(\\alpha\\) = 0.05 and power = 80%\nUnderstand how terribly complex designing an informative study is\nKnow where to turn when you don’t have enough information"
+  },
+  {
+    "objectID": "content/01-intro/slides/slides.html#categorical-predictors",
+    "href": "content/01-intro/slides/slides.html#categorical-predictors",
+    "title": "Welcome",
+    "section": "Categorical predictors",
+    "text": "Categorical predictors\n\nUnderstand the logic behind the data generating process\nSee how the linear model is our data generating process\nApply this to a setting with multiple categories in a predictor"
+  },
+  {
+    "objectID": "content/01-intro/slides/slides.html#interactions",
+    "href": "content/01-intro/slides/slides.html#interactions",
+    "title": "Welcome",
+    "section": "Interactions",
+    "text": "Interactions\n\nUnderstand what an interaction is from the perspective of the linear model\nMake yourself think in more detail about the form of interactions\nBe able to translate that detail to generating data"
+  },
+  {
+    "objectID": "content/01-intro/slides/slides.html#continuous-predictors",
+    "href": "content/01-intro/slides/slides.html#continuous-predictors",
+    "title": "Welcome",
+    "section": "Continuous predictors",
+    "text": "Continuous predictors\n\nUnderstand that continuous predictors are just another case of the linear model\nExtend this understanding to continuous (by categorical) interactions\nBe able to translate that extension to generating data"
+  },
+  {
+    "objectID": "content/01-intro/slides/slides.html#youre-guinea-pigs",
+    "href": "content/01-intro/slides/slides.html#youre-guinea-pigs",
+    "title": "Welcome",
+    "section": "You’re guinea pigs",
+    "text": "You’re guinea pigs\n\nFirst time I’m giving this workshop, so timing might be way off\nThat’s why these slides are so full: I wrote the entire thing so you can go and revisit\nAlways interrupt!"
+  },
+  {
+    "objectID": "content/01-intro/slides/slides.html#materials",
+    "href": "content/01-intro/slides/slides.html#materials",
+    "title": "Welcome",
+    "section": "Materials",
+    "text": "Materials\n\nEverything is up on: https://github.com/niklasjohannes/power-workshop\nJust download everything as a zip file\nRendered to follow along here: https://niklasjohannes.github.io/power-workshop/\nThere, you’ll also find instructions on how to download R, RStudio, and GPower\nFor discussions we use Discord: https://discord.gg/veejMFnNHF"
+  },
+  {
+    "objectID": "content/01-intro/slides/slides.html#stealing-stuff",
+    "href": "content/01-intro/slides/slides.html#stealing-stuff",
+    "title": "Welcome",
+    "section": "Stealing stuff",
+    "text": "Stealing stuff\nI cite all my sources, but relied heavily on the following:\n\nJulian Quandt’s power simulation tutorials\nCourses by Daniel Lakens (textbook)\nTutorial by Ariel Muldoon\nBen Staton on Monte Carlo methods\nR for Data Science"
+  },
+  {
+    "objectID": "content/01-intro/slides/slides.html#on-r-code-and-efficiency",
+    "href": "content/01-intro/slides/slides.html#on-r-code-and-efficiency",
+    "title": "Welcome",
+    "section": "On R code and efficiency",
+    "text": "On R code and efficiency\n\nI focused on base R and making things simple rather than fast\nThis workshop is about getting the principles, rarely about coding\nThere are (much) better ways to implement"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome",
+    "section": "",
+    "text": "Hello."
+  }
+]

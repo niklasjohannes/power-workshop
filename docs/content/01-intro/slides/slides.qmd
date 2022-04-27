@@ -1,0 +1,167 @@
+---
+title: "Welcome"
+subtitle: "Power analysis through simulation in R"
+author: "Niklas Johannes"
+format: 
+  revealjs:
+    theme: ../../slidetheme.scss
+    slide-number: true
+    chalkboard: 
+      buttons: false
+    footer: <https://niklasjohannes.github.io/power-workshop/>
+execute:
+  echo: true
+---
+
+## Why this workshop
+
+- Designing an informative study is a key skill
+- A study is rarely informative if it can't detect what you're after
+- Neglecting power means not knowing what our results mean
+
+## Okay, so I use GPower?
+
+![](gpower.jpg)
+
+## GPower is great
+
+- GPower works great!
+- Runs the risk of treating power just as a hoop to jump through
+- Simulating data instead forces us to be explicit about many more features than GPower asks for
+
+## So why are we here?
+
+The goal of the workshop is for you to (1) have an understanding of the philosophy behind using data to test claims, (2) get an intuition of how data generation processes work, (3) learn the technical skills to turn these processes into data, and (4) use these skills to simulate power for an informative study.
+
+## So what will you learn
+
+A bit of everything. It'll be a weird mix:
+
+- Philosophy of science
+- Meta-science
+- Statistics
+- R
+
+## What I expect from you
+
+- A vague memory of your stats courses
+- Some familiarity with R (and RStudio)
+- Tolerance for confusion
+- Enthusiasm for 2 days
+
+## What you can expect from me
+
+- Comprehensive overview
+- Lots of exercises to apply what you learned
+- Flexible in schedule
+- Enthusiasm for 2 days
+
+## Principle
+
+We'll follow the same routine over and over: Learn, do, recall.
+
+1. Theory (I talk)
+2. Exercises (You apply)
+3. Quiz (You recall)
+
+## Day 1
+
+| What?       | When?                    |
+|-------------|--------------------------|
+| 9:00-9:45   | Intro (now)              |
+| 10:00-10:45 | What's power?            |
+| 11:00-11:45 | Simulations in R         |
+| 12:00-13:00 | Exercise 1               |
+| 14:00-14:45 | Effect sizes             |
+| 15:00-15:45 | Exercise 2               |
+| 16:00-16:45 | Alpha, beta, sensitivity |
+| 17:00-17:45 | Exercise 3               |
+| 17:45-18:00 | Recap                    |
+
+## Day 2
+
+| What?       | When?                    |
+|-------------|--------------------------|
+| 9:00-9:45   | Recap                    |
+| 10:00-10:45 | Categorical predictors   |
+| 11:00-11:45 | Exercise 4               |
+| 12:00-13:00 | Interactions             |
+| 14:00-14:45 | Exercise 5               |
+| 15:00-15:45 | Continuous predictors    |
+| 16:00-16:45 | Exercise 6               |
+| 17:00-17:45 | Buffer                   |
+| 17:45-18:00 | Recap                    |
+
+## What's power
+
+-   Understanding of the logic behind NHST
+-   Intuition about what power is
+-   See why power, perhaps, potentially isn't just a hoop to jump through
+
+## Simulations in R
+
+- Understand why simulations are useful
+- Logic of Monte Carlo Simulations
+- Basic tools
+
+## Effect sizes
+
+- Understand the importance of effect sizes
+- How to formulate a smallest effect size of interest
+- Know when you don't have enough information
+
+## Alpha, beta, sensitivity
+
+- Question the default of $\alpha$ = 0.05 and power = 80%
+- Understand how terribly complex designing an informative study is
+- Know where to turn when you don't have enough information
+
+## Categorical predictors
+
+- Understand the logic behind the data generating process
+- See how the linear model is our data generating process
+- Apply this to a setting with multiple categories in a predictor
+
+## Interactions
+
+- Understand what an interaction is from the perspective of the linear model
+- Make yourself think in more detail about the form of interactions
+- Be able to translate that detail to generating data
+
+## Continuous predictors
+
+- Understand that continuous predictors are just another case of the linear model
+- Extend this understanding to continuous (by categorical) interactions
+- Be able to translate that extension to generating data
+
+## You're guinea pigs
+
+- First time I'm giving this workshop, so timing might be way off
+- That's why these slides are so full: I wrote the entire thing so you can go and revisit
+- Always interrupt!
+
+## Materials
+
+- Everything is up on: <https://github.com/niklasjohannes/power-workshop>
+- Just download everything as a zip file
+- Rendered to follow along here: <https://niklasjohannes.github.io/power-workshop/>
+- There, you'll also find instructions on how to download R, RStudio, and GPower
+- For discussions we use Discord: <https://discord.gg/veejMFnNHF>
+
+## Stealing stuff
+
+I cite all my sources, but relied heavily on the following:
+
+- Julian Quandt's power simulation [tutorials](https://julianquandt.com/post/power-analysis-by-data-simulation-in-r-part-i/)
+- Courses by Daniel Lakens ([textbook](https://lakens.github.io/statistical_inferences/))
+- [Tutorial](https://aosmith.rbind.io/2018/08/29/getting-started-simulating-data/) by Ariel Muldoon
+- Ben Staton on [Monte Carlo methods](https://bstaton1.github.io/au-r-workshop/ch4.html)
+- [R for Data Science](https://r4ds.had.co.nz/)
+
+## On R code and efficiency
+
+- I focused on base R and making things simple rather than fast
+- This workshop is about getting the principles, rarely about coding
+- There are (much) better ways to implement
+
+# Let's get started
