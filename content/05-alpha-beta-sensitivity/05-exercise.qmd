@@ -1,3 +1,420 @@
 ---
 title: "Exercise III"
+format: 
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+execute: 
+  eval: false
+  echo: false
+  message: false
+  warning: false
 ---
+
+---
+# Overview {.unnumbered}
+
+This set of exercises won't introduce new technical skills. Instead, you'll apply your simulation skills to different concepts to get a better feeling for the false positive rate, the role of alpha, and how a sensitivity analysis works. 
+
+## Exercise
+
+The False Positive Rate is the proportion of false positive findings among all positive (aka signifiant) findings. It's defined as follows:
+
+```{=tex}
+\begin{align}
+False \ positive \ rate = \frac{False \ positives}{False \ positives + True \ positives}\\\\
+False \ positives = \phi * \alpha\\
+True \ positives = power * (1 - \phi)\\\\
+False \ positive \ rate = \frac{\phi * \alpha}{\phi * \alpha + power * (1 - \phi)}
+\end{align}
+```
+
+$\phi$ is the proportion of null hypotheses, in general in a field, that are true, $\alpha$ your false positive error rate, and power is $(1-\beta)$.
+
+Plot how the false positive rate develops as $\phi$ goes from 0 to 1 for two $\alpha$ levels (.05 and .01.) and two levels of power (80% and 95%). No need for a simulation here. You can just straight up use the formula above to calculate the false positive rate. For that, it's probably easiest to create a data.frame. Try out the `expand.grid` command which creates a data frame of all combinations of several variables. For example:
+
+```{r}
+#| echo: true
+
+iq_scores <- seq(100, 105, 1)
+sample_size <- c(10, 20)
+d <- expand.grid(iq_scores, sample_size)
+```
+
+You can use the following code (make sure the variables are named accordingly):
+
+```{r}
+#| eval: false
+#| echo: true
+
+library(ggplot2)
+ggplot(d, aes(x = phis, y = fpr, color = as.factor(alphas))) + geom_line() + facet_wrap(~ power) + theme_bw()
+```
+
+
+```{r}
+phis <- seq(0, 1, 0.01)
+alphas <- c(standard = .05, low = .01)
+power <- c(0.80, 0.95)
+
+d <- expand.grid(phis, alphas, power)
+names(d) <- c("phis", "alphas", "power")
+d$fpr <- (d$phis * d$alphas) / ((d$phis * d$alphas) + (d$power * (1 - d$phis)))
+
+library(ggplot2)
+ggplot(d, aes(x = phis, y = fpr, color = as.factor(alphas))) + geom_line() + facet_wrap(~ power) + theme_bw()
+```
+
+In physics, they use a five sigma rule. That means their alpha is $3*10^-7$ or 1 in 3.5 million. Do the above again, but this time plot "our" 0.05 against five sigma and compare false positive rates.
+
+```{r}
+phis <- seq(0, 1, 0.01)
+alphas <- c(standard = .05, physics = 3*10^-7)
+power <- c(0.80, 0.95)
+
+d <- expand.grid(phis, alphas, power)
+names(d) <- c("phis", "alphas", "power")
+d$fpr <- (d$phis * d$alphas) / ((d$phis * d$alphas) + (d$power * (1 - d$phis)))
+
+ggplot(d, aes(x = phis, y = fpr, color = as.factor(alphas))) + geom_line() + facet_wrap(~ power) + theme_bw()
+```
+
+## Exercise
+
+How does the alpha level influence your power? Simulate two correlated scores. The means of the scores are 4 and 4.2; their SDs are 0.4 and 0.7. Their correlation is 0.65. Simulate power (500 runs) for sample sizes starting at 30 and going to a maximum of 110. Stop whenever you reach 95% power (so use `while`). Do that for 5 different alpha levels: c(0.005, 0.001, 0.01, 0.05, 0.10). Plot the results. As always, you can use the code below. What's the influence of the alpha compared to the sample size?
+
+```{r}
+#| eval: false
+#| echo: true
+
+library(ggplot2)
+
+ggplot(outcomes, aes(x = sample_size, y = power, color = as.factor(alpha))) + geom_line() + geom_hline(yintercept = 0.95) %>%  theme_classic()
+```
+
+
+```{r}
+library(MASS)
+
+means <- c(pre = 4, post = 4.3)
+pre_sd <- 0.4
+post_sd <- 0.7
+correlation <- 0.65
+alphas <- c(0.005, 0.001, 0.01, 0.05, 0.10)
+runs <- 500
+n_max <- 110
+
+sigma <- 
+    matrix(
+      c(
+        pre_sd**2,
+        correlation * pre_sd * post_sd,
+        correlation * pre_sd * post_sd,
+        post_sd**2
+      ),
+      ncol = 2
+    )
+
+outcomes <- 
+  data.frame(
+    sample_size = NULL,
+    alpha = NULL,
+    power = NULL
+  )
+
+for (analpha in alphas) {
+  print(analpha)
+  n <- 30
+  power <- 0
+  
+  while (power < 0.95 & n <= n_max) {
+    
+    pvalues <- NULL
+    
+    for (i in 1:runs) {
+      
+      d <- as.data.frame(
+        mvrnorm(
+          n,
+          means,
+          sigma
+        )
+      )
+      
+      t <- t.test(d$pre, d$post, paired = TRUE)
+      
+      pvalues[i] <- t$p.value
+    }
+    
+    power <- sum(pvalues < analpha) / length(pvalues)
+    
+    outcomes <- rbind(
+      outcomes,
+      data.frame(
+        sample_size = n,
+        alpha = analpha,
+        power = power
+      )
+    )
+    
+    n <- n + 1
+  }
+}
+
+ggplot(outcomes, aes(x = sample_size, y = power, color = as.factor(alpha))) + geom_line() + geom_hline(yintercept = 0.95) + theme_classic()
+```
+
+## Exercise
+
+You have a large sample (2,000 people) from a public cohort study. You're interested in comparing two groups on their intelligence. Your smallest effect effect size of interest is 3 IQ points. You know of Lindley's paradox where even small p-values are actually evidence for H~0~ if the test has a lot of power. Therefore, you decide to conduct a compromise analysis in GPower for an independent, one-tailed t-test. You think that type 2 errors in this case are twice as bad as Type I errors. (Tip: IQ scores are standardized with a mean of 100 and an SD of 15).
+
+Obtain the new alpha from GPower. Then check it and simulate drawing 100,000 samples with exactly your SESOI and that sample size as well as 100,000 where there is 0 difference. What proportion of the p-values are below your new alpha? (Aka: Does your power estimate align with GPower's power output?). Then plot the p-values between 0 and alpha. Have you taken care of Lindley's paradox?
+
+You can use this code (if your data `d` are in the long formate where the variable `type` indicates whether we have the effect distribution or the null distribution):
+
+```{r}
+#| eval: false
+#| echo: true
+
+library(ggplot2)
+
+ggplot(d, aes(x = pvalue, color = type)) + geom_density() + xlim(c(0, 0.02)) + ylim(c(0, draws/10)) + geom_vline(xintercept = alpha) + theme_bw()
+```
+
+
+```{r}
+set.seed(42)
+
+n <- 1e3
+m <- 100
+sd <- 15
+sesoi <- 3
+draws <- 1e4
+alpha <- 0.008925552
+
+pvalues <- NULL
+nulls <- NULL
+
+for (i in 1:draws) {
+  
+  control <- rnorm(n, m, sd)
+  treatment <- rnorm(n, m + sesoi, sd)
+  
+  pvalues[i] <- t.test(control, treatment, alternative = "less")$p.value
+  
+  control <- rnorm(n, m, sd)
+  treatment <- rnorm(n, m, sd)
+  
+  nulls[i] <- t.test(control, treatment, alternative = "less")$p.value
+}
+
+power <- sum(pvalues < alpha) / length(pvalues)
+
+d <- data.frame(
+  pvalue = c(pvalues, nulls),
+  type = rep(c("effect", "no effect"), each = draws)
+)
+
+ggplot(d, aes(x = pvalue, color = type)) + geom_density() + xlim(c(0, 0.02)) + ylim(c(0, draws/10)) + geom_vline(xintercept = alpha) + theme_bw()
+```
+
+## Exercise
+
+For your master thesis, you ran a study where you conducted a paired-samples t-test. At the time, you didn't know about power analysis. Now as you write the paper up for publication, you state that you didn't conduct a power analysis, but you want to at least report the sensitivity of the test. Your sample size was 27 and you conducted a two-tailed test. Your alpha was 0.05. Simulate the sensitivity of your study (1,000 runs) for standardized effects ranging from 0 to 1. Verify with GPower. (Tip: Remember that the test is just on the difference of the two scores, so you can directly draw the difference.)
+
+```{r}
+set.seed(42)
+
+n <- 27
+effects <- seq(0, 1, 0.01)
+draws <- 1e3
+
+
+outcomes <- 
+  data.frame(
+    effect_size = NULL,
+    power = NULL
+  )
+
+for (aneffect in effects) {
+  
+  pvalues <- NULL
+  
+  for (i in 1:draws) {
+    
+    differences <- rnorm(n, aneffect)
+    
+    t <- t.test(differences, mu = 0)
+    
+    pvalues[i] <- t$p.value
+  }
+  
+  outcomes <- 
+    rbind(
+      outcomes,
+      data.frame(
+        effect_size = aneffect,
+        power = sum(pvalues < 0.05) / length(pvalues)
+      )
+    )
+}
+
+with(outcomes, plot(effect_size, power))
+abline(h = 0.95)
+```
+
+## Exercise
+
+Run a sensitivity analysis on a paired samples t-test (one-tailed). You had 47 participants; the means were 56 and 60; the SDs were 16 and 13; the correlation between the measures was 0.4. Get sensitivity for three different alpha levels: c(0.005, 0.01, 0.05). As for effect sizes: Increase the effect size by 1 until you have 90% power. For each combination, do 1,000 simulations. Plot the results with `ggplot` like you did earlier.
+
+```{r}
+n <- 32
+sd_control <- 16
+sd_treatment <- 13
+correlation <- 0.4
+alphas <- c(0.005, 0.01, 0.05)
+runs <- 1e3
+
+library(MASS)
+
+outcomes <- 
+  data.frame(
+    effect_size = NULL,
+    alpha = NULL,
+    power = NULL
+  )
+
+for (analpha in alphas) {
+  print(analpha)
+  effect_size <- 0
+  power <- 0
+  
+  while (power < 0.90) {
+    
+    pvalues <- NULL
+    
+    means <- c(control = 56, treatment = 56 + effect_size)
+    
+    sigma <- 
+      matrix(
+        c(
+          sd_control**2,
+          correlation * sd_control * sd_treatment,
+          correlation * sd_control * sd_treatment,
+          sd_treatment**2
+        ),
+        ncol = 2
+      )
+    
+    for (i in 1:runs) {
+      
+      d <- as.data.frame(
+        mvrnorm(
+          n,
+          means,
+          sigma
+        )
+      )
+      
+      t <- t.test(d$control, d$treatment, paired = TRUE, alternative = "less")
+      
+      pvalues[i] <- t$p.value
+    }
+    
+    power <- sum(pvalues < analpha) / length(pvalues)
+    
+    outcomes <- rbind(
+      outcomes,
+      data.frame(
+        effect_size = effect_size,
+        alpha = analpha,
+        power = power
+      )
+    )
+    
+    effect_size <- effect_size + 1
+  }
+}
+
+ggplot(outcomes, aes(x = effect_size, y = power, color = as.factor(alpha))) + geom_line() + geom_hline(yintercept = 0.9) + theme_bw()
+```
+
+## Exercise
+
+Do the above again, but this time on the standardized scale. Verify your results with GPower. (Tip: Compute Cohen's $d$ each time after you've simulated your sample and then take the mean for each combination.)
+
+```{r}
+n <- 32
+sd_control <- 16
+sd_treatment <- 13
+correlation <- 0.4
+alphas <- c(0.005, 0.01, 0.05)
+runs <- 1e3
+
+library(MASS)
+
+outcomes <- 
+  data.frame(
+    effect_size = NULL,
+    alpha = NULL,
+    power = NULL
+  )
+
+for (analpha in alphas) {
+  print(analpha)
+  effect_size <- 0
+  power <- 0
+  
+  while (power < 0.90) {
+    
+    pvalues <- NULL
+    ds <- NULL
+    means <- c(control = 56, treatment = 56 + effect_size)
+    
+    sigma <- 
+      matrix(
+        c(
+          sd_control**2,
+          correlation * sd_control * sd_treatment,
+          correlation * sd_control * sd_treatment,
+          sd_treatment**2
+        ),
+        ncol = 2
+      )
+    
+    for (i in 1:runs) {
+      
+      d <- as.data.frame(
+        mvrnorm(
+          n,
+          means,
+          sigma
+        )
+      )
+      
+      t <- t.test(d$control, d$treatment, paired = TRUE, alternative = "less")
+      
+      pvalues[i] <- t$p.value
+      
+      ds[i] <- (effect_size - 0) / sd(d$control-d$treatment)
+    }
+    
+    power <- sum(pvalues < analpha) / length(pvalues)
+    
+    outcomes <- rbind(
+      outcomes,
+      data.frame(
+        effect_size = mean(ds),
+        alpha = analpha,
+        power = power
+      )
+    )
+    
+    effect_size <- effect_size + 1
+  }
+}
+
+ggplot(outcomes, aes(x = effect_size, y = power, color = as.factor(alpha))) + geom_line() + geom_hline(yintercept = 0.9) + theme_bw()
+```
+
