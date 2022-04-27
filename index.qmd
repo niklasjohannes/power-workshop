@@ -93,7 +93,7 @@ Each of these blocks has a several learning outcomes. They are:
 - Be able to translate that extension to generating data
 
 
-## Prerequisits
+## Prerequisites
 
 I expect that you're somewhat familiar (though not deeply) with R and vaguely remember your undergrad stats classes. Other than that, you should be good to go.
 
@@ -102,6 +102,7 @@ What you'll need for the workshop:
 - A laptop
 - A working installation of [R](https://www.r-project.org/) and preferably [RStudio](https://www.rstudio.com/)
 - [GPower](https://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower) installed
+- For communiction, please join this discord channel that we'll use throughout the 2 days: <https://discord.gg/veejMFnNHF>
 
 ## Structure
 

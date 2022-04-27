@@ -3,10 +3,18 @@ project:
   output-dir: docs
 
 website:
+  reader-mode: true
+  page-footer: 
+    left: "Copyright 2022, Niklas Johannes"
+    right: 
+      - icon: github
+        href: https://github.com/niklasjohannes/power-workshop
+      - icon: twitter
+        href: https://twitter.com/NiklasJohannes
   sidebar:
     title: "Power analysis through simulation in R"
     subtitle: "A 2-day workshop"
-    style: "docked"
+    style: "floating"
     search: true
     contents:
       - section: "Overview"
