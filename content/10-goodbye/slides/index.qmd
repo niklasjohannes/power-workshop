@@ -1,0 +1,76 @@
+---
+title: "Goodbye"
+subtitle: "Power analysis through simulation in R"
+author: "Niklas Johannes"
+format: 
+  revealjs:
+    theme: ../../slidetheme.scss
+    slide-number: true
+    chalkboard: 
+      buttons: false
+    footer: <https://niklasjohannes.github.io/power-workshop/>
+execute:
+  echo: true
+---
+
+## Why this workshop
+
+- Designing an informative study is a key skill
+- A study is rarely informative if it can't detect what you're after
+- Neglecting power means not knowing what our results mean
+
+## So why are we here?
+
+The goal of the workshop is for you to (1) have an understanding of the philosophy behind using data to test claims, (2) get an intuition of how data generation processes work, (3) learn the technical skills to turn these processes into data, and (4) use these skills to simulate power for an informative study.
+
+## What's power
+
+-   Understanding of the logic behind NHST
+-   Intuition about what power is
+-   See why power, perhaps, potentially isn't just a hoop to jump through
+
+## Simulations in R
+
+- Understand why simulations are useful
+- Logic of Monte Carlo Simulations
+- Basic tools
+
+## Effect sizes
+
+- Understand the importance of effect sizes
+- How to formulate a smallest effect size of interest
+- Know when you don't have enough information
+
+## Alpha, beta, sensitivity
+
+- Question the default of $\alpha$ = 0.05 and power = 80%
+- Understand how terribly complex designing an informative study is
+- Know where to turn when you don't have enough information
+
+## Categorical predictors
+
+- Understand the logic behind the data generating process
+- See how the linear model is our data generating process
+- Apply this to a setting with multiple categories in a predictor
+
+## Interactions
+
+- Understand what an interaction is from the perspective of the linear model
+- Make yourself think in more detail about the form of interactions
+- Be able to translate that detail to generating data
+
+## Continuous predictors
+
+- Understand that continuous predictors are just another case of the linear model
+- Extend this understanding to continuous (by categorical) interactions
+- Be able to translate that extension to generating data
+
+## Other (better) solutions
+
+- [faux](https://debruine.github.io/faux/)
+- [simstudy](https://cran.r-project.org/web/packages/simstudy/vignettes/simstudy.html)
+- [Superpower](https://cran.r-project.org/web/packages/Superpower/vignettes/intro_to_superpower.html)
+- [Primer](https://journals.sagepub.com/doi/pdf/10.1177/2515245920965119) for mixed-effects models
+- [Primer](https://philippmasur.de/2020/03/11/how-to-estimate-power-for-structural-equation-models-simulations-in-r/) and [paper](https://journals.sagepub.com/doi/full/10.1177/2515245920918253) for SEM models
+
+# Thank you and good night!
