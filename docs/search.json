@@ -161,6 +161,258 @@
     "text": "On R code and efficiency\n\nI focused on base R and making things simple rather than fast\nThis workshop is about getting the principles, rarely about coding\nThere are (much) better ways to implement"
   },
   {
+    "objectID": "content/02-whats-power/02-slides.html",
+    "href": "content/02-whats-power/02-slides.html",
+    "title": "Slides",
+    "section": "",
+    "text": "Below you can find the slides for session on Power:\n\n\n\nIf you want to see the slides in full screen, you can click here. To download them as PDFs, hit the ‘e’ button when you got the presentation open and then Ctrl+P print to PDF. This will work best in Chrome (in Firefox, it didn’t print the headings for me)."
+  },
+  {
+    "objectID": "content/02-whats-power/slides/index.html#where-it-all-started",
+    "href": "content/02-whats-power/slides/index.html#where-it-all-started",
+    "title": "What’s power?",
+    "section": "Where it all started",
+    "text": "Where it all started\n\n\nSir Ronald Fisher (1890-1962)\n\n\n\nProbability value = p-value\nCentral question: How likely is it to observe such data if there were nothing?"
+  },
+  {
+    "objectID": "content/02-whats-power/slides/index.html#the-original-p-value",
+    "href": "content/02-whats-power/slides/index.html#the-original-p-value",
+    "title": "What’s power?",
+    "section": "The original p-value",
+    "text": "The original p-value\n\n\n\n\n\n\nTea or milk first\nHow many cups would you want to be convinced?\nCorrectly identifying all 8 cups: 1.4% chance to occur if the lady can’t taste the difference\n1.4% < 5%"
+  },
+  {
+    "objectID": "content/02-whats-power/slides/index.html#whats-a-p-value",
+    "href": "content/02-whats-power/slides/index.html#whats-a-p-value",
+    "title": "What’s power?",
+    "section": "What’s a p-value",
+    "text": "What’s a p-value\nInformally: What’s the chance of observing something like this if there were nothing going on?\n\\[\\begin{gather*}\nChance = (Finding \\ something \\ like \\ this \\ | \\ Nothing \\ going \\ on)\n\\end{gather*}\\]\nFormally: The probability of observing data this extreme or more extreme under the null hypothesis\n\\[\\begin{gather*}\nP = (Data|H_0)\n\\end{gather*}\\]"
+  },
+  {
+    "objectID": "content/02-whats-power/slides/index.html#decisions",
+    "href": "content/02-whats-power/slides/index.html#decisions",
+    "title": "What’s power?",
+    "section": "Decisions",
+    "text": "Decisions\n\n\nJerzy Neyman (1894-1981)\n\n\n\nWe want to make a decision\nJust rejecting H0 doesn’t help much\nLet’s introduce an alternative: HA or H1\nSo we need decision rules!"
+  },
+  {
+    "objectID": "content/02-whats-power/slides/index.html#error-rates",
+    "href": "content/02-whats-power/slides/index.html#error-rates",
+    "title": "What’s power?",
+    "section": "Error rates",
+    "text": "Error rates\nError rates are what we deem acceptable levels of being right/wrong in the long-run:\n\n\\(\\alpha\\)\n\\(\\beta\\)\n1 - \\(\\beta\\)\n1 - \\(\\alpha\\)"
+  },
+  {
+    "objectID": "content/02-whats-power/slides/index.html#when-theres-nothing",
+    "href": "content/02-whats-power/slides/index.html#when-theres-nothing",
+    "title": "What’s power?",
+    "section": "When there’s nothing",
+    "text": "When there’s nothing\nWhen there truly is no effect, two things can happen: We find a significant effect or we don’t.\n\nFalse positive: Saying there’s something when there’s nothing (Type I error)\nTrue negative: Saying there isn’t something when there is nothing. (Correct)"
+  },
+  {
+    "objectID": "content/02-whats-power/slides/index.html#when-theres-nothing-1",
+    "href": "content/02-whats-power/slides/index.html#when-theres-nothing-1",
+    "title": "What’s power?",
+    "section": "When there’s nothing",
+    "text": "When there’s nothing\nWhen there truly is no effect, two things can happen: We find a significant effect (error) or we don’t (no error).\n\n\\(\\alpha\\): The probability of observing a significant result when H0 is true.\n1 - \\(\\alpha\\): The probability of observing a nonsignificant result when H0 is true."
+  },
+  {
+    "objectID": "content/02-whats-power/slides/index.html#when-theres-something",
+    "href": "content/02-whats-power/slides/index.html#when-theres-something",
+    "title": "What’s power?",
+    "section": "When there’s something",
+    "text": "When there’s something\nWhen there truly is an effect, two things can happen: We find no significant effect (error) or we find one (correct).\n\nFalse negative: Saying there isn’t something when there’s something (Type II error)\nTrue positive: Saying there’s something when there’s something. (Correct)"
+  },
+  {
+    "objectID": "content/02-whats-power/slides/index.html#when-theres-something-1",
+    "href": "content/02-whats-power/slides/index.html#when-theres-something-1",
+    "title": "What’s power?",
+    "section": "When there’s something",
+    "text": "When there’s something\nWhen there truly is an effect, two things can happen: We find no significant effect (error) or we find one (correct).\n\n\\(\\beta\\): The probability of observing a nonsignificant result when H1 is true\n1 - \\(\\beta\\): The probability of observing a significant result when H1 is true."
+  },
+  {
+    "objectID": "content/02-whats-power/slides/index.html#why-am-i-talking-so-weird",
+    "href": "content/02-whats-power/slides/index.html#why-am-i-talking-so-weird",
+    "title": "What’s power?",
+    "section": "Why am I talking so weird?",
+    "text": "Why am I talking so weird?\n“When there isn’t something?” Why not just say there’s nothing?\n\\[\\begin{gather*}\n(Data|H_0) \\neq (H_0|Data)\n\\end{gather*}\\]\nWe can’t find evidence for H0 with “classical” NHST. A nonsignificant p-value only means we can’t reject H0, and can’t accept H1, but we can’t accept H0."
+  },
+  {
+    "objectID": "content/02-whats-power/slides/index.html#wheres-our-power",
+    "href": "content/02-whats-power/slides/index.html#wheres-our-power",
+    "title": "What’s power?",
+    "section": "Where’s our power?",
+    "text": "Where’s our power?\n\n\n\n\n\n\n\n\n\nH0 true\nH1 true\n\n\n\n\nSignificant\nFalse Positive (\\(\\alpha\\))\nTrue Positive (1-\\(\\beta\\))\n\n\nNonsignificant\nTrue Negative (1-\\(\\alpha\\))\nFalse negative (\\(\\beta\\))"
+  },
+  {
+    "objectID": "content/02-whats-power/slides/index.html#power",
+    "href": "content/02-whats-power/slides/index.html#power",
+    "title": "What’s power?",
+    "section": "Power",
+    "text": "Power\nPower is the probability of finding a significant result when there is an effect. It’s determined (simplified) by:\n\nEffect size\nSample size\nError rates (\\(\\alpha\\) and \\(\\beta\\))"
+  },
+  {
+    "objectID": "content/02-whats-power/slides/index.html#pictures-please",
+    "href": "content/02-whats-power/slides/index.html#pictures-please",
+    "title": "What’s power?",
+    "section": "Pictures, please",
+    "text": "Pictures, please\nLet’s assume we want to know whether the population mean is larger than 50. We sample n = 100."
+  },
+  {
+    "objectID": "content/02-whats-power/slides/index.html#the-null-distribution",
+    "href": "content/02-whats-power/slides/index.html#the-null-distribution",
+    "title": "What’s power?",
+    "section": "The null distribution",
+    "text": "The null distribution\nThis is the sample distribution if the null were true: The true effect is 50."
+  },
+  {
+    "objectID": "content/02-whats-power/slides/index.html#the-null-distribution-1",
+    "href": "content/02-whats-power/slides/index.html#the-null-distribution-1",
+    "title": "What’s power?",
+    "section": "The null distribution",
+    "text": "The null distribution\nWhere does a sample need to fall for us to wrongly conclude there’s a difference?"
+  },
+  {
+    "objectID": "content/02-whats-power/slides/index.html#the-null-distribution-2",
+    "href": "content/02-whats-power/slides/index.html#the-null-distribution-2",
+    "title": "What’s power?",
+    "section": "The null distribution",
+    "text": "The null distribution\nThat’s our \\(\\alpha\\): our false positives. Left of it: our true negatives (1-\\(\\alpha\\))."
+  },
+  {
+    "objectID": "content/02-whats-power/slides/index.html#where-would-we-conclude-its-coming-from-then",
+    "href": "content/02-whats-power/slides/index.html#where-would-we-conclude-its-coming-from-then",
+    "title": "What’s power?",
+    "section": "Where would we conclude it’s coming from then?",
+    "text": "Where would we conclude it’s coming from then?\nOur sampling distribution if the population value is 60. We commit a false positive if we assume a sample comes from the right distribution if in fact it comes from the left."
+  },
+  {
+    "objectID": "content/02-whats-power/slides/index.html#what-about-the-reverse",
+    "href": "content/02-whats-power/slides/index.html#what-about-the-reverse",
+    "title": "What’s power?",
+    "section": "What about the reverse?",
+    "text": "What about the reverse?\nOur \\(\\beta\\): our false negatives. We commit a false negative if we assume a sample comes from the left distribution if in fact it comes from the right."
+  },
+  {
+    "objectID": "content/02-whats-power/slides/index.html#wheres-power-then",
+    "href": "content/02-whats-power/slides/index.html#wheres-power-then",
+    "title": "What’s power?",
+    "section": "Where’s power then?",
+    "text": "Where’s power then?"
+  },
+  {
+    "objectID": "content/02-whats-power/slides/index.html#wheres-power-then-1",
+    "href": "content/02-whats-power/slides/index.html#wheres-power-then-1",
+    "title": "What’s power?",
+    "section": "Where’s power then?",
+    "text": "Where’s power then?\nEverything right of the critical value: If a sample comes from the right distribution, this is how often we’ll correctly identify it."
+  },
+  {
+    "objectID": "content/02-whats-power/slides/index.html#what-determined-power-again",
+    "href": "content/02-whats-power/slides/index.html#what-determined-power-again",
+    "title": "What’s power?",
+    "section": "What determined power again?",
+    "text": "What determined power again?\nPower is the probability of finding a significant result when there is an effect. It’s determined (simplified) by:\n\nEffect size\nSample size\nError rates (\\(\\alpha\\) and \\(\\beta\\))\n\nLet’s have a look how: Preview"
+  },
+  {
+    "objectID": "content/02-whats-power/slides/index.html#why-does-power-matter",
+    "href": "content/02-whats-power/slides/index.html#why-does-power-matter",
+    "title": "What’s power?",
+    "section": "Why does power matter?",
+    "text": "Why does power matter?\nRunning studies with low power (aka underpowered studies) risks:\n\nMissing effects\nInflating those effects we find\nLower chance that a significant result is true"
+  },
+  {
+    "objectID": "content/02-whats-power/slides/index.html#missing-effects",
+    "href": "content/02-whats-power/slides/index.html#missing-effects",
+    "title": "What’s power?",
+    "section": "Missing effects",
+    "text": "Missing effects\nSociety has commissioned us to find out something. Why would we start by setting us up so that we’re barely able to do that?\n\nWaste of resources\nSuper frustrating (personally)\nDissuades others\nCan slow down entire research lines"
+  },
+  {
+    "objectID": "content/02-whats-power/slides/index.html#inflating-those-effects-we-find",
+    "href": "content/02-whats-power/slides/index.html#inflating-those-effects-we-find",
+    "title": "What’s power?",
+    "section": "Inflating those effects we find",
+    "text": "Inflating those effects we find\nLet’s go back to our example. Let’s assume we want to know whether the population mean is larger than 50. We sample n = 100."
+  },
+  {
+    "objectID": "content/02-whats-power/slides/index.html#what-if-we-sample-only-10",
+    "href": "content/02-whats-power/slides/index.html#what-if-we-sample-only-10",
+    "title": "What’s power?",
+    "section": "What if we sample only 10?",
+    "text": "What if we sample only 10?\nThe sampling distribution gets wider: Now a sample mean needs to be really large to be significant. The smaller our sample (aka the lower our power), the more extreme a sample has to be to “make it” across the critical value."
+  },
+  {
+    "objectID": "content/02-whats-power/slides/index.html#low-power-inflates-effects",
+    "href": "content/02-whats-power/slides/index.html#low-power-inflates-effects",
+    "title": "What’s power?",
+    "section": "Low power inflates effects",
+    "text": "Low power inflates effects\nIf our study is small (has low power), only an overestimate will pass our threshold for significance. With underpowered studies, significant results will always be an overestimate.\nTu put it differently: Small studies are only sensitive to large effects. But if the effect is truly small, we’ll only get a significant result for the rare massive overestimate.\nLet’s have a look again: Preview"
+  },
+  {
+    "objectID": "content/02-whats-power/slides/index.html#how-true-is-a-study",
+    "href": "content/02-whats-power/slides/index.html#how-true-is-a-study",
+    "title": "What’s power?",
+    "section": "How true is a study?",
+    "text": "How true is a study?\nHow many effects will we expect?\n\nProbability to find an effect = power\nOdds of there being an effect = R\n\nSo:\n\\[\\begin{gather*}\npower \\ * R\n\\end{gather*}\\]"
+  },
+  {
+    "objectID": "content/02-whats-power/slides/index.html#how-true-is-a-study-1",
+    "href": "content/02-whats-power/slides/index.html#how-true-is-a-study-1",
+    "title": "What’s power?",
+    "section": "How true is a study?",
+    "text": "How true is a study?\nHow many significant results do we expect?\n\nTrue effects (power x R)\nFalse positive\n\n\\[\\begin{gather*}\npower \\ * R + \\alpha\n\\end{gather*}\\]"
+  },
+  {
+    "objectID": "content/02-whats-power/slides/index.html#positive-predictive-value",
+    "href": "content/02-whats-power/slides/index.html#positive-predictive-value",
+    "title": "What’s power?",
+    "section": "Positive predictive value",
+    "text": "Positive predictive value\nWhat is the probability that a significant effect is indeed true? The rate of significant results that represent true effects divided by all significant results.\n\\[\\begin{gather*}\nPPV = \\frac{power*R}{power*R + \\alpha}\n\\end{gather*}\\]"
+  },
+  {
+    "objectID": "content/02-whats-power/slides/index.html#an-example",
+    "href": "content/02-whats-power/slides/index.html#an-example",
+    "title": "What’s power?",
+    "section": "An example",
+    "text": "An example\nLet’s assume our hypothesis has a 25% of being true and we go for the “conventional” alpha-level (5%).\n\\[\\begin{gather*}\nPPV = \\frac{power*R}{power*R + \\alpha}\n= \\frac{power*\\frac{P(effect)}{P(No \\ effect)}}{power*\\frac{P(effect)}{P(No \\ effect)} + \\alpha}\n\\end{gather*}\\]\n\n\nWith 95% power and 1/4 odds?\n86%\nWith 40% power and 1/4 odds?\n73%"
+  },
+  {
+    "objectID": "content/02-whats-power/slides/index.html#what-does-this-mean",
+    "href": "content/02-whats-power/slides/index.html#what-does-this-mean",
+    "title": "What’s power?",
+    "section": "What does this mean?",
+    "text": "What does this mean?\nBottom line: The lower our power, the lower the probability that our significant effects represent the truth. Aka: Low power produces false findings."
+  },
+  {
+    "objectID": "content/02-whats-power/slides/index.html#why-should-we-care",
+    "href": "content/02-whats-power/slides/index.html#why-should-we-care",
+    "title": "What’s power?",
+    "section": "Why should we care?",
+    "text": "Why should we care?\nHeard of the replication crisis?\n\n(Baker 2016)"
+  },
+  {
+    "objectID": "content/02-whats-power/slides/index.html#killer-combo",
+    "href": "content/02-whats-power/slides/index.html#killer-combo",
+    "title": "What’s power?",
+    "section": "Killer combo",
+    "text": "Killer combo\n\nBad research research + low power\nFalse positives\nInflated effect sizes\nInflated false positives = low credibility and a waste of resources\n\n\n“[The] lack of transparency in science has led to quality uncertainty, and . . . this threatens to erode trust in science” (Vazire 2017)"
+  },
+  {
+    "objectID": "content/02-whats-power/slides/index.html#on-the-flip-side",
+    "href": "content/02-whats-power/slides/index.html#on-the-flip-side",
+    "title": "What’s power?",
+    "section": "On the flip side",
+    "text": "On the flip side\n\nOversampling risks wasting resources too\nValue of information: Not every data point has the same value\nOur power should align with our inferential goals"
+  },
+  {
+    "objectID": "content/02-whats-power/slides/index.html#references",
+    "href": "content/02-whats-power/slides/index.html#references",
+    "title": "What’s power?",
+    "section": "References",
+    "text": "References\n\n\nBaker, Monya. 2016. “1,500 Scientists Lift the Lid on Reproducibility.” Nature 533 (7604): 452–54. https://doi.org/10.1038/533452a.\n\n\nVazire, Simine. 2017. “Quality uncertainty erodes trust in science.” Collabra: Psychology 3 (1): 1. https://doi.org/10.1525/collabra.74.\n\n\n\n\nhttps://niklasjohannes.github.io/power-workshop/"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Welcome",

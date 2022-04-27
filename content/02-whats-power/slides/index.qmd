@@ -1,0 +1,548 @@
+---
+title: "What's power?"
+subtitle: "Power analysis through simulation in R"
+author: "Niklas Johannes"
+format: 
+  revealjs:
+    theme: ../../slidetheme.scss
+    slide-number: true
+    chalkboard: 
+      buttons: false
+    footer: <https://niklasjohannes.github.io/power-workshop/>
+execute:
+  echo: false
+bibliography: references-workshop.bib
+---
+
+# Takeaways
+
+```{r}
+#| echo: false
+
+library(tidyverse)
+
+theme_set(
+  theme_linedraw() +
+    theme(
+      panel.grid.minor = element_blank(),
+      panel.grid.major.x = element_blank(),
+      panel.grid.major.y = element_blank(),
+      axis.text.y = element_blank(),
+      axis.ticks.y = element_blank() 
+    )
+)
+```
+
+-   Understanding of the logic behind NHST
+-   Intuition about what power is
+-   See why power, perhaps, potentially isn't just a hoop to jump through
+
+## Where it all started
+
+::: columns
+::: column
+**Sir** Ronald Fisher (1890-1962)
+
+![](https://upload.wikimedia.org/wikipedia/commons/a/aa/Youngronaldfisher2.JPG)
+:::
+
+::: column
+-   Probability value = p-value
+-   Central question: How likely is it to observe such data if there were nothing?
+:::
+:::
+
+## The original p-value
+
+::: columns
+::: column
+![](https://upload.wikimedia.org/wikipedia/commons/3/37/Nice_Cup_of_Tea.jpg)
+:::
+
+::: column
+::: incremental
+-   Tea or milk first
+-   How many cups would you want to be convinced?
+-   Correctly identifying all 8 cups: 1.4% chance to occur if the lady can't taste the difference
+-   1.4% \< 5%
+:::
+:::
+:::
+
+## What's a p-value
+
+Informally: What's the chance of observing something like this if there were nothing going on?
+
+```{=tex}
+\begin{gather*}
+Chance = (Finding \ something \ like \ this \ | \ Nothing \ going \ on)
+\end{gather*}
+```
+Formally: The probability of observing data this extreme or more extreme under the null hypothesis
+
+```{=tex}
+\begin{gather*}
+P = (Data|H_0)
+\end{gather*}
+```
+## Decisions {.scrollable}
+
+::: columns
+::: column
+Jerzy Neyman (1894-1981)
+
+![](https://upload.wikimedia.org/wikipedia/commons/8/8e/Jerzy_Neyman2.jpg){width="266"}
+:::
+
+::: column
+-   We want to make a decision
+-   Just rejecting H~0~ doesn't help much
+-   Let's introduce an alternative: H~A~ or H~1~
+-   So we need decision rules!
+:::
+:::
+
+## Error rates
+
+Error rates are what we deem acceptable levels of being right/wrong in the long-run:
+
+-   $\alpha$
+-   $\beta$
+-   1 - $\beta$
+-   1 - $\alpha$
+
+## When there's nothing
+
+When there truly is no effect, two things can happen: We find a significant effect or we don't.
+
+-   **False positive**: Saying there's something when there's nothing (Type I error)
+-   **True negative**: Saying there isn't something when there is nothing. (Correct)
+
+## When there's nothing
+
+When there truly is no effect, two things can happen: We find a significant effect (error) or we don't (no error).
+
+-   $\alpha$: The probability of observing a significant result when H~0~ is true.
+-   1 - $\alpha$: The probability of observing a nonsignificant result when H~0~ is true.
+
+## When there's something
+
+When there truly is an effect, two things can happen: We find no significant effect (error) or we find one (correct).
+
+-   **False negative**: Saying there isn't something when there's something (Type II error)
+-   **True positive**: Saying there's something when there's something. (Correct)
+
+## When there's something
+
+When there truly is an effect, two things can happen: We find no significant effect (error) or we find one (correct).
+
+-   $\beta$: The probability of observing a nonsignificant result when H~1~ is true
+-   1 - $\beta$: The probability of observing a significant result when H~1~ is true.
+
+## Why am I talking so weird?
+
+"When there isn't something?" Why not just say there's nothing?
+
+```{=tex}
+\begin{gather*}
+(Data|H_0) \neq (H_0|Data)
+\end{gather*}
+```
+We can't find evidence for H~0~ with "classical" NHST. A nonsignificant p-value only means we can't reject H~0~, and can't accept H~1~, but we can't accept H~0~.
+
+## Where's our power?
+
+|                | H0 true                    | H1 true                   |
+|----------------|----------------------------|---------------------------|
+| Significant    | False Positive ($\alpha$)  | True Positive (1-$\beta$) |
+| Nonsignificant | True Negative (1-$\alpha$) | False negative ($\beta$)  |
+
+## Power
+
+Power is the probability of finding a significant result when there is an effect. It's determined (simplified) by:
+
+-   Effect size
+-   Sample size
+-   Error rates ($\alpha$ and $\beta$)
+
+## Pictures, please
+
+Let's assume we want to know whether the population mean is larger than 50. We sample *n* = 100.
+
+```{r}
+#| echo: false
+
+# sample size
+n <- 100
+
+# test against this null
+h0 <- 50
+
+# true population  effect
+h1 <- 60
+
+# population sd
+sd <- 30
+
+# alpha level
+alpha <- 0.05
+
+# calculate the critical z value
+critical_z <- qnorm(alpha, mean = 0, sd = 1, lower.tail = FALSE)
+
+# get the raw critical value: https://www.youtube.com/watch?v=BJZpx7Mdde4&t=458s
+critical_raw <- h0 + sd / sqrt(n) * critical_z
+
+# get standard error for distributions of samples
+se <- sd / sqrt(n)
+
+# data frame
+d <-
+  tibble(
+    x = seq(h0-4*se, h1+4*se, length.out = 100),
+    null = dnorm(x, mean = h0, sd = se),
+    alt = dnorm(x, mean = h1, sd = se)
+  )
+```
+
+## The null distribution
+
+This is the sample distribution if the null were true: The true effect is 50.
+
+```{r}
+#| echo: false
+
+# https://stackoverflow.com/questions/33244629/filling-under-the-a-curve-with-ggplot-graphsot
+# https://github.com/tidyverse/ggplot2/issues/1528
+# https://paulvanderlaken.com/2019/12/21/ggplot2-sampling-distribution-area-under-curve/
+ggplot(
+  d,
+  aes(x, alpha = 0.5)
+) +
+  theme(
+    legend.position = "none"
+  ) -> l1
+
+stat_function(
+  data = d %>% filter(x < h0 + 4*se),
+  fun = dnorm,
+  fill = NA,
+  geom = "area",
+  linetype = "dashed",
+  color = "black",
+  args = list(
+    mean = h0,
+    sd = se
+  )
+) -> l2
+
+l1+l2
+```
+
+## The null distribution
+
+Where does a sample need to fall for us to wrongly conclude there's a difference?
+
+```{r}
+#| echo: false
+
+geom_vline(aes(xintercept = critical_raw)) -> l3
+
+scale_x_continuous(
+  breaks = c(h0, critical_raw),
+  labels = c(h0, "Critical value")
+) -> l4
+
+l1+l2+l3+l4
+```
+
+## The null distribution
+
+That's our $\alpha$: our false positives. Left of it: our true negatives (1-$\alpha$).
+
+```{r}
+#| echo: false
+
+stat_function(
+  data = d %>% filter(x < h0 + 4*se),
+  fun = dnorm,
+  geom = "area",
+  fill = "lightblue",
+  args = list(
+    mean = h0,
+    sd = se
+  ),
+  xlim = c(critical_raw, critical_raw + 3*se)
+) -> l5
+
+l1+l2+l3+l4+l5
+```
+
+## Where would we conclude it's coming from then?
+
+Our sampling distribution if the population value is 60. We commit a false positive if we assume a sample comes from the right distribution if in fact it comes from the left.
+
+```{r}
+#| echo: false
+
+stat_function(
+  fun = dnorm,
+  geom = "area",
+  fill = "lightgrey",
+  color = "lightgrey",
+  args = list(
+    mean = h1,
+    sd = se
+  )
+) -> l6
+
+scale_x_continuous(
+  breaks = c(h0, critical_raw, h1),
+  labels = c(h0, "Critical value", h1)
+) -> l4
+
+l1+l2+l3+l4+l6+l5
+```
+
+## What about the reverse?
+
+Our $\beta$: our false negatives. We commit a false negative if we assume a sample comes from the left distribution if in fact it comes from the right.
+
+```{r}
+#| echo: false
+
+stat_function(
+  fun = dnorm,
+  geom = "area",
+  fill = "pink",
+  args = list(
+    mean = h1,
+    sd = se
+  ),
+  xlim = c(50, critical_raw)
+) -> l7
+
+l1+l2+l3+l4+l6+l7+l5
+```
+
+## Where's power then?
+
+```{r}
+#| echo: false
+
+l1+l2+l3+l4+l6+l7+l5
+```
+
+## Where's power then?
+
+Everything right of the critical value: If a sample comes from the right distribution, this is how often we'll correctly identify it.
+
+```{r}
+#| echo: false
+
+stat_function(
+  fun = dnorm,
+  geom = "area",
+  fill = "black",
+  args = list(
+    mean = h1,
+    sd = se
+  ),
+  xlim = c(critical_raw, h1+4*se)
+) -> l8
+
+l1+l2+l3+l4+l6+l8
+```
+
+## What determined power again?
+
+Power is the probability of finding a significant result when there is an effect. It's determined (simplified) by:
+
+-   Effect size
+-   Sample size
+-   Error rates ($\alpha$ and $\beta$)
+
+Let's have a look how: [Preview](https://rpsychologist.com/d3/nhst/){preview-link="true"}
+
+## Why does power matter?
+
+Running studies with low power (aka underpowered studies) risks:
+
+1.  Missing effects
+2.  Inflating those effects we find
+3.  Lower chance that a significant result is true
+
+## Missing effects
+
+Society has commissioned us to find out something. Why would we start by setting us up so that we're barely able to do that?
+
+-   Waste of resources
+-   Super frustrating (personally)
+-   Dissuades others
+-   Can slow down entire research lines
+
+## Inflating those effects we find
+
+Let's go back to our example. Let's assume we want to know whether the population mean is larger than 50. We sample *n* = 100.
+
+```{r}
+#| echo: false
+
+l1+l2+l3
+```
+
+## What if we sample only 10?
+
+The sampling distribution gets wider: Now a sample mean needs to be really large to be significant. The smaller our sample (aka the lower our power), the more extreme a sample has to be to "make it" across the critical value.
+
+```{r}
+#| echo: false
+
+# sample size
+n <- 10
+
+# get the raw critical value
+critical_raw2 <- h0 + sd / sqrt(n) * critical_z
+
+# get standard error for distributions of samples
+se2 <- sd / sqrt(n)
+
+# data frame
+d2 <-
+  tibble(
+    x = seq(h0-4*se2, h1+4*se2, length.out = 100),
+    null = dnorm(x, mean = h0, sd = se2),
+    alt = dnorm(x, mean = h1, sd = se2)
+  )
+
+ggplot(
+  d2,
+  aes(x, alpha = 0.5)
+) +
+  theme(
+    legend.position = "none"
+  ) +
+  stat_function(
+    data = d,
+    fun = dnorm,
+    fill = NA,
+    geom = "area",
+    linetype = "dashed",
+    color = "black",
+    args = list(
+      mean = h0,
+      sd = se
+    )
+  ) +
+  geom_vline(aes(xintercept = critical_raw), linetype = "dashed") +
+  stat_function(
+    data = d2,
+    fun = dnorm,
+    fill = NA,
+    geom = "area",,
+    color = "black",
+    args = list(
+      mean = h0,
+      sd = se2
+    )
+  ) +
+  geom_vline(aes(xintercept = critical_raw2)) 
+```
+
+## Low power inflates effects
+
+If our study is small (has low power), only an overestimate will pass our threshold for significance. **With underpowered studies, significant results will always be an overestimate**.
+
+Tu put it differently: Small studies are only sensitive to large effects. But if the effect is truly small, we'll only get a significant result for the rare massive overestimate.
+
+Let's have a look again: [Preview](https://rpsychologist.com/d3/nhst/){preview-link="true"}
+
+## How true is a study?
+
+How many effects will we expect?
+
+-   Probability to find an effect = power
+-   Odds of there being an effect = R
+
+So:
+
+```{=tex}
+\begin{gather*}
+power \ * R
+\end{gather*}
+```
+## How true is a study?
+
+How many significant results do we expect?
+
+-   True effects (power x R)
+-   False positive
+
+```{=tex}
+\begin{gather*}
+power \ * R + \alpha
+\end{gather*}
+```
+## Positive predictive value
+
+What is the probability that a significant effect is indeed true? The rate of significant results that represent true effects divided by all significant results.
+
+```{=tex}
+\begin{gather*}
+PPV = \frac{power*R}{power*R + \alpha}
+\end{gather*}
+```
+## An example
+
+Let's assume our hypothesis has a 25% of being true and we go for the "conventional" alpha-level (5%).
+
+```{=tex}
+\begin{gather*}
+PPV = \frac{power*R}{power*R + \alpha}
+= \frac{power*\frac{P(effect)}{P(No \ effect)}}{power*\frac{P(effect)}{P(No \ effect)} + \alpha}
+\end{gather*}
+```
+::: incremental
+-   With 95% power and 1/4 odds?
+-   `r round(0.95*0.25/0.75/(0.95*0.25/0.75+0.05), digits = 2)*100`%
+-   With 40% power and 1/4 odds?
+-   `r round(0.40*0.25/0.75/(0.40*0.25/0.75+0.05), digits = 2)*100`%
+:::
+
+## What does this mean?
+
+Bottom line: The lower our power, the lower the probability that our significant effects represent the truth. Aka: Low power produces false findings.
+
+## Why should we care?
+
+Heard of the replication crisis?
+
+![](nature.jpg)
+
+[@baker2016]
+
+## Killer combo
+
+-   Bad research research + low power
+-   False positives
+-   Inflated effect sizes
+-   Inflated false positives = low credibility and a waste of resources
+
+> "\[The\] lack of transparency in science has led to quality uncertainty, and . . . this threatens to erode trust in science" [@vazire2017]
+
+## On the flip side
+
+-   Oversampling risks wasting resources too
+-   Value of information: Not every data point has the same value
+-   Our power should align with our inferential goals
+
+# Takeaways
+
+-   Understanding of the logic behind NHST
+-   Intuition about what power is
+-   See why power, perhaps, potentially isn't just a hoop to jump through
+
+## References
+
+::: {#refs}
+:::
