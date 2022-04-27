@@ -11,6 +11,69 @@
     div.column{display: inline-block; vertical-align: top; width: 50%;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
 
   <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -48,12 +111,13 @@
       "search-submit-button-title": "Submit"
     }
   }</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
   <link rel="stylesheet" href="../../styles.css">
 </head>
-<body class="docked fullcontent">
+<body class="docked">
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -226,7 +290,7 @@
     <ul id="quarto-sidebar-section-interactions" class="collapse list-unstyled sidebar-section depth1 show">  
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../content/08-interactions/08-slides.html" class="sidebar-item-text sidebar-link">Interactions</a>
+  <a href="../../content/08-interactions/08-slides.html" class="sidebar-item-text sidebar-link">Slides</a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -275,14 +339,175 @@
     </div>
 </nav>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+<h2 id="toc-title">On this page</h2>
+<ul>
+<li><a href="#overview" class="nav-link active" data-scroll-target="#overview">Overview</a>
+<ul class="collapse">
+<li><a href="#exercise" class="nav-link" data-scroll-target="#exercise"> <span class="header-section-number">0.1</span> Exercise</a></li>
+<li><a href="#exercise-1" class="nav-link" data-scroll-target="#exercise-1"> <span class="header-section-number">0.2</span> Exercise</a></li>
+<li><a href="#exercise-2" class="nav-link" data-scroll-target="#exercise-2"> <span class="header-section-number">0.3</span> Exercise</a></li>
+<li><a href="#exercise-3" class="nav-link" data-scroll-target="#exercise-3"> <span class="header-section-number">0.4</span> Exercise</a></li>
+<li><a href="#exercise-4" class="nav-link" data-scroll-target="#exercise-4"> <span class="header-section-number">0.5</span> Exercise</a></li>
+<li><a href="#exercise-5" class="nav-link" data-scroll-target="#exercise-5"> <span class="header-section-number">0.6</span> Exercise</a></li>
+<li><a href="#exercise-6" class="nav-link" data-scroll-target="#exercise-6"> <span class="header-section-number">0.7</span> Exercise</a></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 <header id="title-block-header" class="quarto-title-block default">
 
 <div class="quarto-title"><h1 class="title d-none d-lg-block display-7">Exercise V</h1></div></header>
 
+<section id="overview" class="level1 unnumbered">
+<h1 class="unnumbered">Overview</h1>
+<p>In this set of exercises, you’ll test your understanding of interactions. You’ll start with simulating power for an interaction, before going into more detail of what that actually means. You play around with different effect sizes (and ways to approach interactions) to find out how that affects power. Please note: All experiments and previous research below are completely fictional–I got not idea.</p>
+<section id="exercise" class="level2" data-number="0.1">
+<h2 data-number="0.1" class="anchored" data-anchor-id="exercise"><span class="header-section-number">0.1</span> Exercise</h2>
+<p>You plan to analyze data from a content analysis. You’re interested in what predicts the number of Twitter followers for celebrities (including C-list, whatever that means). You believe that blue check mark definitely means having more followers compared to not having a check mark. Your dependent measure is, well, just the number of followers. You also expect that this difference will be stronger if a celebrity is more active, say tweets at least once a week.</p>
+<p>Now you want to run a power analysis to test that idea. First draw (on a piece of paper or digitally) your interaction. You can use the function below to try out some “drawings”. Start with putting in some of the means to roughly get the pattern described above.</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>twobytwo <span class="ot">&lt;-</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">means =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">7</span>),</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">factors =</span> <span class="fu">c</span>(<span class="st">"Factor 1"</span>, <span class="st">"Factor 2"</span>),</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels1 =</span> <span class="fu">c</span>(<span class="st">"Level 1"</span>, <span class="st">"Level 2"</span>),</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels2 =</span> <span class="fu">c</span>(<span class="st">"Level 1"</span>, <span class="st">"Level 2"</span>),</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">outcome =</span> <span class="st">"Outcome"</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  ){</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    d <span class="ot">&lt;-</span> </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">data.frame</span>(</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">f1 =</span> <span class="fu">rep</span>(levels1, <span class="at">times =</span> <span class="dv">2</span>),</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">f2 =</span> <span class="fu">rep</span>(levels2, <span class="at">each =</span> <span class="dv">2</span>),</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">outcome =</span> means</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">names</span>(d) <span class="ot">&lt;-</span> <span class="fu">c</span>(factors, outcome)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    p <span class="ot">&lt;-</span> </span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> .data[[factors[<span class="dv">1</span>]]], <span class="at">y =</span> .data[[outcome]], <span class="at">shape =</span> .data[[factors[<span class="dv">2</span>]]], <span class="at">group =</span> .data[[factors[<span class="dv">2</span>]]])) <span class="sc">+</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">linetype =</span> .data[[factors[<span class="dv">2</span>]]]), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme</span>(</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(p)</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>For example, the below would be a complete reversal:</p>
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">twobytwo</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">means =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">0</span>),</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">factors =</span> <span class="fu">c</span>(<span class="st">"Verified"</span>, <span class="st">"Activity"</span>),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">levels1 =</span> <span class="fu">c</span>(<span class="st">"No"</span>, <span class="st">"Yes"</span>),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">levels2 =</span> <span class="fu">c</span>(<span class="st">"Lurker"</span>, <span class="st">"Active"</span>),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">outcome =</span> <span class="st">"Followers"</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="08-exercise_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
 
+</div>
+<p>For our case, we’re interested in an attenuation effect: There’s an effect (well, it’s not a causal effect in that sense, but let’s not get into that for now) regardless of the activity type, but it’ll be stronger. How much stronger? And what follower counts should you expect for the different groups? This is where common sense and thinking about effect sizes on the raw scale comes in. Let’s go back to the linear model:</p>
+<p><span class="math inline">\(Characters = \beta_0 + \beta_1Verification + \beta_2Activity + \beta_3Verification \times Activity + \epsilon\)</span></p>
+<p>Go back to the slides if you need a refresher what each beta represents. Let’s talk about our expectations. Let’s say we expect those without verification and low activity to have something like 20,000 followers. We expect that verification makes a big difference, such that verified celebrities, even when they’re not active, have, on average, 50,000 followers. Now comes the tricky bit: How many more followers will an unverified, but active person have? Let’s say it’s 25,000. As for the interaction: How much does activity add to the already massive difference between unverified and verified lurkers? Let’s say it adds 1,000 followers.</p>
+<p>Run a power analysis with these values where you figure out how many participants you need per group. “Recruiting” people won’t be difficult, so all you need is a rough estimate. Start at 500 celebrities and then go up in steps of 20 until 1,500. Use the linear model from above to create the scores. As for error: You’re really not sure about your estimates, so you add a lot of erro. Use a normally distributed error term of 5,000 with a standard deviation of 5,000. For now, you’re not interested in the actual contrasts, only in whether an interaction is present. So run an <code>lm</code> model with and one without the interaction term and compare them with <code>anova</code>. Do 1,000 runs per combo. Also, you really don’t want to commit a Type I error, so you set your alpha to 0.001.</p>
+<div class="cell">
+
+</div>
+</section>
+<section id="exercise-1" class="level2" data-number="0.2">
+<h2 data-number="0.2" class="anchored" data-anchor-id="exercise-1"><span class="header-section-number">0.2</span> Exercise</h2>
+<p>We conduct an experiment. Previous research has shown that reading a story in the first person leads to more enjoyment than in the third person. For your thesis, you want to understand that effect better. You believe that the effect will be stronger if there’s lots of action compared to a tame story. In fact, you think that story type can completely knock out the effect (see <a href="https://approachingblog.wordpress.com/2018/01/24/powering-your-interaction-2/">here</a>).</p>
+<p>The linear model for enjoyment, measured on a 7-point Likert-scale, is as follows:</p>
+<p><span class="math inline">\(Enjoyment = \beta_0 + \beta_1Perspective + \beta_2Type + \beta_3Perspective \times Type\)</span></p>
+<p>You believe the <span class="math inline">\(\beta\)</span> are as follows:</p>
+<span class="math display">\[\begin{align}
+&amp;\beta_0 = 4.3\\
+&amp;\beta_1 = 0.01\\
+&amp;\beta_2 = -0.03\\
+&amp;\beta_3 = 0.4
+\end{align}\]</span>
+<p>First draw the interaction to make sure you understand what it’s supposed to look like (either on paper or digitally). This time, you’d like to decompose the error, meaning rather than adding overall variance, you want to add variance per group. Therefore, you simulate the data with four group means, not with the linear model. You set the SD to 0.6 for all groups, except for the first-person action condition where you expect opinions will be a bit more divided, setting the SD here to 0.9.</p>
+<p>Even though you want to power for the interaction, you’re also interested in main effects you can interpret. Therefore, use type 3 sums of squares with contrast coding for the factors. Start at 30 participants per group and keep going in steps of 5 per group until you reach 95%. Because this is exploratory, and you really don’t want to miss an effect, you set your alpha to 0.15. Do 1,000 runs per combo.</p>
+<div class="cell">
+
+</div>
+</section>
+<section id="exercise-2" class="level2" data-number="0.3">
+<h2 data-number="0.3" class="anchored" data-anchor-id="exercise-2"><span class="header-section-number">0.3</span> Exercise</h2>
+<p>GPower will give you the same sample size for a power analysis for an interaction as for a t-test if the effect size of the interaction is the same as in the t-test. Let’s check that. The effect size is the same if the effect is completely reversed (see (here)[https://approachingblog.wordpress.com/2018/01/24/powering-your-interaction-2/) once more). Let’s say our first experiment produced a difference between control and treatment of 15 points. The mean and SD of the control were 100 and 15. For treatment: 115 and 15. That’s a massive effect size of one standard deviation. Now would a complete reversal look like? As in: A second factor completely reverse the effect of the first factor. Like this, using the plotting function from above:</p>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">twobytwo</span>(<span class="at">means =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">115</span>, <span class="dv">115</span>, <span class="dv">100</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="08-exercise_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>First, calculate power for the original effect (Circles above in the graph) in GPower (two-tailed). Alpha is 0.05 and power should be 95%. The groups should have the same size. Now simulate the above interaction and calculate power for the interaction effect. Compare your estimate to the GPower estimate you just got. Go about it as you think is best. (Tip: Turn the below into a function; you’ll need it again for the next exercises.)</p>
+<div class="cell">
+
+</div>
+</section>
+<section id="exercise-3" class="level2" data-number="0.4">
+<h2 data-number="0.4" class="anchored" data-anchor-id="exercise-3"><span class="header-section-number">0.4</span> Exercise</h2>
+<p>What if an effect is attenuated? Say the original effect was between two groups with means of 4.4 and 4.9 and SDs of 0.6 and 0.7, respectively. Calculate Cohen’s d, then put that into GPower for an independent t-test (two-tailed) with an alpha of 0.05. Note down the sample size needed for 95% power. Next, we introduce a second factor that attenuates the original effect, such that the effect is half is large when we consider the second condition. The graph below (hopefully) shows what I mean:</p>
+<div class="cell">
+
+</div>
+<p>That means, for the two groups under the second condition, we need to half the effect size. First, half the effect size that you put into GPower and calculate the sample size again. Note down the number you get. Then get to simulation: For the new (half-sized) two groups, half the difference between them. The SDs can be the same as for the first two groups. Calculate power for the interaction effect and compare the sample size needed for 95% to the two estimates you got from GPower. To save yourself time, use the function you wrote for the previous exercise. Also, use the GPower estimates as a ballpark figure to set your sample sizes in the simulation. What does adding an interaction add to your sample size? Compare to the case <a href="https://approachingblog.wordpress.com/2018/01/24/powering-your-interaction-2/">here</a>.</p>
+<div class="cell">
+
+</div>
+</section>
+<section id="exercise-4" class="level2" data-number="0.5">
+<h2 data-number="0.5" class="anchored" data-anchor-id="exercise-4"><span class="header-section-number">0.5</span> Exercise</h2>
+<p>So far, we’ve only considered the overall interaction effect. But a significant interaction can mean many different patterns, which is why we always follow up with simple effects. Take the attenuation from the previous exercise: There are 6 comparisons that could be of interest to us, one for each possible contrasts. Say for our hypothesis of attenuation to hold, we’re interested in two simple effects: The comparison of the two levels under the old condition and the comparison of the two levels under the new condition.</p>
+<p>Therefore, repeated the above simulation, but this time also extract the p-values of these two posthoc simple effects. You can do that with <code>pairs(emmeans::emmeans(interactions, "factor1", by = "factor2"))</code>. Save the power of the overall interaction term and the two simple effects and plot them. You can use the following code, assuming your data frame is called <code>results</code>, has a variable with the sample size <code>sample_size</code>, the type of power <code>type</code>, and <code>power</code>. You’ll need to adjust your function above or start from scratch. What’s the power of the simple effects compared to the overall interaction effect?</p>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(results, <span class="fu">aes</span>(<span class="at">x =</span> sample_size, <span class="at">y =</span> power, <span class="at">color =</span> type, <span class="at">group =</span> type)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+
+</div>
+</section>
+<section id="exercise-5" class="level2" data-number="0.6">
+<h2 data-number="0.6" class="anchored" data-anchor-id="exercise-5"><span class="header-section-number">0.6</span> Exercise</h2>
+<p>You want to know what leads people to change their opinion about an issue. Previous research shows that the amount of arguments leads to stronger persuasiveness of a message. That effect will be knocked out, you believe, if the message comes from a source with low credibility. Therefore, you expect something like this:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="08-exercise_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>You go for a repeated measures design, where people read four stories, one in each condition, and report how persuasive they find the story to be. (For the sake of argument, let’s ignore order or carry-over effects). You measure the outcome on a 100-point scale. Without knowing any better, you assume the no arguments, low credibility condition will fall on the middle of the scale. That makes it easy, because only the several arguments, high credibility condition will differ from the other three. You want to build in a reasonable amount of uncertainty, so you choose an SD of 20–this way, most of your values will be within 10 and 90 on the rating scale (50-+2*SD). As for the effect: Your SESOI is 10 points–anything below that is too small to care about in your opinion.</p>
+<p>Run a simulation where you draw from a multivariate normal distribution. The correlation between measures should be fairly low, 0.3. Power for the interaction effect (remember sum-to-zero contrasts). Start at 40 people and go up in steps of 5 until you reach 150. You’ll need to do some data transformations to get the data in the right (= long) format.</p>
+<div class="cell">
+
+</div>
+</section>
+<section id="exercise-6" class="level2" data-number="0.7">
+<h2 data-number="0.7" class="anchored" data-anchor-id="exercise-6"><span class="header-section-number">0.7</span> Exercise</h2>
+<p>You have a natural experiment coming up because you know that some users in the UK get a new streaming service before users in France. You want to know whether access to another streaming service increases satisfaction with people’s media diet. From the waiting list for that streaming service, you want to sample comparable users in the UK and France, ask them how satisfied they are with their media variety, wait for a month to give the UK users time to try out the new streaming service whereas the French users will be the control group. In other words, you have a mixed design with a pre-post measure within, but condition aka country (access to streaming) between.</p>
+<p>You need to run a power analysis. For your measure of satisfaction, you use 7-point Likert-scale. You assume that France at the pre-measure will score above the midpoint, given how many providers are already out there, say 3.9. You also expect no change, maybe even a slight decline seeing how the UK is getting access, so you set the post-measure to 3.8. For the UK, you expect a somewhat higher satisfaction already at pre-measure because they usually get stuff directly after the US, say 4.3. Importantly, you believe access to this new streaming service will increase satisfaction by 0.4 points–that’s the mimimum amount of change on that measure that predicts more users in the future. As for the SDs: You don’t see any reason why variation would increase from pre- to post-measure. However, you do believe there’s a bit more variation in France than in the UK based on previous research with large samples. You set the SD for France to 1.2, but for the UK to 0.9. As for correlations between pre- and post-measures: You expect France to be more consistent (0.6) than the UK (0.4).</p>
+<p>Simulate power. You’ll need to do a variance-covariance matrix for correlated measures for each country. Base your power analysis on the interaction effect, not the simple effects. To run the ANOVA, you’ll need to properly nest the error, meaning <code>Error(id/Time)</code> in the <code>aov_car</code> command. You have money for a max of N total participants.You set your alpha to 0.01 and want to stop at 90% power. Start at 100 people per country and go up in steps of 20.</p>
+<div class="cell">
+
+</div>
+
+
+</section>
+</section>
 </main> <!-- /main -->
 <script type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {

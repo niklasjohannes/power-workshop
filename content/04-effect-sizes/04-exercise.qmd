@@ -321,8 +321,8 @@ How large does the difference in means have to be for a $d$ of 0.25? Prove it wi
 
 n <- 1e4
 
-control <- rnorm(n, ?, 0.5)
-treatment <- rnorm(n, ?, 1.7)
+# control <- rnorm(n, ?, 0.5)
+# treatment <- rnorm(n, ?, 1.7)
 
 effectsize::cohens_d(control, treatment)
 ```

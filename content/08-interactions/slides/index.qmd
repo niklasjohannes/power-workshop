@@ -1,0 +1,700 @@
+---
+title: "Interactions"
+subtitle: "Power analysis through simulation in R"
+author: "Niklas Johannes"
+format: 
+  revealjs:
+    theme: ../../slidetheme.scss
+    slide-number: true
+    chalkboard: 
+      buttons: false
+    footer: <https://niklasjohannes.github.io/power-workshop/>
+execute:
+  echo: true
+---
+
+# Takeaways
+
+- Understand what an interaction is from the perspective of the linear model
+- Make yourself think in more detail about the form of interactions
+- Be able to translate that detail to generating data
+
+## What's an interaction?
+
+- Tells us whether the effect of one variable depends on another variable
+- Extension of the linear model
+- In effect, it just checks whether lines are parallel
+
+## Is there an interaction?
+
+```{r}
+#| echo: false
+
+library(tidyverse)
+
+twobytwo <-
+  function(
+    means = c(0, 5, 2, 7),
+    factors = c("Factor 1", "Factor 2"),
+    levels1 = c("Level 1", "Level 2"),
+    levels2 = c("Level 1", "Level 2"),
+    outcome = "Outcome"
+  ){
+    d <- 
+      data.frame(
+        f1 = rep(levels1, times = 2),
+        f2 = rep(levels2, each = 2),
+        outcome = means
+      )
+    
+    names(d) <- c(factors, outcome)
+    
+    p <- 
+      ggplot(d, aes(x = .data[[factors[1]]], y = .data[[outcome]], shape = .data[[factors[2]]], group = .data[[factors[2]]])) +
+      geom_point(size = 3) +
+      geom_line(aes(linetype = .data[[factors[2]]]), size = 1) +
+      theme_bw() +
+      theme(
+        axis.ticks.y = element_blank(),
+        axis.text.y = element_blank()
+      )
+    
+    return(p)
+  }
+
+twobytwo()
+```
+
+## How about now?
+
+```{r}
+#| echo: false
+
+twobytwo(means = c(0, 5, 2, 8))
+```
+
+## And now?
+
+```{r}
+#| echo: false
+
+twobytwo(means = c(0, 5, 2, 9))
+```
+
+## Definitely now
+
+```{r}
+#| echo: false
+
+twobytwo(means = c(0, 5, 5, 0))
+```
+
+## What's the interaction then?
+
+- In all of these models, we need to ask what extra information about the outcome being in both groups gives us beyond individual group membership
+- If the line isn't parallel, combined group membership gives us additional info than just individual group membership
+- When we simulate, that's our data generating process: The info each group membership carries as well as their combination
+
+## Back to the linear model
+
+Say we want to see the effect of playing a violent game on feelings of aggression, but suspect the effect depends on the difficulty of the game. We have 2 factors with 2 levels each:
+
+- Game: Peaceful vs. Violent
+- Difficulty: Easy vs. Hard
+
+## Both as dummies
+
+We code both as dummies:
+
+| Game     | Difficulty | x1 | x2 |
+|----------|------------|----|----|
+| Peaceful | Easy       | 0  | 0  |
+| Violent  | Easy       | 1  | 0  |
+| Peaceful | Hard       | 0  | 1  |
+| Violent  | Hard       | 1  | 1  |
+
+## In our linear model
+
+$$
+Aggression = \beta_0 + \beta_1Game + \beta_2Difficulty + \beta_3Game \times Difficulty
+$$
+
+## Let's go through
+
+| Game     | Difficulty | x1 | x2 |
+|----------|------------|----|----|
+| Peaceful | Easy       | 0  | 0  |
+| Violent  | Easy       | 1  | 0  |
+| Peaceful | Hard       | 0  | 1  |
+| Violent  | Hard       | 1  | 1  |
+
+```{=tex}
+\begin{align}
+& Aggression = \beta_0 + \beta_1Game + \beta_2Difficulty + \beta_3Game \times Difficulty\\
+& Aggression = \beta_0 + \beta_1 \times 0 + \beta_2 \times 0 + \beta_3 \times 0 \times 0\\
+& Aggression = \beta_0
+\end{align}
+```
+
+## Pictures, please
+
+```{r}
+#| echo: false
+means <- c(0, 2, 3, 6)
+
+twobytwo(
+  means = means,
+  factors = c("Game", "Difficulty"),
+  levels1 = c("Peaceful (0)", "Violent (1)"),
+  levels2 = c("Easy", "Difficult"),
+  outcome = "Aggression"
+) +
+  ylim(c(-1, 7)) +
+  annotate("text", x = 1.5, y = means[2]*0.8, label = "Easy (0)") +
+  annotate("text", x = 1.5, y = means[4]*0.9, label = "Difficult (1)") +
+  theme(
+    legend.position = "none"
+  ) -> l1
+
+l1 +
+  geom_segment(aes(x = 0.9, xend = 2, y = 0, yend = 0), linetype = "dashed")  +
+  annotate("text", x = 0.85, y = 0.1, label = "beta[0]", parse = TRUE) -> l2
+
+l2
+```
+$\beta_0$ is the mean of a peaceful and easy game.
+
+## Let's go through
+
+| Game     | Difficulty | x1 | x2 |
+|----------|------------|----|----|
+| Peaceful | Easy       | 0  | 0  |
+| Violent  | Easy       | 1  | 0  |
+| Peaceful | Hard       | 0  | 1  |
+| Violent  | Hard       | 1  | 1  |
+
+```{=tex}
+\begin{align}
+& Aggression = \beta_0 + \beta_1Game + \beta_2Difficulty + \beta_3Game \times Difficulty\\
+& Aggression = \beta_0 + \beta_1 \times 1 + \beta_2 \times 0 + \beta_3 \times 1 \times 0\\
+& Aggression = \beta_0 + \beta_1
+\end{align}
+```
+
+## Pictures, please
+
+```{r}
+#| echo: false
+
+library(ggbrace)
+
+l2 +
+  geom_segment(aes(x = 2, xend = 2, y = 0, yend = means[2]), linetype = "dashed")  +
+  geom_brace(aes(x = c(2.02, 2.08), y = c(means[1], means[2])), inherit.data = FALSE, rotate = 90) +
+  annotate("text", x = 2.13, y = means[2]/2, label = "beta[1]", parse = TRUE) -> l3
+
+l3
+```
+
+$\beta_1$ is the difference between a peaceful and a violent game for easy games.
+
+## Let's go through
+
+| Game     | Difficulty | x1 | x2 |
+|----------|------------|----|----|
+| Peaceful | Easy       | 0  | 0  |
+| Violent  | Easy       | 1  | 0  |
+| Peaceful | Hard       | 0  | 1  |
+| Violent  | Hard       | 1  | 1  |
+
+```{=tex}
+\begin{align}
+& Aggression = \beta_0 + \beta_1Game + \beta_2Difficulty + \beta_3Game \times Difficulty\\
+& Aggression = \beta_0 + \beta_1 \times 0 + \beta_2 \times 1 + \beta_3 \times 0 \times 1\\
+& Aggression = \beta_0 + \beta_2
+\end{align}
+```
+
+## Pictures, please
+
+```{r}
+#| echo: false
+
+l3 +
+  geom_brace(aes(x = c(0.92, 0.98), y = c(means[1], means[3])), inherit.data = FALSE, rotate = 270) +
+  annotate("text", x = 0.85, y = means[3]/2, label = "beta[2]", parse = TRUE) -> l4
+
+l4
+```
+
+$\beta_2$ is the difference between an easy and a difficult game for peaceful games.
+
+## Let's go through
+
+| Game     | Difficulty | x1 | x2 |
+|----------|------------|----|----|
+| Peaceful | Easy       | 0  | 0  |
+| Violent  | Easy       | 1  | 0  |
+| Peaceful | Hard       | 0  | 1  |
+| Violent  | Hard       | 1  | 1  |
+
+```{=tex}
+\begin{align}
+& Aggression = \beta_0 + \beta_1Game + \beta_2Difficulty + \beta_3Game \times Difficulty\\
+& Aggression = \beta_0 + \beta_1 \times 1 + \beta_2 \times 1 + \beta_3 \times 1 \times 1\\
+& Aggression = \beta_0 + \beta_2 + \beta_3
+\end{align}
+```
+
+## Pictures, please
+
+```{r}
+#| echo: false
+
+l4 +
+  geom_segment(aes(x = 1, xend = 2, y = means[3], yend = means[3]), linetype = "dashed") +
+  geom_segment(aes(x = 2, xend = 2, y = means[3], yend = means[4]), linetype = "dashed") +
+  geom_brace(aes(x = c(2.02, 2.08), y = c(means[3], means[3] + means[2])), inherit.data = FALSE, rotate = 90) +
+  annotate("text", x = 2.13, y = means[3] + means[2]/2, label = "beta[1]", parse = TRUE) +
+  geom_brace(aes(x = c(2.02, 2.08), y = c(means[3] + means[2], means[4])), inherit.data = FALSE, rotate = 90) +
+  annotate("text", x = 2.13, y = means[3] + means[1] + means[2] + (means[4] - (means[3] + means[1] + means[2])) /2 , label = "beta[3]", parse = TRUE) -> l5
+
+l5
+```
+
+$\beta_3$ is the extra difference between a peaceful and violent game when the game is also difficult.
+
+## Let's put that into numbers
+
+Let's say we have 50 people per group.
+
+```{r}
+d <- 
+  data.frame(
+    Game = rep(0:1, times = 50*2),
+    Difficulty = rep(0:1, each = 50*2)
+  )
+
+table(d$Game, d$Difficulty)
+```
+
+## Let's put that into numbers
+
+Then we imitate our regression equation (and add some error): 
+
+$Aggression = \beta_0 + \beta_1Game + \beta_2Difficulty + \beta_3Game \times Difficulty$
+
+```{r}
+b0 <- 0 # peaceful and easy
+b1 <- 2 # difference between b0 and violent and easy
+b2 <- 3 # difference between b0 and peaceful and hard
+b3 <- 1 # the "extra"
+
+set.seed(42)
+
+d$Aggression <- 
+  b0 + b1*d$Game + b2*d$Difficulty + b3*d$Game*d$Difficulty + rnorm(200, 0, 1)
+```
+
+## Where are our values?
+
+```{r}
+b0 <- 0 # peaceful and easy
+b1 <- 2 # difference between b0 and violent and easy
+b2 <- 3 # difference between b0 and peaceful and hard
+b3 <- 1 # the "extra"
+```
+
+
+```{r}
+#| echo: false
+
+l1 +
+  geom_segment(aes(x = 0.9, xend = 2, y = 0, yend = 0), linetype = "dashed")  +
+  annotate("text", x = 0.85, y = 0.1, label = paste("beta[0]==", "0"), parse = TRUE) +
+  geom_segment(aes(x = 2, xend = 2, y = 0, yend = means[2]), linetype = "dashed")  +
+  geom_brace(aes(x = c(2.02, 2.08), y = c(means[1], means[2])), inherit.data = FALSE, rotate = 90) +
+  annotate("text", x = 2.13, y = means[2]/2, label = paste("beta[1]==", "2"), parse = TRUE) +
+  geom_brace(aes(x = c(0.92, 0.98), y = c(means[1], means[3])), inherit.data = FALSE, rotate = 270) +
+  annotate("text", x = 0.85, y = means[3]/2, label = paste("beta[2]==", "3"), parse = TRUE) +
+  geom_segment(aes(x = 1, xend = 2, y = means[3], yend = means[3]), linetype = "dashed") +
+  geom_segment(aes(x = 2, xend = 2, y = means[3], yend = means[4]), linetype = "dashed") +
+  geom_brace(aes(x = c(2.02, 2.08), y = c(means[3], means[3] + means[2])), inherit.data = FALSE, rotate = 90) +
+  annotate("text", x = 2.13, y = means[3] + means[2]/2, label = paste("beta[1]==", "2"), parse = TRUE) +
+  geom_brace(aes(x = c(2.02, 2.08), y = c(means[3] + means[2], means[4])), inherit.data = FALSE, rotate = 90) +
+  annotate("text", x = 2.13, y = means[3] + means[1] + means[2] + (means[4] - (means[3] + means[1] + means[2])) /2 , label = paste("beta[3]==", "1"), parse = TRUE) -> l6
+
+l6
+```
+
+## Let's recover our values
+
+```{r}
+summary(lm(Aggression ~ Game*Difficulty, d))
+```
+
+## Might as well go for means?
+
+```{r}
+#| echo: false
+
+l6
+```
+
+| Game     | Difficulty | Betas                             | Values  | Means |
+|----------|------------|-----------------------------------|---------|-------|
+| Peaceful | Easy       | $\beta_0$                         | 0       | 0     |
+| Violent  | Easy       | $\beta_0+\beta_1$                 | 0+2     | 2     |
+| Peaceful | Hard       | $\beta_0+\beta_2$                 | 0+3     | 3     |
+| Violent  | Hard       | $\beta_0+\beta_1+\beta_2+\beta_3$ | 0+2+3+1 | 6     |
+
+## Directly make the groups
+
+```{r}
+set.seed(42)
+
+peace_easy <- 0
+violent_easy <- 2
+peace_hard <- 3
+violent_hard <- 6
+
+d <- 
+  data.frame(
+    Game = rep(c(0, 1, 0, 1), each = 50),
+    Difficulty = rep(c(0, 0, 1, 1), each = 50),
+    Aggression = c(
+      rnorm(50, peace_easy, 1),
+      rnorm(50, violent_easy, 1),
+      rnorm(50, peace_hard, 1),
+      rnorm(50, violent_hard, 1)
+    )
+  )
+```
+
+## Same result
+
+```{r}
+summary(lm(Aggression ~ Game*Difficulty, d))
+```
+
+## A more extreme example
+
+```{r}
+peace_easy <- 0
+violent_easy <- 3
+peace_hard <- 3
+violent_hard <- 0
+
+d <- 
+  data.frame(
+    Game = rep(c(0, 1, 0, 1), each = 50),
+    Difficulty = rep(c(0, 0, 1, 1), each = 50),
+    Aggression = c(
+      rnorm(50, peace_easy, 1),
+      rnorm(50, violent_easy, 1),
+      rnorm(50, peace_hard, 1),
+      rnorm(50, violent_hard, 1)
+    )
+  )
+```
+
+## Full cross-over
+
+```{r}
+#| echo: false
+
+twobytwo(
+  means = c(0, 3, 3, 0),
+  factors = c("Game", "Difficulty"),
+  levels1 = c("Peaceful (0)", "Violent (1)"),
+  levels2 = c("Easy", "Difficult"),
+  outcome = "Aggression"
+)
+```
+
+## What's our "correction"?
+
+```{r}
+summary(lm(Aggression ~ Game*Difficulty, d))
+```
+
+## Factor vs. contrasts
+
+- In the example above, we're going straight for the contrasts in `lm`
+- In ANOVAs (`aov`) we usually calculate the Sums of Squares for an entire factor (grand mean vs. group mean)
+- Same as comparing an `lm` model without the interaction to an `lm` model with the interaction
+
+## Comparing models
+
+```{r}
+m1 <- lm(Aggression ~ Game + Difficulty, d)
+m2 <- lm(Aggression ~ Game + Difficulty + Game:Difficulty, d)
+anova(m1, m2)
+```
+
+## Main effects vs. contrasts
+
+```{r}
+summary(aov(Aggression ~ Game*Difficulty, d))
+```
+
+Aggregating over both conditions means no main effects of either factor. Both conditions have a mean of 1.5:
+
+|      | Peaceful | Violent |
+|------|----------|---------|
+| Easy | 0        | 3       |
+| Hard | 3        | 0       |
+
+## It gets a bit complicated
+
+- If we don't go for contrasts, then there's different types of Sums of Squares for the terms
+- Are we interested in only the interaction?
+- Do we want to interpret main effects in the presence of an interaction?
+
+## What about here?
+
+```{r}
+#| echo: false
+
+twobytwo(
+  means = c(0, 0, 0, 3),
+  factors = c("Game", "Difficulty"),
+  levels1 = c("Peaceful (0)", "Violent (1)"),
+  levels2 = c("Easy", "Difficult"),
+  outcome = "Aggression"
+)
+```
+
+Yes, there's main effects: On average, peaceful is lower than violent and on average, easy is lower than difficult. But we know that's not really the case.
+
+## Type I
+
+Sequential sum of squares, where the order of factors matters in unbalanced designs:
+
+- $SS(A)$
+- $SS(B | A)$
+- $SS(AB | B, A)$
+
+
+## Type II
+
+Presence of Interaction $SS(AB | A, B)$? Then no need to test for main effects. If there's no interaction, then we test main effects. 
+
+- $SS(A |B)$ for factor A
+- $SS(B | A)$ for factor B
+
+## Type III
+
+We want everything: Main effects even in the presence of an interaction effect.
+
+- $SS(A | B, AB)$
+- $SS(B | A, AB)$
+
+## What do we want?
+
+- With balanced data (same number of observations per cell) none of this matters
+- Do we believe main effects are meaningful when there's an interaction present? If not, Type II are more powerful.
+- But our typical hypotheses are about main effects **and** interaction effects: Type III
+
+## Type III
+
+- If we choose to go for Type III, we can't use dummy coding
+- Dummy coding isn't adequate when there's interactions present
+- Go sum-to-zero instead
+
+```{r}
+Game <- as.factor(d$Game)
+
+contrasts(Game)
+
+contrasts(Game) <- contr.sum
+
+contrasts(Game)
+```
+
+## Bottom line
+
+- If you have balanced cells, none of this matters
+- If you have planned contrasts, none of this matters
+- If you have unbalanced cells and care about main effects, you must choose Type III with sum-to-zero contrasts
+- Either compare models (`anova` command on two `lm` models) or go straight to an out-of-the-box ANOVA solutions (e.g., `afex` package)
+
+## Creating unbalanced data
+
+Let's delete some rows.
+
+```{r}
+rows_to_delete <- sample(nrow(d), 15)
+d <- d[-rows_to_delete,]
+
+table(d$Game, d$Difficulty)
+```
+
+## Different results
+
+```{r}
+summary(aov(Aggression ~ Game*Difficulty, d))
+```
+
+```{r}
+summary(afex::aov_car(Aggression ~ Game*Difficulty + Error(id), d %>% mutate(id=1:nrow(d)), type = 3))
+```
+
+## The `lm` solution
+
+- Specify sum-to-zero contrasts
+- Run a model with and one without the interaction
+- Compare models and get a p-value for just the interaction
+- Doesn't give you the main effects, but fast
+
+## The `afex` solution
+
+- Needs an ID variable to identify a row
+- You can specify the type of tests
+- Automatically uses sum-to-zero coding
+- Automatically transforms character variables into factors
+
+```{r}
+#| eval: false
+
+afex::aov_car(DV ~ IV1*IV2 + Error(ID), data, type = 3)
+```
+
+## Power for interactions
+
+- What do I need to power for: The literal interaction effect or will we follow up?
+- If we're not interested in the pattern, then we can just focus on powering for the interaction term
+- If we're interested in the pattern, we must power for simple effects (aka follow-ups)
+
+## Same effect size
+
+:::: {.columns}
+
+:::: {.column}
+
+```{r}
+#| echo: false
+
+twobytwo(
+  means = c(0, 3, 3, 0),
+  factors = c("Game", "Difficulty"),
+  levels1 = c("Peaceful", "Violent"),
+  levels2 = c("Easy", "Difficult"),
+  outcome = "Aggression"
+)
+```
+
+
+::::
+
+:::: {.column}
+```{r}
+#| echo: false
+
+twobytwo(
+  means = c(0, 3, 3, 0),
+  factors = c("Game", "Difficulty"),
+  levels1 = c("Peaceful", "Violent"),
+  levels2 = c("Hard", "Easy"),
+  outcome = "Aggression"
+)
+```
+
+::::
+
+::::
+
+## Full reversal
+
+![](reversal.jpg)
+
+For full details, picture from [here](https://approachingblog.wordpress.com/2018/01/24/powering-your-interaction-2/)
+
+## Attentuation
+
+![](attenuation.jpg)
+
+## Back to our example
+
+Overall results tells us whether the interaction provides extra information:
+
+```{r}
+# get id variables
+d$id <- 1:nrow(d)
+
+# give actual names to factor leves
+d$Game <- as.factor(d$Game)
+d$Difficulty <- as.factor(d$Difficulty)
+levels(d$Game) <- c("Peaceful", "Violent")
+levels(d$Difficulty) <- c("easy", "hard")
+
+m <- afex::aov_car(Aggression ~ Game*Difficulty + Error(id), d %>% mutate(id=1:nrow(d)), type = 3)
+```
+
+## Back to our example
+
+```{r}
+summary(m)
+```
+
+## Following up
+
+Pairwise comparisons tell us the pattern. Shotgun approach:
+
+```{r}
+pairs(emmeans::emmeans(m, c("Game", "Difficulty")))
+```
+
+## Following up
+
+Pairwise comparisons tell us the pattern. By factor:
+
+```{r}
+pairs(emmeans::emmeans(m, "Game", by = "Difficulty"))
+```
+
+## Power for the interaction term
+
+```{r}
+n <- 50
+m1 <- 4
+m2 <- 4
+m3 <- 4
+m4 <- 4.5
+sd <- 1.5
+draws <- 1e3
+
+pvalues <- NULL
+
+for (i in 1:n) {
+
+  group1 <- rnorm(n, m1, sd)
+  group2 <- rnorm(n, m2, sd)
+  group3 <- rnorm(n, m3, sd)
+  group4 <- rnorm(n, m4, sd)
+
+  d <- data.frame(
+    id = factor(1:c(4*n)),
+    scores = c(group1, group2, group3, group4),
+    group1 = factor(rep(c("a", "b", "a", "b"), each = n)),
+    group2 = factor(rep(c("a", "a", "b", "b"), each = n))
+  )
+  
+  contrasts(d$group1) <- contr.sum
+  contrasts(d$group2) <- contr.sum
+  
+  m <- suppressMessages(afex::aov_car(scores ~ group1*group2 + Error(id), data = d, type = 3))
+  
+  pvalues[i] <- m$anova_table$`Pr(>F)`[3]
+}
+
+sum(pvalues < 0.05) / length(pvalues)
+```
+
+# Takeaways
+
+- Understand what an interaction is from the perspective of the linear model
+- Make yourself think in more detail about the form of interactions
+- Be able to translate that detail to generating data
+
+# Let's get simulating
