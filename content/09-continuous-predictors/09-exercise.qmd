@@ -1,3 +1,494 @@
 ---
 title: "Exercise VI"
+format: 
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+execute: 
+  eval: false
+  echo: false
+  message: false
+  warning: false
 ---
+
+# Overview {.unnumbered}
+
+You made it: last set of exercises. Nothing new here; you'll simulate power for continuous predictors and interactions.
+
+## Exercise
+
+You're interested in the effects of three predictors on an outcome. When all predictors are 0, the outcome (`y`) should be around 16. The first predictor, `x1`, causes a 1-point increase in `y`; the second predictor, `x2` causes a 0.3-point increase in `y`; the third predictor, `x3`, causes a 1.4 increase in `y`. All predictors range from 0 to 7; for our purposes, we can assume that they're uniformly distributed. The error term has a mean of 0 and an SD of 10.
+
+Simulate power with 500 runs. You could either power for the entire model (so for the p-value of the F-test for the full `lm` model) or for each individual predictor. Find out which has the most power: Store power for the full model and each individual predictor from the model. Start with 50 participants and go up in steps of 10 until you reach 200. Plot the power curves for the different power types. You can use the code below:
+
+```{r}
+#| eval: false
+#| echo: true
+
+library(ggplot2)
+
+ggplot(outcomes, aes(x = sample_size, y = power, color = type)) + geom_line() + theme_bw()
+```
+
+
+```{r}
+set.seed(42)
+
+b0 <- 16
+b1 <- 1
+b2 <- 0.3
+b3 <- 1.4
+sizes <- seq(50, 200, 10)
+runs <- 500
+
+outcomes <- 
+  data.frame(
+    sample_size = NULL,
+    type = NULL,
+    power = NULL
+  )
+
+for (n in sizes) {
+  
+  pvalues_all <- NULL
+  pvalues_x1 <- NULL
+  pvalues_x2 <- NULL
+  pvalues_x3 <- NULL
+  
+  for (i in 1:runs) {
+    
+    error <- rnorm(n, 0, 10)
+    
+    x1 <- runif(n, 0, 7)
+    x2 <- runif(n, 0, 7)
+    x3 <- runif(n, 0, 7)
+    
+    d <- 
+      data.frame(
+        x1 = x1,
+        x2 = x2,
+        x3 = x3,
+        y = b0 + b1*x1 + b2*x2 + b3*x3 + error
+      )
+    
+    m <- summary(lm(y ~ x1 + x2 + x3, d))
+    
+    pvalues_all[i] <- broom::glance(m)$p.value
+    pvalues_x1[i] <- broom::tidy(m)$p.value[2]
+    pvalues_x2[i] <- broom::tidy(m)$p.value[3]
+    pvalues_x3[i] <- broom::tidy(m)$p.value[4]
+  }
+  
+  outcomes <- 
+    rbind(
+      outcomes,
+      data.frame(
+        sample_size = rep(n, 4),
+        type = factor(c("all", "x1", "x2", "x3")),
+        power = c(
+          sum(pvalues_all < 0.05) / length(pvalues_all),
+          sum(pvalues_x1 < 0.05) / length(pvalues_x1),
+          sum(pvalues_x2 < 0.05) / length(pvalues_x2),
+          sum(pvalues_x3 < 0.05) / length(pvalues_x3)
+        )
+      )
+    )
+}
+
+library(ggplot2)
+ggplot(outcomes, aes(x = sample_size, y = power, color = type)) + geom_line() + theme_bw()
+```
+
+## Exercise
+
+Create a correlation between two variables of 0.2. Use a correlation matrix. How many participants do you need for 95% power with an alpha of 0.01? Go about this as you think is best. Verify your estimate with GPower.
+
+```{r}
+library(MASS)
+
+sigma <- 
+  matrix(
+    c(1, 0.2, 0.2, 1),
+    ncol = 2
+  )
+alpha <- 0.01
+power <- 0
+n <- 100
+runs <- 1e3
+
+outcomes <- 
+  data.frame(
+    sample_size = NULL,
+    power = NULL
+  )
+
+while (power < 0.95) {
+  
+  pvalues <- NULL
+  
+  for (i in 1:runs) {
+    
+    d <- 
+      mvrnorm(
+        n,
+        c(0,0),
+        sigma
+      )
+    
+    d <- as.data.frame(d)
+    
+    colnames(d) <- c("x1", "x2")
+    
+    pvalues[i] <- cor.test(d$x1, d$x2)$p.value
+  }
+  
+  power <- sum(pvalues < alpha) / length(pvalues)
+  
+  outcomes <- 
+    rbind(
+      outcomes,
+      data.frame(
+        sample_size = n,
+        power = power
+      )
+    )
+  
+  n <- n + 10
+}
+
+plot(outcomes$sample_size, outcomes$power)
+```
+
+## Exercise
+
+In the correlation matrix, you specifically say how variables are related, but also when they aren't related (i.e., when you assign zero for a correlation). For the data generating process, this is important, because it specifies the causal structure. Going simply by $R^2$ will often be misleading. For exmaple, what if you have a third variable that creates a spurious effect? You can simulate that as well. Say you measure how much ice cream a person consumes on average and expect that eating a lot of sweet ice cream makes people crave savoury foods, which you measure as the portions of fries consumed in a beer garden. However, there truly is no effect of ice cream on eating fries; it's just that both are influenced by the number of sun hours: More sun hours will lead people to eat more ice cream but also to spend more time in beer gardens and, inevitably, eat fries there.
+
+Simulate that and inspect the $R^2$ of the models. Use a sample size of 10,000. First, create a sun hours variable. Then, predict ice cream eating with sun hours. Next, predict fries eating with sun hours. Now run two regression models:
+
+- one where you predict fries with ice cream alone
+- one where you predict fries with icre cream and sun hours
+
+Which model is the correct causal structure? But which one has the higher $R^2$? If this tickled your interest, have a look [here](https://www.r-bloggers.com/2016/01/how-to-create-confounders-with-regression-a-lesson-from-causal-inference/) and [here](https://journals.sagepub.com/doi/full/10.1177/2515245917745629).
+
+```{r}
+n <- 1e4
+
+sun <- rnorm(n)
+ice_cream <- 0.4*sun + rnorm(n)
+fries <- 0.5*sun + rnorm(n)
+
+summary(lm(fries ~ ice_cream))
+summary(lm(fries ~ ice_cream + sun))
+```
+
+## Exercise
+
+Your colleague comes to you and tells you that they predicted satisfaction with a film by people's enjoyment. However, they only had 20 people in their sample. Run a sensitivity analysis and check for what $r$ 20 people give you 90% power, even if you allow a more liberal alpha of 0.10. Increase $r$ in steps of 0.01 and go the full distance, checking all effect sizes from 0 to 1. Do 500 runs per step. 
+
+```{r}
+n <- 20
+r <- 0
+alpha <- 0.10
+effects <- seq(0, 1, 0.01)
+runs <- 1e3
+
+outcomes <- 
+  data.frame(
+    effect_size = NULL,
+    power = NULL
+  )
+
+pvalues <- NULL
+
+for (anr in effects) {
+  
+  for (i in 1:runs) {
+    sigma <- matrix(
+        c(1, anr, anr, 1),
+        ncol = 2
+      )
+      
+      d <- mvrnorm(
+        n,
+        c(0,0),
+        sigma
+      )
+      
+      d <- as.data.frame(d)
+      colnames(d) <- c("enjoyment", "satisfaction")
+      
+      pvalues[i] <- cor.test(d$enjoyment, d$satisfaction)$p.value
+  }
+  
+  outcomes <- 
+    rbind(
+      outcomes,
+      data.frame(
+        effect_size = anr,
+        power = sum(pvalues < alpha) / length(pvalues)
+      )
+    )
+}
+
+plot(outcomes$effect_size, outcomes$power)
+```
+
+## Exercise
+
+You design a follow-up study where you measure enjoyment and satisfaction with films, but this time you want to determine a SESOI and do a power analysis before-hand. You measure both variables on a 5-point  index Likert-scale. You know enjoyment usually scores above the midpoint, say a mean of 3.9 sounds realistic. The SD will be narrow: 0.5. For satisfaction, you expect a score below the midpoint of the scale, at 2.1, but with a larger SD of 1. Your smallest effect size of interest is 0.7 points because a previous analysis shows that this is the point where satisfaction translates to higher well-being for the day.
+
+You want to be strict, so you set your alpha to 0.005, but at the same time, you don't mind missing a true effect just as much, which is why you set your power goal to 85%. Run the power analysis (1000 runs per combo). Start at 50 people and go up in steps of 1 until you reach your desired power level. (Tip: Use the raw effect and SDs to get $r$ and from the a variance-covariance matrix). Verify with GPower.
+
+```{r}
+goal <- 0.85
+alpha <- 0.005
+sesoi <- 0.7
+n <- 50
+means <- c(enjoyment = 3.9, satisfaction = 2.1)
+sd_enjoy <- 0.5
+sd_sat <- 1
+r <- sesoi * sd_enjoy/sd_sat
+covariance <- r * sd_enjoy * sd_sat
+runs <- 1e3
+
+sigma <- 
+  matrix(
+    c(
+      sd_enjoy**2, covariance,
+      covariance, sd_sat**2
+    ),
+    ncol = 2
+  )
+
+outcomes <- 
+  data.frame(
+    sample_size = NULL,
+    power = NULL
+  )
+
+power <- 0
+
+while (power < goal) {
+  
+  pvalues <- NULL
+  
+  for (i in 1:runs) {
+    
+    d <- as.data.frame(
+      mvrnorm(
+        n,
+        means,
+        sigma
+      )
+    )
+    
+    pvalues[i] <- cor.test(d$enjoyment, d$satisfaction)$p.value
+  }
+  
+  power <- sum(pvalues < alpha) / length(pvalues)
+  
+  outcomes <- rbind(
+    outcomes,
+    data.frame(
+      sample_size = n,
+      power = power
+    )
+  )
+  
+  n <- n + 1
+}
+
+plot(outcomes$sample_size, outcomes$power)
+```
+
+## Exercise
+
+A colleague has found that films with higher ratings on IMDB bring in more money at the box office. However, you think this effect is mostly due to genre: for comedies, there is an effect of quality on success, but for action films this doesn't matter. In other words, you predict an interaction, such that the positive effect of quality (i.e., IMDB rating) is only present in one condition (genre: comedies), but not in the other condition.
+
+You want to test that hypothesis and start your power simulation. Specifically, you want to power for the interaction effect. IMDB ratings range from 0-10. Success is measured in million dollar steps. For genre, action films will be your baseline. You'll also center the rating so that 0 represents an average rating. Overall, when a film is an action flick and has an average rating, you expect it to bring in 20 million. You expect a main effect of quality because the quality effect will depend on genre. You do expect, however, a main effect of genre, such that, at average quality, action flicks bring in 5 million more than comedies. Crucially, you expect an interaction effect: For comedies, each 1-point increase in quality will generate 2 million extra at the box office.
+
+As for error: You expect normally distributed error with a mean of 0 and an SD of 15. Simulate the data and see how many films you need to code to have enough power to detect the interaction effect with 95% power with an alpha of 0.05. Start at 10 and go up in steps of 10 to a maximum of 250. Do 1,000 runs per combo. (Tip: Generate a large data set with the linear model formula first and plot the means before getting into the simulation.)
+
+```{r}
+b0 <- 50
+b1 <- 0
+b2 <- 5
+b3 <- 2
+sizes <- seq(10, 300, 10)
+runs <- 1e3
+
+outcomes <- 
+  data.frame(
+    sample_size = NULL,
+    power = NULL
+  )
+
+for (n in sizes) {
+  
+  pvalues <- NULL
+  
+  for (i in 1:runs) {
+    
+    error <- rnorm(n, 0, 15)
+    genre <-  rep(0:1, n/2)
+    quality <-  scale(runif(n, 0, 10), center = TRUE, scale = FALSE)
+    
+    d <- 
+      data.frame(
+        genre = genre,
+        quality = quality,
+        success = b0 + b1*quality + b2*genre + b3*quality*genre + error
+      )
+    
+    # success can't be less than 0
+    d$success <- ifelse(d$success < 0, 0, d$success)
+    
+    m <- summary(lm(success ~ quality*genre, d))
+    
+    pvalues[i] <- broom::tidy(m)$p.value[4]
+    
+  }
+  
+  outcomes <- 
+    rbind(
+      outcomes,
+      data.frame(
+        sample_size = n,
+        power = sum(pvalues < 0.05) / length(pvalues)
+      )
+    )
+}
+
+ggplot(d, aes(x = quality, y = success, color = as.factor(genre))) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm") +
+  theme_bw()
+
+with(outcomes, plot(sample_size, power))
+```
+
+## Exercise
+
+Simulate the above again, but this time increase the main effects of both quality and genre to 10 million. Leave the interaction effect at 2. What do you think -- will this have an effect on power? If so, how and why?
+
+```{r}
+b0 <- 50
+b1 <- 10
+b2 <- 10
+b3 <- 2
+sizes <- seq(10, 250, 10)
+runs <- 1e3
+
+outcomes <- 
+  data.frame(
+    sample_size = NULL,
+    power = NULL
+  )
+
+for (n in sizes) {
+  
+  pvalues <- NULL
+  
+  for (i in 1:runs) {
+    
+    error <- rnorm(n, 0, 15)
+    genre <-  rep(0:1, n/2)
+    quality <-  scale(runif(n, 0, 10), center = TRUE, scale = FALSE)
+    
+    d <- 
+      data.frame(
+        genre = genre,
+        quality = quality,
+        success = b0 + b1*quality + b2*genre + b3*quality*genre + error
+      )
+    
+    # success can't be less than 0
+    d$success <- ifelse(d$success < 0, 0, d$success)
+    
+    m <- summary(lm(success ~ quality*genre, d))
+    
+    pvalues[i] <- broom::tidy(m)$p.value[4]
+    
+  }
+  
+  outcomes <- 
+    rbind(
+      outcomes,
+      data.frame(
+        sample_size = n,
+        power = sum(pvalues < 0.05) / length(pvalues)
+      )
+    )
+}
+
+ggplot(d, aes(x = quality, y = success, color = as.factor(genre))) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm") +
+  theme_bw()
+
+with(outcomes, plot(sample_size, power))
+```
+
+## Exercise
+
+You want to know how much listening to music leads to feelings of being relaxed. You expect a linear effect of the number of songs someone listens to on them feeling relaxed. However, you suspect that whether this effect occurs will strongly depend on how much people like these songs. You measure feelings of relaxation on a Likert-type index variable with a range of 1-7. The number of songs is measured as a count with a maximum of 30 songs--you counted songs over a 1h period. After that period, you also asked how much people enjoyed the songs they were listening to on a scale from 0-100.
+
+Simulate (uniformly) number of songs (use `sample`) and liking. Transform the number of songs so that 1 up on the variable means listening to 5 more songs. As for liking, you want to go in steps of 10. Center both. These transformations make it easier to get an intuition about the effect sizes. At average listening and liking, you think relaxation should be somewhat below the midpoint of the scale: 3.1. You don't expect main effects of either predictor: Liking music shouldn't relax you unless you listen to some of it, and listening to music alone shouldn't do much unless you like the music. However, you expect a fairly sizeable interaction effect, such that the combination of liking and listening will increase relaxation by 0.2 points. Remember the transformations: We say that listening to 5 songs (going up 1 on listening) will increase relaxation 0.2 when liking also goes up by 10 points (going up 1 on liking).
+
+For error, you expect a normally distributed error with mean 0 and an SD of 2. Simulate power for the interaction effect, starting at 10 and ending at a sample size of 100. Go in steps of 5.  Do 1,000 runs per combo. Also use `interactions::interaction_plot` to plot a random model to check how the data look like.
+
+```{r}
+b0 <- 3.1
+b1 <- 0
+b2 <- 0
+b3 <- 0.2
+sizes <- seq(10, 100, 5)
+runs <- 1e3
+
+outcomes <- 
+  data.frame(
+    sample_size = NULL,
+    power = NULL
+  )
+
+for (n in sizes) {
+  
+  pvalues <- NULL
+  
+  for (i in 1:runs) {
+    
+    error <- rnorm(n, 0, 2)
+    listening <- scale(sample(1:30, n, replace = TRUE) / 5, scale = FALSE)
+    liking <- scale(runif(n, 0, 100) / 10, scale = FALSE)
+    
+    d <- 
+      data.frame(
+        listening = listening,
+        liking = liking,
+        relaxation = b0 + b1*listening + b2*liking + b3*listening*liking + error
+      )
+    
+    #trim the outcome
+    d$relaxation <- ifelse(d$relaxation < 0, 0, d$relaxation)
+    d$relaxation <- ifelse(d$relaxation > 7, 7, d$relaxation)
+    
+    m <- summary(lm(relaxation ~ listening*liking, d))
+    pvalues[i] <- broom::tidy(m)$p.value[4]
+  }
+  
+  outcomes <- 
+    rbind(
+      outcomes,
+      data.frame(
+        sample_size = n,
+        power = sum(pvalues < 0.05) / length(pvalues)
+      )
+    )
+  
+}
+
+plot(outcomes$sample_size, outcomes$power)
+
+interactions::interact_plot(lm(relaxation ~ listening*liking, d), pred = "listening", modx = "liking")
+```

@@ -1,0 +1,980 @@
+---
+title: "Continuous predictors"
+subtitle: "Power analysis through simulation in R"
+author: "Niklas Johannes"
+format: 
+  revealjs:
+    theme: ../../slidetheme.scss
+    slide-number: true
+    chalkboard: 
+      buttons: false
+    footer: <https://niklasjohannes.github.io/power-workshop/>
+execute:
+  echo: true
+---
+
+# Takeaways
+
+- Understand that continuous predictors are just another case of the linear model
+- Extend this understanding to continuous (by categorical) interactions
+- Be able to translate that extension to generating data
+
+## Back to the linear model
+
+So far our predictors have been categorical. Say we have two groups predicting an outcome. If our predictor is 0:
+
+```{=tex}
+\begin{align}
+& y = \beta_0 + \beta_1x\\
+& y = \beta_0 + beta_1 \times 0\\
+& y = \beta_0
+\end{align}
+```
+
+If it's 1:
+
+```{=tex}
+\begin{align}
+& y = \beta_0 + \beta_1x\\
+& y = \beta_0 + beta_1 \times 1\\
+& y = \beta_0 + beta_1
+\end{align}
+```
+
+## Changing $x$
+
+Nothing new: We're basically looking at what happens if $x$ goes up by 1. So if our measure isn't categorical (aka dummy coded), but continuous, we're asking the same question. Only now, $x$ can be more than 0/1. 
+
+$y = \beta_0 + \beta_1x$ 
+
+## Full range of $x$
+
+If we assume linearity, then getting $y$ is easy. Assume we predict disagreeableness from age. With each year people grow older, they become 1 point more disagreeable on a 100-point scale. (And when they're 0 years old, they're also 0 disagreeable.)
+
+```{=tex}
+\begin{align}
+& disagreeableness = \beta_0 + \beta_1 \times age\\
+& disagreeableness = 0 + 1 \times age
+\end{align}
+```
+
+Now getting the score for someone aged 50 is trivial:
+
+$disagreeableness = 0 + 1 \times 50$
+
+## Simulating this process is trivial
+
+We get our age, put it into the formula, and we have our outcome.
+
+```{r}
+age <- rnorm(100, 50, 20)
+disagreeableness <- 0 + age
+
+summary(lm(disagreeableness ~ age))
+```
+
+## Perfect fit
+
+```{r}
+plot(age, disagreeableness)
+```
+
+## Adding error
+
+If there's lots of error, it'll be harder to separate signal (aka our true 1-point effect) from noise (the total variation in our outcome).
+
+```{r}
+error <- rnorm(100, 0, 100)
+disagreeableness <- 0 + age + error
+
+summary(lm(disagreeableness ~ age))
+```
+
+
+##  Psst, scale
+
+Adding this much error will bring our outcome measure out of bounds. For a proper simulation where we're interested in the data generating process, we need to deal with this (by truncating etc.).
+
+```{r}
+#| echo: false
+
+hist(disagreeableness)
+```
+
+## That's it, really
+
+From the linear model, it doesn't matter on what level our predictor is. Categorical or continuous, we can simulate any outcome with this formula--including multiple predictors and interactions between different levels of predictors.
+
+Let's assume number of relatives living close-by is also causing disagreeableness:
+
+```{r}
+age <- rnorm(100, 50, 20)
+relatives <- rpois(100, 5)
+error <- rnorm(100, 0, 10)
+
+disagreeableness <- 0 + age + relatives + error
+```
+
+## Two independent effects
+
+```{r}
+summary(lm(disagreeableness ~ age + relatives))
+```
+
+## Varying effect sizes
+
+What if we believe the effect of age is smaller, but that of number of relatives much larger. No problem, we just adjust our betas. Say each year only contributes 0.25 higher grumpiness, but each extra relative contributes 5 points on grumpiness.
+
+```{=tex}
+\begin{align}
+& disagreeableness = \beta_0 + \beta_1 \times age + \beta_2relatives\\
+& disagreeableness = 0 + 0.25 \times age + 5 \times relatives
+\end{align}
+```
+
+## In R
+
+```{r}
+disagreeableness <- 0 + 0.25*age + 5*relatives + error
+summary(lm(disagreeableness ~ age + relatives))
+```
+
+## That's the data generating process
+
+In our simulation, we yet again make our assumptions explicit about how the data are generated: According to this linear model and our inputs (aka numbers). Error adds uncertainty to our data generating process. It specifies that our linear model doesn't 100% explain the causal structures and that there are influences on our outcome that we haven't accounted for.
+
+## About that intercept
+
+$disagreeableness = \beta_0 + \beta_1 \times age + \beta_2relatives$
+
+Now the intercept is disagreeableness when **both** age and number of relatives are 0. Maybe 0 age doesn't make a lot of sense, so let's center that variable.
+
+Now the meaning intercept changes: Disagreeableness at average age and 0 relatives living close-by. Easier to have an intuition for.
+
+## In R
+
+The effect for age doesn't change, but the interpretation of the intercept does: Now it's the disagreeableness when there's no relatives and average age.
+
+```{r}
+centered_age <- scale(age, center = TRUE, scale = FALSE)
+
+summary(lm(disagreeableness ~ centered_age + relatives))
+```
+
+## Simulate power
+
+```{r}
+n <- 100
+effect <- 0.10
+runs <- 1000
+
+pvalues <- NULL
+
+for (i in 1:runs) {
+  
+  age <- rnorm(n, 50, 20)
+  centered_age <- scale(age, center = TRUE, scale = FALSE)
+  error <- rnorm(n, 0, 10)
+  
+  disagreeableness <- 50 + effect*centered_age + error
+  
+  disagreeableness <- ifelse(disagreeableness > 100, 100, disagreeableness)
+  disagreeableness <- ifelse(disagreeableness < 0, 0, disagreeableness)
+  
+  m <- summary(lm(disagreeableness ~ centered_age))
+  
+  pvalues[i] <- broom::glance(m)$p.value
+}
+
+sum(pvalues < 0.05) / length(pvalues)
+```
+
+## Standardized effects?
+
+What if we want to work with standardized effects? Remember that a standardized effect is just an expression of standard deviation units? So we can standardize our variables and voila: $r$.
+
+```{r}
+age <- rnorm(100, 50, 20)
+disagreeableness <- 0 + 0.25*age + rnorm(100, 0, 10)
+
+
+stan_age <- scale(age)
+stan_dis <- scale(disagreeableness)
+```
+
+## Let's compare
+
+```{r}
+cor(age, disagreeableness)
+summary(lm(stan_dis ~ stan_age))
+```
+
+## Not super clean
+
+This doesn't give us a lot of control over the standardized effect size. How about we just start off with standardized variables? If we want $r$ = 0.20, we can do that as follows:
+
+```{r}
+n <- 1e4
+
+stan_age <- rnorm(n, 0, 1)
+stan_dis <- 0 + 0.2*stan_age + rnorm(n, 0, 0.3)
+```
+
+## $r$ = 0.20?
+
+```{r}
+summary(lm(stan_dis ~ stan_age))
+```
+
+
+## Wait a second
+
+Why isn't the effect as we specified?
+
+```{r}
+cor(stan_dis, stan_age)
+```
+
+## Because we didn't standardize
+
+We created the standardized version of disagreeableness with 
+
+
+```{r}
+#| eval: false
+stan_dis <- 0 + 0.2*stan_age + rnorm(n, 0, 0.3)
+```
+
+That means the variable isn't actually standardized:
+
+```{r}
+mean(stan_dis); sd(stan_dis)
+```
+
+## How do we fix this?
+
+Luckily, we encountered a way to simulate variables, including their means, standard deviations, and correlations: The variance-covariance matrix. Now, we just make sure the means are 0 and standard deviations are 1.
+
+```{r}
+sd <- 1
+correlation <- 0.2
+covariance <- correlation * sd * sd
+
+sigma <- 
+  matrix(
+    c(
+      sd**2, covariance,
+      covariance, sd**2
+    )
+  )
+```
+
+## Correlation matrix
+
+$$
+\begin{bmatrix} 
+var  & cov \\ 
+cov & var \\ 
+\end{bmatrix}
+$$
+
+$$
+\begin{bmatrix} 
+sd^2  & r\times sd \times sd \\ 
+r\times sd \times sd & sd^2 \\ 
+\end{bmatrix}
+$$
+
+$$
+\begin{bmatrix} 
+1^2  & 0.2\times 1 \times 1 \\ 
+0.2\times 1 \times 1 & 1^2 \\ 
+\end{bmatrix}
+$$
+
+$$
+\begin{bmatrix} 
+1 & 0.2 \\ 
+0.2 & 1 \\ 
+\end{bmatrix}
+$$
+
+## Let's simulate that
+
+```{r}
+library(MASS)
+
+means <- c(age = 0, disagreeableness = 0)
+
+sigma <- 
+  matrix(
+    c(1, correlation, 
+      correlation, 1),
+    ncol = 2
+  )
+
+d <- mvrnorm(
+  n,
+  means,
+  sigma
+)
+
+d <- as.data.frame(d)
+
+cor(d$age, d$disagreeableness)
+```
+
+## What if we want both?
+
+So now we know how to:
+
+- Specify an outcome on the raw scale, but we sort of eyeball the error
+- Specify both predictor and outcome on the standardized scale, full control over means, SDs, but we prefer unstandardized
+
+How do we specify a an effect on the raw scale, but use the multivariate normal distribution? Remember the formula for $r$?
+
+$r = B_{xy} \frac{\sigma_x}{\sigma_Y}$
+
+## Just plug in the number then
+
+Say we want a raw effect of age on disagreeableness of 0.5 points. We want age to have a mean of 50 and an SD of 20. We want disagreeableness to have a mean of 60 and an SD of 15. Let's use the raw score and SDs first.
+
+```{=tex}
+\begin{algin}
+& r = B_{xy} \frac{\sigma_x}{\sigma_Y}\\
+& r = 0.5 \frac{20}{10}
+\end{align}
+```
+
+```{r}
+sd_age <- 20
+sd_dis <- 15
+effect <- 0.5
+
+r <- effect * sd_age/sd_dis
+```
+
+## Then we get the covariances
+
+Now that we have our correlation, we can get the covariates and fill everything into our variance covariance matrix.
+
+```{r}
+covariance <- r * sd_age * sd_dis
+
+sigma <- 
+  matrix(
+    c(
+      sd_age**2, covariance,
+      covariance, sd_dis**2
+    ),
+    ncol = 2
+  )
+```
+
+## Get some data
+
+Now all we need are some means, and we're good to go.
+
+```{r}
+means <- c(age = 50, disagreeableness = 60)
+
+d <- mvrnorm(
+  n,
+  means,
+  sigma
+)
+
+d <- as.data.frame(d)
+```
+
+## Let's check it all worked
+
+Can we recover our raw effect of 0.5?
+
+```{r}
+summary(lm(disagreeableness ~ age, d))
+```
+
+## Standardized effect size
+
+$r = B_{xy} \frac{\sigma_x}{\sigma_Y}$
+
+```{r}
+b <- coef(summary(lm(disagreeableness ~ age, d)))[2]
+
+b * sd(d$age)/sd(d$disagreeableness)
+cor(d$age, d$disagreeableness)
+```
+
+## A word on getting that $r$
+
+$r = B_{xy} \frac{\sigma_x}{\sigma_Y}$
+
+What if we had specified an SD of 20 for age ($x$) and an SD of 5 for disagreeableness ($y$)?
+
+```{r}
+0.5 * 20/5
+```
+
+But $r$ can't be larger than 1--what's going on??
+
+## Data generating process creates limits
+
+When we determine the "raw" regression slope, we also determine the causal structure. In other words: If we say Y is caused by X, the SD of Y will be dependent on the SD of X.
+
+Perfect correlation: SD is exactly half.
+
+```{r}
+x <- rnorm(n, 50, 20)
+y <- 0.5*x
+
+sd(x); sd(y)
+```
+
+## Maximum correlation
+
+```{r}
+summary(lm(y ~ x))
+```
+
+## Maximum correlation
+
+Now if we use the formula, we can get the maximum correlation of 1 because one SD is exactly half of the other SD.
+
+```{r}
+b <- coef(lm(y~x))[2]
+b
+```
+
+```{r}
+b * sd(x)/sd(y)
+cor(x,y)
+```
+
+## Let's add some error
+
+```{r}
+x <- rnorm(n, 50, 20)
+y <- 0.5*x + rnorm(n, 0, 50)
+
+sd(x); sd(y)
+```
+
+## Now our correlation is lower
+
+```{r}
+b <- coef(lm(y~x))[2]
+b
+```
+
+```{r}
+b * sd(x)/sd(y)
+cor(x,y)
+```
+
+## Bottom line
+
+If you're saying that one variable is caused by another, you're not free to choose the variation of the outcome variable. The variation is a result of the data generating process and you're determining what the data generating process is with your linear model. For our example, with this raw slops of 0.5, the smallest SD we can choose for the outcome is half that of the cause.
+
+## Bottom line
+
+In other words, by determining the effect size and SD of the cause, you're setting bounds on the range and SD of the outcome. You need to take that into account when simulating data: What's a sensible raw effect size in relation to both the scale of the cause and the effect?
+
+## Likert setup
+
+Let's say both predictor and outcome are on a 7-point Likert-scale. You think that both should be roughly on the mid-point with a 1.2-point SD for predictor and 0.9 for outcome. As a raw effect, you assume 0.3 points as your SESOI. Do those SDs make sense? Would they produce a sensible $r$?
+
+```{r}
+0.3 * 1.2/0.9
+```
+
+## Power
+
+```{r}
+means <- c(x = 4, y = 4)
+sd_x <- 1.2
+sd_y <- 0.9
+sesoi <- 0.3
+r <- sesoi * sd_x/sd_y
+covariance <- r * sd_x * sd_y
+n <- 50
+runs <- 500
+
+sigma <- 
+  matrix(
+    c(sd_x**2, covariance,
+      covariance, sd_y),
+    ncol = 2
+  )
+
+pvalues <- NULL
+
+for (i in 1:runs) {
+  
+  d <- mvrnorm(
+    n,
+    means,
+    sigma
+  )
+  
+  d <- as.data.frame(d)
+  
+  pvalues[i] <- broom::glance(summary((lm(y ~ x, d))))$p.value
+}
+
+sum(pvalues < 0.05) / length(pvalues)
+```
+
+## More than one cause
+
+If we have more than one predictor, we need to specify effect sizes for each. Also, we need to be clear what our causal model is: We're saying that both predictors are independently influencing our outcome. Otherwise we commit the [Table II fallacy](https://academic.oup.com/aje/article/177/4/292/147738). Simulating data also means simulating the causal structure.
+
+## What power?
+
+If we want to simulate power for multiple predictors, powering for $R^2$ is possible, but strange: It means powering for the total effect of all predictors. Just like with group differences, powering for a total effect can mean many underlying patterns: 
+
+- $x_1$ explaining everything, but $x_2$ and $x_3$ explaining nothing
+- $x_1$ and $x_2$ both explaining a moderate amount, but $x_3$ explaining nothing
+- All 3 explaining a little
+- Etc.
+
+## What we need
+
+Ideally, we power for **all effects**, meaning the smallest independent effect:
+
+- Slope for each predictor
+- Correlation between each predictor
+- Correlation between each predictor and the outcome
+- All means and SDs
+
+How to simulate power for multiple causes? Next exercise.
+
+## Categorical by continuous interactions
+
+An interaction between a categorical and a continuous variable states that the effect of one depends on the other. Back to the linear model:
+
+$$
+y = \beta_0 + \beta_1x_1 + \beta_2x_2 + \beta_3x_1x_2
+$$
+
+In effect, we ask what information increasing both predictors adds to increasing them individually.
+
+## Example
+
+Say we want to know the effect of framing of a message (positive vs. neutral) on how much people agree with it, but we expect the effect to depend on how much people like positive framing. 
+
+## Pictures, plase
+
+Therefore, we expect the effect to look something like this, if we were to plot means per group and liking:
+
+```{r}
+#| echo: false
+
+library(tidyverse)
+set.seed(42)
+
+n <- 7
+
+d <- 
+  tibble(
+    id = rep(1:n, each = 2),
+    condition = rep(0:1, n),
+    liking = rep(1:n, each = 2),
+    agree = 3.5 + 0.3 * liking + 0*condition + 20*condition*liking
+  ) %>% 
+  mutate(condition = as.factor(if_else(condition==0, "neutral", "positive")))
+
+ggplot(
+  d,
+  aes(x = condition, agree, group = id, color = liking)
+) +
+  geom_point() +
+  geom_line() +
+  theme_bw() +
+  theme(
+    axis.text.y = element_blank(),
+    axis.ticks.y = element_blank()
+  )
+```
+
+## How to translate
+
+$$
+y = \beta_0 + \beta_1condition + \beta_2liking + \beta_3 \times condition \times liking
+$$
+
+- $\beta_0$: The outcome when condition is neutral and liking is 0
+- $\beta_1$: Difference between condition neutral and liking 0 and condition positive and liking 0 (aka main effect of condition)
+- $\beta_2$: Difference between condition neutral and liking 0 and condition neutral and liking 1 (aka main effect liking)
+- $\beta_3$: In addition to the condition effect, what does going up in liking by 1 add (or subtract) from the outcome?
+
+## Let's create those scores
+
+Let's say we measure agreement on a 100-point scale. We make several assumptions:
+
+- There's probably no main effect of liking: Why would how much you like a positive message influence the effect of any message? It should only enhance the positive one.
+- We'll center liking: It makes it easier to think about what our coefficients mean.
+- Let's say at average liking (0 = centered), agreement is on the mid-point of the scale: 50
+- We expect a positive message to "work" at average liking, so we put down a main effect of 5 points as our SESOI
+- We expect that going up 1 point on liking will enhance our framing effect by 1 point
+
+## Put into numbers
+
+```{=tex}
+\begin{align}
+& y = \beta_0 + \beta_1x_1 + \beta_2x_2 + \beta_3x_1x_2\\
+& y = 50 + 5 \times condition + 0 \times liking + 1 \times condition \times liking
+\end{align}
+```
+
+- $\beta_0$: The outcome when condition is neutral and liking is 0: 50
+- $\beta_1$: Difference between condition neutral and liking 0 and condition positive and liking 0 (aka main effect of condition): 5
+- $\beta_2$: Difference between condition neutral and liking 0 and condition neutral and liking 1 (aka main effect liking): 0
+- $\beta_3$: In addition to the condition effect, what does going up in liking by 1 add (or subtract) from the outcome?: 1
+
+## In R
+
+```{r}
+set.seed(42)
+
+b0 <- 50
+b1 <- 5
+b2 <- 0
+b3 <- 1
+n <- 1e4
+error <- rnorm(n*2, 0, 20)
+
+condition <- rep(0:1, n)
+liking <- runif(n*2, min = 0, max = 7)
+liking <- scale(liking, center = TRUE, scale = FALSE)
+
+d <- 
+  data.frame(
+    condition = condition,
+    liking = liking,
+    agree = b0 + b1 * condition + b2 * liking + b3 * condition * liking + error
+  )
+
+d$condition <- as.factor(ifelse(d$condition == 0, "neutral", "positive"))
+d$agree <- ifelse(d$agree > 100, 100, d$agree)
+d$agree <- ifelse(d$agree < 0, 0, d$agree)
+```
+
+## Let's find our numbers
+
+```{r}
+summary(lm(agree ~ condition*liking, d))
+```
+
+## Pictures, please
+
+```{r}
+#| echo: false
+
+d_sum <-  
+  d %>% 
+  mutate(
+    liking_cuts = factor(case_when(
+      liking < (mean(d$liking) - sd(d$liking)) ~ "<-1SD",
+      liking > (mean(d$liking) + sd(d$liking)) ~ ">1SD",
+      TRUE ~ ">-1SD<1SD"
+    ))
+  ) %>% 
+  group_by(condition, liking_cuts) %>% 
+  summarise(agree = mean(agree))
+
+library(ggbeeswarm)
+
+ggplot(d, aes(condition, agree)) +
+  geom_quasirandom(color = "lightgrey") +
+  geom_point(
+    data = d_sum,
+    aes(color = liking_cuts)
+  ) +
+  geom_line(
+    data = d_sum,
+    aes(color = liking_cuts, group = liking_cuts)
+  ) +
+  theme_bw()
+```
+
+## Two-way interaction
+
+The interaction can also go way the other way around: The effect of A under B or the effect of B under A. In our case, we could also ask how the effect of liking a message is modified through framing. Same data, different plot:
+
+```{r}
+#| echo: false
+
+ggplot(d, aes(x = liking, y = agree, color = condition)) +
+  geom_point(alpha = 0.05) + 
+  geom_smooth(method = "lm") +
+  theme_bw()
+```
+
+## Let's redo the logic
+
+```{r}
+set.seed(42)
+
+b0 <- 50
+b1 <- 0 # no main effect of condition
+b2 <- 2 # main effect of liking
+b3 <- 3 # interaction
+n <- 1e4
+error <- rnorm(n*2, 0, 5)
+
+condition <- rep(0:1, n)
+liking <- runif(n*2, min = 0, max = 7)
+liking <- scale(liking, center = TRUE, scale = FALSE)
+
+d <- 
+  data.frame(
+    condition = condition,
+    liking = liking,
+    agree = b0 + b1 * condition + b2 * liking + b3 * condition * liking + error
+  )
+
+d$condition <- as.factor(ifelse(d$condition == 0, "neutral", "positive"))
+d$agree <- ifelse(d$agree > 100, 100, d$agree)
+d$agree <- ifelse(d$agree < 0, 0, d$agree)
+```
+
+## Now we're looking at slopes
+
+```{r}
+#| echo: false
+
+ggplot(d, aes(x = liking, y = agree, color = condition)) +
+  geom_point(alpha = 0.05) + 
+  geom_smooth(method = "lm") +
+  theme_bw()
+```
+
+## Alternative way of thinking about it
+
+Let's go back to our original example. At average liking, there'll be a 5-point difference. What's the maximum effect we can expect? If someone scores 7/7 on liking. Because we centered (and the mean was 3.5), that means someone who scores 3.5 above 0.
+
+So the maximum effect is 5 (main effect) + 3.5 * 1 (interaction effect) = 8.5 points difference. The minimum effect is 5 - 3.5 = 1.5 points. The maximum range, therefore, is 7 points.
+
+## Continuous interactions
+
+Same logic as before: What extra information do we gain if we go up on both variables compared to going up on them individually?
+
+$y = \beta_0 + \beta_1x_1 + \beta_2x_2 + \beta_3x_1x_2$
+
+## Example
+
+Say we want to know the effect of liking a message sender on agreeing with the sender's message. However, we expect the effect to depend on how trustworthy the sender is.
+
+## Pictures, plase
+
+We expect the effect to look something like this, if we were to plot a line per trustworthiness rating:
+
+```{r}
+#| echo: false
+set.seed(42)
+
+n <- 1e4
+
+d <- 
+  tibble(
+    id = rep(1:n),
+    liking = rnorm(n, 3.5, 1),
+    trustworthiness = rnorm(n, 3.5, 1),
+    agree = 3.5 + 0.3 * liking + 0.3 * trustworthiness + 0.1*liking*trustworthiness
+  )
+
+ggplot(
+  d,
+  aes(x = liking, agree, group = id, color = trustworthiness)
+) +
+  geom_point() +
+  geom_smooth(data = d %>% mutate(trustworthiness = as.integer(trustworthiness)), aes(group = trustworthiness), method = "lm") +
+  theme_bw() +
+  theme(
+    axis.text.y = element_blank(),
+    axis.ticks.y = element_blank()
+  )
+```
+
+## How to translate
+
+$$
+y = \beta_0 + \beta_1liking + \beta_2trust + \beta_3 \times liking \times trust
+$$
+Both predictors are centered, so 0 is their mean:
+
+- $\beta_0$: The outcome when both liking and trustworthiness are 0 (at their means)
+- $\beta_1$: Outcome when liking goes 1 up, but trustworthiness remains at average (= 0) (aka main effect of liking)
+- $\beta_2$: Outcome when trustworthiness goes 1 up, but liking remains at average (= 0) (aka the main effect of trustworthiness)
+- $\beta_3$: In addition to the effect of liking going up 1, what does going up in trustworthiness by 1 add (or subtract) from the outcome?
+
+## Let's create those scores
+
+Once more, we measure agreement on a 100-point scale. We make several assumptions:
+
+- We'll center both predictors: It makes it easier to think about the interaction.
+- At average liking and trustworthiness (0 = centered), agreement is on the mid-point of the scale: 50
+- There's a main effect of liking: With each extra point (at average trustworthiness), agreement should go up by 3 points.
+- There's a main effect of trustworthiness: With each extra point (at average liking), agreement should go up by 2 points.
+- We expect that going up on trustworthiness will enhance our framing liking effect by 2 points
+
+## Put into numbers
+
+```{=tex}
+\begin{align}
+& y = \beta_0 + \beta_1x_1 + \beta_2x_2 + \beta_3x_1x_2\\
+& y = 50 + 3 \times liking + 2 \times trust + 2 \times liking \times trust
+\end{align}
+```
+
+- $\beta_0$: The outcome when both liking and trustworthiness are 0: 50
+- $\beta_1$: Outcome when liking goes 1 up, but trustworthiness remains at average: +3
+- $\beta_2$: Outcome when trustworthiness goes 1 up, but liking remains at average: +2
+- $\beta_3$: In addition to the effect of liking going up 1, also going up in trustworthiness 1 adds to the outcome: 2
+
+## In R
+
+```{r}
+set.seed(42)
+
+b0 <- 50
+b1 <- 3
+b2 <- 2
+b3 <- 2
+n <- 1e4
+error <- rnorm(n, 0, 20)
+
+liking <- runif(n, 0, 7)
+trustworthiness <- runif(n, 0, 7)
+liking <- scale(liking, center = TRUE, scale = FALSE)
+trustworthiness <- scale(trustworthiness, center = TRUE, scale = FALSE)
+
+d <- 
+  data.frame(
+    liking = liking,
+    trustworthiness = trustworthiness,
+    agree = b0 + b1 * liking + b2 * trustworthiness + b3 * liking * trustworthiness + error
+  )
+
+d$agree <- ifelse(d$agree > 100, 100, d$agree)
+d$agree <- ifelse(d$agree < 0, 0, d$agree)
+```
+
+## Let's find our numbers
+
+```{r}
+summary(lm(agree ~ liking*trustworthiness, d))
+```
+
+## Pictures, plesase
+
+```{r}
+#| echo: false
+
+ggplot(
+  d %>% mutate(id = 1:n),
+  aes(x = liking, agree, color = trustworthiness)
+) +
+  geom_point(alpha = 1) +
+  geom_smooth(data = d %>% mutate(trustworthiness = as.integer(trustworthiness)), aes(group = trustworthiness), method = "lm") +
+  theme_bw() +
+  theme(
+    axis.text.y = element_blank(),
+    axis.ticks.y = element_blank()
+  )
+```
+
+## Interaction plots
+
+In the above plot, I cheated a bit by rounding trustworthiness so that we can get only 7 "levels". With truly continuous variables, we usually operate with standard deviations: What's the effect of liking on agreeing when trustworthiness is 1 SD above or below its mean? You can create those plots yourself or rely on other [packages](https://cran.r-project.org/web/packages/interactions/vignettes/interactions.html).
+
+## Prediction plots
+
+```{r}
+m <- lm(agree ~ liking*trustworthiness, d)
+
+interactions::interact_plot(m, pred = "liking", modx = "trustworthiness")
+```
+
+## From the matrix
+
+$y = \beta_0 + \beta_1x_1 + \beta_2x_2 + \beta_3x_1x_2$
+
+The interaction term is really just a product, so we can treat it as its own variable. We can simply create a correlation matrix where we specify how the product of two variables (aka $x_1 \times x_2$) should correlate to our outcome.
+
+$$
+\begin{bmatrix} 
+& x_1 & x_2 & x_1x_2 & y \\
+x_1 & 1 & & & \\
+x_2 & r & 1 & &\\
+x_1x_2 & r & r & 1 &\\
+y & r & r& r& 1
+\end{bmatrix}
+$$
+
+## Putting that into numbers
+
+Let's say liking is correlated to agreeing with 0.2, trustworthiness with 0.25, and the interaction "adds" 0.1 standard deviations. The interaction is correlated to liking and trustworthiness with 0. Liking and trustworthiness are correlated at 0.4.
+
+$$
+\begin{bmatrix} 
+& x_1 & x_2 & x_1x_2 & y \\
+x_1 & 1 & & & \\
+x_2 & 0.4 & 1 & &\\
+x_1x_2 & 0 & 0 & 1 &\\
+y & 0.2 & 0.25 & 0.1 & 1
+\end{bmatrix}
+$$
+
+## In R
+
+```{r}
+library(MASS)
+
+means <- c(x1 = 0, x2 = 0, x1x2 = 0, y = 0)
+
+sigma <- 
+  matrix(
+    c(
+    1, 0.4, 0, 0.2,
+    0.4, 1, 0, 0.25,
+    0, 0, 1, 0.1,
+    0.2, 0.25, 0.1, 1
+  ),
+  ncol = 4
+  )
+
+d <- 
+  mvrnorm(
+    1e4,
+    means,
+    sigma
+  )
+
+d <- as.data.frame(d)
+```
+
+## Let's find our numbers
+
+```{r}
+cor(d)
+```
+
+## Summary
+
+Remember: Those are conditional effects, not just 1-to-1 correlations.
+
+```{r}
+summary(lm(y ~ x1 + x2 + x1x2, d))
+```
+
+## What about raw?
+
+If we want to work on the raw scale, we once more need the standard deviations. We could do the transformation per variable variable pairing, but that gets very unwieldy. At this point, you'd need to do some matrix multiplication, see [here](https://stats.stackexchange.com/questions/62850/obtaining-covariance-matrix-from-correlation-matrix) for a starter.
+
+# Takeaways
+
+- Understand that continuous predictors are just another case of the linear model
+- Extend this understanding to continuous (by categorical) interactions
+- Be able to translate that extension to generating data
