@@ -417,14 +417,14 @@
     "href": "content/03-simulations-in-r/03-exercise.html#block-1",
     "title": "Exercise I",
     "section": "0.1 Block 1",
-    "text": "0.1 Block 1\n\n0.1.1 Exercise\nYou have three groups. Name the groups, randomly sample ten cases (total), and then create a simple data frame that contains a variable for the group called condition.\n\ngroups <- letters[1:3]\nmy_sample <- sample(groups, 10, TRUE)\nd <- data.frame(condition = as.factor(my_sample))\n\n\n\n0.1.2 Exercise\nSame three groups. This time you want each case to have a 70% to be in the first group, a 20% to be in the second group, and a 10% to be in the third group. Get 100 participants (no need for a data frame). Use set.seed(1). How many are in the first group?\n\nset.seed(1)\ngroups <- letters[1:3]\nmy_sample <- \n  sample(\n    groups,\n    100,\n    TRUE,\n    prob = c(0.7, 0.2, 0.1)\n  )\nsum(my_sample==groups[1])\n\n[1] 68\n\n\n\n\n0.1.3 Exercise\nShow that sample with assigned probability (prob = argument) is the same as rbinom. Conduct 10 coin flips with a an unfair coin that has a 60% of landing heads. Remember to set a seed (tip: twice).\n\nset.seed(1)\nsample(0:1, 10, replace = TRUE, prob = c(0.4, 0.6))\n\n [1] 1 1 1 0 1 0 0 0 0 1\n\nset.seed(1)\nrbinom(10, 1, 0.6)\n\n [1] 1 1 1 0 1 0 0 0 0 1\n\n\n\n\n0.1.4 Exercise\nDraw random letters from the alphabet until the alphabet is empty.\n\nsample(letters, length(letters))\n\n [1] \"s\" \"a\" \"u\" \"x\" \"j\" \"n\" \"v\" \"g\" \"i\" \"o\" \"e\" \"p\" \"r\" \"w\" \"q\" \"l\" \"b\" \"m\" \"d\"\n[20] \"z\" \"y\" \"h\" \"c\" \"t\" \"k\" \"f\"\n\n\n\n\n0.1.5 Exercise\nDraw all letters from the alphabet and explicitly assign the same probability for each letter (tip: repeat the same probability).\n\nprobs <- rep(1/length(letters), length(letters))\nsample(letters, prob = probs)\n\n [1] \"r\" \"v\" \"o\" \"n\" \"w\" \"b\" \"l\" \"t\" \"s\" \"k\" \"y\" \"i\" \"f\" \"c\" \"e\" \"j\" \"q\" \"u\" \"m\"\n[20] \"a\" \"g\" \"p\" \"h\" \"x\" \"d\" \"z\"\n\n\n\n\n0.1.6 Exercise\nCreate a data set. In the data set, each participant has an identifier (called id), a group identifier (condition), and an identifier what number of measurement we have for this participant (trial). There are 3 participants in each of three groups with 5 trials in each group.\n\ngroups <- letters[1:3]\nparticipants <- length(groups) * 3\ntrials <- 5\n\nd <- \n  data.frame(\n    id = rep(1:participants, each = trials),\n    condition = rep(groups, each = trials, times = 3),\n    trial = rep(1:trials, times = participants)\n  )\n\nd\n\n   id condition trial\n1   1         a     1\n2   1         a     2\n3   1         a     3\n4   1         a     4\n5   1         a     5\n6   2         b     1\n7   2         b     2\n8   2         b     3\n9   2         b     4\n10  2         b     5\n11  3         c     1\n12  3         c     2\n13  3         c     3\n14  3         c     4\n15  3         c     5\n16  4         a     1\n17  4         a     2\n18  4         a     3\n19  4         a     4\n20  4         a     5\n21  5         b     1\n22  5         b     2\n23  5         b     3\n24  5         b     4\n25  5         b     5\n26  6         c     1\n27  6         c     2\n28  6         c     3\n29  6         c     4\n30  6         c     5\n31  7         a     1\n32  7         a     2\n33  7         a     3\n34  7         a     4\n35  7         a     5\n36  8         b     1\n37  8         b     2\n38  8         b     3\n39  8         b     4\n40  8         b     5\n41  9         c     1\n42  9         c     2\n43  9         c     3\n44  9         c     4\n45  9         c     5\n\n\n\n\n0.1.7 Exercise\nYou have two groups, a control and a treatment group. In each group, there are 10 participants. Each participant flips a coin 10 times. The control group has a fair coin: 50% heads. The treatment group has an unfair coin: 70% heads. Create a data frame with a participant identifier (id), group membership (condition), and a total head count for that participant (heads). Check that the two groups indeed have different means on the number of heads (roughly corresponding to the two probabilities)\n\ngroups <- c(\"control\", \"treatment\")\nn <- 20\nflips <- 10\nfair <- 0.5\nunfair <- 0.7\nprobs <- rep(c(fair, unfair), each = n/2)\n\n\nd <- \n  data.frame(\n    id = 1:20,\n    condition = rep(groups, each = n/2),\n    heads = rbinom(n, flips, prob = probs)\n  )\n\naggregate(d$heads, by = list(d$condition), mean)\n\n    Group.1   x\n1   control 5.4\n2 treatment 6.5\n\n\n\n\n0.1.8 Exercise\nYou have 100 participants. Each participants reports their age which lies uniformly between 20 and 40. They also report grumpiness on a 100-point scale (with a 10-point SD). Each extra year predicts 0.5 higher grumpiness. Create the two variables (no need for a data frame) and conduct a correlation with cor. What’s the correlation?\n\nn <- 100\nage <- runif(n, 20, 40)\ngrumpiness <- age*0.5 + rnorm(n, 100, 10)\ncor(age, grumpiness)\n\n[1] 0.2127516\n\n\n\n\n0.1.9 Exercise\nWe track how many calls you get during this exercise. Nobody calls anymore, so there’ll be very few. Create a data frame with 20 participants, a participant number and the number of calls per participant. Plot the calls and show that 0 is the most common value.\n\nn <- 20\n\nd <- data.frame(\n  id = 1:n,\n  calls = rpois(n, 0.5)\n)\n\nplot(density(d$calls)) \n\n\n\n\n\n\n0.1.10 Exercise\nProfessors get more calls. Add 20 more participants who have much higher call numbers. Also include a condition variable that marks whether participants are students (first 20 people) or professors (new 20 people). Conduct an independent sample t-test (t.test) and also plot the different groups as a boxplot.\n\nd <- rbind(\n  d,\n    data.frame(\n    id = n+1:2*n,\n    calls = rpois(n, 3)\n  )\n)\n\nd$condition <- \n  rep(c(\"students\", \"profs\"), each = 20)\n\nt.test(d$calls ~ d$condition)\n\n\n    Welch Two Sample t-test\n\ndata:  d$calls by d$condition\nt = 5.8023, df = 26.202, p-value = 3.989e-06\nalternative hypothesis: true difference in means between group profs and group students is not equal to 0\n95 percent confidence interval:\n 1.679272 3.520728\nsample estimates:\n   mean in group profs mean in group students \n                  3.25                   0.65 \n\nboxplot(d$calls ~ d$condition)"
+    "text": "0.1 Block 1\n\n0.1.1 Exercise\nYou have three groups. Name the groups, randomly sample ten cases (total), and then create a simple data frame that contains a variable for the group called condition.\n\n\n\n\n\n0.1.2 Exercise\nSame three groups. This time you want each case to have a 70% to be in the first group, a 20% to be in the second group, and a 10% to be in the third group. Get 100 participants (no need for a data frame). Use set.seed(1). How many are in the first group?\n\n\n\n\n\n0.1.3 Exercise\nShow that sample with assigned probability (prob = argument) is the same as rbinom. Conduct 10 coin flips with a an unfair coin that has a 60% of landing heads. Remember to set a seed (tip: twice).\n\n\n\n\n\n0.1.4 Exercise\nDraw random letters from the alphabet until the alphabet is empty.\n\n\n\n\n\n0.1.5 Exercise\nDraw all letters from the alphabet and explicitly assign the same probability for each letter (tip: repeat the same probability).\n\n\n\n\n\n0.1.6 Exercise\nCreate a data set. In the data set, each participant has an identifier (called id), a group identifier (condition), and an identifier what number of measurement we have for this participant (trial). There are 3 participants in each of three groups with 5 trials in each group.\n\n\n\n\n\n0.1.7 Exercise\nYou have two groups, a control and a treatment group. In each group, there are 10 participants. Each participant flips a coin 10 times. The control group has a fair coin: 50% heads. The treatment group has an unfair coin: 70% heads. Create a data frame with a participant identifier (id), group membership (condition), and a total head count for that participant (heads). Check that the two groups indeed have different means on the number of heads (roughly corresponding to the two probabilities)\n\n\n\n\n\n0.1.8 Exercise\nYou have 100 participants. Each participants reports their age which lies uniformly between 20 and 40. They also report grumpiness on a 100-point scale (with a 10-point SD). Each extra year predicts 0.5 higher grumpiness. Create the two variables (no need for a data frame) and conduct a correlation with cor. What’s the correlation?\n\n\n\n\n\n0.1.9 Exercise\nWe track how many calls you get during this exercise. Nobody calls anymore, so there’ll be very few. Create a data frame with 20 participants, a participant number and the number of calls per participant. Plot the calls and show that 0 is the most common value.\n\n\n\n\n\n0.1.10 Exercise\nProfessors get more calls. Add 20 more participants who have much higher call numbers. Also include a condition variable that marks whether participants are students (first 20 people) or professors (new 20 people). Conduct an independent sample t-test (t.test) and also plot the different groups as a boxplot."
   },
   {
     "objectID": "content/03-simulations-in-r/03-exercise.html#block-2",
     "href": "content/03-simulations-in-r/03-exercise.html#block-2",
     "title": "Exercise I",
     "section": "0.2 Block 2",
-    "text": "0.2 Block 2\nIn this section, you’ll use the basics from above to perform your first power analysis. You’ll apply repeated simulations over a range of values and extracting and storing results to summarize them.\n\n0.2.1 Exercise\nThere are four groups. Each group comes from a different normal distribution. The means are c(100, 105, 107, 109). The SDs are c(9, 12, 10, 17). Each group should be 20 cases. Store everything in a data frame and have a variable that indicates the group. Tip: Remember that R uses vectors, even for arguments in a function.\n\nmeans <- c(100, 105, 107, 109)\nsds <- c(9, 12, 10, 17)\nn <- 20\n\nd <- \n  data.frame(\n    group = rep(c(letters[1:4]), times = n),\n    score = rnorm(n*4, means, sds)\n  )\n\n\n\n0.2.2 Exercise\nYou need 5 samples. Each sample contains 10 unique letters from the alphabet. (Use replicate.)\n\nreplicate(5, sample(letters, 10))\n\n      [,1] [,2] [,3] [,4] [,5]\n [1,] \"o\"  \"u\"  \"p\"  \"l\"  \"e\" \n [2,] \"p\"  \"e\"  \"g\"  \"j\"  \"w\" \n [3,] \"q\"  \"l\"  \"z\"  \"a\"  \"f\" \n [4,] \"s\"  \"c\"  \"q\"  \"f\"  \"s\" \n [5,] \"n\"  \"r\"  \"k\"  \"q\"  \"t\" \n [6,] \"f\"  \"n\"  \"i\"  \"m\"  \"l\" \n [7,] \"k\"  \"m\"  \"h\"  \"b\"  \"c\" \n [8,] \"h\"  \"o\"  \"m\"  \"o\"  \"d\" \n [9,] \"e\"  \"b\"  \"f\"  \"d\"  \"o\" \n[10,] \"b\"  \"t\"  \"x\"  \"z\"  \"n\" \n\n\n\n\n0.2.3 Exercise\nSame as before, but this time you need 10 samples from a normal distribution with a mean of 10 and an SD of 2. Use replicate first, then a for loop.\n\nreplicate(5, rnorm(10, 10, 2))\n\n           [,1]      [,2]      [,3]      [,4]      [,5]\n [1,] 10.629034 10.077856 10.916251 11.087316  8.782663\n [2,] 10.444436 10.029294  7.095943 12.082121  9.397606\n [3,]  8.312769  9.627366 10.154685 10.395012 11.952405\n [4,] 10.887611 12.801182 11.119791  6.740843 10.912017\n [5,] 10.111594 10.036971  9.850107 10.242080 12.588816\n [6,] 10.135945 10.498392 11.565395  6.725156  7.733596\n [7,]  9.596077 10.298441  9.654663  8.937914  8.261079\n [8,]  7.683969  8.073534  7.897412 11.907360  8.490059\n [9,]  8.814513  9.867066 11.458903  6.558699  9.740729\n[10,] 11.532131 12.573844 10.525330 10.212641  7.996397\n\nfor (i in 1:5) {\n  print(rnorm(10, 10, 2))\n}\n\n [1]  8.360263  8.050895 11.208619 11.097575 11.832865 15.323133  9.639486\n [8] 11.370030 16.532829 11.121201\n [1]  9.861965  8.055114  8.906827  6.622615  6.855255  9.190026 10.638573\n [8] 10.080855  9.219981  6.361556\n [1] 11.318361 10.919243 13.233253  6.287619  9.426352 13.500644 10.232827\n [8] 12.768506 11.148442 10.272982\n [1] 11.828432  6.398347  9.320239 11.212529 12.682261 11.534575 10.387451\n [8] 12.281133 10.027730  7.789388\n [1]  9.949675  9.672653 10.740119  9.238351 11.305905 14.122684  6.406710\n [8] 11.168154  8.554494  8.741671\n\n\n\n\n0.2.4 Exercise\nAssume we know the population mean in height (168cm) and its standard deviation (20). Assume we draw 10,000 samples from this distribution. Each sample has 50 participants. The standard deviation of these 10,000 sample means is the standard error.\nSimulate the standard error and compare it to the theoretical value: \\(SE = \\frac{\\sigma}{\\sqrt{n}}\\). (\\(\\sigma\\) is the standard deviation of the population.)\n\nn <- 50\nmu <- 168\nsd <- 20\nse <- sd / sqrt(n)\nmeans <- NULL \ndraws <- 1e5\n\nfor (i in 1:draws) {\n  means[i] <- mean(rnorm(n, mu, sd))\n}\n\ncat(\"The real SE is:\", round(se, digits = 2), \". The simulated SE is:\", round(sd(means), digits = 2), \".\")\n\nThe real SE is: 2.83 . The simulated SE is: 2.83 .\n\n# with replicate\nmeans <- \n  replicate(\n    draws,\n    rnorm(n, mu, sd)\n  )\n\nsd(colMeans(means))\n\n[1] 2.827195\n\n\n\n\n0.2.5 Exercise\nSame population. Draw 1,000 observations for each sample size between 20 and 100. Calculate the standard error for each sample size (like you did above) and plot it against the sample size. (Tip: You’ll need to iterate over two things.)\n\nmu <- 168\nsd <- 20\ndraws <- 1e3\nmin_sample <- 20\nmax_sample <- 100\n\nresults <- \n  data.frame(\n    sample_size = NULL,\n    se = NULL\n  )\n\nfor (i in min_sample:max_sample) {\n  \n  sample_means <- NULL\n  \n  for (j in 1:draws) {\n    sample_means[j] <- mean(rnorm(i, mu, sd))\n  }\n  \n  se <- sd(sample_means)\n  \n  results <- rbind(\n    results,\n    data.frame(\n      sample_size = i,\n      se = se\n    )\n  )\n}\n\nplot(results$sample_size, results$se)\n\n\n\n\n\n\n0.2.6 Exercise\nTurn the above into a function so that you can change the population effect size, SD, number of simulations, and sample size range. The function should also return the plot from above.\n\nsample_against_se <- \n  function(\n    mu = 168,\n    sd = 20,\n    draws = 1e3,\n    min_sample = 20,\n    max_sample = 100\n  ) {\n    results <- \n      data.frame(\n        sample_size = NULL,\n        se = NULL\n      )\n    \n    for (i in min_sample:max_sample) {\n      \n      sample_means <- NULL\n      \n      for (j in 1:draws) {\n        sample_means[j] <- mean(rnorm(i, mu, sd))\n      }\n      \n      se <- sd(sample_means)\n      \n      results <- rbind(\n        results,\n        data.frame(\n          sample_size = i,\n          se = se\n        )\n      )\n    }\n    \n    return(plot(results$sample_size, results$se))\n  }\n\n\n\n0.2.7 Exercise\nTry out the function with two plots: when the population SD is 5 and when you do 10 draws. What changes?\n\nsample_against_se(sd = 5)\n\n\n\nsample_against_se(draws = 10)\n\n\n\n\n\n\n0.2.8 Exercise\nThe average height of men in Spain is 173cm (says Wikipedia). The population standard deviation is probablay around 7cm (source).\nYou draw a sample of men and want to test whether they’re significantly different from that mean (our H0). In fact, these men you have sampled are truly French (175.6cm, our true “effect size”). In other words, can we reject the null hypothesis that these men we sampled come from a different country in favor of our alternative hypothesis that the true population value is greater than the Spanish population mean?\nYou calculate the z-statistic, which is calculated as follows: \\(\\frac{\\bar{X} - \\mu_0}{\\sigma/\\sqrt{N}}\\) This simply tells us how far from the population mean (well, the suspected population mean under the null hypothesis) our sample mean is in terms of standard errors. \\(\\bar{X}\\) is the sample mean, \\(\\mu_0\\) is the population mean under H0, \\(\\sigma\\) is the population standard deviation, and \\(N\\) is the sample size.\nThen we can look up the z-score to see what the probability is to score this high or higher (does that definition ring a bell?). In R, you can simply do that with a built-in function: pnorm(). For example, if we have a z-score of 1.645, our probability of obtaining such a value (or higher) is pnorm(1.645, lower.tail = FALSE) = 0.0499849 – our p-value for a one-sided test.\nWe can simulate the power of our statistical test (in this case, the z-statistic). Take a sample of 30 people from the French population, calculate the z-statistic, it’s p-value, and store the p-value. Do this 1,000 times. Plot the distribution of p-values. What can we conclude about the sample size?\n\n# sample size\nn <- 30\nh0 <- 173 # test against this null\nh1 <- 175.6 # true population  effect\nsd <- 7\nalpha <- 0.05\ndraws <- 1e3\n\npvalues <- NULL\n\nfor (i in 1:draws) {\n  d <- rnorm(n, h1, sd)\n  z <- (mean(d) - h0) / (sd / sqrt(n))\n  pvalues[i] <- pnorm(z, lower.tail = FALSE)\n}\n\nplot(density(pvalues))\n\n\n\n\n\n\n0.2.9 Exercise\nNow calculate the power by calculating the proportion of pvalues that are below 0.05. That’s your power: The proportion of tests that will detect that there’s a true effect. In our case, that effect is a difference of 2.6cm.\n\nsum(pvalues < 0.05)/length(pvalues)\n\n[1] 0.668\n\n\n\n\n0.2.10 Exercise\nNow let’s do what we did before: Put the loop from above inside another loop that iterates over different sample sizes. Then put that all into a function that let’s you set the parameters of interest (sample size range, h0, h1, etc.). Then simulate power (1,000 simulations each) for samples between 30 and 100. Plot the sample size against power.\n\npower_function <- \n  function(\n    h0 = 173,\n    h1 = 175.6,\n    sd = 7,\n    alpha = 0.05,\n    draws = 1e3,\n    min_sample = 30,\n    max_sample = 100\n  ) {\n    results <- \n      data.frame(\n        sample_size = NULL,\n        power = NULL\n      )\n    \n    for (i in min_sample:max_sample) {\n      \n      pvalues <- NULL\n      \n      for (j in 1:draws) {\n        d <- rnorm(i, h1, sd)\n        z <- (mean(d) - h0) / (sd / sqrt(i))\n        pvalues[j] <- pnorm(z, lower.tail = FALSE)\n      }\n      \n      results <- rbind(\n        results,\n        data.frame(\n          sample_size = i,\n          power = sum(pvalues < 0.05)/length(pvalues)\n        )\n      )\n    }\n    \n    return(plot(results$sample_size, results$power, type = \"l\"))\n  }\n\npower_function()\n\n\n\n\n\n\n0.2.11 Exercise\nNow do the same thing with a one-sample t-test. (Tip: You only need to replace the z-scores with a t.test from which you can extract the p-value). (Another tip: Use the $ sign on where you stored the t-test results.)\n\npower_function_t <- \n  function(\n    h0 = 173,\n    h1 = 175.6,\n    sd = 7,\n    alpha = 0.05,\n    draws = 1e3,\n    min_sample = 30,\n    max_sample = 100\n  ) {\n    results <- \n      data.frame(\n        sample_size = NULL,\n        power = NULL\n      )\n    \n    for (i in min_sample:max_sample) {\n      \n      pvalues <- NULL\n      \n      for (j in 1:draws) {\n        d <- rnorm(i, h1, sd)\n        t <- t.test(d, mu = h0,alternative = \"greater\")\n        pvalues[j] <- t$p.value\n      }\n      \n      results <- rbind(\n        results,\n        data.frame(\n          sample_size = i,\n          power = sum(pvalues < 0.05)/length(pvalues)\n        )\n      )\n    }\n    \n    return(plot(results$sample_size, results$power, type = \"l\"))\n  }\n\npower_function()\n\n\n\n\n\n\n0.2.12 Exercise\nJust for funsies (and for our next session), see what happens when the true effect is only 1cm in difference.\n\npower_function_t(h1 = h0+1)"
+    "text": "0.2 Block 2\nIn this section, you’ll use the basics from above to perform your first power analysis. You’ll apply repeated simulations over a range of values and extracting and storing results to summarize them.\n\n0.2.1 Exercise\nThere are four groups. Each group comes from a different normal distribution. The means are c(100, 105, 107, 109). The SDs are c(9, 12, 10, 17). Each group should be 20 cases. Store everything in a data frame and have a variable that indicates the group. Tip: Remember that R uses vectors, even for arguments in a function.\n\n\n\n\n\n0.2.2 Exercise\nYou need 5 samples. Each sample contains 10 unique letters from the alphabet. (Use replicate.)\n\n\n\n\n\n0.2.3 Exercise\nSame as before, but this time you need 10 samples from a normal distribution with a mean of 10 and an SD of 2. Use replicate first, then a for loop.\n\n\n\n\n\n0.2.4 Exercise\nAssume we know the population mean in height (168cm) and its standard deviation (20). Assume we draw 10,000 samples from this distribution. Each sample has 50 participants. The standard deviation of these 10,000 sample means is the standard error.\nSimulate the standard error and compare it to the theoretical value: \\(SE = \\frac{\\sigma}{\\sqrt{n}}\\). (\\(\\sigma\\) is the standard deviation of the population.)\n\n\n\n\n\n0.2.5 Exercise\nSame population. Draw 1,000 observations for each sample size between 20 and 100. Calculate the standard error for each sample size (like you did above) and plot it against the sample size. (Tip: You’ll need to iterate over two things.)\n\n\n\n\n\n0.2.6 Exercise\nTurn the above into a function so that you can change the population effect size, SD, number of simulations, and sample size range. The function should also return the plot from above.\n\n\n\n\n\n0.2.7 Exercise\nTry out the function with two plots: when the population SD is 5 and when you do 10 draws. What changes?\n\n\n\n\n\n0.2.8 Exercise\nThe average height of men in Spain is 173cm (says Wikipedia). The population standard deviation is probablay around 7cm (source).\nYou draw a sample of men and want to test whether they’re significantly different from that mean (our H0). In fact, these men you have sampled are truly French (175.6cm, our true “effect size”). In other words, can we reject the null hypothesis that these men we sampled come from a different country in favor of our alternative hypothesis that the true population value is greater than the Spanish population mean?\nYou calculate the z-statistic, which is calculated as follows: \\(\\frac{\\bar{X} - \\mu_0}{\\sigma/\\sqrt{N}}\\) This simply tells us how far from the population mean (well, the suspected population mean under the null hypothesis) our sample mean is in terms of standard errors. \\(\\bar{X}\\) is the sample mean, \\(\\mu_0\\) is the population mean under H0, \\(\\sigma\\) is the population standard deviation, and \\(N\\) is the sample size.\nThen we can look up the z-score to see what the probability is to score this high or higher (does that definition ring a bell?). In R, you can simply do that with a built-in function: pnorm(). For example, if we have a z-score of 1.645, our probability of obtaining such a value (or higher) is pnorm(1.645, lower.tail = FALSE) = 0.0499849 – our p-value for a one-sided test.\nWe can simulate the power of our statistical test (in this case, the z-statistic). Take a sample of 30 people from the French population, calculate the z-statistic, it’s p-value, and store the p-value. Do this 1,000 times. Plot the distribution of p-values. What can we conclude about the sample size?\n\n\n\n\n\n0.2.9 Exercise\nNow calculate the power by calculating the proportion of pvalues that are below 0.05. That’s your power: The proportion of tests that will detect that there’s a true effect. In our case, that effect is a difference of 2.6cm.\n\n\n\n\n\n0.2.10 Exercise\nNow let’s do what we did before: Put the loop from above inside another loop that iterates over different sample sizes. Then put that all into a function that let’s you set the parameters of interest (sample size range, h0, h1, etc.). Then simulate power (1,000 simulations each) for samples between 30 and 100. Plot the sample size against power.\n\n\n\n\n\n0.2.11 Exercise\nNow do the same thing with a one-sample t-test. (Tip: You only need to replace the z-scores with a t.test from which you can extract the p-value). (Another tip: Use the $ sign on where you stored the t-test results.)\n\n\n\n\n\n0.2.12 Exercise\nJust for funsies (and for our next session), see what happens when the true effect is only 1cm in difference."
   },
   {
     "objectID": "content/03-simulations-in-r/03-slides.html",
@@ -494,14 +494,14 @@
     "href": "content/03-simulations-in-r/slides/index.html#some-basic-commands-first",
     "title": "Simulations in R",
     "section": "Some basic commands first",
-    "text": "Some basic commands first\nSampling a certain number of elements from a set.\n\nmy_sample <- 1:20\n\nsample(\n  x = my_sample,\n  size = 2\n)\n\n[1] 13 20"
+    "text": "Some basic commands first\nSampling a certain number of elements from a set.\n\nmy_sample <- 1:20\n\nsample(\n  x = my_sample,\n  size = 2\n)\n\n[1]  5 11"
   },
   {
     "objectID": "content/03-simulations-in-r/slides/index.html#sampling",
     "href": "content/03-simulations-in-r/slides/index.html#sampling",
     "title": "Simulations in R",
     "section": "Sampling",
-    "text": "Sampling\nWith or without replacement?\n\nmy_sample <- c(\"a\", \"b\", \"c\")\n\nsample(\n  x = my_sample,\n  size = 4,\n  replace = TRUE\n)\n\n[1] \"a\" \"a\" \"b\" \"a\""
+    "text": "Sampling\nWith or without replacement?\n\nmy_sample <- c(\"a\", \"b\", \"c\")\n\nsample(\n  x = my_sample,\n  size = 4,\n  replace = TRUE\n)\n\n[1] \"a\" \"b\" \"a\" \"b\""
   },
   {
     "objectID": "content/03-simulations-in-r/slides/index.html#on-those-letters",
@@ -515,14 +515,14 @@
     "href": "content/03-simulations-in-r/slides/index.html#sampling-1",
     "title": "Simulations in R",
     "section": "Sampling",
-    "text": "Sampling\nUsing those letters.\n\nmy_sample <- letters[1:3]\n\nsample(\n  x = my_sample,\n  size = 4,\n  replace = TRUE\n)\n\n[1] \"c\" \"a\" \"c\" \"c\""
+    "text": "Sampling\nUsing those letters.\n\nmy_sample <- letters[1:3]\n\nsample(\n  x = my_sample,\n  size = 4,\n  replace = TRUE\n)\n\n[1] \"a\" \"c\" \"c\" \"a\""
   },
   {
     "objectID": "content/03-simulations-in-r/slides/index.html#sampling-2",
     "href": "content/03-simulations-in-r/slides/index.html#sampling-2",
     "title": "Simulations in R",
     "section": "Sampling",
-    "text": "Sampling\nAssigning different probabilities.\n\nmy_sample <- c(\"black\", \"blue\")\n\nsample(\n  x = my_sample,\n  size = 10,\n  replace = TRUE,\n  prob = c(0.2, 0.8)\n)\n\n [1] \"blue\"  \"black\" \"blue\"  \"blue\"  \"blue\"  \"blue\"  \"blue\"  \"blue\"  \"black\"\n[10] \"blue\""
+    "text": "Sampling\nAssigning different probabilities.\n\nmy_sample <- c(\"black\", \"blue\")\n\nsample(\n  x = my_sample,\n  size = 10,\n  replace = TRUE,\n  prob = c(0.2, 0.8)\n)\n\n [1] \"blue\"  \"black\" \"blue\"  \"blue\"  \"black\" \"blue\"  \"blue\"  \"blue\"  \"blue\" \n[10] \"blue\""
   },
   {
     "objectID": "content/03-simulations-in-r/slides/index.html#remember-seeds",
@@ -936,6 +936,706 @@
     "title": "Simulations in R",
     "section": "References",
     "text": "References\n\n\nTrisovic, Ana, Matthew K. Lau, Thomas Pasquier, and Mercè Crosas. 2022. “A Large-Scale Study on Research Code Quality and Execution.” Scientific Data 9 (1): 60. https://doi.org/10.1038/s41597-022-01143-6.\n\n\n\n\nhttps://niklasjohannes.github.io/power-workshop/"
+  },
+  {
+    "objectID": "content/04-effect-sizes/04-exercise.html#exercise",
+    "href": "content/04-effect-sizes/04-exercise.html#exercise",
+    "title": "Exercise II",
+    "section": "1.1 Exercise",
+    "text": "1.1 Exercise\nWhat’s the distribution of p-values when there’s no effect? Create two independent groups, both with the same mean and standard deviation in rnorm (because there’s no effect). Use rnorm’s default mean and SD. Each group should have 50 participants. Run an independent, two-tailed t-test and store the p-value. Repeat 10,000 times. Now plot the p-values as a histogram (hist). Did you expect them to look like this?"
+  },
+  {
+    "objectID": "content/04-effect-sizes/04-exercise.html#exercise-1",
+    "href": "content/04-effect-sizes/04-exercise.html#exercise-1",
+    "title": "Exercise II",
+    "section": "1.2 Exercise",
+    "text": "1.2 Exercise\nNow let’s check empirically why p-values alone don’t tell us much. Repeat your simulation from above, but this time create two “experiments” per run: One where there’s no difference (like you already have above, with mean = 0 and SD = 1), but also one where there’s a massive difference (at least mean = 0.8, SD = 1). Store the p-values of the no difference experiments and the p-values of the massive difference experiments in a data frame, with one variable for condition and one for pvalue.\nNow plot both as densities (so two density lines). Us this code (call the data frame d and the number of simulations runs):\n\nlibrary(ggplot2)\n\nggplot(d, aes(x = pvalue, color = condition)) + geom_density() + xlim(c(0, 0.05)) + ylim(c(0, runs/5)) + theme_bw()\n\nLook at the p = 0.04. If were to run an experiment, not knowing which reality (no effect or massive effect) our experiments comes from, which one is more likely with a p-value of 0.04? If all we know is that our p-value is 0.04, what’s our best bet for the reality our experiment comes from: no effect or massive effect?"
+  },
+  {
+    "objectID": "content/04-effect-sizes/04-exercise.html#exercise-2",
+    "href": "content/04-effect-sizes/04-exercise.html#exercise-2",
+    "title": "Exercise II",
+    "section": "1.3 Exercise",
+    "text": "1.3 Exercise\nGoogle “Lindley’s paradox”. Let’s return to our alpha (0.05) in one of the next sessions: but keep this in mind."
+  },
+  {
+    "objectID": "content/04-effect-sizes/04-exercise.html#exercise-3",
+    "href": "content/04-effect-sizes/04-exercise.html#exercise-3",
+    "title": "Exercise II",
+    "section": "1.4 Exercise",
+    "text": "1.4 Exercise\nLet’s expand on our simulation skills from the previous sessions. In previous sessions, we simulated t-tests for different sample sizes over many repetitions. That was a loop in a loop: We’re looping over sample size, then, for each sample size, we looped over the number of simulations. Now, let’s add another layer: the effect size.\nCreate a simulation for an independent t-test. The mean for the control group should be 4 with an SD of 1. The means for the treatment group should be 4.2 (small), 4.5 (medium), and 4.8 (large), with an SD that’s always 1. Create a data.frame, store effect_size (so the difference in means between the groups: small, medium, and large), the sample size (from 20:100), and the mean power for this effect size and sample size.\nTip, you could go about this with the following structure:\n\nfor (asize in c(4.2, 4.5, 4.8)) {\n  for (asample in minimum:maximum) {\n    for (arun in 1:runs) {\n      \n    }\n    \n  }\n}\n\nGo for 200 runs for each combination of effect size and sample size. Plot the results afterwards with (assuming your data frame is called outcome):\n\nlibrary(ggplot2)\n\nggplot(outcome, aes(x = sample_size, y = power, color = as.factor(effect_size))) + geom_line() + theme_bw()"
+  },
+  {
+    "objectID": "content/04-effect-sizes/04-exercise.html#exercise-4",
+    "href": "content/04-effect-sizes/04-exercise.html#exercise-4",
+    "title": "Exercise II",
+    "section": "1.5 Exercise",
+    "text": "1.5 Exercise\nGuess what? The power analysis you did above was on the standardized scale. Do you know why? Let’s look at the formula for Cohen’s d again:\n\\(d = \\frac{M_1-M_2}{pooled \\ SD}\\)\nAbove, our means were 4 for the control group, and 4.2, 4,5, and 4.8 for the treatment group. Crucially, the SD was 1 for all groups. That means, very conveniently, that the differences are 0.2, 0.5, and 0.8 standard deviations–and Cohen’s \\(d\\) is measured in standard deviations.\nYou can verify that yourself. Simulate a normally distributed control group (10,000) cases with a mean of 100 and an SD of 1. Also simulate a treatment group with a mean of 101 and and SD of 1. Then do two more groups, but this time increase the SD for both groups to 2. What should happen to Cohen’s \\(d\\) from the first comparison to the second? Verify your intuition by using effectsize::cohens_d function."
+  },
+  {
+    "objectID": "content/04-effect-sizes/04-exercise.html#exercise-5",
+    "href": "content/04-effect-sizes/04-exercise.html#exercise-5",
+    "title": "Exercise II",
+    "section": "1.6 Exercise",
+    "text": "1.6 Exercise\nProbably the easiest way to simulate standardized effects is to simply rely on variables that are already standardized. Look up the default values of rnorm. SD here is set to 1, so whatever difference we put down as the difference in means between the two groups will be our Cohen’s \\(d\\). Simulate power for a Cohen’s \\(d\\) of 0.1 in an independent, two-tailed t-test for a sample size ranging from 10:1000. Use 200 simulations per sample size (or more, if you’re fine waiting for a couple of minutes). Before looking at the results: How many people do you think you’ll need per group for 95% power? Verify that in GPower."
+  },
+  {
+    "objectID": "content/04-effect-sizes/04-exercise.html#exercise-6",
+    "href": "content/04-effect-sizes/04-exercise.html#exercise-6",
+    "title": "Exercise II",
+    "section": "1.7 Exercise",
+    "text": "1.7 Exercise\nHow much power do we gain if we specify the direction of a test? Run a simulation with a Cohen’s \\(d\\) of 0.5 for sample sizes of 20 to 100 (1,000 samples each). For each run, do a one-tailed and a two-tailed t-test. Then plot the power curves and calculate the average power (across all sample sizes) for the two.\nIf you store the following data frame, you can use the below code for plotting. ::: {.cell}\noutcomes <- \n  data.frame(\n    sample_size = NULL,\n    type = NULL, # for one vs. two-tailed\n    power = NULL\n  )\n:::"
+  },
+  {
+    "objectID": "content/04-effect-sizes/04-exercise.html#exercise-7",
+    "href": "content/04-effect-sizes/04-exercise.html#exercise-7",
+    "title": "Exercise II",
+    "section": "1.8 Exercise",
+    "text": "1.8 Exercise\nSo far, getting a pooled SD was easy because it was the same in both groups. Let’s see how we can simulate standardized effect sizes (Cohen’s \\(d\\) in this case). Write a function that calculates the pooled SD from two SDs. The formula:\n\\(pooled = \\sqrt{\\frac{(sd_1^2 + sd_2^2)}{2}}\\)\nThen think about two groups that have different SDs. Say we measured something on a 7-point scale. The control group has an SD of 0.5, whereas the treatment group has an SD of 1.7.\nHow large does the difference in means have to be for a \\(d\\) of 0.25? Prove it with a simulation, using the following code:\n\nn <- 1e4\n\ncontrol <- rnorm(n, ?, 0.5)\ntreatment <- rnorm(n, ?, 1.7)\n\neffectsize::cohens_d(control, treatment)"
+  },
+  {
+    "objectID": "content/04-effect-sizes/04-exercise.html#exercise-8",
+    "href": "content/04-effect-sizes/04-exercise.html#exercise-8",
+    "title": "Exercise II",
+    "section": "1.9 Exercise",
+    "text": "1.9 Exercise\nDo the above again, but this time add 1 to the mean of both control group and treatment group. What do you notice?"
+  },
+  {
+    "objectID": "content/04-effect-sizes/04-exercise.html#exercise-9",
+    "href": "content/04-effect-sizes/04-exercise.html#exercise-9",
+    "title": "Exercise II",
+    "section": "1.10 Exercise",
+    "text": "1.10 Exercise\nThe above example shows how arbitrary it can be to go for a standardized effect size. You calculated power in two ways:\n\nYou decided what your Cohen’s \\(d\\) is and just went with an SD of 1, ignoring how the SD of your actual variables might look like\nYou specified the SDs for both groups and then calculated the pooled SD to adjust the means of the groups\n\nThe first option is easy, but comes with all the limitations of standardized effect sizes we talked about. The second option requires much more thought–but it ignores the absolute level of the means because you only specify means in their distance from each other in SD units. In fact, I’d argue that if you’ve made it this far and thought about the variation in your measures, you might as well think about the means and their differences in raw units.\nStandard deviations can be really hard to determine. In that case, you could also examine uncertainty around the SDs of each group. Simulate an independent t-test (one-sided, 1,000 simulations) over sample sizes 50:150. The control group has a mean of 100, the treatment group a mean of 105. Simulate over two conditions: Where the SD (both groups have the same SD) is 10 and one where it’s 25.\nThis time, save everything in a data frame: The sd (small or large), the sample_size, the number of the run, and the pvalue. That means your data frame will have 2 SD x 50 sample sizes x 1,000 simulations. With the data frame, get the power per SD and sample size (tip: use aggregate or group_by if you use the tidyverse). Then plot the two power curves. You can use the following code:\n\nlibrary(ggplot2)\n\nggplot(d, aes(x = sample_size, y = power, color = as.factor(sd))) + geom_line() + theme_bw()\n\nPay attention to two things: What does it do to your runtime? (Spoiler: It’ll take a while!). Second: How does the SD influence power?"
+  },
+  {
+    "objectID": "content/04-effect-sizes/04-exercise.html#exercise-10",
+    "href": "content/04-effect-sizes/04-exercise.html#exercise-10",
+    "title": "Exercise II",
+    "section": "2.1 Exercise",
+    "text": "2.1 Exercise\nAlright, now let’s get familiar with the while function. Simulate (200 runs) an independent (we’ll go paired soon enough) t-test (two-tailed) for two difference effect sizes. The SD for both groups is 2. The mean for the control group is 100. In the small effects condition, the treatment group is 0.5 points larger. In the large effects condition, the treatment group is 1 points larger.\nStart at a sample size of 25 and stop when you reach 95% power. Plot the power curve and show that the larger effect size stops much earlier.\n\nlibrary(ggplot2)\n\nggplot(outcomes, aes(x = sample_size, y = power, color = as.factor(effect_size))) + geom_line() + geom_hline(yintercept = 0.95) + theme_bw()\n\n\neffect_sizes <- c(small = 0.5, large = 1)\nn <- 30\ndraws <- 200\n\noutcomes <- data.frame(\n  effect_size = NULL,\n  sample_size = NULL,\n  power = NULL\n)\n\nfor (asize in effect_sizes) {\n  \n  n <- 30\n  power <- 0\n  \n  while (power < 0.95) {\n    \n    pvalues <- NULL\n    \n    for (i in 1:draws) {\n      control <- rnorm(n, 100, 2)\n      treatment <- rnorm(n, 100 + asize, 2)\n      t <- t.test(control, treatment)\n      \n      pvalues[i] <- t$p.value\n    }\n    \n    power <- sum(pvalues < 0.05) / length(pvalues)\n    \n    outcomes <- rbind(\n      outcomes,\n      data.frame(\n        effect_size = asize,\n        sample_size = n,\n        power = sum(pvalues < 0.05) / length(pvalues)\n      )\n    )\n    \n    n <- n + 1\n  }\n}\n\nggplot(outcomes, aes(x = sample_size, y = power, color = as.factor(effect_size))) + geom_line() + geom_hline(yintercept = 0.95) + theme_bw()"
+  },
+  {
+    "objectID": "content/04-effect-sizes/04-exercise.html#exercise-11",
+    "href": "content/04-effect-sizes/04-exercise.html#exercise-11",
+    "title": "Exercise II",
+    "section": "2.2 Exercise",
+    "text": "2.2 Exercise\nYou’re measuring people’s mood twice: right before and right after lunch. You know from extensive study on effect sizes that mood needs to increase by 0.5 points on a 7-point scale for other people to notice. You assume the the SD is somewhere around 1.5, with a bit more variation before lunch (1.7) than after lunch (1.5). You also assume that mood is correlated to some degree, say 0.5.\nYou have budget for a maximum sample of 100. How many people do you need to measure to achieve 87% power to detect this 1-point effect–and do you need to go to your max? Use 500 simulations per run. (Tip: the samples are correlated, so you’ll need to specify a variance-covariance matrix.) Verify with GPower."
+  },
+  {
+    "objectID": "content/04-effect-sizes/04-exercise.html#exercise-12",
+    "href": "content/04-effect-sizes/04-exercise.html#exercise-12",
+    "title": "Exercise II",
+    "section": "2.3 Exercise",
+    "text": "2.3 Exercise\nHow does the correlation between measures influence the power of your test? Do the above simulation again, but this time try out correlations between pre and post scores of 0.3, 0.5, 0.7. What do you expect to happen?"
+  },
+  {
+    "objectID": "content/04-effect-sizes/04-exercise.html#exercise-13",
+    "href": "content/04-effect-sizes/04-exercise.html#exercise-13",
+    "title": "Exercise II",
+    "section": "2.4 Exercise",
+    "text": "2.4 Exercise\nWhat’s happening above? With higher correlations, you also have more power. The formula for Cohen’s \\(d\\) for a paired samples t-test is different from the independent samples t-test one:\n\\(Cohen's \\ d = \\frac{M_{diff}-\\mu_o}{SD_{diff}}\\)\n(\\(\\mu_0\\) is 0 because our H0 is no difference). Show the effect of the correlation between the scores on effect size with a simulation. The pre-score has a mean of 5 and an SD of 1.1; the post-score has a mean of 5.2 with an SD of 0.8. Go with a sample size of 100.\nSimulate the samples with different correlations between the scores, ranging from 0.01 to 0.99. For each correlation, run 1,000 samples, then calculate Cohen’s \\(d\\) and get the mean of \\(d\\) for this correlation. Then plot \\(d\\) for the range of correlations. (Tip: You can create the correlations in such small steps with seq.)"
+  },
+  {
+    "objectID": "content/04-effect-sizes/04-exercise.html#exercise-14",
+    "href": "content/04-effect-sizes/04-exercise.html#exercise-14",
+    "title": "Exercise II",
+    "section": "2.5 Exercise",
+    "text": "2.5 Exercise\nNow you see how standardized effect sizes can become quite the problem: With an increase in the correlation between measures, your \\(SD_{diff}\\) beomes smaller, whereas the means remain unchanged. In other words, the effect sizes becomes larger with decreasing SD because the difference in means turns into more standard deviation units.\nIt’s hard–if not impossible–to have an intuition about what Cohen’s \\(d\\) you can go for because you’ll need to know the means, SDs, and their correlations. If you know those, you have enough information to work on the raw scale anyway–and as we know, the raw scale is much more intuitive.\nYou can showcase how hard that intuition is by skipping straight to the difference score. That’s what a paired samples t-test is: it’s a one-sample t-test of the difference between scores against H0, so for demonstration you can also simulate from the difference. t.test(control, treatment, paired = TRUE) is the same as t.test(difference, mu = 0) (if our H0 is indeed 0).\nSimulate power for Cohen’s \\(d\\) of 0.4 in a paired sampled t-test, using difference scores. That means you just need a normal distribution of difference scores. How do you know the \\(d\\) is 0.4? Well, choose a mean that’s 40% of whatever SD you specify.\nUse 1,000 runs and while to stop whenever you reach 93% power, starting at a sample size of 20. Verify with GPower."
+  },
+  {
+    "objectID": "content/04-effect-sizes/04-exercise.html#exercise-15",
+    "href": "content/04-effect-sizes/04-exercise.html#exercise-15",
+    "title": "Exercise II",
+    "section": "2.6 Exercise",
+    "text": "2.6 Exercise\nYou’re working for a fitness company that helps people gain muscle mass. They’re currently working on when people should measure their muscle mass: in the morning or in the evening or does that not matter?\nIt’s your job to find out. You know that if differences are off by less than 5%, time of measurement doesn’t matter. If it does matter, though, you need to tell customers that they need to be consistent in when they measure themselves.\nNow you plan the study. It’ll be expensive: You need to provide each person with an advanced measurement scale and pay them to measure once in the morning and once in the evening.\nYou have resources for a maximum of 200 people. Calculate power (95%, you want to be certain) and check whether you need to collect the full sample. Go about it as you find most sensible. (Tip: There’s no correct answer–we simply don’t have enough information.)"
+  },
+  {
+    "objectID": "content/04-effect-sizes/04-slides-part1.html",
+    "href": "content/04-effect-sizes/04-slides-part1.html",
+    "title": "Slides - Part 1",
+    "section": "",
+    "text": "Below you can find the slides for intro to simulations:\n\n\n\nIf you want to see the slides in full screen, you can click here. To download them as PDFs, hit the ‘e’ button when you got the presentation open and then Ctrl+P print to PDF. This will work best in Chrome (in Firefox, it didn’t print the headings for me)."
+  },
+  {
+    "objectID": "content/04-effect-sizes/04-slides-part2.html",
+    "href": "content/04-effect-sizes/04-slides-part2.html",
+    "title": "Slides - Part 2",
+    "section": "",
+    "text": "Below you can find the slides for intro to simulations:\n\n\n\nIf you want to see the slides in full screen, you can click here. To download them as PDFs, hit the ‘e’ button when you got the presentation open and then Ctrl+P print to PDF. This will work best in Chrome (in Firefox, it didn’t print the headings for me)."
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#whats-an-effect-size",
+    "href": "content/04-effect-sizes/slides-part1/index.html#whats-an-effect-size",
+    "title": "Effect sizes",
+    "section": "What’s an effect size",
+    "text": "What’s an effect size\n\nSource](https://en.wikipedia.org/wiki/Effect_size#Cohen’s_%C6%922)"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#an-example",
+    "href": "content/04-effect-sizes/slides-part1/index.html#an-example",
+    "title": "Effect sizes",
+    "section": "An example",
+    "text": "An example\nAge predicts grumpiness with a large effect. But the sample is too small for significance.\n\nset.seed(1)\nage <- runif(10, 20, 80)\ngrumpiness <- 50 + 0.5 * age + rnorm(10, 0, 20)\n\ncor.test(age, grumpiness)\n\n\n    Pearson's product-moment correlation\n\ndata:  age and grumpiness\nt = 1.5624, df = 8, p-value = 0.1568\nalternative hypothesis: true correlation is not equal to 0\n95 percent confidence interval:\n -0.2100550  0.8533538\nsample estimates:\n      cor \n0.4835198"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#an-example-this-time-larger",
+    "href": "content/04-effect-sizes/slides-part1/index.html#an-example-this-time-larger",
+    "title": "Effect sizes",
+    "section": "An example, this time larger",
+    "text": "An example, this time larger\nAge predicts grumpiness with a super tiny effect, but we have a sample of a million, so the effect is significant.\n\nage <- runif(1e6, 20, 80)\ngrumpiness <- 50 + 0.01 * age + rnorm(1e6, 0, 20)\n\ncor.test(age, grumpiness)\n\n\n    Pearson's product-moment correlation\n\ndata:  age and grumpiness\nt = 8.5288, df = 999998, p-value < 2.2e-16\nalternative hypothesis: true correlation is not equal to 0\n95 percent confidence interval:\n 0.006568625 0.010488268\nsample estimates:\n        cor \n0.008528479"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#an-example-this-time-null",
+    "href": "content/04-effect-sizes/slides-part1/index.html#an-example-this-time-null",
+    "title": "Effect sizes",
+    "section": "An example, this time null",
+    "text": "An example, this time null\nAge doesn’t predict grumpiness. Can a nonsignificant p-value tell us that?\n\nage <- runif(1e6, 20, 80)\ngrumpiness <- 50 + 0 * age + rnorm(1e6, 0, 20)\n\ncor.test(age, grumpiness)\n\n\n    Pearson's product-moment correlation\n\ndata:  age and grumpiness\nt = 0.093827, df = 999998, p-value = 0.9252\nalternative hypothesis: true correlation is not equal to 0\n95 percent confidence interval:\n -0.001866138  0.002053791\nsample estimates:\n         cor \n9.382711e-05"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#problems-with-nhst",
+    "href": "content/04-effect-sizes/slides-part1/index.html#problems-with-nhst",
+    "title": "Effect sizes",
+    "section": "Problems with NHST",
+    "text": "Problems with NHST\n\nDoesn’t answer what we want to know\nThere’ll always be a difference\nNothing special about p = 0.05"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#not-what-we-want-to-know",
+    "href": "content/04-effect-sizes/slides-part1/index.html#not-what-we-want-to-know",
+    "title": "Effect sizes",
+    "section": "Not what we want to know",
+    "text": "Not what we want to know\nRemember \\(P(data|H)\\), not \\(P(H|data)\\)?\n\nWe want to know how probable our hypothesis is\nP-values don’t do that\nWrong focus on significance"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#the-typical-h0-is-unrealistic",
+    "href": "content/04-effect-sizes/slides-part1/index.html#the-typical-h0-is-unrealistic",
+    "title": "Effect sizes",
+    "section": "The typical H0 is unrealistic",
+    "text": "The typical H0 is unrealistic\n\nMeehl (1991): Everything in the social sciences correlates with everything\nSo-called “crud factor” (Orben and Lakens 2019)\nWith large enough samples, anything will be significant"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#significant-but-trivial",
+    "href": "content/04-effect-sizes/slides-part1/index.html#significant-but-trivial",
+    "title": "Effect sizes",
+    "section": "Significant, but trivial",
+    "text": "Significant, but trivial\n\n(Lantz 2013)"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#whats-so-special-about-0.05",
+    "href": "content/04-effect-sizes/slides-part1/index.html#whats-so-special-about-0.05",
+    "title": "Effect sizes",
+    "section": "What’s so special about 0.05?",
+    "text": "What’s so special about 0.05?\n\n“…If one in twenty does not seem high enough odds, we may, if we prefer it, draw the line at one in fifty or one in a hundred. Personally, the writer prefers to set a low standard of significance at the 5 per cent point, and ignore entirely all results which fails to reach this level. A scientific fact should be regarded as experimentally established only if a properly designed experiment rarely fails to give this level of significance.”\n\nFrom Fisher RA. The arrangement of field experiments. Journal of the Ministry of Agriculture of Great Britain 1926; 33:503-513."
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#what-are-we-claiming",
+    "href": "content/04-effect-sizes/slides-part1/index.html#what-are-we-claiming",
+    "title": "Effect sizes",
+    "section": "What are we claiming?",
+    "text": "What are we claiming?\n\nSignificance threshold = arbitrary\nEvidential strength clearing that threshold = arbitrary"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#how-not-to-do-it",
+    "href": "content/04-effect-sizes/slides-part1/index.html#how-not-to-do-it",
+    "title": "Effect sizes",
+    "section": "How not to do it",
+    "text": "How not to do it\nWe have three independent groups: control, treatment A, and treatment B. The pesky ethics board asks us to do a power analysis. You head to GPower.\nThankfully, there’s a previous study! It had n = 20 per condition and the conditions are only somewhat similar to our planned experiment, but they do report an effect size: \\(\\eta_2 = .21\\). Off to GPower!"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#why-this-this-approach-isnt-ideal",
+    "href": "content/04-effect-sizes/slides-part1/index.html#why-this-this-approach-isnt-ideal",
+    "title": "Effect sizes",
+    "section": "Why this this approach isn’t ideal",
+    "text": "Why this this approach isn’t ideal\n\n\nNo idea what \\(\\eta_2 = .21\\) means: Is that a lot?\nThere’s three groups: What’s the effect size for?\nCan I trust the previous study?"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#lets-simulate-that-previous-study",
+    "href": "content/04-effect-sizes/slides-part1/index.html#lets-simulate-that-previous-study",
+    "title": "Effect sizes",
+    "section": "Let’s simulate that “previous study”",
+    "text": "Let’s simulate that “previous study”\n\nset.seed(42)\nd <- data.frame(\n  id = 1:60,\n  condition = rep(c(\"control\", \"Treatment A\", \"Treatment B\"), times = 20),\n  score = rnorm(60, mean = c(0, 10, 20), sd = 15)\n)\n\nmodel <- \n  aov(\n    score ~ condition, data = d\n  )\n\neffectsize::eta_squared(model)\n\n# Effect Size for ANOVA\n\nParameter | Eta2 |       95% CI\n-------------------------------\ncondition | 0.21 | [0.06, 1.00]\n\n- One-sided CIs: upper bound fixed at (1)."
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#notice-something",
+    "href": "content/04-effect-sizes/slides-part1/index.html#notice-something",
+    "title": "Effect sizes",
+    "section": "Notice something?",
+    "text": "Notice something?"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#wrong-rituals",
+    "href": "content/04-effect-sizes/slides-part1/index.html#wrong-rituals",
+    "title": "Effect sizes",
+    "section": "Wrong rituals",
+    "text": "Wrong rituals\n\nUsing effect sizes like this will get us nowhere\nRituals and rules of thumbs get in the way of understanding\nBut effect sizes might well be the most important part of our research"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#where-it-all-began",
+    "href": "content/04-effect-sizes/slides-part1/index.html#where-it-all-began",
+    "title": "Effect sizes",
+    "section": "Where it all began",
+    "text": "Where it all began\n\nCohen (1988)"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#types-of-effect-sizes",
+    "href": "content/04-effect-sizes/slides-part1/index.html#types-of-effect-sizes",
+    "title": "Effect sizes",
+    "section": "Types of effect sizes",
+    "text": "Types of effect sizes\n\nDifferences between groups (e.g., Cohen’s \\(d\\))\nStrength of association (e.g., Pearson’s \\(r\\), \\(R^2\\), \\(\\eta^2\\))\nEstimates of risks (e.g., relative risks, odds ratios)"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#differences",
+    "href": "content/04-effect-sizes/slides-part1/index.html#differences",
+    "title": "Effect sizes",
+    "section": "Differences",
+    "text": "Differences\n\nExpress difference between groups in variance units, not raw units\nNot “How many cm is the difference in height between the groups”\nBut “How many standard deviation difference in height between the groups”\n\n\\(d = \\frac{M_1-M_2}{pooled\\ \\sigma}\\)\n\\(pooled\\ \\sigma = \\sqrt{\\frac{(sd_1^2 + sd_2^2)}{2}}\\)"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#poor-cohen",
+    "href": "content/04-effect-sizes/slides-part1/index.html#poor-cohen",
+    "title": "Effect sizes",
+    "section": "Poor Cohen",
+    "text": "Poor Cohen"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#an-example-1",
+    "href": "content/04-effect-sizes/slides-part1/index.html#an-example-1",
+    "title": "Effect sizes",
+    "section": "An example",
+    "text": "An example\nControl group has a mean of 100 and an SD of 20. The treatment group has a mean of 105 and an SD of 10. The difference in the means is \\(105-100 = 15\\) (simplified). The pooled SD is (simplified!) \\(\\frac{20+10}{2} = 15\\). So our difference is \\(5/15\\) or simply \\(d = 0.33\\). In other words, our difference is a third of a standard deviation unit."
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#so",
+    "href": "content/04-effect-sizes/slides-part1/index.html#so",
+    "title": "Effect sizes",
+    "section": "So…",
+    "text": "So…\nCohen suggested (and later very much regretted) some rules of thumb if a researcher has no better idea:\n\n\\(d = 0.20\\) is a small effect: New lines of research, experiments aren’t that sophisticated yet\n\\(d = 0.50\\) is a medium effect: Visible to the naked eye\n\\(d = 0.80\\) is a large effect: Almost half of distributions aren’t overlapping"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#a-word-of-warning",
+    "href": "content/04-effect-sizes/slides-part1/index.html#a-word-of-warning",
+    "title": "Effect sizes",
+    "section": "A word of warning",
+    "text": "A word of warning\nIn small samples, Cohen’s d will be biased. Use Hedge’s g instead. In fact, you should probably always use g. (Software does it for you anyway.)\n\\(d = \\frac{M_1-M_2}{pooled\\ \\sigma^*}\\)"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#strength-of-association",
+    "href": "content/04-effect-sizes/slides-part1/index.html#strength-of-association",
+    "title": "Effect sizes",
+    "section": "Strength of association",
+    "text": "Strength of association\n\nExpress the strength of association as a regression slope when both variables have been standardized\nNot “How many points does grumpiness go up with one extra year”\nBut “How many standard deviations does grumpiness go up with one extra standard deviation of age”\n\n\\(r = B_{xy} \\frac{\\sigma_x}{\\sigma_Y}\\)"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#an-example-2",
+    "href": "content/04-effect-sizes/slides-part1/index.html#an-example-2",
+    "title": "Effect sizes",
+    "section": "An example",
+    "text": "An example\nWe predict grumpiness with age. The regression slope is 2: With each year, people score 2 higher on grumpiness. The SD of grumpiness is 30. The SD of age is 10. The correlation coefficient is \\(2*10/30 = .67\\). We could’ve also just standardized both variables and run a regression."
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#so-1",
+    "href": "content/04-effect-sizes/slides-part1/index.html#so-1",
+    "title": "Effect sizes",
+    "section": "So…",
+    "text": "So…\n\n\\(r = 0.10\\) is a small effect: Cohen believed the majority of effects in the “soft” sciences are in this range\n\\(r = 0.30\\) is a medium effect: Visible to the naked eye to a “reasonably sensitive observer”\n\\(r = 0.50\\) is a large effect: “About as high as they come”"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#translating-between-the-two",
+    "href": "content/04-effect-sizes/slides-part1/index.html#translating-between-the-two",
+    "title": "Effect sizes",
+    "section": "Translating between the two",
+    "text": "Translating between the two\nCohen also provides a formula how to get \\(r\\) from \\(d\\). Remember, use Hedge’s \\(g\\) instead of \\(d\\).\n\\(r = \\frac{d}{\\sqrt{d^2 + 4}}\\)\nBack to that medium effect size:\n\\(r = \\frac{0.5}{\\sqrt{0.5^2 + 4}} = 0.24\\)"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#variance-explained",
+    "href": "content/04-effect-sizes/slides-part1/index.html#variance-explained",
+    "title": "Effect sizes",
+    "section": "Variance explained",
+    "text": "Variance explained\nStrength of association is just another way of saying magnitude of shared variance between variables. Or: Does the blue line do better than the black line?"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#variance-explained-1",
+    "href": "content/04-effect-sizes/slides-part1/index.html#variance-explained-1",
+    "title": "Effect sizes",
+    "section": "Variance explained",
+    "text": "Variance explained\n\nProportion of unexplained variance (residuals) in relation to total variance\nFor \\(r\\), this is easy to calculate if we only have two variables\n\\(r^2\\) tells us the proportion of variance we can explain = \\(R^2\\)\n\n\\(Variance \\ explained = \\frac{\\sigma_{effect}}{\\sigma_{total}}\\)"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#what-about-our-conventions",
+    "href": "content/04-effect-sizes/slides-part1/index.html#what-about-our-conventions",
+    "title": "Effect sizes",
+    "section": "What about our conventions?",
+    "text": "What about our conventions?\n\n\\(r^2 = 0.10^2 = 1\\%\\) is a small effect: Cohen believed the majority of effects in the “soft” sciences are in this range\n\\(r^2 = 0.30^2 = 9\\%\\) is a medium effect: Visible to the naked eye to a “reasonably sensitive observer”\n\\(r^2 = 0.50^2 = 25\\%\\) is a large effect: “About as high as they come”"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#thank-you-spss",
+    "href": "content/04-effect-sizes/slides-part1/index.html#thank-you-spss",
+    "title": "Effect sizes",
+    "section": "Thank you, SPSS",
+    "text": "Thank you, SPSS\nIn the ANOVA context, we often use \\(\\eta^2\\), because it has been standard in SPSS output (Lakens 2013).\n\\(\\eta^2 = \\frac{SS_{effect}}{SS_{total}}\\)\n\nTells us, once again, what % of variance is accounted for by group membership\nStraightforward with two variables (group membership and outcome)"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#insert-confusion",
+    "href": "content/04-effect-sizes/slides-part1/index.html#insert-confusion",
+    "title": "Effect sizes",
+    "section": "Insert confusion",
+    "text": "Insert confusion\n\n\\(\\eta^2_p = \\frac{SS_{effect}}{SS_{total} + SS_{error}}\\)\n\nIf there’s more than one predictor, gives us the effect size per predictor\nSo one effect size indicator for main effect(s) and interactions (Levine and Hullett 2002)"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#all-the-same",
+    "href": "content/04-effect-sizes/slides-part1/index.html#all-the-same",
+    "title": "Effect sizes",
+    "section": "All the same?",
+    "text": "All the same?\n\nWhen there’s only one predictor, \\(\\eta^2\\), \\(\\eta^2_p\\), and \\(R^2\\) are the same: Variance accounted for by effect\nWhen there’s multiple effects, you can state variance explained for the entire model or invidual effects\nMultiple effects require overall model (\\(R^2\\)) and individual effect estimates (\\(\\eta^2_p\\), partial \\(R^2\\))"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#are-we-done-please",
+    "href": "content/04-effect-sizes/slides-part1/index.html#are-we-done-please",
+    "title": "Effect sizes",
+    "section": "Are we done, please?",
+    "text": "Are we done, please?\n\\(f\\) mostly used for one-way ANOVAs\n\nA measure of how wide means are spread in ANOVA relative to variation within groups\nCut-offs suggested by Cohen: 0.10, 0.25, 0.40\n\n\\(f^2\\) mostly used for regressions, but also one-way, or multi-way ANOVAs\n\nAgain a measure of how much variance an effect (just easier to work with squared values)\nCut-offs suggested by Cohen: .02, .15, .35"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#corrections",
+    "href": "content/04-effect-sizes/slides-part1/index.html#corrections",
+    "title": "Effect sizes",
+    "section": "Corrections",
+    "text": "Corrections\nThese effect sizes of shared variance are often biased. Instead, use \\(\\omega^2\\) or \\(\\epsilon^2\\). Don’t panic: Smart people have provided spreadsheets.\nEffect size converter: https://osf.io/vbdah/"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#my-head-is-spinning",
+    "href": "content/04-effect-sizes/slides-part1/index.html#my-head-is-spinning",
+    "title": "Effect sizes",
+    "section": "My head is spinning",
+    "text": "My head is spinning\nAll you need to remember:\n\nEffect sizes can be for differences between two groups (\\(d\\))\nEffect sizes can be for strength of associations (\\(r\\), \\(R^2\\), \\(\\eta^2\\), \\(\\eta^2_p\\), \\(f\\), \\(f^2\\))\nEvery effect size can be transformed into one another\nCut-offs are really arbitrary"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#about-squaring-things",
+    "href": "content/04-effect-sizes/slides-part1/index.html#about-squaring-things",
+    "title": "Effect sizes",
+    "section": "About squaring things",
+    "text": "About squaring things\n\nHalf of a perfect correlation (\\(r\\) = 1.00, \\(r^2\\) = 100%) is \\(r\\) = 0.50, \\(r^2\\) = 25%\nWhy are we interested in variance and not standard deviations all of a sudden\nMight be useful for model fit, but less intuitive for individual effect\n\n\nSquaring the r is not merely uninformative; for purposes of evaluating effect size, the practice is actively misleading. [Funder and Ozer (2019), p. 3]"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#about-squaring-things-1",
+    "href": "content/04-effect-sizes/slides-part1/index.html#about-squaring-things-1",
+    "title": "Effect sizes",
+    "section": "About squaring things",
+    "text": "About squaring things\nThe moment we move beyond two groups or bivariate relationships:\n\nVariance explained can mean almost any pattern\nOur hypotheses are rarely about partial effects or total model variance\nReporting them isn’t really informative\n\n\nAs a rule, reports of effect size should focus on 1 df effects. [Baguley (2009), p. 614]"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#so-what-effect-sizes-are-typical",
+    "href": "content/04-effect-sizes/slides-part1/index.html#so-what-effect-sizes-are-typical",
+    "title": "Effect sizes",
+    "section": "So what effect sizes are typical?",
+    "text": "So what effect sizes are typical?\n\n\n\n708 correlations from Personality Psychology\n25th, 50th, and 75th percentiles = \\(r\\) of 0.11, 0.19, and 0.29\n< 3% of correlations were large (aka 0.50 or larger)\n\n\n\n(Gignac and Szodorai 2016)"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#so-what-effect-sizes-are-typical-1",
+    "href": "content/04-effect-sizes/slides-part1/index.html#so-what-effect-sizes-are-typical-1",
+    "title": "Effect sizes",
+    "section": "So what effect sizes are typical?",
+    "text": "So what effect sizes are typical?\n\n26,841 effects from cognitive neuroscience and psychology\nMedian \\(d\\) for significant results: 0.93\nMedian \\(d\\) for nonsignificant results: 0.24\n\n\n(Szucs and Ioannidis 2017)"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#so-what-effect-sizes-are-typical-2",
+    "href": "content/04-effect-sizes/slides-part1/index.html#so-what-effect-sizes-are-typical-2",
+    "title": "Effect sizes",
+    "section": "So what effect sizes are typical?",
+    "text": "So what effect sizes are typical?\n\n\n\n12,170 \\(r\\)s and 6,447 \\(d\\)s from 134 meta-analyses\n25th, 50th, and 75th percentiles =\\(r\\) of 0.12, 0.24, and 0.41\n\\(d\\) of 0.15, 0.36, and 0.65\n\n\n\n(Lovakov and Agadullina 2021)"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#and-in-communication",
+    "href": "content/04-effect-sizes/slides-part1/index.html#and-in-communication",
+    "title": "Effect sizes",
+    "section": "And in communication?",
+    "text": "And in communication?\n\n(Rains, Levine, and Weber 2018)"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#getting-a-feel",
+    "href": "content/04-effect-sizes/slides-part1/index.html#getting-a-feel",
+    "title": "Effect sizes",
+    "section": "Getting a feel",
+    "text": "Getting a feel\nSo… is \\(r\\) = .21 big then? (Meyer et al. 2001)\n\nExtent of social support and enhanced immune functioning: .21\nQuality of parents’ marital relationship and quality of parent-child relationship: .22\nEffect of alcohol on aggressive behavior: .23"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#getting-too-much-of-a-feel",
+    "href": "content/04-effect-sizes/slides-part1/index.html#getting-too-much-of-a-feel",
+    "title": "Effect sizes",
+    "section": "Getting too much of a feel",
+    "text": "Getting too much of a feel\n\nViolent video game vs. racing game condition: \\(d\\) = 3.46 (Hilgard 2021)\nCancer-prone personality 121 times more likely to die of disease source\nMassive effect sizes are often a sign that something fishy is going on"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#heard-of-the-replication-crisis",
+    "href": "content/04-effect-sizes/slides-part1/index.html#heard-of-the-replication-crisis",
+    "title": "Effect sizes",
+    "section": "Heard of the replication crisis?",
+    "text": "Heard of the replication crisis?\n\n\n\n(Open Science Collaboration 2015)\n\n\n(Fanelli 2012)"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#a-good-bad-example",
+    "href": "content/04-effect-sizes/slides-part1/index.html#a-good-bad-example",
+    "title": "Effect sizes",
+    "section": "A good bad example",
+    "text": "A good bad example\n\n(De Vries et al. 2018)"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#were-likely-overestimating",
+    "href": "content/04-effect-sizes/slides-part1/index.html#were-likely-overestimating",
+    "title": "Effect sizes",
+    "section": "We’re likely overestimating",
+    "text": "We’re likely overestimating\n\n(Schäfer and Schwarz 2019)"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#crud",
+    "href": "content/04-effect-sizes/slides-part1/index.html#crud",
+    "title": "Effect sizes",
+    "section": "Crud",
+    "text": "Crud\nWhen we correlate variables that are specifically selected not to be related, we still reach \\(r\\) ~ .10.\n\n(Ferguson and Heene 2021)"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#okay-how-about-pilots",
+    "href": "content/04-effect-sizes/slides-part1/index.html#okay-how-about-pilots",
+    "title": "Effect sizes",
+    "section": "Okay, how about pilots?",
+    "text": "Okay, how about pilots?\n\n\n\nPilots are small and small studies have more variability\nSo we’ll often land on effects that will require massive samples\nIf those exceed our means, we run into follow-up bias\nGetting effect sizes from pilots not a good idea\n\n\n\n(Albers and Lakens 2018)"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#so-what-shall-we-do",
+    "href": "content/04-effect-sizes/slides-part1/index.html#so-what-shall-we-do",
+    "title": "Effect sizes",
+    "section": "So what shall we do?",
+    "text": "So what shall we do?\nSeveral considerations (Funder and Ozer 2019):\n\nCompare to classical studies?\nField in general?\nOther benchmarks?\nCumulative or not?"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#sesoi",
+    "href": "content/04-effect-sizes/slides-part1/index.html#sesoi",
+    "title": "Effect sizes",
+    "section": "SESOI",
+    "text": "SESOI\nSmallest effect size of interest (Anvari et al. 2021)\n\nWhy rely on previous research that is notoriously unreliable?\nYou should define what effect you find worth looking for?\nAt what point do you not care about an effect anymore?\nMake falsifiable and testable studies"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#tradition",
+    "href": "content/04-effect-sizes/slides-part1/index.html#tradition",
+    "title": "Effect sizes",
+    "section": "Tradition",
+    "text": "Tradition\nMinimally detectable difference\n\nSmallest increase in an outcome that we care about\nPain, surgery, etc.\nAnywhere where we need to balance not just theory, but also limited resources"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#how-do-i-determine-the-sesoi",
+    "href": "content/04-effect-sizes/slides-part1/index.html#how-do-i-determine-the-sesoi",
+    "title": "Effect sizes",
+    "section": "How do I determine the SESOI?",
+    "text": "How do I determine the SESOI?\n\nObjective benchmarks (e.g., half an SD for health outcomes)\nSame considerations: In relation to field, time frame, etc.\nMaximum positive control\nCost benefit analysis\nEmpirical benchmarks"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#cost-benefit",
+    "href": "content/04-effect-sizes/slides-part1/index.html#cost-benefit",
+    "title": "Effect sizes",
+    "section": "Cost-benefit",
+    "text": "Cost-benefit\nOften used in medicine:\n\nWe know the effect of one drug\nOur effect becomes same size for less resources\nOr more than half the effect for half the resources"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#empirical-benchmarks",
+    "href": "content/04-effect-sizes/slides-part1/index.html#empirical-benchmarks",
+    "title": "Effect sizes",
+    "section": "Empirical benchmarks",
+    "text": "Empirical benchmarks\n\n\n\n\n\nWhat’s the performance gap between low and high performers in school\nThat’s the minimum effect we want to achieve\nAnything less is uninteresting and we should invest our resources somewhere else\n\n(Hill et al. 2008)"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#empirical-benchmarks-1",
+    "href": "content/04-effect-sizes/slides-part1/index.html#empirical-benchmarks-1",
+    "title": "Effect sizes",
+    "section": "Empirical benchmarks",
+    "text": "Empirical benchmarks\n\nWhat’s the expected growth that would naturally occur?\nExample: Reading ability from one grade to the next\nWe want to achieve an effect of at least that size as our SESOI\n\n(Hill et al. 2008)"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#empirical-benchmarks-2",
+    "href": "content/04-effect-sizes/slides-part1/index.html#empirical-benchmarks-2",
+    "title": "Effect sizes",
+    "section": "Empirical benchmarks",
+    "text": "Empirical benchmarks\nGlobal ratings of change methods:\n\nComes from medicine\nPsychological states are inherently subjective\nSo we need to rely on people informing us when they can feel a difference"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#empirical-benchmarks-3",
+    "href": "content/04-effect-sizes/slides-part1/index.html#empirical-benchmarks-3",
+    "title": "Effect sizes",
+    "section": "Empirical benchmarks",
+    "text": "Empirical benchmarks\nProcedure (Anvari and Lakens 2021):\n\nAsk participants how they feel\nPerform intervention\nAsk them again how they feel\nAsk whether it has gotten better or not\nLook at the average difference in scores for those who say there’s improvement"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#empirical-benchmarks-4",
+    "href": "content/04-effect-sizes/slides-part1/index.html#empirical-benchmarks-4",
+    "title": "Effect sizes",
+    "section": "Empirical benchmarks",
+    "text": "Empirical benchmarks"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#changes-my-interpretation-and-conclusions",
+    "href": "content/04-effect-sizes/slides-part1/index.html#changes-my-interpretation-and-conclusions",
+    "title": "Effect sizes",
+    "section": "Changes my interpretation and conclusions",
+    "text": "Changes my interpretation and conclusions\n\nMy study has 80% power to detect a medium sized effect, as shown by the meta-analysis by XYZ.\n\nTranslation: If this doesn’t work, we have learned close to nothing.\n\nI designed my study to be able to detect an effect of a certain size with 95% power. Anything smaller than that is uninteresting. Don’t waste resources if you’re hoping to find an effect this large.\n\nTranslation: I thought about what I want and I’m putting that part of the process up for debate."
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#maximum-positive-controls-hilgard2021",
+    "href": "content/04-effect-sizes/slides-part1/index.html#maximum-positive-controls-hilgard2021",
+    "title": "Effect sizes",
+    "section": "Maximum positive controls (Hilgard 2021)",
+    "text": "Maximum positive controls (Hilgard 2021)\n\nProduce the largest effect you possibly can\nTell participants to imagine what would happen (aka induce demand artifacts)\nPuts a limit on the maximum effect you can expect"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#on-what-scale",
+    "href": "content/04-effect-sizes/slides-part1/index.html#on-what-scale",
+    "title": "Effect sizes",
+    "section": "On what scale",
+    "text": "On what scale\nUnstandardized measures have several advantages:\n\nScale independent of variance\nMore intuitive and easier to understand\nLess prone to error in calculation\n\n(Baguley 2009)"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#raw-for-the-win",
+    "href": "content/04-effect-sizes/slides-part1/index.html#raw-for-the-win",
+    "title": "Effect sizes",
+    "section": "Raw for the win",
+    "text": "Raw for the win\n\nStandardized effects can be helpful in comparison or initial explorations\nBut standard deviations aren’t objective units that just happen\nRaw effect sizes force you to put a number on things and think about whether you know enough for a confirmatory study"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part1/index.html#references",
+    "href": "content/04-effect-sizes/slides-part1/index.html#references",
+    "title": "Effect sizes",
+    "section": "References",
+    "text": "References\n\n\nAlbers, Casper J., and Daniël Lakens. 2018. “When Power Analyses Based on Pilot Data Are Biased: Inaccurate Effect Size Estimators and Follow-up Bias.” Journal of Experimental Social Psychology 74: 187–95. https://doi.org/10.17605/OSF.IO/B7Z4Q.\n\n\nAnvari, Farid, Rogier Kievit, Daniel Lakens, Andrew K. Przybylski, Leo Tiokhin, Brenton M. Wiernik, and Amy Orben. 2021. “Evaluating the Practical Relevance of Observed Effect Sizes in Psychological Research,” June. https://doi.org/10.31234/osf.io/g3vtr.\n\n\nAnvari, Farid, and Daniël Lakens. 2021. “Using Anchor-Based Methods to Determine the Smallest Effect Size of Interest.” Journal of Experimental Social Psychology 96 (September): 104159. https://doi.org/10.1016/j.jesp.2021.104159.\n\n\nBaguley, Thom. 2009. “Standardized or Simple Effect Size: What Should Be Reported?” British Journal of Psychology 100 (3): 603–17. https://doi.org/10.1348/000712608X377117.\n\n\nCohen, J. 1988. Statistical Power Analysis for the Behavioral Sciences. 2nd ed. Hillsdale, NJ: Lawrence Erlbaum.\n\n\nDe Vries, Y. A., A. M. Roest, Peter de Jonge, Pim Cuijpers, M. R. Munafò, and J. A. Bastiaansen. 2018. “The Cumulative Effect of Reporting and Citation Biases on the Apparent Efficacy of Treatments: The Case of Depression.” Psychological Medicine 48 (15): 24532455.\n\n\nFanelli, Daniele. 2012. “Negative Results Are Disappearing from Most Disciplines and Countries.” Scientometrics 90 (3): 891–904. https://doi.org/10.1007/s11192-011-0494-7.\n\n\nFerguson, Christopher J., and Moritz Heene. 2021. “Providing a Lower-Bound Estimate for Psychology’s “Crud Factor”: The Case of Aggression.” Professional Psychology: Research and Practice 52 (6): 620–26. https://doi.org/10.1037/pro0000386.\n\n\nFunder, David C., and Daniel J. Ozer. 2019. “Evaluating Effect Size in Psychological Research: Sense and Nonsense.” Advances in Methods and Practices in Psychological Science 2 (2): 156–68. https://doi.org/10.1177/2515245919847202.\n\n\nGignac, Gilles E., and Eva T. Szodorai. 2016. “Effect Size Guidelines for Individual Differences Researchers.” Personality and Individual Differences 102 (November): 74–78. https://doi.org/10.1016/j.paid.2016.06.069.\n\n\nHilgard, Joseph. 2021. “Maximal Positive Controls: A Method for Estimating the Largest Plausible Effect Size.” Journal of Experimental Social Psychology 93 (March): 104082. https://doi.org/10.1016/j.jesp.2020.104082.\n\n\nHill, Carolyn J., Howard S. Bloom, Alison Rebeck Black, and Mark W. Lipsey. 2008. “Empirical Benchmarks for Interpreting Effect Sizes in Research.” Child Development Perspectives 2 (3): 172–77. https://doi.org/10.1111/j.1750-8606.2008.00061.x.\n\n\nLakens, Daniël. 2013. “Calculating and Reporting Effect Sizes to Facilitate Cumulative Science: A Practical Primer for t-Tests and ANOVAs.” Frontiers in Psychology 4 (NOV): 1–12. https://doi.org/10.3389/fpsyg.2013.00863.\n\n\nLantz, Björn. 2013. “The Large Sample Size Fallacy.” Scandinavian Journal of Caring Sciences 27 (2): 487–92. https://doi.org/10.1111/j.1471-6712.2012.01052.x.\n\n\nLevine, Timothy R., and Craig R. Hullett. 2002. “Eta Squared, Partial Eta Squared, and Misreporting of Effect Size in Communication Research.” Human Communication Research 28 (4): 612–25. https://doi.org/10.1111/j.1468-2958.2002.tb00828.x.\n\n\nLovakov, Andrey, and Elena R. Agadullina. 2021. “Empirically Derived Guidelines for Effect Size Interpretation in Social Psychology.” European Journal of Social Psychology 51 (3): 485–504. https://doi.org/10.1002/ejsp.2752.\n\n\nMeyer, Gregory J., Stephen E. Finn, Lorraine D. Eyde, Gary G. Kay, Kevin L. Moreland, Robert R. Dies, Elena J. Eisman, Tom W. Kubiszyn, and Geoffrey M. Reed. 2001. “Psychological Testing and Psychological Assessment: A Review of Evidence and Issues.” American Psychologist 56 (2): 128.\n\n\nOpen Science Collaboration. 2015. “Estimating the Reproducibility of Psychological Science.” Science 349 (6251): aac4716–16. https://doi.org/10.1126/science.aac4716.\n\n\nOrben, Amy, and Daniel Lakens. 2019. “Crud (Re)defined,” May. https://doi.org/10.31234/osf.io/96dpy.\n\n\nRains, Stephen A., Timothy R. Levine, and Rene Weber. 2018. “Sixty Years of Quantitative Communication Research Summarized: Lessons from 149 Meta-Analyses.” Annals of the International Communication Association 8985: 1–20. https://doi.org/10.1080/23808985.2018.1446350.\n\n\nSchäfer, Thomas, and Marcus A. Schwarz. 2019. “The Meaningfulness of Effect Sizes in Psychological Research: Differences Between Sub-Disciplines and the Impact of Potential Biases.” Frontiers in Psychology 10. https://doi.org/10.3389/fpsyg.2019.00813.\n\n\nSzucs, Denes, and John P. A. Ioannidis. 2017. “Empirical Assessment of Published Effect Sizes and Power in the Recent Cognitive Neuroscience and Psychology Literature.” PLoS Biology 15 (3). https://doi.org/10.1371/journal.pbio.2000797.\n\n\n\n\nhttps://niklasjohannes.github.io/power-workshop/"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part2/index.html#so-far",
+    "href": "content/04-effect-sizes/slides-part2/index.html#so-far",
+    "title": "Interlude: Correlated measures",
+    "section": "So far",
+    "text": "So far\nSo far we’ve been drawing samples from two independent groups.\n\nset.seed(42)\n\ncontrol <- rnorm(100)\ntreatment <- rnorm(100, 0.2)\n\nt.test(control, treatment)\n\n\n    Welch Two Sample t-test\n\ndata:  control and treatment\nt = -0.58009, df = 194.18, p-value = 0.5625\nalternative hypothesis: true difference in means is not equal to 0\n95 percent confidence interval:\n -0.3519980  0.1919951\nsample estimates:\n mean of x  mean of y \n0.03251482 0.11251629"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part2/index.html#what-about-two-measures-from-the-same-person",
+    "href": "content/04-effect-sizes/slides-part2/index.html#what-about-two-measures-from-the-same-person",
+    "title": "Interlude: Correlated measures",
+    "section": "What about two measures from the same person",
+    "text": "What about two measures from the same person\n\nThink of a typical pre/posttest design\nSomeone who has a tendency to score low will therefore score low on both pre- and post-test measure\nThe measures are correlated\nWe need to take into account that measures come from the same unit in simulating"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part2/index.html#each-person-gets-their-own-distribution",
+    "href": "content/04-effect-sizes/slides-part2/index.html#each-person-gets-their-own-distribution",
+    "title": "Interlude: Correlated measures",
+    "section": "Each person gets their own distribution",
+    "text": "Each person gets their own distribution\nWe’ve already done that with replicate and for loops: Each person gets their own distribution rather than drawing from the same distribution (although in effect this is the same here).\n\nn <- 200\nd1 <- data.frame(\n  id = rep(letters[1:2], each = n/2),\n  x = rnorm(n)\n)\nd2 <- \n  data.frame(\n    x = replicate(2, rnorm(n/2))\n  )\nd2 <- stack(d2)\nd2$id <- rep(letters[1:2], each = n/2)"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part2/index.html#so-how-do-we-get-correlated-measures",
+    "href": "content/04-effect-sizes/slides-part2/index.html#so-how-do-we-get-correlated-measures",
+    "title": "Interlude: Correlated measures",
+    "section": "So how do we get correlated measures?",
+    "text": "So how do we get correlated measures?\n\nWe need to increase the dimensions\nSo far, we’ve worked with one dimension: our dependent variable only\nBut if a person has multiple measures, that means we don’t just have one normal distribution\nWe have two correlated normal distributions: a multivariate normal distribution"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part2/index.html#how-does-that-look-like",
+    "href": "content/04-effect-sizes/slides-part2/index.html#how-does-that-look-like",
+    "title": "Interlude: Correlated measures",
+    "section": "How does that look like?",
+    "text": "How does that look like?\nFor univariate, we pick from a single value (left). For bivariate, we pick two values, or a point on the the plane (right).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFor the left, we need a mean and SD. What do we need for the right?"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part2/index.html#what-goes-into-a-multivariate-distribution",
+    "href": "content/04-effect-sizes/slides-part2/index.html#what-goes-into-a-multivariate-distribution",
+    "title": "Interlude: Correlated measures",
+    "section": "What goes into a multivariate distribution",
+    "text": "What goes into a multivariate distribution\nEverything’s double:\n\n2 means\n2 SDs\nCorrelation between variables\nAn SD for the entire “mountain”"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part2/index.html#sd-variance-covariance-matrix",
+    "href": "content/04-effect-sizes/slides-part2/index.html#sd-variance-covariance-matrix",
+    "title": "Interlude: Correlated measures",
+    "section": "SD = Variance-covariance matrix",
+    "text": "SD = Variance-covariance matrix\nThe SD for the “mountain” is just the SDs and correlations between the two variables in one place so that we can draw our data from them.\n\\[\n\\begin{bmatrix}\nvar  & cov \\\\\ncov & var \\\\\n\\end{bmatrix}\n\\]"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part2/index.html#this-isnt-new",
+    "href": "content/04-effect-sizes/slides-part2/index.html#this-isnt-new",
+    "title": "Interlude: Correlated measures",
+    "section": "This isn’t new",
+    "text": "This isn’t new\nAll of you have done correlation tables: they’re just standardized versions of the variance-covariance matrix.\n\\[\n\\begin{bmatrix}\nSD  & r \\\\\nr & SD \\\\\n\\end{bmatrix}\n=\n\\begin{bmatrix}\n1  & 0.5 \\\\\n0.5 & 1 \\\\\n\\end{bmatrix}\n\\]"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part2/index.html#so-how-do-we-make-this",
+    "href": "content/04-effect-sizes/slides-part2/index.html#so-how-do-we-make-this",
+    "title": "Interlude: Correlated measures",
+    "section": "So how do we make this?",
+    "text": "So how do we make this?\n\\[\n\\begin{bmatrix}\nvar  & cov \\\\\ncov & var \\\\\n\\end{bmatrix}\n=\n\\begin{bmatrix}\n?  & ? \\\\\n? & ? \\\\\n\\end{bmatrix}\n\\]"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part2/index.html#our-values",
+    "href": "content/04-effect-sizes/slides-part2/index.html#our-values",
+    "title": "Interlude: Correlated measures",
+    "section": "Our values",
+    "text": "Our values\nSay we have an experiment where people give us a baseline measure, then the treatment happens, and we get a post-treatment measures. The measures are normally distributed with means of 10 and 10.5 and SDs of 1.5 and 2. The pre- and post-measure are correlated with \\(r\\) = 0.4.\n\nmeans <- c(pre = 10, post = 10.5)\npre_sd <- 1.5\npost_sd <- 2\ncorrelation <- 0.4"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part2/index.html#getting-variance-and-covariances",
+    "href": "content/04-effect-sizes/slides-part2/index.html#getting-variance-and-covariances",
+    "title": "Interlude: Correlated measures",
+    "section": "Getting variance and covariances",
+    "text": "Getting variance and covariances\nSD is just the square root of the variance. So we go \\(Var = sd^2\\) and we got our variance.\nCovariance is just the correlation times the SDs. So we go \\(covariance = r(pre, post) * sd_{pre} * sd_{post}\\)\n\nvar_pre <- pre_sd**2\nvar_post <- post_sd**2\n\ncovariance <- correlation * pre_sd * post_sd"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part2/index.html#now-lets-combine-all-that-into-a-matrix",
+    "href": "content/04-effect-sizes/slides-part2/index.html#now-lets-combine-all-that-into-a-matrix",
+    "title": "Interlude: Correlated measures",
+    "section": "Now let’s combine all that into a matrix",
+    "text": "Now let’s combine all that into a matrix\n\nour_matrix <- matrix(\n  c(var_pre, covariance, covariance, var_post),\n  ncol = 2\n)\n\nour_matrix\n\n     [,1] [,2]\n[1,] 2.25  1.2\n[2,] 1.20  4.0"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part2/index.html#ready-to-simulate-now",
+    "href": "content/04-effect-sizes/slides-part2/index.html#ready-to-simulate-now",
+    "title": "Interlude: Correlated measures",
+    "section": "Ready to simulate now",
+    "text": "Ready to simulate now\nWe use the mvrnorm function for, well, multivariate normal distributions, from the MASS package. Let’s get a massive sample of 10,000 people.\n\nlibrary(MASS)\n\nd <- \n  mvrnorm(\n    10000,\n    means,\n    our_matrix\n  )\nd <- as.data.frame(d)\nhead(d)\n\n        pre      post\n1  9.641884  8.709398\n2 12.824293 11.082426\n3  9.895452 11.851025\n4 11.295242 10.025020\n5  9.940425  8.382987\n6  8.671538  9.648427"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part2/index.html#lets-check-that",
+    "href": "content/04-effect-sizes/slides-part2/index.html#lets-check-that",
+    "title": "Interlude: Correlated measures",
+    "section": "Let’s check that",
+    "text": "Let’s check that\nLet’s first check the sample to see whether we can recover our numbers.\n\nmean(d$pre); mean(d$post)\n\n[1] 10.00596\n\n\n[1] 10.48671\n\nsd(d$pre); sd(d$post)\n\n[1] 1.496022\n\n\n[1] 2.002508\n\ncor(d$pre, d$post)\n\n[1] 0.4097954"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part2/index.html#run-our-test",
+    "href": "content/04-effect-sizes/slides-part2/index.html#run-our-test",
+    "title": "Interlude: Correlated measures",
+    "section": "Run our test",
+    "text": "Run our test\n\nt.test(\n  d$pre,\n  d$post,\n  paired = TRUE\n)\n\n\n    Paired t-test\n\ndata:  d$pre and d$post\nt = -24.686, df = 9999, p-value < 2.2e-16\nalternative hypothesis: true difference in means is not equal to 0\n95 percent confidence interval:\n -0.5189280 -0.4425778\nsample estimates:\nmean of the differences \n             -0.4807529"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part2/index.html#the-while-operator",
+    "href": "content/04-effect-sizes/slides-part2/index.html#the-while-operator",
+    "title": "Interlude: Correlated measures",
+    "section": "The while operator",
+    "text": "The while operator\nAt this point, we’ve worked with for loops and went from a minimum to a maximum. If that maximum is large, that can take quite some time. You can also consider the while function to stop when you’ve reached the point you want to be at.\n Source"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part2/index.html#easy-example",
+    "href": "content/04-effect-sizes/slides-part2/index.html#easy-example",
+    "title": "Interlude: Correlated measures",
+    "section": "Easy example",
+    "text": "Easy example\n\ni <- 1\n\nwhile (i < 5) {\n  print(i)\n  \n  i <- i + 1\n}\n\n[1] 1\n[1] 2\n[1] 3\n[1] 4"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part2/index.html#how-would-that-work-for-our-purposes",
+    "href": "content/04-effect-sizes/slides-part2/index.html#how-would-that-work-for-our-purposes",
+    "title": "Interlude: Correlated measures",
+    "section": "How would that work for our purposes?",
+    "text": "How would that work for our purposes?\n\ndraws <- 1e3\nn <- 60\neffect_size <- 0.5\n\nd <- data.frame(\n  sample_size = NULL,\n  power = NULL\n)\n\npower <- 0\n\nwhile (power<0.95) {\n  \n  pvalues <- NULL\n  for (i in 1:draws) {\n    control <- rnorm(n)\n    treatment <- rnorm(n, effect_size)\n    t <- t.test(control, treatment, alternative = \"less\")\n    \n    pvalues[i] <- t$p.value\n  }\n  \n  power <- sum(pvalues<0.05) / length(pvalues)\n  \n  d <- rbind(\n    d,\n    data.frame(\n      sample_size = n,\n      power = power\n    )\n  )\n  \n  n <- n + 1\n}"
+  },
+  {
+    "objectID": "content/04-effect-sizes/slides-part2/index.html#what-did-we-just-do",
+    "href": "content/04-effect-sizes/slides-part2/index.html#what-did-we-just-do",
+    "title": "Interlude: Correlated measures",
+    "section": "What did we just do?",
+    "text": "What did we just do?\n\nhead(d)\n\n  sample_size power\n1          60 0.857\n2          61 0.852\n3          62 0.867\n4          63 0.884\n5          64 0.887\n6          65 0.889\n\nplot(d$sample_size, d$power)\nabline(h = 0.95)"
   },
   {
     "objectID": "index.html",

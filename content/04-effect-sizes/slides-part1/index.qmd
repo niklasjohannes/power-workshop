@@ -1,0 +1,624 @@
+---
+title: "Effect sizes"
+subtitle: "Power analysis through simulation in R"
+author: "Niklas Johannes"
+format: 
+  revealjs:
+    theme: ../../slidetheme.scss
+    slide-number: true
+    chalkboard: 
+      buttons: false
+    footer: <https://niklasjohannes.github.io/power-workshop/>
+execute:
+  echo: true
+bibliography: references.bib
+---
+
+# Takeaways
+
+-   Understand the importance of effect sizes
+-   How to formulate a smallest effect size of interest
+-   Know when you don't have enough information
+
+## What's an effect size
+
+[![](effect_size_wikipedia.jpg)](https://en.wikipedia.org/wiki/Effect_size#Cohen's_%C6%922)
+
+[Source](effect_size_wikipedia.jpg)\](https://en.wikipedia.org/wiki/Effect_size#Cohen's\_%C6%922)
+
+## An example
+
+Age predicts grumpiness with a large effect. But the sample is too small for significance.
+
+```{r}
+set.seed(1)
+age <- runif(10, 20, 80)
+grumpiness <- 50 + 0.5 * age + rnorm(10, 0, 20)
+
+cor.test(age, grumpiness)
+```
+
+## An example, this time larger
+
+Age predicts grumpiness with a super tiny effect, but we have a sample of a million, so the effect is significant.
+
+```{r}
+age <- runif(1e6, 20, 80)
+grumpiness <- 50 + 0.01 * age + rnorm(1e6, 0, 20)
+
+cor.test(age, grumpiness)
+```
+
+## An example, this time null
+
+Age doesn't predict grumpiness. Can a nonsignificant p-value tell us that?
+
+```{r}
+age <- runif(1e6, 20, 80)
+grumpiness <- 50 + 0 * age + rnorm(1e6, 0, 20)
+
+cor.test(age, grumpiness)
+```
+
+## Problems with NHST
+
+1.  Doesn't answer what we want to know
+2.  There'll always be a difference
+3.  Nothing special about *p* = 0.05
+
+## Not what we want to know
+
+Remember $P(data|H)$, not $P(H|data)$?
+
+-   We want to know how probable our hypothesis is
+-   P-values don't do that
+-   Wrong focus on significance
+
+## The typical H~0~ is unrealistic
+
+-   Meehl (1991): Everything in the social sciences correlates with everything
+-   So-called "crud factor" [@orben2019]
+-   With large enough samples, anything will be significant
+
+## Significant, but trivial
+
+[![](large_sample_fallacy.jpg)](https://pubmed.ncbi.nlm.nih.gov/22862286/)
+
+[@lantz2013]
+
+## What's so special about 0.05?
+
+> "...If one in twenty does not seem high enough odds, we may, if we prefer it, draw the line at one in fifty or one in a hundred. Personally, the writer prefers to set a low standard of significance at the 5 per cent point, and ignore entirely all results which fails to reach this level. A scientific fact should be regarded as experimentally established only if a properly designed experiment rarely fails to give this level of significance."
+
+From Fisher RA. The arrangement of field experiments. Journal of the Ministry of Agriculture of Great Britain 1926; 33:503-513.
+
+## What are we claiming?
+
+-   Significance threshold = arbitrary
+-   Evidential strength clearing that threshold = arbitrary
+
+## How not to do it
+
+We have three independent groups: control, treatment A, and treatment B. The pesky ethics board asks us to do a power analysis. You head to GPower.
+
+Thankfully, there's a previous study! It had n = 20 per condition and the conditions are only somewhat similar to our planned experiment, but they do report an effect size: $\eta_2 = .21$. Off to GPower!
+
+## Why this this approach isn't ideal
+
+::: incremental
+-   No idea what $\eta_2 = .21$ means: Is that a lot?
+-   There's three groups: What's the effect size for?
+-   Can I trust the previous study?
+:::
+
+## Let's simulate that "previous study"
+
+```{r}
+set.seed(42)
+d <- data.frame(
+  id = 1:60,
+  condition = rep(c("control", "Treatment A", "Treatment B"), times = 20),
+  score = rnorm(60, mean = c(0, 10, 20), sd = 15)
+)
+
+model <- 
+  aov(
+    score ~ condition, data = d
+  )
+
+effectsize::eta_squared(model)
+```
+
+## Notice something?
+
+::: columns
+::: column
+```{r}
+#| echo: false
+
+
+set.seed(42)
+d <- data.frame(
+  id = 1:60,
+  condition = rep(c("control", "Treatment A", "Treatment B"), times = 20),
+  score = rnorm(60, mean = c(0, 10, 20), sd = 15)
+)
+
+boxplot(d$score ~ d$condition)
+```
+:::
+
+::: column
+```{r}
+#| echo: false
+
+
+set.seed(42)
+d <- data.frame(
+  id = 1:60,
+  condition = rep(c("control", "Treatment A", "Treatment B"), times = 20),
+  score = rnorm(60, mean = c(20, 10, 0), sd = 15)
+)
+
+boxplot(d$score ~ d$condition)
+```
+:::
+
+::: column
+```{r}
+#| echo: false
+
+
+set.seed(42)
+d <- data.frame(
+  id = 1:60,
+  condition = rep(c("control", "Treatment A", "Treatment B"), times = 20),
+  score = rnorm(60, mean = c(20, 0, 10), sd = 15)
+)
+
+boxplot(d$score ~ d$condition)
+```
+:::
+
+::: column
+```{r}
+#| echo: false
+
+
+set.seed(42)
+d <- data.frame(
+  id = 1:60,
+  condition = rep(c("control", "Treatment A", "Treatment B"), times = 20),
+  score = rnorm(60, mean = c(10, 0, 20), sd = 15)
+)
+
+boxplot(d$score ~ d$condition)
+```
+:::
+:::
+
+## Wrong rituals
+
+-   Using effect sizes like this will get us nowhere
+-   Rituals and rules of thumbs get in the way of understanding
+-   But effect sizes might well be the most important part of our research
+
+## Where it all began
+
+![](https://images.routledge.com/common/jackets/crclarge/978080580/9780805802832.jpg)
+
+@cohen1988
+
+## Types of effect sizes
+
+1.  Differences between groups (e.g., Cohen's $d$)
+2.  Strength of association (e.g., Pearson's $r$, $R^2$, $\eta^2$)
+3.  Estimates of risks (e.g., relative risks, odds ratios)
+
+## Differences
+
+-   Express difference between groups in variance units, not raw units
+-   Not "How many cm is the difference in height between the groups"
+-   But "How many standard deviation difference in height between the groups"
+
+$d = \frac{M_1-M_2}{pooled\ \sigma}$
+
+$pooled\ \sigma = \sqrt{\frac{(sd_1^2 + sd_2^2)}{2}}$
+
+## Poor Cohen
+
+![](https://media.giphy.com/media/JCAZQKoMefkoX6TyTb/giphy.gif)
+
+## An example
+
+Control group has a mean of 100 and an SD of 20. The treatment group has a mean of 105 and an SD of 10. The difference in the means is $105-100 = 15$ (simplified). The pooled SD is (simplified!) $\frac{20+10}{2} = 15$. So our difference is $5/15$ or simply $d = 0.33$. In other words, our difference is a third of a standard deviation unit.
+
+## So...
+
+Cohen suggested (and later very much regretted) some rules of thumb if a researcher has no better idea:
+
+1.  $d = 0.20$ is a small effect: New lines of research, experiments aren't that sophisticated yet
+2.  $d = 0.50$ is a medium effect: Visible to the naked eye
+3.  $d = 0.80$ is a large effect: Almost half of distributions aren't overlapping
+
+## A word of warning
+
+In small samples, Cohen's *d* will be biased. Use Hedge's *g* instead. In fact, you should probably always use *g*. (Software does it for you anyway.)
+
+$d = \frac{M_1-M_2}{pooled\ \sigma^*}$
+
+## Strength of association
+
+-   Express the strength of association as a regression slope when both variables have been standardized
+-   Not "How many points does grumpiness go up with one extra year"
+-   But "How many standard deviations does grumpiness go up with one extra standard deviation of age"
+
+$r = B_{xy} \frac{\sigma_x}{\sigma_Y}$
+
+## An example
+
+We predict grumpiness with age. The regression slope is 2: With each year, people score 2 higher on grumpiness. The SD of grumpiness is 30. The SD of age is 10. The correlation coefficient is $2*10/30 = .67$. We could've also just standardized both variables and run a regression.
+
+## So...
+
+1.  $r = 0.10$ is a small effect: Cohen believed the majority of effects in the "soft" sciences are in this range
+2.  $r = 0.30$ is a medium effect: Visible to the naked eye to a "reasonably sensitive observer"
+3.  $r = 0.50$ is a large effect: "About as high as they come"
+
+## Translating between the two
+
+Cohen also provides a formula how to get $r$ from $d$. Remember, use Hedge's $g$ instead of $d$.
+
+$r = \frac{d}{\sqrt{d^2 + 4}}$
+
+Back to that medium effect size:
+
+$r = \frac{0.5}{\sqrt{0.5^2 + 4}} = 0.24$
+
+## Variance explained
+
+Strength of association is just another way of saying magnitude of shared variance between variables. Or: Does the blue line do better than the black line?
+
+```{r}
+#| echo: false
+
+library(tidyverse)
+x <- rnorm(20)
+y <- 0.8*x + rnorm(20)
+ggplot(NULL, aes(x = x, y = y)) +
+  geom_point() +
+  geom_smooth(method = "lm", color = "slateblue", se = FALSE) +
+  geom_hline(yintercept = mean(y)) +
+  theme_classic()
+```
+
+## Variance explained
+
+-   Proportion of unexplained variance (residuals) in relation to total variance
+-   For $r$, this is easy to calculate if we only have two variables
+-   $r^2$ tells us the proportion of variance we can explain = $R^2$
+
+$Variance \ explained = \frac{\sigma_{effect}}{\sigma_{total}}$
+
+## What about our conventions?
+
+1.  $r^2 = 0.10^2 = 1\%$ is a small effect: Cohen believed the majority of effects in the "soft" sciences are in this range
+2.  $r^2 = 0.30^2 = 9\%$ is a medium effect: Visible to the naked eye to a "reasonably sensitive observer"
+3.  $r^2 = 0.50^2 = 25\%$ is a large effect: "About as high as they come"
+
+## Thank you, SPSS
+
+In the ANOVA context, we often use $\eta^2$, because it has been standard in SPSS output [@lakens2013].
+
+$\eta^2 = \frac{SS_{effect}}{SS_{total}}$
+
+-   Tells us, once again, what % of variance is accounted for by group membership
+-   Straightforward with two variables (group membership and outcome)
+
+## Insert confusion
+
+![](eta_squared.jpg)
+
+$\eta^2_p = \frac{SS_{effect}}{SS_{total} + SS_{error}}$
+
+-   If there's more than one predictor, gives us the effect size per predictor
+-   So one effect size indicator for main effect(s) and interactions [@levine2002]
+
+## All the same?
+
+-   When there's only one predictor, $\eta^2$, $\eta^2_p$, and $R^2$ are the same: Variance accounted for by effect
+-   When there's multiple effects, you can state variance explained for the entire model or invidual effects
+-   Multiple effects require overall model ($R^2$) and individual effect estimates ($\eta^2_p$, partial $R^2$)
+
+## Are we done, please?
+
+$f$ mostly used for one-way ANOVAs
+
+-   A measure of how wide means are spread in ANOVA relative to variation within groups
+-   Cut-offs suggested by Cohen: 0.10, 0.25, 0.40
+
+$f^2$ mostly used for regressions, but also one-way, or multi-way ANOVAs
+
+-   Again a measure of how much variance an effect (just easier to work with squared values)
+-   Cut-offs suggested by Cohen: .02, .15, .35
+
+## Corrections
+
+These effect sizes of shared variance are often biased. Instead, use $\omega^2$ or $\epsilon^2$. Don't panic: Smart people have provided spreadsheets.
+
+Effect size converter: <https://osf.io/vbdah/>
+
+## My head is spinning
+
+All you need to remember:
+
+-   Effect sizes can be for differences between two groups ($d$)
+-   Effect sizes can be for strength of associations ($r$, $R^2$, $\eta^2$, $\eta^2_p$, $f$, $f^2$)
+-   Every effect size can be transformed into one another
+-   Cut-offs are really arbitrary
+
+## About squaring things
+
+-   Half of a perfect correlation ($r$ = 1.00, $r^2$ = 100%) is $r$ = 0.50, $r^2$ = 25%
+-   Why are we interested in variance and not standard deviations all of a sudden
+-   Might be useful for model fit, but less intuitive for individual effect
+
+> Squaring the r is not merely uninformative; for purposes of evaluating effect size, the practice is actively misleading. \[@funder2019, p. 3\]
+
+## About squaring things
+
+The moment we move beyond two groups or bivariate relationships:
+
+-   Variance explained can mean almost any pattern
+-   Our hypotheses are rarely about partial effects or total model variance
+-   Reporting them isn't really informative
+
+> As a rule, reports of effect size should focus on 1 *df* effects. \[@baguley2009, p. 614\]
+
+## So what effect sizes are typical?
+
+::: columns
+::: column
+-   708 correlations from Personality Psychology
+-   25th, 50th, and 75th percentiles = $r$ of 0.11, 0.19, and 0.29
+-   \< 3% of correlations were large (aka 0.50 or larger)
+:::
+
+::: column
+![](personality.jpg)
+
+[@gignac2016]
+:::
+:::
+
+## So what effect sizes are typical?
+
+-   26,841 effects from cognitive neuroscience and psychology
+-   Median $d$ for significant results: 0.93
+-   Median $d$ for nonsignificant results: 0.24
+
+![](neuroscience.jpg)
+
+[@szucs2017]
+
+## So what effect sizes are typical?
+
+::: columns
+::: column
+-   12,170 $r$s and 6,447 $d$s from 134 meta-analyses
+-   25th, 50th, and 75th percentiles =$r$ of 0.12, 0.24, and 0.41
+-   $d$ of 0.15, 0.36, and 0.65
+:::
+
+::: column
+![](all_psychology.jpg)
+
+[@lovakov2021]
+:::
+:::
+
+## And in communication?
+
+![](communication.jpg)
+
+[@rains2018]
+
+## Getting a feel
+
+So... is $r$ = .21 big then? [@meyer2001]
+
+-   Extent of social support and enhanced immune functioning: .21
+-   Quality of parents' marital relationship and quality of parent-child relationship: .22
+-   Effect of alcohol on aggressive behavior: .23
+
+## Getting too much of a feel
+
+-   Violent video game vs. racing game condition: $d$ = 3.46 [@hilgard2021]
+-   Cancer-prone personality 121 times more likely to die of disease [source](https://www.theguardian.com/science/2019/oct/11/work-of-renowned-uk-psychologist-hans-eysenck-ruled-unsafe)
+-   Massive effect sizes are often a sign that something fishy is going on
+
+## Heard of the replication crisis?
+
+::: columns
+::: column
+![](replicability.jpg)
+
+[@opensciencecollaboration2015]
+:::
+
+::: column
+![](positive.jpg)
+
+[@fanelli2012]
+:::
+:::
+
+## A good bad example
+
+![](bias.jpg)
+
+[@devries2018]
+
+## We're likely overestimating
+
+![](reduction.jpg)
+
+[@schäfer2019]
+
+## Crud
+
+When we correlate variables that are specifically selected not to be related, we still reach $r$ \~ .10.
+
+![](crud.jpg)
+
+[@ferguson2021]
+
+## Okay, how about pilots?
+
+::: columns
+::: column
+-   Pilots are small and small studies have more variability
+-   So we'll often land on effects that will require massive samples
+-   If those exceed our means, we run into **follow-up bias**
+-   Getting effect sizes from pilots not a good idea
+:::
+
+::: column
+![](pilots.jpg)
+
+[@albers2018]
+:::
+:::
+
+## So what shall we do?
+
+Several considerations [@funder2019]:
+
+-   Compare to classical studies?
+-   Field in general?
+-   Other benchmarks?
+-   Cumulative or not?
+
+## SESOI
+
+Smallest effect size of interest [@anvari2021]
+
+-   Why rely on previous research that is notoriously unreliable?
+-   You should define what effect you find worth looking for?
+-   At what point do you not care about an effect anymore?
+-   Make falsifiable and testable studies
+
+## Tradition
+
+Minimally detectable difference
+
+-   Smallest increase in an outcome that we care about
+-   Pain, surgery, etc.
+-   Anywhere where we need to balance not just theory, but also limited resources
+
+## How do I determine the SESOI?
+
+-   Objective benchmarks (e.g., half an SD for health outcomes)
+-   Same considerations: In relation to field, time frame, etc.
+-   Maximum positive control
+-   Cost benefit analysis
+-   Empirical benchmarks
+
+## Cost-benefit
+
+Often used in medicine:
+
+-   We know the effect of one drug
+-   Our effect becomes same size for less resources
+-   Or more than half the effect for half the resources
+
+## Empirical benchmarks
+
+::: columns
+::: column
+![](schools.jpg)
+:::
+
+::: column
+-   What's the performance gap between low and high performers in school
+-   That's the minimum effect we want to achieve
+-   Anything less is uninteresting and we should invest our resources somewhere else
+
+[@hill2008]
+:::
+:::
+
+## Empirical benchmarks
+
+-   What's the expected growth that would naturally occur?
+-   Example: Reading ability from one grade to the next
+-   We want to achieve an effect of at least that size as our SESOI
+
+[@hill2008]
+
+## Empirical benchmarks
+
+Global ratings of change methods:
+
+-   Comes from medicine
+-   Psychological states are inherently subjective
+-   So we need to rely on people informing us when they can feel a difference
+
+## Empirical benchmarks
+
+Procedure [@anvari2021a]:
+
+1.  Ask participants how they feel
+2.  Perform intervention
+3.  Ask them again how they feel
+4.  Ask whether it has gotten better or not
+5.  Look at the average difference in scores for those who say there's improvement
+
+## Empirical benchmarks
+
+![](anchor.jpg)
+
+## Changes my interpretation and conclusions
+
+> My study has 80% power to detect a medium sized effect, as shown by the meta-analysis by XYZ.
+
+Translation: If this doesn't work, we have learned close to nothing.
+
+> I designed my study to be able to detect an effect of a certain size with 95% power. Anything smaller than that is uninteresting. Don't waste resources if you're hoping to find an effect this large.
+
+Translation: I thought about what I want and I'm putting that part of the process up for debate.
+
+## Maximum positive controls [@hilgard2021]
+
+-   Produce the largest effect you possibly can
+-   Tell participants to imagine what would happen (aka induce demand artifacts)
+-   Puts a limit on the maximum effect you can expect
+
+## On what scale
+
+Unstandardized measures have several advantages:
+
+-   Scale independent of variance
+-   More intuitive and easier to understand
+-   Less prone to error in calculation
+
+[@baguley2009]
+
+## Raw for the win
+
+-   Standardized effects can be helpful in comparison or initial explorations
+-   But standard deviations aren't objective units that just happen
+-   Raw effect sizes force you to put a number on things and think about whether you know enough for a confirmatory study
+
+# Takeaways
+
+-   Understand the importance of effect sizes
+-   How to formulate a smallest effect size of interest
+-   Know when you don't have enough information
+
+# Now let's get simulating
+
+## References
+
+::: {#refs}
+:::

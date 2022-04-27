@@ -11,6 +11,69 @@
     div.column{display: inline-block; vertical-align: top; width: 50%;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
 
   <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -48,12 +111,13 @@
       "search-submit-button-title": "Submit"
     }
   }</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
   <link rel="stylesheet" href="../../styles.css">
 </head>
-<body class="docked fullcontent">
+<body class="docked">
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -146,12 +210,17 @@
     <ul id="quarto-sidebar-section-effect-sizes" class="collapse list-unstyled sidebar-section depth1 show">  
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../content/04-effect-sizes/04-slides.html" class="sidebar-item-text sidebar-link">Effect sizes</a>
+  <a href="../../content/04-effect-sizes/04-slides-part1.html" class="sidebar-item-text sidebar-link">Slides - Part 1</a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../content/04-effect-sizes/04-exercise.html" class="sidebar-item-text sidebar-link active">Exercise II</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../content/04-effect-sizes/04-slides-part2.html" class="sidebar-item-text sidebar-link">Slides - Part 2</a>
   </div>
 </li>
     </ul>
@@ -270,14 +339,283 @@
     </div>
 </nav>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+<h2 id="toc-title">On this page</h2>
+<ul>
+<li><a href="#overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+<li><a href="#block-1" class="nav-link" data-scroll-target="#block-1"> <span class="header-section-number">1</span> Block 1</a>
+<ul class="collapse">
+<li><a href="#exercise" class="nav-link" data-scroll-target="#exercise"> <span class="header-section-number">1.1</span> Exercise</a></li>
+<li><a href="#exercise-1" class="nav-link" data-scroll-target="#exercise-1"> <span class="header-section-number">1.2</span> Exercise</a></li>
+<li><a href="#exercise-2" class="nav-link" data-scroll-target="#exercise-2"> <span class="header-section-number">1.3</span> Exercise</a></li>
+<li><a href="#exercise-3" class="nav-link" data-scroll-target="#exercise-3"> <span class="header-section-number">1.4</span> Exercise</a></li>
+<li><a href="#exercise-4" class="nav-link" data-scroll-target="#exercise-4"> <span class="header-section-number">1.5</span> Exercise</a></li>
+<li><a href="#exercise-5" class="nav-link" data-scroll-target="#exercise-5"> <span class="header-section-number">1.6</span> Exercise</a></li>
+<li><a href="#exercise-6" class="nav-link" data-scroll-target="#exercise-6"> <span class="header-section-number">1.7</span> Exercise</a></li>
+<li><a href="#exercise-7" class="nav-link" data-scroll-target="#exercise-7"> <span class="header-section-number">1.8</span> Exercise</a></li>
+<li><a href="#exercise-8" class="nav-link" data-scroll-target="#exercise-8"> <span class="header-section-number">1.9</span> Exercise</a></li>
+<li><a href="#exercise-9" class="nav-link" data-scroll-target="#exercise-9"> <span class="header-section-number">1.10</span> Exercise</a></li>
+</ul></li>
+<li><a href="#block-2" class="nav-link" data-scroll-target="#block-2"> <span class="header-section-number">2</span> Block 2</a>
+<ul class="collapse">
+<li><a href="#exercise-10" class="nav-link" data-scroll-target="#exercise-10"> <span class="header-section-number">2.1</span> Exercise</a></li>
+<li><a href="#exercise-11" class="nav-link" data-scroll-target="#exercise-11"> <span class="header-section-number">2.2</span> Exercise</a></li>
+<li><a href="#exercise-12" class="nav-link" data-scroll-target="#exercise-12"> <span class="header-section-number">2.3</span> Exercise</a></li>
+<li><a href="#exercise-13" class="nav-link" data-scroll-target="#exercise-13"> <span class="header-section-number">2.4</span> Exercise</a></li>
+<li><a href="#exercise-14" class="nav-link" data-scroll-target="#exercise-14"> <span class="header-section-number">2.5</span> Exercise</a></li>
+<li><a href="#exercise-15" class="nav-link" data-scroll-target="#exercise-15"> <span class="header-section-number">2.6</span> Exercise</a></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 <header id="title-block-header" class="quarto-title-block default">
 
 <div class="quarto-title"><h1 class="title d-none d-lg-block display-7">Exercise II</h1></div></header>
 
+<section id="overview" class="level1 unnumbered">
+<h1 class="unnumbered">Overview</h1>
+<p>Welcome to the next set of exercises. At this point, I hope you feel somewhat comfortable with the logic of simulations as well as the commands that get you there. Now, we’ll try to use these commands to add to your understanding of effect sizes and add an extra layer (aka another loop level). That’s what you’ll do in the first block.</p>
+<p>In the second block, we’ll add a tad more complexity. You’ll get going with correlated measures (aka paired-sampled t-test) and get to know the <code>while</code> command.</p>
+</section>
+<section id="block-1" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Block 1</h1>
+<section id="exercise" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="exercise"><span class="header-section-number">1.1</span> Exercise</h2>
+<p>What’s the distribution of p-values when there’s no effect? Create two independent groups, both with the same mean and standard deviation in <code>rnorm</code> (because there’s no effect). Use <code>rnorm</code>’s default mean and SD. Each group should have 50 participants. Run an independent, two-tailed t-test and store the p-value. Repeat 10,000 times. Now plot the p-values as a histogram (<code>hist</code>). Did you expect them to look like this?</p>
+<div class="cell">
 
+</div>
+</section>
+<section id="exercise-1" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="exercise-1"><span class="header-section-number">1.2</span> Exercise</h2>
+<p>Now let’s check empirically why p-values alone don’t tell us much. Repeat your simulation from above, but this time create two “experiments” per run: One where there’s no difference (like you already have above, with mean = 0 and SD = 1), but also one where there’s a massive difference (at least mean = 0.8, SD = 1). Store the p-values of the no difference experiments and the p-values of the massive difference experiments in a data frame, with one variable for <code>condition</code> and one for <code>pvalue</code>.</p>
+<p>Now plot both as densities (so two density lines). Us this code (call the data frame <code>d</code> and the number of simulations <code>runs</code>):</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> pvalue, <span class="at">color =</span> condition)) <span class="sc">+</span> <span class="fu">geom_density</span>() <span class="sc">+</span> <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.05</span>)) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="dv">0</span>, runs<span class="sc">/</span><span class="dv">5</span>)) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Look at the p = 0.04. If were to run an experiment, not knowing which reality (no effect or massive effect) our experiments comes from, which one is more likely with a p-value of 0.04? If all we know is that our p-value is 0.04, what’s our best bet for the reality our experiment comes from: no effect or massive effect?</p>
+<div class="cell">
+
+</div>
+</section>
+<section id="exercise-2" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="exercise-2"><span class="header-section-number">1.3</span> Exercise</h2>
+<p>Google “Lindley’s paradox”. Let’s return to our alpha (0.05) in one of the next sessions: but keep this in mind.</p>
+</section>
+<section id="exercise-3" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="exercise-3"><span class="header-section-number">1.4</span> Exercise</h2>
+<p>Let’s expand on our simulation skills from the previous sessions. In previous sessions, we simulated t-tests for different sample sizes over many repetitions. That was a loop in a loop: We’re looping over sample size, then, for each sample size, we looped over the number of simulations. Now, let’s add another layer: the effect size.</p>
+<p>Create a simulation for an independent t-test. The mean for the control group should be 4 with an SD of 1. The means for the treatment group should be 4.2 (small), 4.5 (medium), and 4.8 (large), with an SD that’s always 1. Create a data.frame, store <code>effect_size</code> (so the difference in means between the groups: small, medium, and large), the sample size (from 20:100), and the mean power for this effect size and sample size.</p>
+<p>Tip, you could go about this with the following structure:</p>
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (asize <span class="cf">in</span> <span class="fu">c</span>(<span class="fl">4.2</span>, <span class="fl">4.5</span>, <span class="fl">4.8</span>)) {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (asample <span class="cf">in</span> minimum<span class="sc">:</span>maximum) {</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (arun <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>runs) {</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Go for 200 runs for each combination of effect size and sample size. Plot the results afterwards with (assuming your data frame is called <code>outcome</code>):</p>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(outcome, <span class="fu">aes</span>(<span class="at">x =</span> sample_size, <span class="at">y =</span> power, <span class="at">color =</span> <span class="fu">as.factor</span>(effect_size))) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+
+</div>
+</section>
+<section id="exercise-4" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="exercise-4"><span class="header-section-number">1.5</span> Exercise</h2>
+<p>Guess what? The power analysis you did above was on the standardized scale. Do you know why? Let’s look at the formula for Cohen’s d again:</p>
+<p><span class="math inline">\(d = \frac{M_1-M_2}{pooled \ SD}\)</span></p>
+<p>Above, our means were 4 for the control group, and 4.2, 4,5, and 4.8 for the treatment group. Crucially, the SD was 1 for all groups. That means, very conveniently, that the differences are 0.2, 0.5, and 0.8 standard deviations–and Cohen’s <span class="math inline">\(d\)</span> is measured in standard deviations.</p>
+<p>You can verify that yourself. Simulate a normally distributed control group (10,000) cases with a mean of 100 and an SD of 1. Also simulate a treatment group with a mean of 101 and and SD of 1. Then do two more groups, but this time increase the SD for both groups to 2. What should happen to Cohen’s <span class="math inline">\(d\)</span> from the first comparison to the second? Verify your intuition by using <code>effectsize::cohens_d</code> function.</p>
+<div class="cell">
+
+</div>
+</section>
+<section id="exercise-5" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="exercise-5"><span class="header-section-number">1.6</span> Exercise</h2>
+<p>Probably the easiest way to simulate standardized effects is to simply rely on variables that are already standardized. Look up the default values of <code>rnorm</code>. SD here is set to 1, so whatever difference we put down as the difference in means between the two groups will be our Cohen’s <span class="math inline">\(d\)</span>. Simulate power for a Cohen’s <span class="math inline">\(d\)</span> of 0.1 in an independent, two-tailed t-test for a sample size ranging from 10:1000. Use 200 simulations per sample size (or more, if you’re fine waiting for a couple of minutes). Before looking at the results: How many people do you think you’ll need per group for 95% power? Verify that in GPower.</p>
+<div class="cell">
+
+</div>
+</section>
+<section id="exercise-6" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="exercise-6"><span class="header-section-number">1.7</span> Exercise</h2>
+<p>How much power do we gain if we specify the direction of a test? Run a simulation with a Cohen’s <span class="math inline">\(d\)</span> of 0.5 for sample sizes of 20 to 100 (1,000 samples each). For each run, do a one-tailed and a two-tailed t-test. Then plot the power curves and calculate the average power (across all sample sizes) for the two.</p>
+<p>If you store the following data frame, you can use the below code for plotting. ::: {.cell}</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>outcomes <span class="ot">&lt;-</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">sample_size =</span> <span class="cn">NULL</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="cn">NULL</span>, <span class="co"># for one vs. two-tailed</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">power =</span> <span class="cn">NULL</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>:::</p>
+<div class="cell">
+
+</div>
+</section>
+<section id="exercise-7" class="level2" data-number="1.8">
+<h2 data-number="1.8" class="anchored" data-anchor-id="exercise-7"><span class="header-section-number">1.8</span> Exercise</h2>
+<p>So far, getting a pooled SD was easy because it was the same in both groups. Let’s see how we can simulate standardized effect sizes (Cohen’s <span class="math inline">\(d\)</span> in this case). Write a function that calculates the pooled SD from two SDs. The formula:</p>
+<p><span class="math inline">\(pooled = \sqrt{\frac{(sd_1^2 + sd_2^2)}{2}}\)</span></p>
+<p>Then think about two groups that have different SDs. Say we measured something on a 7-point scale. The control group has an SD of 0.5, whereas the treatment group has an SD of 1.7.</p>
+<p>How large does the difference in means have to be for a <span class="math inline">\(d\)</span> of 0.25? Prove it with a simulation, using the following code:</p>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fl">1e4</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>control <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, ?, <span class="fl">0.5</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>treatment <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, ?, <span class="fl">1.7</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>effectsize<span class="sc">::</span><span class="fu">cohens_d</span>(control, treatment)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+
+</div>
+</section>
+<section id="exercise-8" class="level2" data-number="1.9">
+<h2 data-number="1.9" class="anchored" data-anchor-id="exercise-8"><span class="header-section-number">1.9</span> Exercise</h2>
+<p>Do the above again, but this time add 1 to the mean of both control group and treatment group. What do you notice?</p>
+<div class="cell">
+
+</div>
+</section>
+<section id="exercise-9" class="level2" data-number="1.10">
+<h2 data-number="1.10" class="anchored" data-anchor-id="exercise-9"><span class="header-section-number">1.10</span> Exercise</h2>
+<p>The above example shows how arbitrary it can be to go for a standardized effect size. You calculated power in two ways:</p>
+<ol type="1">
+<li>You decided what your Cohen’s <span class="math inline">\(d\)</span> is and just went with an SD of 1, ignoring how the SD of your <strong>actual</strong> variables might look like</li>
+<li>You specified the SDs for both groups and then calculated the pooled SD to adjust the means of the groups</li>
+</ol>
+<p>The first option is easy, but comes with all the limitations of standardized effect sizes we talked about. The second option requires much more thought–but it ignores the absolute level of the means because you only specify means in their distance from each other in SD units. In fact, I’d argue that if you’ve made it this far and thought about the variation in your measures, you might as well think about the means and their differences in raw units.</p>
+<p>Standard deviations can be really hard to determine. In that case, you could also examine uncertainty around the SDs of each group. Simulate an independent t-test (one-sided, 1,000 simulations) over sample sizes 50:150. The control group has a mean of 100, the treatment group a mean of 105. Simulate over two conditions: Where the SD (both groups have the same SD) is 10 and one where it’s 25.</p>
+<p>This time, save everything in a data frame: The <code>sd</code> (small or large), the <code>sample_size</code>, the number of the <code>run</code>, and the <code>pvalue</code>. That means your data frame will have 2 SD x 50 sample sizes x 1,000 simulations. With the data frame, get the power per SD and sample size (tip: use <code>aggregate</code> or <code>group_by</code> if you use the tidyverse). Then plot the two power curves. You can use the following code:</p>
+<div class="cell">
+<div class="sourceCode" id="cb6"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> sample_size, <span class="at">y =</span> power, <span class="at">color =</span> <span class="fu">as.factor</span>(sd))) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Pay attention to two things: What does it do to your runtime? (Spoiler: It’ll take a while!). Second: How does the SD influence power?</p>
+<div class="cell">
+
+</div>
+</section>
+</section>
+<section id="block-2" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Block 2</h1>
+<section id="exercise-10" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="exercise-10"><span class="header-section-number">2.1</span> Exercise</h2>
+<p>Alright, now let’s get familiar with the <code>while</code> function. Simulate (200 runs) an independent (we’ll go paired soon enough) t-test (two-tailed) for two difference effect sizes. The SD for both groups is 2. The mean for the control group is 100. In the small effects condition, the treatment group is 0.5 points larger. In the large effects condition, the treatment group is 1 points larger.</p>
+<p>Start at a sample size of 25 and stop when you reach 95% power. Plot the power curve and show that the larger effect size stops much earlier.</p>
+<div class="cell">
+<div class="sourceCode" id="cb7"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(outcomes, <span class="fu">aes</span>(<span class="at">x =</span> sample_size, <span class="at">y =</span> power, <span class="at">color =</span> <span class="fu">as.factor</span>(effect_size))) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.95</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb8"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>effect_sizes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">small =</span> <span class="fl">0.5</span>, <span class="at">large =</span> <span class="dv">1</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>draws <span class="ot">&lt;-</span> <span class="dv">200</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>outcomes <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">effect_size =</span> <span class="cn">NULL</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">sample_size =</span> <span class="cn">NULL</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">power =</span> <span class="cn">NULL</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (asize <span class="cf">in</span> effect_sizes) {</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  power <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> (power <span class="sc">&lt;</span> <span class="fl">0.95</span>) {</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    pvalues <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>draws) {</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>      control <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>      treatment <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">100</span> <span class="sc">+</span> asize, <span class="dv">2</span>)</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>      t <span class="ot">&lt;-</span> <span class="fu">t.test</span>(control, treatment)</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>      pvalues[i] <span class="ot">&lt;-</span> t<span class="sc">$</span>p.value</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>    power <span class="ot">&lt;-</span> <span class="fu">sum</span>(pvalues <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">/</span> <span class="fu">length</span>(pvalues)</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>    outcomes <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>      outcomes,</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>      <span class="fu">data.frame</span>(</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">effect_size =</span> asize,</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>        <span class="at">sample_size =</span> n,</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>        <span class="at">power =</span> <span class="fu">sum</span>(pvalues <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">/</span> <span class="fu">length</span>(pvalues)</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>    n <span class="ot">&lt;-</span> n <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(outcomes, <span class="fu">aes</span>(<span class="at">x =</span> sample_size, <span class="at">y =</span> power, <span class="at">color =</span> <span class="fu">as.factor</span>(effect_size))) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.95</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercise-11" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="exercise-11"><span class="header-section-number">2.2</span> Exercise</h2>
+<p>You’re measuring people’s mood twice: right before and right after lunch. You know from extensive study on effect sizes that mood needs to increase by 0.5 points on a 7-point scale for other people to notice. You assume the the SD is somewhere around 1.5, with a bit more variation before lunch (1.7) than after lunch (1.5). You also assume that mood is correlated to some degree, say 0.5.</p>
+<p>You have budget for a maximum sample of 100. How many people do you need to measure to achieve 87% power to detect this 1-point effect–and do you need to go to your max? Use 500 simulations per run. (Tip: the samples are correlated, so you’ll need to specify a variance-covariance matrix.) Verify with GPower.</p>
+<div class="cell">
+
+</div>
+</section>
+<section id="exercise-12" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="exercise-12"><span class="header-section-number">2.3</span> Exercise</h2>
+<p>How does the correlation between measures influence the power of your test? Do the above simulation again, but this time try out correlations between pre and post scores of 0.3, 0.5, 0.7. What do you expect to happen?</p>
+<div class="cell">
+
+</div>
+</section>
+<section id="exercise-13" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="exercise-13"><span class="header-section-number">2.4</span> Exercise</h2>
+<p>What’s happening above? With higher correlations, you also have more power. The formula for Cohen’s <span class="math inline">\(d\)</span> for a paired samples t-test is different from the independent samples t-test one:</p>
+<p><span class="math inline">\(Cohen's \ d = \frac{M_{diff}-\mu_o}{SD_{diff}}\)</span></p>
+<p>(<span class="math inline">\(\mu_0\)</span> is 0 because our H<sub>0</sub> is no difference). Show the effect of the correlation between the scores on effect size with a simulation. The pre-score has a mean of 5 and an SD of 1.1; the post-score has a mean of 5.2 with an SD of 0.8. Go with a sample size of 100.</p>
+<p>Simulate the samples with different correlations between the scores, ranging from 0.01 to 0.99. For each correlation, run 1,000 samples, then calculate Cohen’s <span class="math inline">\(d\)</span> and get the mean of <span class="math inline">\(d\)</span> for this correlation. Then plot <span class="math inline">\(d\)</span> for the range of correlations. (Tip: You can create the correlations in such small steps with <code>seq</code>.)</p>
+<div class="cell">
+
+</div>
+</section>
+<section id="exercise-14" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="exercise-14"><span class="header-section-number">2.5</span> Exercise</h2>
+<p>Now you see how standardized effect sizes can become quite the problem: With an increase in the correlation between measures, your <span class="math inline">\(SD_{diff}\)</span> beomes smaller, whereas the means remain unchanged. In other words, the effect sizes becomes larger with decreasing SD because the difference in means turns into more standard deviation units.</p>
+<p>It’s hard–if not impossible–to have an intuition about what Cohen’s <span class="math inline">\(d\)</span> you can go for because you’ll need to know the means, SDs, and their correlations. If you know those, you have enough information to work on the raw scale anyway–and as we know, the raw scale is much more intuitive.</p>
+<p>You can showcase how hard that intuition is by skipping straight to the difference score. That’s what a paired samples t-test is: it’s a one-sample t-test of the difference between scores against H<sub>0</sub>, so for demonstration you can also simulate from the difference. <code>t.test(control, treatment, paired = TRUE)</code> is the same as <code>t.test(difference, mu = 0)</code> (if our H<sub>0</sub> is indeed 0).</p>
+<p>Simulate power for Cohen’s <span class="math inline">\(d\)</span> of 0.4 in a paired sampled t-test, using difference scores. That means you just need a normal distribution of difference scores. How do you know the <span class="math inline">\(d\)</span> is 0.4? Well, choose a mean that’s 40% of whatever SD you specify.</p>
+<p>Use 1,000 runs and <code>while</code> to stop whenever you reach 93% power, starting at a sample size of 20. Verify with GPower.</p>
+<div class="cell">
+
+</div>
+</section>
+<section id="exercise-15" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="exercise-15"><span class="header-section-number">2.6</span> Exercise</h2>
+<p>You’re working for a fitness company that helps people gain muscle mass. They’re currently working on when people should measure their muscle mass: in the morning or in the evening or does that not matter?</p>
+<p>It’s your job to find out. You know that if differences are off by less than 5%, time of measurement doesn’t matter. If it does matter, though, you need to tell customers that they need to be consistent in when they measure themselves.</p>
+<p>Now you plan the study. It’ll be expensive: You need to provide each person with an advanced measurement scale and pay them to measure once in the morning and once in the evening.</p>
+<p>You have resources for a maximum of 200 people. Calculate power (95%, you want to be certain) and check whether you need to collect the full sample. Go about it as you find most sensible. (Tip: There’s no correct answer–we simply don’t have enough information.)</p>
+<div class="cell">
+
+</div>
+
+
+</section>
+</section>
 </main> <!-- /main -->
 <script type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {

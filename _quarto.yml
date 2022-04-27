@@ -22,8 +22,9 @@ website:
           - "content/03-simulations-in-r/03-exercise.qmd"
       - section: "Effect sizes"
         contents:
-          - "content/04-effect-sizes/04-slides.qmd"
+          - "content/04-effect-sizes/04-slides-part1.qmd"
           - "content/04-effect-sizes/04-exercise.qmd"
+          - "content/04-effect-sizes/04-slides-part2.qmd"
       - section: "Alpha, beta, sensitivity"
         contents:
           - "content/05-alpha-beta-sensitivity/05-slides.qmd"

@@ -1,0 +1,308 @@
+---
+title: "Interlude: Correlated measures"
+subtitle: "Power analysis through simulation in R"
+author: "Niklas Johannes"
+format: 
+  revealjs:
+    theme: ../../slidetheme.scss
+    slide-number: true
+    chalkboard: 
+      buttons: false
+    footer: <https://niklasjohannes.github.io/power-workshop/>
+execute:
+  echo: true
+---
+
+# Takeaways
+
+- Understand difference between independent and correlated measures
+- Know how to simulate correlated measures
+- Get to know the `while` logic
+
+## So far
+
+So far we've been drawing samples from two independent groups.
+
+```{r}
+set.seed(42)
+
+control <- rnorm(100)
+treatment <- rnorm(100, 0.2)
+
+t.test(control, treatment)
+```
+
+## What about two measures from the same person
+
+- Think of a typical pre/posttest design
+- Someone who has a tendency to score low will therefore score low on both pre- and post-test measure
+- The measures are correlated
+- We need to take into account that measures come from the same unit in simulating
+
+## Each person gets their own distribution
+
+We've already done that with `replicate` and `for` loops: Each person gets their own distribution rather than drawing from the same distribution (although in effect this is the same here).
+
+```{r}
+n <- 200
+d1 <- data.frame(
+  id = rep(letters[1:2], each = n/2),
+  x = rnorm(n)
+)
+d2 <- 
+  data.frame(
+    x = replicate(2, rnorm(n/2))
+  )
+d2 <- stack(d2)
+d2$id <- rep(letters[1:2], each = n/2)
+```
+
+## So how do we get correlated measures?
+
+- We need to increase the dimensions
+- So far, we've worked with one dimension: our dependent variable only
+- But if a person has multiple measures, that means we don't just have one normal distribution
+- We have two correlated normal distributions: a **multivariate normal** distribution
+
+## How does that look like?
+
+For univariate, we pick from a single value (left). For bivariate, we pick two values, or a point on the the plane (right).
+
+:::: {.columns}
+
+:::: {.column}
+```{r}
+#| echo: false
+
+d <- rnorm(1e4)
+
+plot(density(d))
+```
+
+
+::::
+
+:::: {.column}
+```{r}
+#| echo: false
+
+library(MASS)
+
+means <- c(pre = 100, post = 105)
+pre_sd <- 2
+post_sd <- 2
+correlation <- 0.5
+
+sigma <- matrix(c(pre_sd^2, pre_sd*post_sd*correlation, pre_sd*post_sd*correlation, post_sd^2), ncol = 2)
+
+d <- data.frame(mvrnorm(1e4, means, sigma))
+
+d_density <- kde2d(d[,1], d[,2], n = 50)
+
+par(mar = c(0, 0, 0, 0))
+persp(d_density, phi = 45, theta = 30, xlab = "pre-measure", ylab = "post-measure", zlab = "frequency")
+```
+
+::::
+
+::::
+
+For the left, we need a mean and SD. What do we need for the right?
+
+## What goes into a multivariate distribution
+
+Everything's double:
+
+- 2 means
+- 2 SDs
+- Correlation between variables
+- An SD for the entire "mountain"
+
+## SD = Variance-covariance matrix
+
+The SD for the "mountain" is just the SDs and correlations between the two variables in one place so that we can draw our data from them.
+
+$$
+\begin{bmatrix} 
+var  & cov \\ 
+cov & var \\ 
+\end{bmatrix}
+$$
+
+## This isn't new
+
+All of you have done correlation tables: they're just standardized versions of the variance-covariance matrix.
+
+$$
+\begin{bmatrix} 
+SD  & r \\ 
+r & SD \\ 
+\end{bmatrix}
+=
+\begin{bmatrix} 
+1  & 0.5 \\ 
+0.5 & 1 \\ 
+\end{bmatrix}
+$$
+
+## So how do we make this?
+
+$$
+\begin{bmatrix} 
+var  & cov \\ 
+cov & var \\ 
+\end{bmatrix}
+=
+\begin{bmatrix} 
+?  & ? \\ 
+? & ? \\ 
+\end{bmatrix}
+$$
+
+## Our values
+
+Say we have an experiment where people give us a baseline measure, then the treatment happens, and we get a post-treatment measures. The measures are normally distributed with means of 10 and 10.5 and SDs of 1.5 and 2. The pre- and post-measure are correlated with $r$ = 0.4.
+
+```{r}
+means <- c(pre = 10, post = 10.5)
+pre_sd <- 1.5
+post_sd <- 2
+correlation <- 0.4
+```
+
+## Getting variance and covariances
+
+SD is just the square root of the variance. So we go $Var = sd^2$ and we got our variance.
+
+Covariance is just the correlation times the SDs. So we go $covariance = r(pre, post) * sd_{pre} * sd_{post}$
+
+```{r}
+var_pre <- pre_sd**2
+var_post <- post_sd**2
+
+covariance <- correlation * pre_sd * post_sd
+```
+
+## Now let's combine all that into a matrix
+
+```{r}
+our_matrix <- matrix(
+  c(var_pre, covariance, covariance, var_post),
+  ncol = 2
+)
+
+our_matrix
+```
+
+## Ready to simulate now
+
+We use the `mvrnorm` function for, well, multivariate normal distributions, from the `MASS` package. Let's get a massive sample of 10,000 people.
+
+```{r}
+library(MASS)
+
+d <- 
+  mvrnorm(
+    10000,
+    means,
+    our_matrix
+  )
+d <- as.data.frame(d)
+head(d)
+```
+
+## Let's check that
+
+Let's first check the sample to see whether we can recover our numbers.
+
+```{r}
+mean(d$pre); mean(d$post)
+sd(d$pre); sd(d$post)
+cor(d$pre, d$post)
+```
+
+## Run our test
+
+```{r}
+t.test(
+  d$pre,
+  d$post,
+  paired = TRUE
+)
+```
+
+## The while operator
+
+At this point, we've worked with `for` loops and went from a minimum to a maximum. If that maximum is large, that can take quite some time. You can also consider the `while` function to stop when you've reached the point you want to be at.
+
+![](https://cdn.datamentor.io/wp-content/uploads/2017/11/r-while-loop.jpg)
+[Source](https://www.datamentor.io/r-programming/while-loop/)
+
+## Easy example
+
+```{r}
+i <- 1
+
+while (i < 5) {
+  print(i)
+  
+  i <- i + 1
+}
+```
+
+## How would that work for our purposes?
+
+```{r}
+draws <- 1e3
+n <- 60
+effect_size <- 0.5
+
+d <- data.frame(
+  sample_size = NULL,
+  power = NULL
+)
+
+power <- 0
+
+while (power<0.95) {
+  
+  pvalues <- NULL
+  for (i in 1:draws) {
+    control <- rnorm(n)
+    treatment <- rnorm(n, effect_size)
+    t <- t.test(control, treatment, alternative = "less")
+    
+    pvalues[i] <- t$p.value
+  }
+  
+  power <- sum(pvalues<0.05) / length(pvalues)
+  
+  d <- rbind(
+    d,
+    data.frame(
+      sample_size = n,
+      power = power
+    )
+  )
+  
+  n <- n + 1
+}
+```
+
+## What did we just do?
+
+```{r}
+head(d)
+
+plot(d$sample_size, d$power)
+abline(h = 0.95)
+```
+
+# Takeaways
+
+- Understand difference between independent and correlated measures
+- Know how to simulate correlated measures
+- Get to know the `while` logic
+
+# Let's get back to simulating
+
