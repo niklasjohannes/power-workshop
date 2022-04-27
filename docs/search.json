@@ -494,14 +494,14 @@
     "href": "content/03-simulations-in-r/slides/index.html#some-basic-commands-first",
     "title": "Simulations in R",
     "section": "Some basic commands first",
-    "text": "Some basic commands first\nSampling a certain number of elements from a set.\n\nmy_sample <- 1:20\n\nsample(\n  x = my_sample,\n  size = 2\n)\n\n[1] 17  4"
+    "text": "Some basic commands first\nSampling a certain number of elements from a set.\n\nmy_sample <- 1:20\n\nsample(\n  x = my_sample,\n  size = 2\n)\n\n[1] 11  6"
   },
   {
     "objectID": "content/03-simulations-in-r/slides/index.html#sampling",
     "href": "content/03-simulations-in-r/slides/index.html#sampling",
     "title": "Simulations in R",
     "section": "Sampling",
-    "text": "Sampling\nWith or without replacement?\n\nmy_sample <- c(\"a\", \"b\", \"c\")\n\nsample(\n  x = my_sample,\n  size = 4,\n  replace = TRUE\n)\n\n[1] \"b\" \"c\" \"b\" \"c\""
+    "text": "Sampling\nWith or without replacement?\n\nmy_sample <- c(\"a\", \"b\", \"c\")\n\nsample(\n  x = my_sample,\n  size = 4,\n  replace = TRUE\n)\n\n[1] \"a\" \"a\" \"c\" \"c\""
   },
   {
     "objectID": "content/03-simulations-in-r/slides/index.html#on-those-letters",
@@ -515,14 +515,14 @@
     "href": "content/03-simulations-in-r/slides/index.html#sampling-1",
     "title": "Simulations in R",
     "section": "Sampling",
-    "text": "Sampling\nUsing those letters.\n\nmy_sample <- letters[1:3]\n\nsample(\n  x = my_sample,\n  size = 4,\n  replace = TRUE\n)\n\n[1] \"a\" \"a\" \"b\" \"c\""
+    "text": "Sampling\nUsing those letters.\n\nmy_sample <- letters[1:3]\n\nsample(\n  x = my_sample,\n  size = 4,\n  replace = TRUE\n)\n\n[1] \"b\" \"b\" \"b\" \"a\""
   },
   {
     "objectID": "content/03-simulations-in-r/slides/index.html#sampling-2",
     "href": "content/03-simulations-in-r/slides/index.html#sampling-2",
     "title": "Simulations in R",
     "section": "Sampling",
-    "text": "Sampling\nAssigning different probabilities.\n\nmy_sample <- c(\"black\", \"blue\")\n\nsample(\n  x = my_sample,\n  size = 10,\n  replace = TRUE,\n  prob = c(0.2, 0.8)\n)\n\n [1] \"blue\"  \"blue\"  \"black\" \"blue\"  \"blue\"  \"blue\"  \"black\" \"blue\"  \"blue\" \n[10] \"blue\""
+    "text": "Sampling\nAssigning different probabilities.\n\nmy_sample <- c(\"black\", \"blue\")\n\nsample(\n  x = my_sample,\n  size = 10,\n  replace = TRUE,\n  prob = c(0.2, 0.8)\n)\n\n [1] \"blue\" \"blue\" \"blue\" \"blue\" \"blue\" \"blue\" \"blue\" \"blue\" \"blue\" \"blue\""
   },
   {
     "objectID": "content/03-simulations-in-r/slides/index.html#remember-seeds",
@@ -2063,6 +2063,447 @@
     "title": "Recap",
     "section": "Alpha, beta, sensitivity",
     "text": "Alpha, beta, sensitivity\n\nQuestion the default of \\(\\alpha\\) = 0.05 and power = 80%\nUnderstand how terribly complex designing an informative study is\nKnow where to turn when you don’t have enough information"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/07-exercise.html#exercise",
+    "href": "content/07-categorical-predictors/07-exercise.html#exercise",
+    "title": "Exercise IV",
+    "section": "0.1 Exercise",
+    "text": "0.1 Exercise\nANOVAs are just linear models. There’s nothing wrong with using R’s aov command. In fact, it’s just a wrapper for lm. Type ?aov and convince yourself by reading the (short) description. There’s another reason why directly calling lm can be an advantage: efficiency. So far, we haven’t really cared much about the time our simulations take, but with more complicated designs (or more runs) it can easily take several hours, days, or even weeks.\nLet’s see whether lm gives us an advantage. For that, we’ll need the Sys.time() command. It does exactly what it says: tells you the time of your computer system. When we store the time before and after a simulation, we can check how long it took and compare different functions.\nRun the following to get familiar with how this works:\n\nt1 <- Sys.time()\n# wait a couple of seconds\nt2 <- Sys.time()\n\nt2-t1\n\nNow create a data frame with 4 (independent) groups whose means are c(4.2, 4.5, 4.6, 4.6) and their SDs are c(0.7, 0.8, 0.6, 0.5). The sample size is 240 (equal size in the groups). Check for an effect of condition on the outcome in 10,000 simulations. Do that once with aov and once with lm and measure how long it took. Are there differences? (Tip: Remember vectorization for rnorm to create the groups.)"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/07-exercise.html#exercise-1",
+    "href": "content/07-categorical-predictors/07-exercise.html#exercise-1",
+    "title": "Exercise IV",
+    "section": "0.2 Exercise",
+    "text": "0.2 Exercise\nTime to run a power analysis. You have 3 independent groups. Their means are c(5, 5.2, 5.6); the SD is constant: 1. Your minimum sample size is 120; your maximum sample size is 300. How large does your sample have to be for 95% power? Do 1,000 per run. Go in steps of 6 for the sample size (so increase 2 per group). (Tip: You can use seq and remember this link). This can take a minute."
+  },
+  {
+    "objectID": "content/07-categorical-predictors/07-exercise.html#exercise-2",
+    "href": "content/07-categorical-predictors/07-exercise.html#exercise-2",
+    "title": "Exercise IV",
+    "section": "0.3 Exercise",
+    "text": "0.3 Exercise\nDo the above again, but this time there’s no difference between the first two groups: c(5, 5, 5.6). What’s the effect on power if there’s a null effect for one contrast? Go in steps of 12 to speed it up."
+  },
+  {
+    "objectID": "content/07-categorical-predictors/07-exercise.html#exercise-3",
+    "href": "content/07-categorical-predictors/07-exercise.html#exercise-3",
+    "title": "Exercise IV",
+    "section": "0.4 Exercise",
+    "text": "0.4 Exercise\nLet’s try to work on the standardized scale. You again have 3 groups. Their SDs are c(2, 2.2, 1.8). Choose means such that the Cohen’s \\(d\\)s are as follows:\n\nGroup 1 vs. Group 2: \\(d\\) = 0.2\nGroup 1 vs. Group 3: \\(d\\) = 0.6\nGroup 2 vs. Group 3: ?\n\nRemember the formulate for Cohen’s \\(d\\): \\(d = \\frac{M_1-M_2}{\\sqrt{\\frac{(sd_1^2 + sd_2^2)}{2}}}\\)\nIt might help to look at the previous exercises about choosing Cohen’s \\(d\\). Create the data frame and calculate power for samples ranging from 20 per group to 60 per group. Go in steps of 3 per group. Do 500 runs. Tip: You can choose means in relation to the pooled SD. Run effectsize::cohens_d() for each run (and contrast) and store the mean in your outcomes data frame. Plot the power, but also check the effect sizes for each contrast."
+  },
+  {
+    "objectID": "content/07-categorical-predictors/07-exercise.html#exercise-4",
+    "href": "content/07-categorical-predictors/07-exercise.html#exercise-4",
+    "title": "Exercise IV",
+    "section": "0.5 Exercise",
+    "text": "0.5 Exercise\nSo far, we’ve worked with dummy coding for our explanatory factor. That presumes that we’re interested in those contrasts where the second and third condition are compared to the first.\nSometimes, however, we’re not interested in these comparisons and would rather like to know the difference between our conditions and the grand mean. In that case, we should use sum to zero coding.\nTake the data set below:\n\nset.seed(42)\nn <- 100\nd <- \n  data.frame(\n    condition = as.factor(rep(letters[1:3], times = n)),\n    scores = rnorm(n*3, c(100, 150, 200), c(7, 10, 12))\n  )\n\nLet’s have a look at the contrasts:\n\n\n\nIt’s the familiar dummy coding. This means, going row by row, that the intercept will be the mean of condition a, the first contrast will be the mean of condition b in comparison to a, and the third contrast will be the mean of condition c in comparison to a.\nLet’s have a look at contrast coding instead:\n\ncontrasts(d$condition) <- contr.sum\ncontrasts(d$condition)\n\n  [,1] [,2]\na    1    0\nb    0    1\nc   -1   -1\n\n\nNow the intercept is our grand mean (the overall mean of the outcome), the first contrast compares the score in condition a against the grand mean and the second contrast compares the mean of condition b against the grand mean.\n\nsummary(lm(scores~condition, d))\n\n\nCall:\nlm(formula = scores ~ condition, data = d)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-32.364  -6.417  -0.009   6.081  26.953 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)    \n(Intercept) 149.8348     0.5700 262.872   <2e-16 ***\ncondition1  -50.0140     0.8061 -62.045   <2e-16 ***\ncondition2   -0.6376     0.8061  -0.791     0.43    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 9.873 on 297 degrees of freedom\nMultiple R-squared:  0.946, Adjusted R-squared:  0.9456 \nF-statistic:  2600 on 2 and 297 DF,  p-value: < 2.2e-16\n\n\nIf we want a different comparison, we can reorder the factor levels:\n\nd$condition <- factor(d$condition, levels = c(\"b\", \"c\", \"a\")) \ncontrasts(d$condition) <- contr.sum\ncontrasts(d$condition)\n\n  [,1] [,2]\nb    1    0\nc    0    1\na   -1   -1\n\n\nNow the first contrasts compares condition b against the grand mean, and the second contrast compares condition c against the grand mean.\nFor later sessions on interactions, we’ll rely on this kind of sum coding (also called effect coding), so let’s get familiar with it here. Create four groups: a placebo group, a low dose group, a medium dose group, and a high dose group.\nYou want to know whether the low dose, the medium dose, and the high dose are significantly different from the grand mean. Simulate a data set, set the contrasts, and run a linear model. Choose mean values as you like, but make sure you can find them again in the model output. How would you get the mean of the placebo group now? (Tip: Look at the contrasts, take the grand mean, and apply the contrasts to each estimate.)"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/07-exercise.html#exercise-5",
+    "href": "content/07-categorical-predictors/07-exercise.html#exercise-5",
+    "title": "Exercise IV",
+    "section": "0.6 Exercise",
+    "text": "0.6 Exercise\nYou plan an experiment where you want to test the effect of framing on agreeing with a message. You run a within-person experiment where people read a text with either neutral, positive, or negative framing. Each person reads each text (so we have a within-subjects design) and rates their level of agreeing on a 7-point Likert-scale.\nYou determine that the smallest contrast you care about is 0.25 points between the neutral and the negative condition and between the neutral and the positive condition. You’ve found in previous testing that only such a difference on agreeing actually has an effect on behavior. That’s your SESOI.\nYou decide that the midpoint of the scale is a decent starting point for the neutral condition. The negative condition should be 0.25 points lower and the positive condition 0.25 points higher. You generally expect that the variation should be somewhere around 1 Likert-point; this way, most scores are within -2 and +2 from the mean. However, you know that negative framing usually increases variation, so you’ll set the SD for that score 30% higher.\nThe experiment takes place within 20 minutes, so you expect a decent amount of consistency in answers per participant: a person who generally agrees more should also agree more to all conditions. In other words, you set the correlation between scores to 0.6.\nLast, you determined that you’re early in the research process, so you definitely don’t want to miss any effects (aka commit a Type II error). You also consider that a false positive won’t have any negative consequences. Therefore, you set your \\(\\alpha\\) to 0.10.\nYou can afford to collect 100 participants in total. Simulate power (500 runs each); go in steps of 5 (start with 20). How many participants do you need for 95% power? Use contrast coding. (Tip: Draw the variance-covariance matrix first before coding it. It helps.) (Tip: Remember the data format the data have to be in. You’ll need to transform them.) (You might have to Google how to get the p-value out of aov.)"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/07-exercise.html#exercise-6",
+    "href": "content/07-categorical-predictors/07-exercise.html#exercise-6",
+    "title": "Exercise IV",
+    "section": "0.7 Exercise",
+    "text": "0.7 Exercise\nThe previous study worked. Nice. Now you want to know whether positive framing scales: Can you reduce positivity and agreeing reduces proportionally? You run a follow-up experiment where you now have a neutral condition, a low positivity condition (half the positivity of your previous positive condition), and a high positivity condition (the positivity of your original positive condition). Your effect size remains: 0.25 for the comparison between neutral and high positivity (the original positive condition). You expect, therefore, that half the positivity should leave to half the effect size: 0.125. That’s your new SESOI.\nThe previous study also showed that you weren’t too far off with an SD of 1, but this time you’ll use 0.8 for all scores.\nHowever, you expect that, because the two positivity conditions are so similar, they’ll correlate higher than the correlation between neutral and positivity. So you expect a correlation between neutral and either positivity condition to be 0.3, but 0.6 between the two positivity conditions.\nBecause your department was so happy with how well you designed the previous study, they gave you more money. Now you can collect a maximum of 500 participants. Last time, the power simulation took quite some time, so this time you want to stop whenever you reach 95% power. Also, because this time you want to be more stringent, you set \\(\\alpha\\) to 0.01.\nDo 500 runs, start with 60 people and go in in steps of 10. Use treatment contrasts. This can take a while."
+  },
+  {
+    "objectID": "content/07-categorical-predictors/07-exercise.html#exercise-7",
+    "href": "content/07-categorical-predictors/07-exercise.html#exercise-7",
+    "title": "Exercise IV",
+    "section": "0.8 Exercise",
+    "text": "0.8 Exercise\nUsually when you run an ANOVA, you specify your contrasts before-hand so you know which groups you want to compare beyond just the overall effect of your condition. Let’s take the data set below. The overall effect of condition is significant:\n\n\n\nLet’s inspect the post-hoc comparisons between the groups with the emmeans package. Here, not every comparison is significant.\n\n\n\nRun a power simulation that finds the sample size for which we have 90% power for the smallest post-hoc contrast (aka the largest of the three p-values.) Go about it as you think is best, but save both the main effect p-value and the largest p-value of the posthoc contrasts to be able to compare power. In effect, you’re powering for a t-test, which only emphasizes that you should work on the raw scale and specify each comparison. (Tip: summary turns the pairs(postdocs) into a data frame.)"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/07-exercise.html#exercise-8",
+    "href": "content/07-categorical-predictors/07-exercise.html#exercise-8",
+    "title": "Exercise IV",
+    "section": "0.9 Exercise",
+    "text": "0.9 Exercise\nRather than doing posthoc comparisons between each group, we can rely on planned contrasts. If that’s completely new to you, have a read here. The blog post does a really nice job explaining planned contrasts.\nIn effect, rather than relying on sum to zero or treatment coding, we create our own comparisons. Let’s say we want to compare neutral to both low positivity and high positivity (as a general test that framing works). Then, our second contrast compares the two framing conditions. For simplicity, let’s go three independent groups with means of c(4, 4.3, 4.4) and a common SD of 1.1. Custom contrasts will allow us to directly make the two comparisons we’re interested in like such:\n\nd <- data.frame(\n  scores = rnorm(150, c(4., 4.3, 4.4), 1.1),\n  condition = factor(rep(c(\"neutral\", \"low\", \"high\"), 50))\n)\n\ncontrasts(d$condition)\n\n        low neutral\nhigh      0       0\nlow       1       0\nneutral   0       1\n\nhighlow_vs_neutral <- c(1, 1, -2)\nhigh_vs_low <- c(1, -1, 0)\n\ncontrasts(d$condition) <- cbind(highlow_vs_neutral, high_vs_low)\ncontrasts(d$condition)\n\n        highlow_vs_neutral high_vs_low\nhigh                     1           1\nlow                      1          -1\nneutral                 -2           0\n\nsummary.lm(aov(scores ~ condition, d))\n\n\nCall:\naov(formula = scores ~ condition, data = d)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-2.36436 -0.66718 -0.03486  0.75111  2.70774 \n\nCoefficients:\n                            Estimate Std. Error t value Pr(>|t|)    \n(Intercept)                  4.21370    0.08293  50.809   <2e-16 ***\nconditionhighlow_vs_neutral  0.10082    0.05864   1.719   0.0877 .  \nconditionhigh_vs_low         0.04212    0.10157   0.415   0.6790    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.016 on 147 degrees of freedom\nMultiple R-squared:  0.02083,   Adjusted R-squared:  0.007511 \nF-statistic: 1.564 on 2 and 147 DF,  p-value: 0.2128\n\n\nRun a power simulation where you first run standard treatment contrasts. Then, run posthoc tests (emmeans::emmeans) on that test. For simplicity, focus on the comparison of high vs. low. Select the p-value for that posthoc contrast. In the same run, change the contrasts to custom from above, run the model again, and extract the p-value for the high vs. low comparison. Do that for samples ranging from 50 to 200 in steps of 10. Do 200 runs to save a bit of time, then plot the two types of power against each other. Which approach is more “powerful”?"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/07-slides.html",
+    "href": "content/07-categorical-predictors/07-slides.html",
+    "title": "Slides",
+    "section": "",
+    "text": "Below you can find the slides for intro to simulations:\n\n\n\nIf you want to see the slides in full screen, you can click here. To download them as PDFs, hit the ‘e’ button when you got the presentation open and then Ctrl+P print to PDF. This will work best in Chrome (in Firefox, it didn’t print the headings for me)."
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#whats-that-data-generating-process",
+    "href": "content/07-categorical-predictors/slides/index.html#whats-that-data-generating-process",
+    "title": "The linear model and comparing multiple groups",
+    "section": "What’s that data generating process?",
+    "text": "What’s that data generating process?\n\nThe process, in the real world, that you believe created the data\nWe don’t know the process, but we can observe the outcomes\nWhen we try to explain the outcome, we make assumptions about the data generating process\nWe collect data from samples and want to know whether our assumptions fit (and generalize)"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#whats-the-process",
+    "href": "content/07-categorical-predictors/slides/index.html#whats-the-process",
+    "title": "The linear model and comparing multiple groups",
+    "section": "What’s the process?",
+    "text": "What’s the process?\nYou measure height in a sample (the observable consequences). What’s the data generating process?"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#we-have-a-simple-process",
+    "href": "content/07-categorical-predictors/slides/index.html#we-have-a-simple-process",
+    "title": "The linear model and comparing multiple groups",
+    "section": "We have a (simple) process",
+    "text": "We have a (simple) process\n\\(Normal(\\mu, \\sigma)\\)"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#look-familiar",
+    "href": "content/07-categorical-predictors/slides/index.html#look-familiar",
+    "title": "The linear model and comparing multiple groups",
+    "section": "Look familiar?",
+    "text": "Look familiar?\n\\(Normal(174, 7)\\) aka rnorm(174, 7)\n\n\n\n\n\n\n\n\n\nplot(density(rnorm(1e4, 174, 7)))"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#all-are-processes",
+    "href": "content/07-categorical-predictors/slides/index.html#all-are-processes",
+    "title": "The linear model and comparing multiple groups",
+    "section": "All are processes",
+    "text": "All are processes\n\nrnorm: You say that the underlying data generating process is a normal distribution\nrbinom: You say that the underlying data generating process is a binomial distribution\nYou get the idea\n\nImportant: Those are assumptions you make explicit and they can be wrong."
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#remember-our-t-tests",
+    "href": "content/07-categorical-predictors/slides/index.html#remember-our-t-tests",
+    "title": "The linear model and comparing multiple groups",
+    "section": "Remember our t-tests?",
+    "text": "Remember our t-tests?\nYou are explicitly claiming that the observable outcome (the data) have been generated by this true underlying process. The process is a normal distribution with a true effect size (\\(\\mu\\)) and a true standard deviation (\\(\\sigma\\)) for two data generating processes: \\(Normal(100, 15)\\) and \\(Normal(105, 15)\\)\n\ncontrol <- rnorm(100, 100, 15)\ntreatment <- rnorm(100, 105, 15)\n\nt.test(control, treatment)\n\n\n    Welch Two Sample t-test\n\ndata:  control and treatment\nt = -3.8139, df = 194.83, p-value = 0.0001835\nalternative hypothesis: true difference in means is not equal to 0\n95 percent confidence interval:\n -12.202637  -3.884032\nsample estimates:\nmean of x mean of y \n 98.56637 106.60970"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#thats-why-simulation-is-cool",
+    "href": "content/07-categorical-predictors/slides/index.html#thats-why-simulation-is-cool",
+    "title": "The linear model and comparing multiple groups",
+    "section": "That’s why simulation is cool",
+    "text": "That’s why simulation is cool\n\nYou’re being explicit about your model of the world\nYou translate that model (data generating process) into a concrete formula (code) to create data (the consequences of the data generation process)\nYou check how changes to your model influence the data, which inform the conclusions you draw from the data about your model (aka statistical inference)\nNo more hiding your model assumptions behind standard software"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#this-all-sounds-complicated",
+    "href": "content/07-categorical-predictors/slides/index.html#this-all-sounds-complicated",
+    "title": "The linear model and comparing multiple groups",
+    "section": "This all sounds complicated",
+    "text": "This all sounds complicated\nHere’s the good news: In (much of) the (social) sciences we rely on a common data generating process: the linear model.\nt-test, regression, logistic regression, machine learning are all variations of the linear model.\n\\(y = \\beta_0 + \\beta_1x\\)"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#all-stolen-from-here",
+    "href": "content/07-categorical-predictors/slides/index.html#all-stolen-from-here",
+    "title": "The linear model and comparing multiple groups",
+    "section": "All stolen from here",
+    "text": "All stolen from here\n\nSource"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#back-to-our-control-and-treatment",
+    "href": "content/07-categorical-predictors/slides/index.html#back-to-our-control-and-treatment",
+    "title": "The linear model and comparing multiple groups",
+    "section": "Back to our control and treatment",
+    "text": "Back to our control and treatment\n\\(y = \\beta_0 + \\beta_1x\\): What’s \\(x\\) here?\n\ncontrol <- rnorm(15, 0, 1)\ntreatment <- rnorm(15, 1, 1)"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#group-membership",
+    "href": "content/07-categorical-predictors/slides/index.html#group-membership",
+    "title": "The linear model and comparing multiple groups",
+    "section": "Group membership",
+    "text": "Group membership\nOur group is \\(x\\).\n\nd <- \n  data.frame(\n    group = rep(c(\"control\", \"treatment\"), each = 15),\n    y = c(control, treatment)\n  )\n\nd$x <- ifelse(d$group==\"control\", 0, 1)"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#finding-our-inputs-again",
+    "href": "content/07-categorical-predictors/slides/index.html#finding-our-inputs-again",
+    "title": "The linear model and comparing multiple groups",
+    "section": "Finding our inputs again",
+    "text": "Finding our inputs again\n\nDataBoxplot\n\n\n\n\n\n\n\ngroup\ny\nx\n\n\n\n\ncontrol\n-0.2494899\n0\n\n\ncontrol\n-0.5601157\n0\n\n\ncontrol\n0.2854088\n0\n\n\ncontrol\n0.1678379\n0\n\n\ncontrol\n-0.1974034\n0\n\n\ncontrol\n0.1733741\n0\n\n\ncontrol\n0.3127256\n0\n\n\ncontrol\n-0.1063440\n0\n\n\ncontrol\n0.5726753\n0\n\n\ncontrol\n0.0721174\n0\n\n\ncontrol\n-1.0158127\n0\n\n\ncontrol\n2.9248489\n0\n\n\ncontrol\n-1.2836184\n0\n\n\ncontrol\n0.1306958\n0\n\n\ncontrol\n-0.9527664\n0\n\n\ntreatment\n1.8535385\n1\n\n\ntreatment\n-0.1692150\n1\n\n\ntreatment\n0.1360748\n1\n\n\ntreatment\n-0.6536403\n1\n\n\ntreatment\n1.0767516\n1\n\n\ntreatment\n1.9791449\n1\n\n\ntreatment\n0.3529616\n1\n\n\ntreatment\n0.2250301\n1\n\n\ntreatment\n1.5707393\n1\n\n\ntreatment\n2.3276022\n1\n\n\ntreatment\n1.7890741\n1\n\n\ntreatment\n1.2629201\n1\n\n\ntreatment\n0.6024221\n1\n\n\ntreatment\n1.2544137\n1\n\n\ntreatment\n-0.1181407\n1"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#what-happens-when-x-is-zero",
+    "href": "content/07-categorical-predictors/slides/index.html#what-happens-when-x-is-zero",
+    "title": "The linear model and comparing multiple groups",
+    "section": "What happens when \\(x\\) is zero?",
+    "text": "What happens when \\(x\\) is zero?\n\\[\\begin{align}\n& y = \\beta_0 + \\beta_1x\\\\\n& y = \\beta_0 + \\beta_1*0\\\\\n& y = \\beta_0\n\\end{align}\\]\nIn other words, when we predict values for the control (aka \\(x=0\\)) group, our best predictor for outcome scores becomes \\(\\beta_0\\) (also known as the intercept): the mean for the control group."
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#what-happens-when-x-is-one",
+    "href": "content/07-categorical-predictors/slides/index.html#what-happens-when-x-is-one",
+    "title": "The linear model and comparing multiple groups",
+    "section": "What happens when \\(x\\) is one?",
+    "text": "What happens when \\(x\\) is one?\n\\[\\begin{align}\n& y = \\beta_0 + \\beta_1x\\\\\n& y = \\beta_0 + \\beta_1*1\\\\\n& y = \\beta_0 + \\beta_1\\\\\n& y = mean(control) + ?\n\\end{align}\\]\nWe already know that the intercept (\\(\\beta_0\\)) is the mean of the control group. How would we now go from that mean to predicting scores of the treatment group? What do we need to add to the mean of the control group to get the mean of the treatment group?"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#pictures-please",
+    "href": "content/07-categorical-predictors/slides/index.html#pictures-please",
+    "title": "The linear model and comparing multiple groups",
+    "section": "Pictures, please",
+    "text": "Pictures, please"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#lets-check-that",
+    "href": "content/07-categorical-predictors/slides/index.html#lets-check-that",
+    "title": "The linear model and comparing multiple groups",
+    "section": "Let’s check that",
+    "text": "Let’s check that\n\n\nMean of the control group (our intercept or \\(\\beta_0\\)):\n\nmean(d$y[d$x==0])\n\n[1] 0.01827555\n\n\nDifference (our slope or \\(\\beta_1\\)):\n\nmean(d$y[d$x==1]) - mean(d$y[d$x==0])\n\n[1] 0.8810362\n\n\nMean of the treatment group (\\(\\beta_0 + \\beta_1\\)):\n\nmean(d$y[d$x==1])\n\n[1] 0.8993118\n\n\n\nLinear model:\n\nmodel <- lm(y ~ x, data = d)\n\nsummary(model)\n\n\nCall:\nlm(formula = y ~ x, data = d)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-1.55295 -0.65031  0.08313  0.36148  2.90657 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)  \n(Intercept)  0.01828    0.24306   0.075    0.941  \nx1           0.88104    0.34374   2.563    0.016 *\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.9414 on 28 degrees of freedom\nMultiple R-squared:   0.19, Adjusted R-squared:  0.1611 \nF-statistic:  6.57 on 1 and 28 DF,  p-value: 0.01604"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#so-theyre-really-the-same",
+    "href": "content/07-categorical-predictors/slides/index.html#so-theyre-really-the-same",
+    "title": "The linear model and comparing multiple groups",
+    "section": "So they’re really the same?",
+    "text": "So they’re really the same?\n\n\n\nt.test(control, treatment, var.equal = TRUE)\n\n\n    Two Sample t-test\n\ndata:  control and treatment\nt = -2.5631, df = 28, p-value = 0.01604\nalternative hypothesis: true difference in means is not equal to 0\n95 percent confidence interval:\n -1.585146 -0.176926\nsample estimates:\n mean of x  mean of y \n0.01827555 0.89931179 \n\n\n\n\nsummary(lm(y ~ x, d))\n\n\nCall:\nlm(formula = y ~ x, data = d)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-1.55295 -0.65031  0.08313  0.36148  2.90657 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)  \n(Intercept)  0.01828    0.24306   0.075    0.941  \nx1           0.88104    0.34374   2.563    0.016 *\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.9414 on 28 degrees of freedom\nMultiple R-squared:   0.19, Adjusted R-squared:  0.1611 \nF-statistic:  6.57 on 1 and 28 DF,  p-value: 0.01604"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#same-logic-for-a-one-sample-t-test",
+    "href": "content/07-categorical-predictors/slides/index.html#same-logic-for-a-one-sample-t-test",
+    "title": "The linear model and comparing multiple groups",
+    "section": "Same logic for a one-sample t-test",
+    "text": "Same logic for a one-sample t-test\nThere’s no \\(x\\) here, so all we’re left with is the intercept, which we test against our H0. A single number (aka the mean) predicts \\(y\\).\n\\[\\begin{align}\n& y = \\beta_0\n\\end{align}\\]"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#pictures-please-1",
+    "href": "content/07-categorical-predictors/slides/index.html#pictures-please-1",
+    "title": "The linear model and comparing multiple groups",
+    "section": "Pictures, please",
+    "text": "Pictures, please"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#lets-check-that-once-more",
+    "href": "content/07-categorical-predictors/slides/index.html#lets-check-that-once-more",
+    "title": "The linear model and comparing multiple groups",
+    "section": "Let’s check that once more",
+    "text": "Let’s check that once more\n\n\nMean of the treatment group (our intercept or \\(\\beta_0\\)):\n\nmean(d$y[d$x==1])\n\n[1] 0.8993118\n\n\n\nLinear model:\n\nmodel <- lm(y ~ 1, data = d[d$x==1,])\n\nsummary(model)\n\n\nCall:\nlm(formula = y ~ 1, data = d[d$x == 1, ])\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-1.5530 -0.7188  0.1774  0.7806  1.4283 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)   \n(Intercept)   0.8993     0.2356   3.816  0.00189 **\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.9127 on 14 degrees of freedom"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#so-theyre-really-the-same-1",
+    "href": "content/07-categorical-predictors/slides/index.html#so-theyre-really-the-same-1",
+    "title": "The linear model and comparing multiple groups",
+    "section": "So they’re really the same?",
+    "text": "So they’re really the same?\n\n\n\nt.test(treatment)\n\n\n    One Sample t-test\n\ndata:  treatment\nt = 3.8163, df = 14, p-value = 0.001889\nalternative hypothesis: true mean is not equal to 0\n95 percent confidence interval:\n 0.3938963 1.4047273\nsample estimates:\nmean of x \n0.8993118 \n\n\n\n\nsummary(lm(y ~ 1, d[d$x==1,]))\n\n\nCall:\nlm(formula = y ~ 1, data = d[d$x == 1, ])\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-1.5530 -0.7188  0.1774  0.7806  1.4283 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)   \n(Intercept)   0.8993     0.2356   3.816  0.00189 **\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.9127 on 14 degrees of freedom"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#same-logic-for-a-paired-samples-t-test",
+    "href": "content/07-categorical-predictors/slides/index.html#same-logic-for-a-paired-samples-t-test",
+    "title": "The linear model and comparing multiple groups",
+    "section": "Same logic for a paired-samples t-test",
+    "text": "Same logic for a paired-samples t-test\nRemember: Paired samples t-test is just testing the difference in scores against H0. This way, it turns into a one-sample t-test, so all we’re left with is, once again, the intercept, which we test against our H0. A single number (aka the mean) predicts \\(y\\) (technically \\(y_{difference}\\).\n\\[\\begin{align}\n& y_{treatment} - y_{control} = \\beta_0\n\\end{align}\\]"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#pictures-please-2",
+    "href": "content/07-categorical-predictors/slides/index.html#pictures-please-2",
+    "title": "The linear model and comparing multiple groups",
+    "section": "Pictures, please",
+    "text": "Pictures, please"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#pictures-please-3",
+    "href": "content/07-categorical-predictors/slides/index.html#pictures-please-3",
+    "title": "The linear model and comparing multiple groups",
+    "section": "Pictures, please",
+    "text": "Pictures, please"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#lets-check-that-once-more-1",
+    "href": "content/07-categorical-predictors/slides/index.html#lets-check-that-once-more-1",
+    "title": "The linear model and comparing multiple groups",
+    "section": "Let’s check that once more",
+    "text": "Let’s check that once more\n\n\nMean of the difference (our intercept or \\(\\beta_0\\)):\n\nmean(treatment-control)\n\n[1] 0.8810362\n\n\n\nLinear model:\n\nmodel <- lm(treatment-control ~ 1)\n\nsummary(model)\n\n\nCall:\nlm(formula = treatment - control ~ 1)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-2.5430 -0.6952  0.1170  0.9649  1.9239 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)  \n(Intercept)   0.8810     0.3151   2.796   0.0143 *\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.22 on 14 degrees of freedom"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#so-theyre-really-the-same-2",
+    "href": "content/07-categorical-predictors/slides/index.html#so-theyre-really-the-same-2",
+    "title": "The linear model and comparing multiple groups",
+    "section": "So they’re really the same?",
+    "text": "So they’re really the same?\n\n\n\nt.test(treatment-control)\n\n\n    One Sample t-test\n\ndata:  treatment - control\nt = 2.7958, df = 14, p-value = 0.0143\nalternative hypothesis: true mean is not equal to 0\n95 percent confidence interval:\n 0.2051533 1.5569192\nsample estimates:\nmean of x \n0.8810362 \n\n\n\n\nsummary(lm(treatment-control ~ 1))\n\n\nCall:\nlm(formula = treatment - control ~ 1)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-2.5430 -0.6952  0.1170  0.9649  1.9239 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)  \n(Intercept)   0.8810     0.3151   2.796   0.0143 *\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.22 on 14 degrees of freedom"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#what-about-anova-then",
+    "href": "content/07-categorical-predictors/slides/index.html#what-about-anova-then",
+    "title": "The linear model and comparing multiple groups",
+    "section": "What about ANOVA then?",
+    "text": "What about ANOVA then?\nSame as before: We predict scores with the group membership (aka the mean in each group). Doesn’t matter whether we predict it from two (t-test) or more groups (ANOVA). Now we just have an indicator for membership for each group: dummy coding.\n\n\n\ngroups\n\\(x_1\\)\n\\(x_2\\)\n\n\n\n\ncontrol\n0\n0\n\n\nlow\n1\n0\n\n\nhigh\n0\n1\n\n\n\n\\[\\begin{align}\n& y = \\beta_0 + \\beta_1x_1 + \\beta_2x_2\n\\end{align}\\]"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#getting-the-score-for-control",
+    "href": "content/07-categorical-predictors/slides/index.html#getting-the-score-for-control",
+    "title": "The linear model and comparing multiple groups",
+    "section": "Getting the score for control",
+    "text": "Getting the score for control\n\n\n\ngroups\n\\(x_1\\)\n\\(x_2\\)\n\n\n\n\ncontrol\n0\n0\n\n\nlow\n1\n0\n\n\nhigh\n0\n1\n\n\n\n\\[\\begin{align}\n& y = \\beta_0 + \\beta_1x_1 + \\beta_2x_2\\\\\n& y = \\beta_0 + \\beta_1*0 + \\beta_2*0\\\\\n& y = \\beta_0\n\\end{align}\\]"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#getting-the-score-for-low",
+    "href": "content/07-categorical-predictors/slides/index.html#getting-the-score-for-low",
+    "title": "The linear model and comparing multiple groups",
+    "section": "Getting the score for low",
+    "text": "Getting the score for low\n\n\n\ngroups\n\\(x_1\\)\n\\(x_2\\)\n\n\n\n\ncontrol\n0\n0\n\n\nlow\n1\n0\n\n\nhigh\n0\n1\n\n\n\n\\[\\begin{align}\n& y = \\beta_0 + \\beta_1x_1 + \\beta_2x_2\\\\\n& y = \\beta_0 + \\beta_1*1 + \\beta_2*0\\\\\n& y = \\beta_0 + \\beta_1\n\\end{align}\\]"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#getting-the-score-for-high",
+    "href": "content/07-categorical-predictors/slides/index.html#getting-the-score-for-high",
+    "title": "The linear model and comparing multiple groups",
+    "section": "Getting the score for high",
+    "text": "Getting the score for high\n\n\n\ngroups\n\\(x_1\\)\n\\(x_2\\)\n\n\n\n\ncontrol\n0\n0\n\n\nlow\n1\n0\n\n\nhigh\n0\n1\n\n\n\n\\[\\begin{align}\n& y = \\beta_0 + \\beta_1x_1 + \\beta_2x_2\\\\\n& y = \\beta_0 + \\beta_1*0 + \\beta_2*1\\\\\n& y = \\beta_0 + \\beta_2\n\\end{align}\\]"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#what-are-beta_1-and-beta_2-then",
+    "href": "content/07-categorical-predictors/slides/index.html#what-are-beta_1-and-beta_2-then",
+    "title": "The linear model and comparing multiple groups",
+    "section": "What are \\(\\beta_1\\) and \\(\\beta_2\\) then?",
+    "text": "What are \\(\\beta_1\\) and \\(\\beta_2\\) then?\nWhat do we need to go from the control mean to the low mean? What do we need to go from control mean to high mean? Same as with the t-test: the difference between those means."
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#pictures-please-4",
+    "href": "content/07-categorical-predictors/slides/index.html#pictures-please-4",
+    "title": "The linear model and comparing multiple groups",
+    "section": "Pictures, please",
+    "text": "Pictures, please"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#just-an-extension",
+    "href": "content/07-categorical-predictors/slides/index.html#just-an-extension",
+    "title": "The linear model and comparing multiple groups",
+    "section": "Just an extension",
+    "text": "Just an extension\nIf we know how to simulate a t-test, we know how to simulate an ANOVA (because both are just linear models): Imitate the data generating process.\n\\[\\begin{align}\n& y = \\beta_0 + \\beta_1x_1 + \\beta_2x_2\n\\end{align}\\]\n\nn <- 5\n\ncontrol <- rnorm(n, 100, 15)\nlow <- rnorm(n, 120, 15)\nhigh <- rnorm(n, 140, 15)\n\nd <- data.frame(\n  y = c(control, low, high),\n  condition = rep(c(\"control\", \"low\", \"high\"), each = n)\n)\n\nd$condition <- as.factor(d$condition)"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#add-our-dummy-codes",
+    "href": "content/07-categorical-predictors/slides/index.html#add-our-dummy-codes",
+    "title": "The linear model and comparing multiple groups",
+    "section": "Add our dummy codes",
+    "text": "Add our dummy codes\n\nd$group_low <- rep(c(0, 1, 0), each = n)\nd$group_high <- rep(c(0, 0, 1), each = n)\n\n\n\n           y condition group_low group_high\n1  106.49227   control         0          0\n2   87.82910   control         0          0\n3  121.66152   control         0          0\n4   93.52831   control         0          0\n5  109.83472   control         0          0\n6  124.82888       low         1          0\n7  108.24242       low         1          0\n8  143.63591       low         1          0\n9  129.64349       low         1          0\n10 121.34641       low         1          0\n11 144.14826      high         0          1\n12 150.18933      high         0          1\n13 141.34749      high         0          1\n14  95.10365      high         0          1\n15 144.27324      high         0          1"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#compare-to-model",
+    "href": "content/07-categorical-predictors/slides/index.html#compare-to-model",
+    "title": "The linear model and comparing multiple groups",
+    "section": "Compare to model",
+    "text": "Compare to model\n\n\n\n\n# A tibble: 3 x 2\n  condition  mean\n  <fct>     <dbl>\n1 control    104.\n2 low        126.\n3 high       135.\n\n\n\n\nmodel <- lm(y ~ group_low + group_high, data = d)\n\nsummary(model)\n\n\nCall:\nlm(formula = y ~ group_low + group_high, data = d)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-39.909  -7.267   4.104   9.198  18.096 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)    \n(Intercept)  103.869      7.547  13.763 1.04e-08 ***\ngroup_low     21.670     10.673   2.030   0.0651 .  \ngroup_high    31.143     10.673   2.918   0.0129 *  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 16.88 on 12 degrees of freedom\nMultiple R-squared:  0.4272,    Adjusted R-squared:  0.3317 \nF-statistic: 4.475 on 2 and 12 DF,  p-value: 0.03532"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#compare-to-anova",
+    "href": "content/07-categorical-predictors/slides/index.html#compare-to-anova",
+    "title": "The linear model and comparing multiple groups",
+    "section": "Compare to ANOVA",
+    "text": "Compare to ANOVA\n\n\n\nour_anova <- aov(y ~ condition, data = d)\n\nsummary(our_anova)\n\n            Df Sum Sq Mean Sq F value Pr(>F)  \ncondition    2   2549  1274.4   4.475 0.0353 *\nResiduals   12   3417   284.8                 \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\nour_regression <- lm(y ~ group_low + group_high, data = d)\n\nsummary(our_regression)\n\n\nCall:\nlm(formula = y ~ group_low + group_high, data = d)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-39.909  -7.267   4.104   9.198  18.096 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)    \n(Intercept)  103.869      7.547  13.763 1.04e-08 ***\ngroup_low     21.670     10.673   2.030   0.0651 .  \ngroup_high    31.143     10.673   2.918   0.0129 *  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 16.88 on 12 degrees of freedom\nMultiple R-squared:  0.4272,    Adjusted R-squared:  0.3317 \nF-statistic: 4.475 on 2 and 12 DF,  p-value: 0.03532"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#no-need-to-use-dummies",
+    "href": "content/07-categorical-predictors/slides/index.html#no-need-to-use-dummies",
+    "title": "The linear model and comparing multiple groups",
+    "section": "No need to use dummies",
+    "text": "No need to use dummies\nThe lm call will automatically dummy code factors.\n\nsummary(lm(y ~ condition, data = d))\n\n\nCall:\nlm(formula = y ~ condition, data = d)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-39.909  -7.267   4.104   9.198  18.096 \n\nCoefficients:\n              Estimate Std. Error t value Pr(>|t|)    \n(Intercept)    103.869      7.547  13.763 1.04e-08 ***\nconditionhigh   31.143     10.673   2.918   0.0129 *  \nconditionlow    21.670     10.673   2.030   0.0651 .  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 16.88 on 12 degrees of freedom\nMultiple R-squared:  0.4272,    Adjusted R-squared:  0.3317 \nF-statistic: 4.475 on 2 and 12 DF,  p-value: 0.03532"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#in-a-power-simulation",
+    "href": "content/07-categorical-predictors/slides/index.html#in-a-power-simulation",
+    "title": "The linear model and comparing multiple groups",
+    "section": "In a power simulation",
+    "text": "In a power simulation\n\nn <- 40\nm1 <- 100\nm2 <- 103\nm3 <- 105\nsd <- 8\ndraws <- 1e4\n\npvalues <- NULL\n\nfor (i in 1:n) {\n\n  group1 <- rnorm(n, m1, sd)\n  group2 <- rnorm(n, m2, sd)\n  group3 <- rnorm(n, m3, sd)\n\n  dat <- data.frame(\n    scores = c(group1, group2, group3),\n    condition = as.factor(rep(c(\"group1\", \"group2\", \"group3\"), each = n))\n  )\n\n  m <- summary(lm(scores ~ condition, data = dat))\n  \n  pvalues[i] <- broom::glance(m)$p.value\n}\n\nsum(pvalues < 0.05) / length(pvalues)\n\n[1] 0.7"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#getting-that-p-value",
+    "href": "content/07-categorical-predictors/slides/index.html#getting-that-p-value",
+    "title": "The linear model and comparing multiple groups",
+    "section": "Getting that p-value",
+    "text": "Getting that p-value\nYou can access the p-value by storing the summary in an object (as a list) and accessing its component. For the lm summary, that’s a bit less straightforward. See https://stackoverflow.com/questions/5587676/pull-out-p-values-and-r-squared-from-a-linear-regression."
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#about-that-effect-size",
+    "href": "content/07-categorical-predictors/slides/index.html#about-that-effect-size",
+    "title": "The linear model and comparing multiple groups",
+    "section": "About that effect size",
+    "text": "About that effect size\nLet’s just swap the low and high conditions.\n\nd2 <- d\n\nlevels(d2$condition) <- c(\"control\", \"low\", \"high\")"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#now-what-are-the-model-statistics",
+    "href": "content/07-categorical-predictors/slides/index.html#now-what-are-the-model-statistics",
+    "title": "The linear model and comparing multiple groups",
+    "section": "Now what are the model statistics?",
+    "text": "Now what are the model statistics?\n\n\n\nsummary(lm(y ~ condition, d))\n\n\nCall:\nlm(formula = y ~ condition, data = d)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-39.909  -7.267   4.104   9.198  18.096 \n\nCoefficients:\n              Estimate Std. Error t value Pr(>|t|)    \n(Intercept)    103.869      7.547  13.763 1.04e-08 ***\nconditionlow    21.670     10.673   2.030   0.0651 .  \nconditionhigh   31.143     10.673   2.918   0.0129 *  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 16.88 on 12 degrees of freedom\nMultiple R-squared:  0.4272,    Adjusted R-squared:  0.3317 \nF-statistic: 4.475 on 2 and 12 DF,  p-value: 0.03532\n\n\n\n\nsummary(lm(y ~ condition, d2))\n\n\nCall:\nlm(formula = y ~ condition, data = d2)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-39.909  -7.267   4.104   9.198  18.096 \n\nCoefficients:\n              Estimate Std. Error t value Pr(>|t|)    \n(Intercept)    103.869      7.547  13.763 1.04e-08 ***\nconditionlow    31.143     10.673   2.918   0.0129 *  \nconditionhigh   21.670     10.673   2.030   0.0651 .  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 16.88 on 12 degrees of freedom\nMultiple R-squared:  0.4272,    Adjusted R-squared:  0.3317 \nF-statistic: 4.475 on 2 and 12 DF,  p-value: 0.03532"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#what-about-the-effect-size",
+    "href": "content/07-categorical-predictors/slides/index.html#what-about-the-effect-size",
+    "title": "The linear model and comparing multiple groups",
+    "section": "What about the effect size?",
+    "text": "What about the effect size?\n\neffectsize::eta_squared(lm(y ~ condition, d))\n\n# Effect Size for ANOVA\n\nParameter | Eta2 |       95% CI\n-------------------------------\ncondition | 0.43 | [0.03, 1.00]\n\n- One-sided CIs: upper bound fixed at (1).\n\neffectsize::eta_squared(lm(y ~ condition, d2))\n\n# Effect Size for ANOVA\n\nParameter | Eta2 |       95% CI\n-------------------------------\ncondition | 0.43 | [0.03, 1.00]\n\n- One-sided CIs: upper bound fixed at (1)."
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#how-would-i-go-for-power-now",
+    "href": "content/07-categorical-predictors/slides/index.html#how-would-i-go-for-power-now",
+    "title": "The linear model and comparing multiple groups",
+    "section": "How would I go for power now?",
+    "text": "How would I go for power now?\n\nBack to standardized vs. unstandardized\nBest to “draw” first\nDetermine contrast of interest"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#what-about-correlated-measures",
+    "href": "content/07-categorical-predictors/slides/index.html#what-about-correlated-measures",
+    "title": "The linear model and comparing multiple groups",
+    "section": "What about correlated measures?",
+    "text": "What about correlated measures?\nRemember drawing two scores from the same unit?\n\\[\n\\begin{bmatrix}\nvar  & cov \\\\\ncov & var \\\\\n\\end{bmatrix}\n\\]\nWe just need to extend that to the number of measures:\n\\[\n\\begin{bmatrix}\nvar & cov & cov\\\\\ncov & var & cov\\\\\ncov & cov & var\n\\end{bmatrix}\n\\]"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#what-we-need-to-know",
+    "href": "content/07-categorical-predictors/slides/index.html#what-we-need-to-know",
+    "title": "The linear model and comparing multiple groups",
+    "section": "What we need to know",
+    "text": "What we need to know\n\nThe standard deviation for each measure (\\(\\sigma_{x_1}\\))\nThe correlation between each measure (\\(r_{x_1x_2}\\))\n\n\\[\n\\begin{bmatrix}\nSD_{x_1} & r_{x_1x_2} & r_{x_1x_3}\\\\\nr_{x_2x_1} & SD_{x_2} & r_{x_2x_2}\\\\\nr_{x_3x_1} & r_{x_3x_2} & SD_{x_3}\n\\end{bmatrix}\n\\]"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#same-as-before",
+    "href": "content/07-categorical-predictors/slides/index.html#same-as-before",
+    "title": "The linear model and comparing multiple groups",
+    "section": "Same as before",
+    "text": "Same as before\nDefine our parameters and get variance-covariance matrix.\n\nmeans <- c(control = 100, low = 103, high = 105)\nsd <- 8\ncorrelation <- 0.4\ncovariance <- correlation * sd * sd\n\nour_matrix <- matrix(\n  c(\n    sd**2, covariance, covariance,\n    covariance, sd**2, covariance,\n    covariance, covariance, sd**2\n  ),\n  ncol = 3\n)\n\nour_matrix\n\n     [,1] [,2] [,3]\n[1,] 64.0 25.6 25.6\n[2,] 25.6 64.0 25.6\n[3,] 25.6 25.6 64.0"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#then-draw-from-multivariate-normal",
+    "href": "content/07-categorical-predictors/slides/index.html#then-draw-from-multivariate-normal",
+    "title": "The linear model and comparing multiple groups",
+    "section": "Then draw from multivariate normal",
+    "text": "Then draw from multivariate normal\n\nlibrary(MASS)\n\nset.seed(42)\n\nd <- \n  mvrnorm(\n    200,\n    means,\n    our_matrix\n  )\nd <- as.data.frame(d)\nd$id <- factor(1:200)\nhead(d)\n\n    control       low      high id\n1 102.65124  93.16169  86.70051  1\n2  98.88458 109.62849 109.98486  2\n3  94.79098  97.77544 108.68290  3\n4  90.66920  94.06642 111.49926  4\n5  98.78622 106.29663  95.40168  5\n6  99.54111 110.82243  99.60934  6"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#lets-check",
+    "href": "content/07-categorical-predictors/slides/index.html#lets-check",
+    "title": "The linear model and comparing multiple groups",
+    "section": "Let’s check",
+    "text": "Let’s check\nCan we recover our numbers of means = c(100, 103, 105), SD of 8, and correlation of 0.4?\n\nmean(d$control); mean(d$low); mean(d$high)\n\n[1] 99.89351\n\n\n[1] 103.4035\n\n\n[1] 105.214\n\nsd(d$control); sd(d$low); sd(d$high)\n\n[1] 7.854443\n\n\n[1] 7.706208\n\n\n[1] 8.024822\n\ncor(d$control, d$low); cor(d$control, d$high); cor(d$low, d$high);\n\n[1] 0.3166429\n\n\n[1] 0.4616155\n\n\n[1] 0.3740047"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#we-cant-use-lm-this-time",
+    "href": "content/07-categorical-predictors/slides/index.html#we-cant-use-lm-this-time",
+    "title": "The linear model and comparing multiple groups",
+    "section": "We can’t use lm this time",
+    "text": "We can’t use lm this time\nThe linear model has several assumptions, one of which is that observations are independent. They clearly aren’t (we specified a correlation between them after all). So we need to go for models that take this dependence into account.\nFor most cases, data need to be in the long format:\n\nlibrary(tidyr)\n\nd2 <- \n  pivot_longer(\n    d,\n    cols = -id,\n    names_to = \"condition\",\n    values_to = \"score\"\n  )"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#long-format",
+    "href": "content/07-categorical-predictors/slides/index.html#long-format",
+    "title": "The linear model and comparing multiple groups",
+    "section": "Long format",
+    "text": "Long format\n\nhead(d); head(d2)\n\n    control       low      high id\n1 102.65124  93.16169  86.70051  1\n2  98.88458 109.62849 109.98486  2\n3  94.79098  97.77544 108.68290  3\n4  90.66920  94.06642 111.49926  4\n5  98.78622 106.29663  95.40168  5\n6  99.54111 110.82243  99.60934  6\n\n\n# A tibble: 6 x 3\n  id    condition score\n  <fct> <chr>     <dbl>\n1 1     control   103. \n2 1     low        93.2\n3 1     high       86.7\n4 2     control    98.9\n5 2     low       110. \n6 2     high      110."
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#lets-run-the-rm-anova",
+    "href": "content/07-categorical-predictors/slides/index.html#lets-run-the-rm-anova",
+    "title": "The linear model and comparing multiple groups",
+    "section": "Let’s run the RM ANOVA",
+    "text": "Let’s run the RM ANOVA\n\nmodel <- aov(score ~ condition + Error(id), d2)\nsummary(model)\n\n\nError: id\n           Df Sum Sq Mean Sq F value Pr(>F)\nResiduals 199  21774   109.4               \n\nError: Within\n           Df Sum Sq Mean Sq F value   Pr(>F)    \ncondition   2   2927    1464   38.48 5.25e-16 ***\nResiduals 398  15135      38                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#just-a-hierarchical-linear-model",
+    "href": "content/07-categorical-predictors/slides/index.html#just-a-hierarchical-linear-model",
+    "title": "The linear model and comparing multiple groups",
+    "section": "Just a (hierarchical) linear model",
+    "text": "Just a (hierarchical) linear model\n\n\n\nsummary(model)\n\n\nError: id\n           Df Sum Sq Mean Sq F value Pr(>F)\nResiduals 199  21774   109.4               \n\nError: Within\n           Df Sum Sq Mean Sq F value   Pr(>F)    \ncondition   2   2927    1464   38.48 5.25e-16 ***\nResiduals 398  15135      38                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\nlibrary(lme4)\n\nmodel2 <- lmer(score ~ condition + (1 | id), d2)\nanova(model2)\n\nAnalysis of Variance Table\n          npar Sum Sq Mean Sq F value\ncondition    2   2927  1463.5  38.484\n\n\n\n\nCheck here for more background info."
+  },
+  {
+    "objectID": "content/07-categorical-predictors/slides/index.html#this-is-the-max",
+    "href": "content/07-categorical-predictors/slides/index.html#this-is-the-max",
+    "title": "The linear model and comparing multiple groups",
+    "section": "This is the max",
+    "text": "This is the max\nThe workshop won’t go further than (interactions) with repeated measures. More resources on simulating more complicated designs at the final wrap up."
   },
   {
     "objectID": "index.html",

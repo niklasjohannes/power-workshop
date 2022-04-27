@@ -11,6 +11,69 @@
     div.column{display: inline-block; vertical-align: top; width: 50%;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
 
   <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -48,12 +111,13 @@
       "search-submit-button-title": "Submit"
     }
   }</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
   <link rel="stylesheet" href="../../styles.css">
 </head>
-<body class="docked fullcontent">
+<body class="docked">
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -206,7 +270,7 @@
     <ul id="quarto-sidebar-section-categorical-predictors" class="collapse list-unstyled sidebar-section depth1 show">  
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../content/07-categorical-predictors/07-slides.html" class="sidebar-item-text sidebar-link">Categorical predictors</a>
+  <a href="../../content/07-categorical-predictors/07-slides.html" class="sidebar-item-text sidebar-link">Slides</a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -275,14 +339,250 @@
     </div>
 </nav>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+<h2 id="toc-title">On this page</h2>
+<ul>
+<li><a href="#overview" class="nav-link active" data-scroll-target="#overview">Overview</a>
+<ul class="collapse">
+<li><a href="#exercise" class="nav-link" data-scroll-target="#exercise"> <span class="header-section-number">0.1</span> Exercise</a></li>
+<li><a href="#exercise-1" class="nav-link" data-scroll-target="#exercise-1"> <span class="header-section-number">0.2</span> Exercise</a></li>
+<li><a href="#exercise-2" class="nav-link" data-scroll-target="#exercise-2"> <span class="header-section-number">0.3</span> Exercise</a></li>
+<li><a href="#exercise-3" class="nav-link" data-scroll-target="#exercise-3"> <span class="header-section-number">0.4</span> Exercise</a></li>
+<li><a href="#exercise-4" class="nav-link" data-scroll-target="#exercise-4"> <span class="header-section-number">0.5</span> Exercise</a></li>
+<li><a href="#exercise-5" class="nav-link" data-scroll-target="#exercise-5"> <span class="header-section-number">0.6</span> Exercise</a></li>
+<li><a href="#exercise-6" class="nav-link" data-scroll-target="#exercise-6"> <span class="header-section-number">0.7</span> Exercise</a></li>
+<li><a href="#exercise-7" class="nav-link" data-scroll-target="#exercise-7"> <span class="header-section-number">0.8</span> Exercise</a></li>
+<li><a href="#exercise-8" class="nav-link" data-scroll-target="#exercise-8"> <span class="header-section-number">0.9</span> Exercise</a></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 <header id="title-block-header" class="quarto-title-block default">
 
 <div class="quarto-title"><h1 class="title d-none d-lg-block display-7">Exercise IV</h1></div></header>
 
+<section id="overview" class="level1 unnumbered">
+<h1 class="unnumbered">Overview</h1>
+<p>Once more, this set of exercises won’t introduce new technical skills: You got everything you need for the most common designs. Here, you’ll dive deeper into simulating multiple groups and getting a better feel for how these comparisons work.</p>
+<section id="exercise" class="level2" data-number="0.1">
+<h2 data-number="0.1" class="anchored" data-anchor-id="exercise"><span class="header-section-number">0.1</span> Exercise</h2>
+<p>ANOVAs are just linear models. There’s nothing wrong with using R’s <code>aov</code> command. In fact, it’s just a wrapper for <code>lm</code>. Type <code>?aov</code> and convince yourself by reading the (short) description. There’s another reason why directly calling <code>lm</code> can be an advantage: efficiency. So far, we haven’t really cared much about the time our simulations take, but with more complicated designs (or more runs) it can easily take several hours, days, or even weeks.</p>
+<p>Let’s see whether <code>lm</code> gives us an advantage. For that, we’ll need the <code>Sys.time()</code> command. It does exactly what it says: tells you the time of your computer system. When we store the time before and after a simulation, we can check how long it took and compare different functions.</p>
+<p>Run the following to get familiar with how this works:</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># wait a couple of seconds</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>t2 <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>t2<span class="sc">-</span>t1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now create a data frame with 4 (independent) groups whose means are <code>c(4.2, 4.5, 4.6, 4.6)</code> and their SDs are <code>c(0.7, 0.8, 0.6, 0.5)</code>. The sample size is 240 (equal size in the groups). Check for an effect of condition on the outcome in 10,000 simulations. Do that once with <code>aov</code> and once with <code>lm</code> and measure how long it took. Are there differences? (Tip: Remember vectorization for <code>rnorm</code> to create the groups.)</p>
+<div class="cell">
 
+</div>
+</section>
+<section id="exercise-1" class="level2" data-number="0.2">
+<h2 data-number="0.2" class="anchored" data-anchor-id="exercise-1"><span class="header-section-number">0.2</span> Exercise</h2>
+<p>Time to run a power analysis. You have 3 independent groups. Their means are <code>c(5, 5.2, 5.6)</code>; the SD is constant: 1. Your minimum sample size is 120; your maximum sample size is 300. How large does your sample have to be for 95% power? Do 1,000 per run. Go in steps of 6 for the sample size (so increase 2 per group). (Tip: You can use <code>seq</code> and remember <a href="https://stackoverflow.com/questions/5587676/pull-out-p-values-and-r-squared-from-a-linear-regression">this</a> link). This can take a minute.</p>
+<div class="cell">
+
+</div>
+</section>
+<section id="exercise-2" class="level2" data-number="0.3">
+<h2 data-number="0.3" class="anchored" data-anchor-id="exercise-2"><span class="header-section-number">0.3</span> Exercise</h2>
+<p>Do the above again, but this time there’s no difference between the first two groups: <code>c(5, 5, 5.6)</code>. What’s the effect on power if there’s a null effect for one contrast? Go in steps of 12 to speed it up.</p>
+<div class="cell">
+
+</div>
+</section>
+<section id="exercise-3" class="level2" data-number="0.4">
+<h2 data-number="0.4" class="anchored" data-anchor-id="exercise-3"><span class="header-section-number">0.4</span> Exercise</h2>
+<p>Let’s try to work on the standardized scale. You again have 3 groups. Their SDs are <code>c(2, 2.2, 1.8)</code>. Choose means such that the Cohen’s <span class="math inline">\(d\)</span>s are as follows:</p>
+<ul>
+<li>Group 1 vs.&nbsp;Group 2: <span class="math inline">\(d\)</span> = 0.2</li>
+<li>Group 1 vs.&nbsp;Group 3: <span class="math inline">\(d\)</span> = 0.6</li>
+<li>Group 2 vs.&nbsp;Group 3: ?</li>
+</ul>
+<p>Remember the formulate for Cohen’s <span class="math inline">\(d\)</span>: <span class="math inline">\(d = \frac{M_1-M_2}{\sqrt{\frac{(sd_1^2 + sd_2^2)}{2}}}\)</span></p>
+<p>It might help to look at the previous exercises about choosing Cohen’s <span class="math inline">\(d\)</span>. Create the data frame and calculate power for samples ranging from 20 per group to 60 per group. Go in steps of 3 per group. Do 500 runs. Tip: You can choose means in relation to the pooled SD. Run <code>effectsize::cohens_d()</code> for each run (and contrast) and store the mean in your outcomes data frame. Plot the power, but also check the effect sizes for each contrast.</p>
+<div class="cell">
+
+</div>
+</section>
+<section id="exercise-4" class="level2" data-number="0.5">
+<h2 data-number="0.5" class="anchored" data-anchor-id="exercise-4"><span class="header-section-number">0.5</span> Exercise</h2>
+<p>So far, we’ve worked with dummy coding for our explanatory factor. That presumes that we’re interested in those contrasts where the second and third condition are compared to the first.</p>
+<p>Sometimes, however, we’re not interested in these comparisons and would rather like to know the difference between our conditions and the grand mean. In that case, we should use sum to zero coding.</p>
+<p>Take the data set below:</p>
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">condition =</span> <span class="fu">as.factor</span>(<span class="fu">rep</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], <span class="at">times =</span> n)),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">scores =</span> <span class="fu">rnorm</span>(n<span class="sc">*</span><span class="dv">3</span>, <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">150</span>, <span class="dv">200</span>), <span class="fu">c</span>(<span class="dv">7</span>, <span class="dv">10</span>, <span class="dv">12</span>))</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s have a look at the contrasts:</p>
+<div class="cell">
+
+</div>
+<p>It’s the familiar dummy coding. This means, going row by row, that the intercept will be the mean of condition a, the first contrast will be the mean of condition b in comparison to a, and the third contrast will be the mean of condition c in comparison to a.</p>
+<p>Let’s have a look at contrast coding instead:</p>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(d<span class="sc">$</span>condition) <span class="ot">&lt;-</span> contr.sum</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(d<span class="sc">$</span>condition)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>  [,1] [,2]
+a    1    0
+b    0    1
+c   -1   -1</code></pre>
+</div>
+</div>
+<p>Now the intercept is our grand mean (the overall mean of the outcome), the first contrast compares the score in condition a against the grand mean and the second contrast compares the mean of condition b against the grand mean.</p>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(scores<span class="sc">~</span>condition, d))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = scores ~ condition, data = d)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-32.364  -6.417  -0.009   6.081  26.953 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 149.8348     0.5700 262.872   &lt;2e-16 ***
+condition1  -50.0140     0.8061 -62.045   &lt;2e-16 ***
+condition2   -0.6376     0.8061  -0.791     0.43    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 9.873 on 297 degrees of freedom
+Multiple R-squared:  0.946, Adjusted R-squared:  0.9456 
+F-statistic:  2600 on 2 and 297 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>If we want a different comparison, we can reorder the factor levels:</p>
+<div class="cell">
+<div class="sourceCode" id="cb7"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>condition <span class="ot">&lt;-</span> <span class="fu">factor</span>(d<span class="sc">$</span>condition, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"a"</span>)) </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(d<span class="sc">$</span>condition) <span class="ot">&lt;-</span> contr.sum</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(d<span class="sc">$</span>condition)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>  [,1] [,2]
+b    1    0
+c    0    1
+a   -1   -1</code></pre>
+</div>
+</div>
+<p>Now the first contrasts compares condition b against the grand mean, and the second contrast compares condition c against the grand mean.</p>
+<p>For later sessions on interactions, we’ll rely on this kind of sum coding (also called effect coding), so let’s get familiar with it here. Create four groups: a placebo group, a low dose group, a medium dose group, and a high dose group.</p>
+<p>You want to know whether the low dose, the medium dose, and the high dose are significantly different from the grand mean. Simulate a data set, set the contrasts, and run a linear model. Choose mean values as you like, but make sure you can find them again in the model output. How would you get the mean of the placebo group now? (Tip: Look at the contrasts, take the grand mean, and apply the contrasts to each estimate.)</p>
+<div class="cell">
+
+</div>
+</section>
+<section id="exercise-5" class="level2" data-number="0.6">
+<h2 data-number="0.6" class="anchored" data-anchor-id="exercise-5"><span class="header-section-number">0.6</span> Exercise</h2>
+<p>You plan an experiment where you want to test the effect of framing on agreeing with a message. You run a within-person experiment where people read a text with either neutral, positive, or negative framing. Each person reads each text (so we have a within-subjects design) and rates their level of agreeing on a 7-point Likert-scale.</p>
+<p>You determine that the smallest contrast you care about is 0.25 points between the neutral and the negative condition and between the neutral and the positive condition. You’ve found in previous testing that only such a difference on agreeing actually has an effect on behavior. That’s your SESOI.</p>
+<p>You decide that the midpoint of the scale is a decent starting point for the neutral condition. The negative condition should be 0.25 points lower and the positive condition 0.25 points higher. You generally expect that the variation should be somewhere around 1 Likert-point; this way, most scores are within -2 and +2 from the mean. However, you know that negative framing usually increases variation, so you’ll set the SD for that score 30% higher.</p>
+<p>The experiment takes place within 20 minutes, so you expect a decent amount of consistency in answers per participant: a person who generally agrees more should also agree more to all conditions. In other words, you set the correlation between scores to 0.6.</p>
+<p>Last, you determined that you’re early in the research process, so you definitely don’t want to miss any effects (aka commit a Type II error). You also consider that a false positive won’t have any negative consequences. Therefore, you set your <span class="math inline">\(\alpha\)</span> to 0.10.</p>
+<p>You can afford to collect 100 participants in total. Simulate power (500 runs each); go in steps of 5 (start with 20). How many participants do you need for 95% power? Use contrast coding. (Tip: Draw the variance-covariance matrix first before coding it. It helps.) (Tip: Remember the data format the data have to be in. You’ll need to transform them.) (You might have to Google how to get the p-value out of <code>aov</code>.)</p>
+<div class="cell">
+
+</div>
+</section>
+<section id="exercise-6" class="level2" data-number="0.7">
+<h2 data-number="0.7" class="anchored" data-anchor-id="exercise-6"><span class="header-section-number">0.7</span> Exercise</h2>
+<p>The previous study worked. Nice. Now you want to know whether positive framing scales: Can you reduce positivity and agreeing reduces proportionally? You run a follow-up experiment where you now have a neutral condition, a low positivity condition (half the positivity of your previous positive condition), and a high positivity condition (the positivity of your original positive condition). Your effect size remains: 0.25 for the comparison between neutral and high positivity (the original positive condition). You expect, therefore, that half the positivity should leave to half the effect size: 0.125. That’s your new SESOI.</p>
+<p>The previous study also showed that you weren’t too far off with an SD of 1, but this time you’ll use 0.8 for all scores.</p>
+<p>However, you expect that, because the two positivity conditions are so similar, they’ll correlate higher than the correlation between neutral and positivity. So you expect a correlation between neutral and either positivity condition to be 0.3, but 0.6 between the two positivity conditions.</p>
+<p>Because your department was so happy with how well you designed the previous study, they gave you more money. Now you can collect a maximum of 500 participants. Last time, the power simulation took quite some time, so this time you want to stop whenever you reach 95% power. Also, because this time you want to be more stringent, you set <span class="math inline">\(\alpha\)</span> to 0.01.</p>
+<p>Do 500 runs, start with 60 people and go in in steps of 10. Use treatment contrasts. This can take a while.</p>
+<div class="cell">
+
+</div>
+</section>
+<section id="exercise-7" class="level2" data-number="0.8">
+<h2 data-number="0.8" class="anchored" data-anchor-id="exercise-7"><span class="header-section-number">0.8</span> Exercise</h2>
+<p>Usually when you run an ANOVA, you specify your contrasts before-hand so you know which groups you want to compare beyond just the overall effect of your condition. Let’s take the data set below. The overall effect of condition is significant:</p>
+<div class="cell">
+
+</div>
+<p>Let’s inspect the post-hoc comparisons between the groups with the <code>emmeans</code> package. Here, not every comparison is significant.</p>
+<div class="cell">
+
+</div>
+<p>Run a power simulation that finds the sample size for which we have 90% power for the smallest post-hoc contrast (aka the largest of the three p-values.) Go about it as you think is best, but save both the main effect p-value and the largest p-value of the posthoc contrasts to be able to compare power. In effect, you’re powering for a t-test, which only emphasizes that you should work on the raw scale and specify each comparison. (Tip: <code>summary</code> turns the <code>pairs(postdocs)</code> into a data frame.)</p>
+<div class="cell">
+
+</div>
+</section>
+<section id="exercise-8" class="level2" data-number="0.9">
+<h2 data-number="0.9" class="anchored" data-anchor-id="exercise-8"><span class="header-section-number">0.9</span> Exercise</h2>
+<p>Rather than doing posthoc comparisons between each group, we can rely on planned contrasts. If that’s completely new to you, have a read <a href="https://towardsdatascience.com/doing-and-reporting-your-first-planned-contrasts-in-r-ee77ff277088">here</a>. The blog post does a really nice job explaining planned contrasts.</p>
+<p>In effect, rather than relying on sum to zero or treatment coding, we create our own comparisons. Let’s say we want to compare neutral to <strong>both</strong> low positivity and high positivity (as a general test that framing works). Then, our second contrast compares the two framing conditions. For simplicity, let’s go three independent groups with means of <code>c(4, 4.3, 4.4)</code> and a common SD of 1.1. Custom contrasts will allow us to directly make the two comparisons we’re interested in like such:</p>
+<div class="cell">
+<div class="sourceCode" id="cb9"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">scores =</span> <span class="fu">rnorm</span>(<span class="dv">150</span>, <span class="fu">c</span>(<span class="fl">4.</span>, <span class="fl">4.3</span>, <span class="fl">4.4</span>), <span class="fl">1.1</span>),</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">condition =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"neutral"</span>, <span class="st">"low"</span>, <span class="st">"high"</span>), <span class="dv">50</span>))</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(d<span class="sc">$</span>condition)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>        low neutral
+high      0       0
+low       1       0
+neutral   0       1</code></pre>
+</div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>highlow_vs_neutral <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="dv">2</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>high_vs_low <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(d<span class="sc">$</span>condition) <span class="ot">&lt;-</span> <span class="fu">cbind</span>(highlow_vs_neutral, high_vs_low)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(d<span class="sc">$</span>condition)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>        highlow_vs_neutral high_vs_low
+high                     1           1
+low                      1          -1
+neutral                 -2           0</code></pre>
+</div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary.lm</span>(<span class="fu">aov</span>(scores <span class="sc">~</span> condition, d))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>
+Call:
+aov(formula = scores ~ condition, data = d)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2.36436 -0.66718 -0.03486  0.75111  2.70774 
+
+Coefficients:
+                            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                  4.21370    0.08293  50.809   &lt;2e-16 ***
+conditionhighlow_vs_neutral  0.10082    0.05864   1.719   0.0877 .  
+conditionhigh_vs_low         0.04212    0.10157   0.415   0.6790    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.016 on 147 degrees of freedom
+Multiple R-squared:  0.02083,   Adjusted R-squared:  0.007511 
+F-statistic: 1.564 on 2 and 147 DF,  p-value: 0.2128</code></pre>
+</div>
+</div>
+<p>Run a power simulation where you first run standard treatment contrasts. Then, run posthoc tests (<code>emmeans::emmeans</code>) on that test. For simplicity, focus on the comparison of high vs.&nbsp;low. Select the p-value for that posthoc contrast. In the same run, change the contrasts to custom from above, run the model again, and extract the p-value for the high vs.&nbsp;low comparison. Do that for samples ranging from 50 to 200 in steps of 10. Do 200 runs to save a bit of time, then plot the two types of power against each other. Which approach is more “powerful”?</p>
+<div class="cell">
+
+</div>
+
+
+</section>
+</section>
 </main> <!-- /main -->
 <script type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
