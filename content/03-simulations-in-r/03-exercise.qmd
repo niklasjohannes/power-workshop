@@ -14,7 +14,7 @@ execute:
 
 This is the first set of exercises where you get familiar with basic commands that you'll need for data simulation. It'll make it easier later on when you do more complicated designs to have a good intuition how these commands work.
 
-This part might be really boring to you if you're already a seasoned R user. In that case, I recommend you get a coffee, tea, and/or nap.
+This part might be boring to you if you're already a seasoned R user. In that case, I recommend you get a coffee, tea, and/or nap.
 
 ## Block 1
 
@@ -76,7 +76,7 @@ sample(letters, prob = probs)
 
 ### Exercise
 
-Create a data set. In the data set, each participant has an identifier (called `id`), a group identifier (`condition`), and an identifier what number of measurement we have for this participant (`trial`). There are 3 participants in each of three groups with 5 trials in each group.
+Create a data set. In the data set, each participant has an identifier (called `id`), a group identifier (`condition`), and an identifier of what number of measurement we have for this participant (`trial`). There are 3 participants in each of three groups with 5 trials in each group.
 
 ```{r}
 groups <- letters[1:3]
@@ -95,7 +95,7 @@ d
 
 ### Exercise
 
-You have two groups, a control and a treatment group. In each group, there are 10 participants. Each participant flips a coin 10 times. The control group has a fair coin: 50% heads. The treatment group has an unfair coin: 70% heads. Create a data frame with a participant identifier (`id`), group membership (`condition`), and a total head count for that participant (`heads`). Check that the two groups indeed have different means on the number of heads (roughly corresponding to the two probabilities)
+You have two groups, a control and a treatment group. In each group, there are 10 participants. Each participant flips a coin 10 times. The control group has a fair coin: 50% heads. The treatment group has an unfair coin: 70% heads. Create a data frame with a participant identifier (`id`), group membership (`condition`), and a total head count for that participant (`heads`). Check that the two groups indeed have different means of how often they get heads (roughly corresponding to the two probabilities)
 
 ```{r}
 groups <- c("control", "treatment")
@@ -118,7 +118,7 @@ aggregate(d$heads, by = list(d$condition), mean)
 
 ### Exercise
 
-You have 100 participants. Each participants reports their age which lies uniformly between 20 and 40. They also report grumpiness on a 100-point scale (with a 10-point SD). Each extra year predicts 0.5 higher grumpiness. Create the two variables (no need for a data frame) and conduct a correlation with `cor`. What's the correlation?
+You have 100 participants. Each participants reports their age which lies uniformly between 20 and 40. They also report grumpiness on a 100-point scale (with a 10-point SD). Each extra year predicts 0.5 higher grumpiness (Tip: Check the lecture slides; you'll need to add some error). Create the two variables (no need for a data frame) and conduct a correlation with `cor`. What's the correlation?
 
 ```{r}
 n <- 100
@@ -169,7 +169,7 @@ In this section, you'll use the basics from above to perform your first power an
 
 ### Exercise
 
-There are four groups. Each group comes from a different normal distribution. The means are c(100, 105, 107, 109). The SDs are c(9, 12, 10, 17). Each group should be 20 cases. Store everything in a data frame and have a variable that indicates the group. Tip: Remember that R uses vectors, even for arguments in a function.
+There are four groups. Each group comes from a different normal distribution. The means are `c(100, 105, 107, 109)`. The SDs are `c(9, 12, 10, 17)`. Each group should be 20 cases. Store everything in a data frame and have a variable that indicates the group. Tip: Remember that R uses vectors, even for arguments in a function.
 
 ```{r}
 means <- c(100, 105, 107, 109)
@@ -328,7 +328,7 @@ sample_against_se(draws = 10)
 
 The average height of men in Spain is 173cm (says [Wikipedia](https://en.wikipedia.org/wiki/Average_human_height_by_country)). The population standard deviation is probablay around 7cm ([source](https://biology.stackexchange.com/questions/9730/what-is-the-standard-deviation-of-adult-human-heights-for-males-and-females)).
 
-You draw a sample of men and want to test whether they're significantly different from that mean (our H~0~). In fact, these men you have sampled are truly French (175.6cm, our true "effect size"). In other words, can we reject the null hypothesis that these men we sampled come from a different country in favor of our alternative hypothesis that the true population value is greater than the Spanish population mean?
+You draw a sample of men and want to test whether they're significantly different from that mean (our H~0~). In fact, these men you have sampled are truly French (175.6cm, our true "effect size"). In other words, can we reject the null hypothesis that these men we sampled come from the Spanish distribution in favor of our alternative hypothesis that the true population value is greater than the Spanish population mean?
 
 You calculate the z-statistic, which is calculated as follows: $\frac{\bar{X} - \mu_0}{\sigma/\sqrt{N}}$
 This simply tells us how far from the population mean (well, the suspected population mean under the null hypothesis) our sample mean is in terms of standard errors. 
@@ -336,7 +336,7 @@ $\bar{X}$ is the sample mean, $\mu_0$ is the population mean under H~0~, $\sigma
 
 Then we can look up the z-score to see what the probability is to score this high or higher (does that definition ring a bell?). In R, you can simply do that with a built-in function: `pnorm()`. For example, if we have a z-score of 1.645, our probability of obtaining such a value (or higher) is `pnorm(1.645, lower.tail = FALSE)` = `r pnorm(1.645, lower.tail = FALSE)` -- our p-value for a one-sided test.
 
-We can simulate the power of our statistical test (in this case, the z-statistic). Take a sample of 30 people from the French population, calculate the z-statistic, it's p-value, and store the p-value. Do this 1,000 times. Plot the distribution of p-values. What can we conclude about the sample size?
+We can simulate the power of our statistical test (in this case, the z-statistic). Take a sample of 30 people from the French population, calculate the z-statistic, its p-value, and store the p-value. Do this 1,000 times. Plot the distribution of p-values. What can we conclude about the sample size?
 
 ```{r}
 # sample size
@@ -360,7 +360,7 @@ plot(density(pvalues))
 
 ### Exercise
 
-Now calculate the power by calculating the proportion of pvalues that are below 0.05. That's your power: The proportion of tests that will detect that there's a true effect. In our case, that effect is a difference of 2.6cm.
+Now calculate the proportion of p-values that are below 0.05. That's your power: The proportion of tests that will detect that there's a true effect. In our case, that effect is a difference of 2.6cm.
 
 ```{r}
 sum(pvalues < 0.05)/length(pvalues)

@@ -279,6 +279,9 @@ d <-
 Let's have a look at the contrasts:
 
 ```{r}
+#| echo: true
+#| eval: true
+
 contrasts(d$condition)
 ```
 
@@ -316,7 +319,7 @@ contrasts(d$condition)
 
 Now the first contrasts compares condition b against the grand mean, and the second contrast compares condition c against the grand mean.
 
-For later sessions on interactions, we'll rely on this kind of sum coding (also called effect coding), so let's get familiar with it here. Create four groups: a placebo group, a low dose group, a medium dose group, and a high dose group.
+For later sessions on interactions, we'll rely on this kind of sum-to-zero coding (also called effect coding), so let's get familiar with it here. Create four groups: a placebo group, a low dose group, a medium dose group, and a high dose group.
 
 You want to know whether the low dose, the medium dose, and the high dose are significantly different from the grand mean. Simulate a data set, set the contrasts, and run a linear model. Choose mean values as you like, but make sure you can find them again in the model output. How would you get the mean of the placebo group now? (Tip: Look at the contrasts, take the grand mean, and apply the contrasts to each estimate.)
 
@@ -425,7 +428,7 @@ plot(outcomes$sample_size, outcomes$power)
 
 ## Exercise
 
-The previous study worked. Nice. Now you want to know whether positive framing scales: Can you reduce positivity and agreeing reduces proportionally? You run a follow-up experiment where you now have a neutral condition, a low positivity condition (half the positivity of your previous positive condition), and a high positivity condition (the positivity of your original positive condition). Your effect size remains: 0.25 for the comparison between neutral and high positivity (the original positive condition). You expect, therefore, that half the positivity should leave to half the effect size: 0.125. That's your new SESOI.
+The previous study worked. Nice. Now you want to know whether positive framing scales: Can you reduce positivity and agreeing reduces proportionally? You run a follow-up experiment where you now have a neutral condition, a low positivity condition (half the positivity of your previous positive condition), and a high positivity condition (the positivity of your original positive condition). Your effect size remains: 0.25 for the comparison between neutral and high positivity (the original positive condition). You expect, therefore, that half the positivity should lead to half the effect size: 0.125. That's your new SESOI.
 
 The previous study also showed that you weren't too far off with an SD of 1, but this time  you'll use 0.8 for all scores.
 
@@ -523,6 +526,12 @@ plot(outcomes$sample_size, outcomes$power)
 Usually when you run an ANOVA, you specify your contrasts before-hand so you know which groups you want to compare beyond just the overall effect of your condition. Let's take the data set below. The overall effect of condition is significant:
 
 ```{r}
+#| echo: true
+#| eval: true
+
+library(MASS)
+library(tidyr)
+
 means <- c(neutral = 10, low = 12, high = 14)
 sd <- 8
 correlation <- 0.6

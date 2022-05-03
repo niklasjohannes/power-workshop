@@ -360,8 +360,8 @@ violent_hard <- 6
 
 d <- 
   data.frame(
-    Game = rep(c(0, 1, 0, 1), each = 50),
-    Difficulty = rep(c(0, 0, 1, 1), each = 50),
+    Game = rep(c(0, 1), each = 50, times = 2),
+    Difficulty = rep(c(0, 1), each = 50*2),
     Aggression = c(
       rnorm(50, peace_easy, 1),
       rnorm(50, violent_easy, 1),
@@ -387,8 +387,8 @@ violent_hard <- 0
 
 d <- 
   data.frame(
-    Game = rep(c(0, 1, 0, 1), each = 50),
-    Difficulty = rep(c(0, 0, 1, 1), each = 50),
+    Game = rep(c(0, 1), each = 50, times = 2),
+    Difficulty = rep(c(0, 1), each = 50*2),
     Aggression = c(
       rnorm(50, peace_easy, 1),
       rnorm(50, violent_easy, 1),
@@ -579,7 +579,7 @@ twobytwo(
   means = c(0, 3, 3, 0),
   factors = c("Game", "Difficulty"),
   levels1 = c("Peaceful", "Violent"),
-  levels2 = c("Easy", "Difficult"),
+  levels2 = c("Easy", "Hard"),
   outcome = "Aggression"
 )
 ```
@@ -608,7 +608,7 @@ twobytwo(
 
 ![](reversal.jpg)
 
-For full details, picture from [here](https://approachingblog.wordpress.com/2018/01/24/powering-your-interaction-2/)
+For full details, see [here](https://approachingblog.wordpress.com/2018/01/24/powering-your-interaction-2/).
 
 ## Attentuation
 
@@ -676,8 +676,8 @@ for (i in 1:n) {
   d <- data.frame(
     id = factor(1:c(4*n)),
     scores = c(group1, group2, group3, group4),
-    group1 = factor(rep(c("a", "b", "a", "b"), each = n)),
-    group2 = factor(rep(c("a", "a", "b", "b"), each = n))
+    group1 = factor(rep(c("a", "b"), each = n, times = 2)),
+    group2 = factor(rep(c("a", "b"), each = n*2))
   )
   
   contrasts(d$group1) <- contr.sum

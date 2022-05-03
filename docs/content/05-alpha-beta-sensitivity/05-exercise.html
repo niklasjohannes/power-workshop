@@ -361,7 +361,6 @@
 
 <div class="quarto-title"><h1 class="title d-none d-lg-block display-7">Exercise III</h1></div></header>
 
-<hr>
 <section id="overview" class="level1 unnumbered">
 <h1 class="unnumbered">Overview</h1>
 <p>This set of exercises won’t introduce new technical skills. Instead, you’ll apply your simulation skills to different concepts to get a better feeling for the false positive rate, the role of alpha, and how a sensitivity analysis works.</p>
@@ -379,7 +378,9 @@ False \ positive \ rate = \frac{\phi * \alpha}{\phi * \alpha + power * (1 - \phi
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>iq_scores <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">100</span>, <span class="dv">105</span>, <span class="dv">1</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>sample_size <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(iq_scores, sample_size)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(iq_scores, sample_size)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>d</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You can use the following code (make sure the variables are named accordingly):</p>
 <div class="cell">
@@ -396,7 +397,7 @@ False \ positive \ rate = \frac{\phi * \alpha}{\phi * \alpha + power * (1 - \phi
 </section>
 <section id="exercise-1" class="level2" data-number="0.2">
 <h2 data-number="0.2" class="anchored" data-anchor-id="exercise-1"><span class="header-section-number">0.2</span> Exercise</h2>
-<p>How does the alpha level influence your power? Simulate two correlated scores. The means of the scores are 4 and 4.2; their SDs are 0.4 and 0.7. Their correlation is 0.65. Simulate power (500 runs) for sample sizes starting at 30 and going to a maximum of 110. Stop whenever you reach 95% power (so use <code>while</code>). Do that for 5 different alpha levels: c(0.005, 0.001, 0.01, 0.05, 0.10). Plot the results. As always, you can use the code below. What’s the influence of the alpha compared to the sample size?</p>
+<p>How does the alpha level influence your power? Simulate two correlated scores. The means of the scores are 4 and 4.2; their SDs are 0.4 and 0.7. Their correlation is 0.65. Simulate power (500 runs) for sample sizes starting at 30 and going to a maximum of 110. Stop whenever you reach 95% power (so use <code>while</code>). Do that for 5 different alpha levels: <code>c(0.005, 0.001, 0.01, 0.05, 0.10)</code>. Plot the results. As always, you can use the code below. What’s the influence of the alpha compared to the sample size?</p>
 <div class="cell">
 <div class="sourceCode" id="cb3"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -429,14 +430,14 @@ False \ positive \ rate = \frac{\phi * \alpha}{\phi * \alpha + power * (1 - \phi
 </section>
 <section id="exercise-4" class="level2" data-number="0.5">
 <h2 data-number="0.5" class="anchored" data-anchor-id="exercise-4"><span class="header-section-number">0.5</span> Exercise</h2>
-<p>Run a sensitivity analysis on a paired samples t-test (one-tailed). You had 47 participants; the means were 56 and 60; the SDs were 16 and 13; the correlation between the measures was 0.4. Get sensitivity for three different alpha levels: c(0.005, 0.01, 0.05). As for effect sizes: Increase the effect size by 1 until you have 90% power. For each combination, do 1,000 simulations. Plot the results with <code>ggplot</code> like you did earlier.</p>
+<p>Run a sensitivity analysis on a paired samples t-test (one-tailed). You had 47 participants; the means were 56 and 60; the SDs were 16 and 13; the correlation between the measures was 0.4. Get sensitivity for three different alpha levels: <code>c(0.005, 0.01, 0.05)</code>. As for effect sizes: Increase the effect size by 1 until you have 90% power. For each combination, do 1,000 simulations. Plot the results with <code>ggplot</code> like you did earlier.</p>
 <div class="cell">
 
 </div>
 </section>
 <section id="exercise-5" class="level2" data-number="0.6">
 <h2 data-number="0.6" class="anchored" data-anchor-id="exercise-5"><span class="header-section-number">0.6</span> Exercise</h2>
-<p>Do the above again, but this time on the standardized scale. Verify your results with GPower. (Tip: Compute Cohen’s <span class="math inline">\(d\)</span> each time after you’ve simulated your sample and then take the mean for each combination.)</p>
+<p>Do the above again, but this time on the standardized scale. Verify your results with GPower. Now you can’t plot the raw effect size, but you need the standardized one. However, the standardized one in this setting will depend on the SD of the difference. Therefore, you need to calculate the empirical Cohen’s <span class="math inline">\(d\)</span> for each run, store it, and then take the mean of all <span class="math inline">\(d\)</span>s per combination.</p>
 <div class="cell">
 
 </div>

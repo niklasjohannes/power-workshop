@@ -468,7 +468,7 @@ So:
 
 ```{=tex}
 \begin{gather*}
-power \ * R
+power \times R
 \end{gather*}
 ```
 ## How true is a study?
@@ -480,7 +480,7 @@ How many significant results do we expect?
 
 ```{=tex}
 \begin{gather*}
-power \ * R + \alpha
+power \times R + \alpha
 \end{gather*}
 ```
 ## Positive predictive value
@@ -489,7 +489,7 @@ What is the probability that a significant effect is indeed true? The rate of si
 
 ```{=tex}
 \begin{gather*}
-PPV = \frac{power*R}{power*R + \alpha}
+PPV = \frac{power \times R}{power \times R + \alpha}
 \end{gather*}
 ```
 ## An example
@@ -498,8 +498,8 @@ Let's assume our hypothesis has a 25% of being true and we go for the "conventio
 
 ```{=tex}
 \begin{gather*}
-PPV = \frac{power*R}{power*R + \alpha}
-= \frac{power*\frac{P(effect)}{P(No \ effect)}}{power*\frac{P(effect)}{P(No \ effect)} + \alpha}
+PPV = \frac{power \times R}{power \times R + \alpha}
+= \frac{power \times \frac{P(effect)}{P(No \ effect)}}{power \times \frac{P(effect)}{P(No \ effect)} + \alpha}
 \end{gather*}
 ```
 ::: incremental

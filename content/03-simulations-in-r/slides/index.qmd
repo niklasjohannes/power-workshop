@@ -25,6 +25,7 @@ bibliography: references.bib
 -   Cooking vs. eating
 -   Makes you truly understand what you're doing
 -   Forces you to put a number on things
+-   Simulate the data generating process (we'll get back to that)
 
 ## Going through the motions
 
@@ -36,7 +37,7 @@ bibliography: references.bib
 
 Above all, you want to be able to reproduce your analysis--much later, on a different computer, etc. [@trisovic2022]
 
-[![](https://media.springernature.com/full/springer-static/image/art%253A10.1038%252Fs41597-022-01143-6/MediaObjects/41597_2022_1143_Fig8_HTML.png?as=webp)](https://www.nature.com/articles/s41597-022-01143-6)
+![](dependencies.jpg)
 
 ## Computational reproducibility
 
@@ -751,7 +752,7 @@ for (current_year in 2:years) {
   newbies <- rbinom(n = 1, size = profs, prob = money)
   
   # how many see the light and quit
-  enlightened <- rbinom(n = 1, size = results, prob = quitting)
+  enlightened <- rbinom(n = 1, size = results[current_year  - 1], prob = quitting)
   
   # new total
   results[current_year] <- results[current_year - 1] + newbies - enlightened
@@ -788,7 +789,7 @@ for (i in 1:experiments) {
     newbies <- rbinom(n = 1, size = profs, prob = money)
     
     # how many see the light and quit
-    enlightened <- rbinom(n = 1, size = results, prob = quitting)
+    enlightened <- rbinom(n = 1, size = results[current_year - 1], prob = quitting)
     
     # new total
     results[current_year] <- results[current_year - 1] + newbies - enlightened
@@ -842,7 +843,7 @@ counting_phds <-
       newbies <- rbinom(n = 1, size = profs, prob = money)
       
       # how many see the light and quit
-      enlightened <- rbinom(n = 1, size = results, prob = quitting)
+      enlightened <- rbinom(n = 1, size = results[current_year - 1], prob = quitting)
       
       # new total
       results[current_year] <- results[current_year - 1] + newbies - enlightened
@@ -970,6 +971,35 @@ ggplot(outcomes, aes(x = experiment, y = total, color = as.factor(prof))) + geom
 
 aggregate(outcomes[, 3], list(outcomes$prof), mean)
 ```
+
+## A note on efficiency
+
+Right now, we're appending our data to an object that grows with each iteration:
+
+```{r}
+#| eval: false
+
+# turn into a row and add to outcomes
+our_row <- data.frame(experiment = i, prof = aprof, total = total)
+outcomes <- rbind(outcomes, our_row)
+```
+
+This procedure helps with explaining the logic, but is inefficient. It's much faster to [pre-allocate](https://r4ds.had.co.nz/iteration.html) space:
+
+```{r}
+#| eval: false
+
+outcomes <- 
+  data.frame(
+    experiment = rep(1:years, each = profs),
+    prof = rep(1:profs, times = years),
+    total = NA
+  )
+
+outcomes$total[i] <- total
+```
+
+For your own simulations, when efficiency matters, you should always pre-allocate space.
 
 # Let's get simulating
 

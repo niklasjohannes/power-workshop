@@ -331,7 +331,7 @@ So now we know how to:
 - Specify an outcome on the raw scale, but we sort of eyeball the error
 - Specify both predictor and outcome on the standardized scale, full control over means, SDs, but we prefer unstandardized
 
-How do we specify a an effect on the raw scale, but use the multivariate normal distribution? Remember the formula for $r$?
+How do we specify an effect on the raw scale, but use the multivariate normal distribution? Remember the formula for $r$?
 
 $r = B_{xy} \frac{\sigma_x}{\sigma_Y}$
 
@@ -817,7 +817,7 @@ Once more, we measure agreement on a 100-point scale. We make several assumption
 - At average liking and trustworthiness (0 = centered), agreement is on the mid-point of the scale: 50
 - There's a main effect of liking: With each extra point (at average trustworthiness), agreement should go up by 3 points.
 - There's a main effect of trustworthiness: With each extra point (at average liking), agreement should go up by 2 points.
-- We expect that going up on trustworthiness will enhance our framing liking effect by 2 points
+- We expect that going up on trustworthiness will enhance our liking effect by 2 points
 
 ## Put into numbers
 

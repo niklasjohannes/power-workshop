@@ -436,8 +436,8 @@
 <h2 data-number="1.5" class="anchored" data-anchor-id="exercise-4"><span class="header-section-number">1.5</span> Exercise</h2>
 <p>Guess what? The power analysis you did above was on the standardized scale. Do you know why? Let’s look at the formula for Cohen’s d again:</p>
 <p><span class="math inline">\(d = \frac{M_1-M_2}{pooled \ SD}\)</span></p>
-<p>Above, our means were 4 for the control group, and 4.2, 4,5, and 4.8 for the treatment group. Crucially, the SD was 1 for all groups. That means, very conveniently, that the differences are 0.2, 0.5, and 0.8 standard deviations–and Cohen’s <span class="math inline">\(d\)</span> is measured in standard deviations.</p>
-<p>You can verify that yourself. Simulate a normally distributed control group (10,000) cases with a mean of 100 and an SD of 1. Also simulate a treatment group with a mean of 101 and and SD of 1. Then do two more groups, but this time increase the SD for both groups to 2. What should happen to Cohen’s <span class="math inline">\(d\)</span> from the first comparison to the second? Verify your intuition by using <code>effectsize::cohens_d</code> function.</p>
+<p>Above, our means were 4 for the control group, and 4.2, 4,5, and 4.8 for the treatment group. Crucially, the SD was 1 for all groups. That means, very conveniently, that the differences are 0.2, 0.5, and 0.8 standard deviations–and Cohen’s <span class="math inline">\(d\)</span> is measured in standard deviations. 0.2, 0.5, and 0.8 are also the heuristics for a small, medium, and large effect, respectively.</p>
+<p>You can verify that yourself. Simulate a normally distributed control group (10,000 cases) with a mean of 100 and an SD of 1. Also simulate a treatment group with a mean of 101 and and SD of 1. Then do two more groups, but this time increase the SD for both groups to 2. What should happen to Cohen’s <span class="math inline">\(d\)</span> from the first comparison to the second? Verify your intuition by using the <code>effectsize::cohens_d</code> function.</p>
 <div class="cell">
 
 </div>
@@ -452,14 +452,10 @@
 <section id="exercise-6" class="level2" data-number="1.7">
 <h2 data-number="1.7" class="anchored" data-anchor-id="exercise-6"><span class="header-section-number">1.7</span> Exercise</h2>
 <p>How much power do we gain if we specify the direction of a test? Run a simulation with a Cohen’s <span class="math inline">\(d\)</span> of 0.5 for sample sizes of 20 to 100 (1,000 samples each). For each run, do a one-tailed and a two-tailed t-test. Then plot the power curves and calculate the average power (across all sample sizes) for the two.</p>
-<p>If you store the following data frame, you can use the below code for plotting. ::: {.cell}</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>outcomes <span class="ot">&lt;-</span> </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">sample_size =</span> <span class="cn">NULL</span>,</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="cn">NULL</span>, <span class="co"># for one vs. two-tailed</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">power =</span> <span class="cn">NULL</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>:::</p>
+<p>If you store the following data frame, you can use the below code for plotting.</p>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(outcomes, <span class="fu">aes</span>(<span class="at">x =</span> sample_size, <span class="at">y =</span> power, <span class="at">color =</span> <span class="fu">as.factor</span>(type))) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <div class="cell">
 
 </div>
@@ -514,7 +510,7 @@
 <h1 data-number="2"><span class="header-section-number">2</span> Block 2</h1>
 <section id="exercise-10" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="exercise-10"><span class="header-section-number">2.1</span> Exercise</h2>
-<p>Alright, now let’s get familiar with the <code>while</code> function. Simulate (200 runs) an independent (we’ll go paired soon enough) t-test (two-tailed) for two difference effect sizes. The SD for both groups is 2. The mean for the control group is 100. In the small effects condition, the treatment group is 0.5 points larger. In the large effects condition, the treatment group is 1 points larger.</p>
+<p>Alright, now let’s get familiar with the <code>while</code> function. Simulate (200 runs) an independent (we’ll go paired soon enough) t-test (two-tailed) for two different effect sizes. The SD for both groups is 2. The mean for the control group is 100. In the small effects condition, the treatment group is 0.5 points larger. In the large effects condition, the treatment group is 1 points larger.</p>
 <p>Start at a sample size of 25 and stop when you reach 95% power. Plot the power curve and show that the larger effect size stops much earlier.</p>
 <div class="cell">
 <div class="sourceCode" id="cb7"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
@@ -569,7 +565,7 @@
 </section>
 <section id="exercise-11" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="exercise-11"><span class="header-section-number">2.2</span> Exercise</h2>
-<p>You’re measuring people’s mood twice: right before and right after lunch. You know from extensive study on effect sizes that mood needs to increase by 0.5 points on a 7-point scale for other people to notice. You assume the the SD is somewhere around 1.5, with a bit more variation before lunch (1.7) than after lunch (1.5). You also assume that mood is correlated to some degree, say 0.5.</p>
+<p>You’re measuring people’s mood twice: right before and right after lunch. You know from extensive study on effect sizes that mood needs to increase by 1 point on a 7-point scale for other people to notice. You assume the the SD is somewhere around 1.5, with a bit more variation before lunch (1.7) than after lunch (1.5). You also assume that mood is correlated to some degree, say 0.5.</p>
 <p>You have budget for a maximum sample of 100. How many people do you need to measure to achieve 87% power to detect this 1-point effect–and do you need to go to your max? Use 500 simulations per run. (Tip: the samples are correlated, so you’ll need to specify a variance-covariance matrix.) Verify with GPower.</p>
 <div class="cell">
 

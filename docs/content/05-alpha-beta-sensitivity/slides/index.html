@@ -451,7 +451,7 @@
 <li>Our <span class="math inline">\(\alpha\)</span> (how many false positives we get)</li>
 </ul>
 <span class="math display">\[\begin{gather*}
-PPV = \frac{power*R}{power*R + \alpha}
+PPV = \frac{power \times R}{power \times R + \alpha}
 \end{gather*}\]</span>
 </section>
 <section id="reversing-the-logic" class="slide level2">
@@ -469,17 +469,17 @@ False \ positive \ rate = \frac{False \ positives}{False \ positives + True \ po
 <li>Our power (how good are we in finding true positives)</li>
 </ul>
 <span class="math display">\[\begin{gather*}
-False \ positives = \phi * \alpha\\
-True \ positives = power * (1 - \phi)
+False \ positives = \phi \times \alpha\\
+True \ positives = power \times (1 - \phi)
 \end{gather*}\]</span>
 </section>
 <section id="plug-it-all-in" class="slide level2">
 <h2>Plug it all in</h2>
 <span class="math display">\[\begin{gather*}
 False \ positive \ rate = \frac{False \ positives}{False \ positives + True \ positives}\\\\
-False \ positives = \phi * \alpha\\
-True \ positives = power * (1 - \phi)\\\\
-False \ positive \ rate = \frac{\phi * \alpha}{\phi * \alpha + power * (1 - \phi)}
+False \ positives = \phi \times \alpha\\
+True \ positives = power \times (1 - \phi)\\\\
+False \ positive \ rate = \frac{\phi \times \alpha}{\phi \times \alpha + power \times (1 - \phi)}
 \end{gather*}\]</span>
 </section>
 <section id="the-alpha-debate-1" class="slide level2">
@@ -617,7 +617,7 @@ False \ positive \ rate = \frac{\phi * \alpha}{\phi * \alpha + power * (1 - \phi
 <h2>What’s our (real) Type I error rate?</h2>
 <p>Probability of committing a false positive: How many nulls are there and what’s our chance of falsely flagging a null as a true effect?</p>
 <span class="math display">\[\begin{gather*}
-Probability \ H_0 \ is \ true * Probability \ Type \ I \ error \\
+Probability \ H_0 \ is \ true \times Probability \ Type \ I \ error \\
 P(H_0)*\alpha
 \end{gather*}\]</span>
 </section>
@@ -625,8 +625,8 @@ P(H_0)*\alpha
 <h2>What’s our (real) Type II error rate?</h2>
 <p>Probability of commmiting a false negative: How many true effects are there and what’s our chance of missing them?</p>
 <span class="math display">\[\begin{gather*}
-Probability \ H_1 \ is \ true * Probability \ Type \ II \ error \\
-P(H_1)*\beta
+Probability \ H_1 \ is \ true \times Probability \ Type \ II \ error \\
+P(H_1) \times \beta
 \end{gather*}\]</span>
 </section>
 <section id="weighted-combined-error-rate" class="slide level2">
@@ -638,16 +638,16 @@ P(H_1)*\beta
 <li>Prior odds of H<sub>1</sub> being true: 3:1 (i.e., 75%)</li>
 </ul>
 <span class="math display">\[\begin{gather*}
-(P(H_0)*\alpha) + (P(H_1)*\beta) \\
-(0.25 * 0.05) + (0.75 * 0.20) = 0.1625
+(P(H_0) \times \alpha) + (P(H_1) \times \beta) \\
+(0.25 \times 0.05) + (0.75 \times 0.20) = 0.1625
 \end{gather*}\]</span>
 </section>
 <section id="is-that-the-best-we-can-do" class="slide level2">
 <h2>Is that the best we can do?</h2>
 <p>Now let’s change our <span class="math inline">\(\alpha\)</span> to 0.10. That makes our power go up to 88%. Our <span class="math inline">\(\beta\)</span>, therefore, is .12. (Remember: iterative). Put those in:</p>
 <span class="math display">\[\begin{gather*}
-(P(H_0)*\alpha) + (P(H_1)*\beta) \\
-(0.25 * 0.10) + (0.75 * 0.12) = 0.115
+(P(H_0) \times \alpha) + (P(H_1) \times \beta) \\
+(0.25 \times 0.10) + (0.75 \times 0.12) = 0.115
 \end{gather*}\]</span>
 </section>
 <section id="comparing-the-two" class="slide level2">
@@ -660,15 +660,15 @@ P(H_1)*\beta
 <h2>Pesky reality</h2>
 <p>What if the probabilities of our hypotheses are different? Say the odds of H<sub>1</sub> being true aren’t 3:1, but 1:3.</p>
 <span class="math display">\[\begin{gather*}
-(0.75 * 0.05) + (0.25 * 0.20) = 0.0875\\
-(0.75 * 0.10) + (0.25 * 0.12) = 0.105
+(0.75 \times 0.05) + (0.25 \times 0.20) = 0.0875\\
+(0.75 \times 0.10) + (0.25 \times 0.12) = 0.105
 \end{gather*}\]</span>
 <p>Try it <a href="https://maxma1er.shinyapps.io/JustifyAlpha/" data-preview-link="true">out.</a></p>
 </section>
 <section id="general-logic" class="slide level2">
 <h2>General logic</h2>
 <p>If an effect is likely, we don’t want to miss it. We cast a wider net and consider more effects significant because the (real) risk of false positives is lowered. The higher <span class="math inline">\(P(H_1)\)</span>, the less strict <span class="math inline">\(\alpha\)</span>.</p>
-<p>If an effect is unlikely, we don’t want to false claim it’s there. We cast a narrower net and consider less effects significant because the (real) risk of false positive is increased. The higher <span class="math inline">\(P(H_0)\)</span>, the more strict <span class="math inline">\(\alpha\)</span>.</p>
+<p>If an effect is unlikely, we don’t want to falsely claim it’s there. We cast a narrower net and consider less effects significant because the (real) risk of false positive is increased. The higher <span class="math inline">\(P(H_0)\)</span>, the more strict <span class="math inline">\(\alpha\)</span>.</p>
 </section>
 <section id="a-balancing-act" class="slide level2">
 <h2>A balancing act</h2>
@@ -688,7 +688,7 @@ P(H_1)*\beta
 <ul>
 <li>Publishing a false positive: bad!</li>
 <li>But the benefits could be huge: publish away then!</li>
-<li>But it costs a lot of get these benefits: Hm, maybe not.</li>
+<li>But it costs a lot to get these benefits: Hm, maybe not.</li>
 </ul>
 </section>
 <section id="the-compromise" class="slide level2">
@@ -712,7 +712,8 @@ P(H_1)*\beta
 </section>
 <section id="the-bible" class="slide level2">
 <h2>The Bible</h2>
-<p><img data-src="bible.jpg"> <span class="citation" data-cites="lakens2022">(<a href="#/ref-lakens2022" role="doc-biblioref" onclick="return false;">Lakens 2022</a>)</span></p>
+
+<img data-src="bible.jpg" width="500" class="r-stretch"><p><span class="citation" data-cites="lakens2022">(<a href="#/ref-lakens2022" role="doc-biblioref" onclick="return false;">Lakens 2022</a>)</span></p>
 </section>
 <section id="other-ways" class="slide level2">
 <h2>Other ways</h2>

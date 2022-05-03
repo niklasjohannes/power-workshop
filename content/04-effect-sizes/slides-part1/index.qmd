@@ -219,7 +219,7 @@ boxplot(d$score ~ d$condition)
 
 -   Express difference between groups in variance units, not raw units
 -   Not "How many cm is the difference in height between the groups"
--   But "How many standard deviation difference in height between the groups"
+-   But "How many standard deviations difference in height between the groups"
 
 $d = \frac{M_1-M_2}{pooled\ \sigma}$
 
@@ -504,7 +504,7 @@ Several considerations [@funder2019]:
 Smallest effect size of interest [@anvari2021]
 
 -   Why rely on previous research that is notoriously unreliable?
--   You should define what effect you find worth looking for?
+-   You should define what effect you find worth looking for
 -   At what point do you not care about an effect anymore?
 -   Make falsifiable and testable studies
 
@@ -540,7 +540,7 @@ Often used in medicine:
 :::
 
 ::: column
--   What's the performance gap between low and high performers in school
+-   What's the performance gap between low and high performers in school?
 -   That's the minimum effect we want to achieve
 -   Anything less is uninteresting and we should invest our resources somewhere else
 

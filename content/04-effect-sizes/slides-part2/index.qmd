@@ -37,25 +37,7 @@ t.test(control, treatment)
 - Think of a typical pre/posttest design
 - Someone who has a tendency to score low will therefore score low on both pre- and post-test measure
 - The measures are correlated
-- We need to take into account that measures come from the same unit in simulating
-
-## Each person gets their own distribution
-
-We've already done that with `replicate` and `for` loops: Each person gets their own distribution rather than drawing from the same distribution (although in effect this is the same here).
-
-```{r}
-n <- 200
-d1 <- data.frame(
-  id = rep(letters[1:2], each = n/2),
-  x = rnorm(n)
-)
-d2 <- 
-  data.frame(
-    x = replicate(2, rnorm(n/2))
-  )
-d2 <- stack(d2)
-d2$id <- rep(letters[1:2], each = n/2)
-```
+- We need to take into account that measures come from the same unit when simulating
 
 ## So how do we get correlated measures?
 
@@ -174,7 +156,7 @@ correlation <- 0.4
 
 SD is just the square root of the variance. So we go $Var = sd^2$ and we got our variance.
 
-Covariance is just the correlation times the SDs. So we go $covariance = r(pre, post) * sd_{pre} * sd_{post}$
+Covariance is just the correlation times the SDs. So we go $covariance = r(pre, post) \times sd_{pre} \times sd_{post}$
 
 ```{r}
 var_pre <- pre_sd**2

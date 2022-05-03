@@ -323,7 +323,7 @@
 <section id="overview" class="level1 unnumbered">
 <h1 class="unnumbered">Overview</h1>
 <p>This is the first set of exercises where you get familiar with basic commands that you’ll need for data simulation. It’ll make it easier later on when you do more complicated designs to have a good intuition how these commands work.</p>
-<p>This part might be really boring to you if you’re already a seasoned R user. In that case, I recommend you get a coffee, tea, and/or nap.</p>
+<p>This part might be boring to you if you’re already a seasoned R user. In that case, I recommend you get a coffee, tea, and/or nap.</p>
 <section id="block-1" class="level2" data-number="0.1">
 <h2 data-number="0.1" class="anchored" data-anchor-id="block-1"><span class="header-section-number">0.1</span> Block 1</h2>
 <section id="exercise" class="level3" data-number="0.1.1">
@@ -363,21 +363,21 @@
 </section>
 <section id="exercise-5" class="level3" data-number="0.1.6">
 <h3 data-number="0.1.6" class="anchored" data-anchor-id="exercise-5"><span class="header-section-number">0.1.6</span> Exercise</h3>
-<p>Create a data set. In the data set, each participant has an identifier (called <code>id</code>), a group identifier (<code>condition</code>), and an identifier what number of measurement we have for this participant (<code>trial</code>). There are 3 participants in each of three groups with 5 trials in each group.</p>
+<p>Create a data set. In the data set, each participant has an identifier (called <code>id</code>), a group identifier (<code>condition</code>), and an identifier of what number of measurement we have for this participant (<code>trial</code>). There are 3 participants in each of three groups with 5 trials in each group.</p>
 <div class="cell">
 
 </div>
 </section>
 <section id="exercise-6" class="level3" data-number="0.1.7">
 <h3 data-number="0.1.7" class="anchored" data-anchor-id="exercise-6"><span class="header-section-number">0.1.7</span> Exercise</h3>
-<p>You have two groups, a control and a treatment group. In each group, there are 10 participants. Each participant flips a coin 10 times. The control group has a fair coin: 50% heads. The treatment group has an unfair coin: 70% heads. Create a data frame with a participant identifier (<code>id</code>), group membership (<code>condition</code>), and a total head count for that participant (<code>heads</code>). Check that the two groups indeed have different means on the number of heads (roughly corresponding to the two probabilities)</p>
+<p>You have two groups, a control and a treatment group. In each group, there are 10 participants. Each participant flips a coin 10 times. The control group has a fair coin: 50% heads. The treatment group has an unfair coin: 70% heads. Create a data frame with a participant identifier (<code>id</code>), group membership (<code>condition</code>), and a total head count for that participant (<code>heads</code>). Check that the two groups indeed have different means of how often they get heads (roughly corresponding to the two probabilities)</p>
 <div class="cell">
 
 </div>
 </section>
 <section id="exercise-7" class="level3" data-number="0.1.8">
 <h3 data-number="0.1.8" class="anchored" data-anchor-id="exercise-7"><span class="header-section-number">0.1.8</span> Exercise</h3>
-<p>You have 100 participants. Each participants reports their age which lies uniformly between 20 and 40. They also report grumpiness on a 100-point scale (with a 10-point SD). Each extra year predicts 0.5 higher grumpiness. Create the two variables (no need for a data frame) and conduct a correlation with <code>cor</code>. What’s the correlation?</p>
+<p>You have 100 participants. Each participants reports their age which lies uniformly between 20 and 40. They also report grumpiness on a 100-point scale (with a 10-point SD). Each extra year predicts 0.5 higher grumpiness (Tip: Check the lecture slides; you’ll need to add some error). Create the two variables (no need for a data frame) and conduct a correlation with <code>cor</code>. What’s the correlation?</p>
 <div class="cell">
 
 </div>
@@ -402,7 +402,7 @@
 <p>In this section, you’ll use the basics from above to perform your first power analysis. You’ll apply repeated simulations over a range of values and extracting and storing results to summarize them.</p>
 <section id="exercise-10" class="level3" data-number="0.2.1">
 <h3 data-number="0.2.1" class="anchored" data-anchor-id="exercise-10"><span class="header-section-number">0.2.1</span> Exercise</h3>
-<p>There are four groups. Each group comes from a different normal distribution. The means are c(100, 105, 107, 109). The SDs are c(9, 12, 10, 17). Each group should be 20 cases. Store everything in a data frame and have a variable that indicates the group. Tip: Remember that R uses vectors, even for arguments in a function.</p>
+<p>There are four groups. Each group comes from a different normal distribution. The means are <code>c(100, 105, 107, 109)</code>. The SDs are <code>c(9, 12, 10, 17)</code>. Each group should be 20 cases. Store everything in a data frame and have a variable that indicates the group. Tip: Remember that R uses vectors, even for arguments in a function.</p>
 <div class="cell">
 
 </div>
@@ -453,17 +453,17 @@
 <section id="exercise-17" class="level3" data-number="0.2.8">
 <h3 data-number="0.2.8" class="anchored" data-anchor-id="exercise-17"><span class="header-section-number">0.2.8</span> Exercise</h3>
 <p>The average height of men in Spain is 173cm (says <a href="https://en.wikipedia.org/wiki/Average_human_height_by_country">Wikipedia</a>). The population standard deviation is probablay around 7cm (<a href="https://biology.stackexchange.com/questions/9730/what-is-the-standard-deviation-of-adult-human-heights-for-males-and-females">source</a>).</p>
-<p>You draw a sample of men and want to test whether they’re significantly different from that mean (our H<sub>0</sub>). In fact, these men you have sampled are truly French (175.6cm, our true “effect size”). In other words, can we reject the null hypothesis that these men we sampled come from a different country in favor of our alternative hypothesis that the true population value is greater than the Spanish population mean?</p>
+<p>You draw a sample of men and want to test whether they’re significantly different from that mean (our H<sub>0</sub>). In fact, these men you have sampled are truly French (175.6cm, our true “effect size”). In other words, can we reject the null hypothesis that these men we sampled come from the Spanish distribution in favor of our alternative hypothesis that the true population value is greater than the Spanish population mean?</p>
 <p>You calculate the z-statistic, which is calculated as follows: <span class="math inline">\(\frac{\bar{X} - \mu_0}{\sigma/\sqrt{N}}\)</span> This simply tells us how far from the population mean (well, the suspected population mean under the null hypothesis) our sample mean is in terms of standard errors. <span class="math inline">\(\bar{X}\)</span> is the sample mean, <span class="math inline">\(\mu_0\)</span> is the population mean under H<sub>0</sub>, <span class="math inline">\(\sigma\)</span> is the population standard deviation, and <span class="math inline">\(N\)</span> is the sample size.</p>
 <p>Then we can look up the z-score to see what the probability is to score this high or higher (does that definition ring a bell?). In R, you can simply do that with a built-in function: <code>pnorm()</code>. For example, if we have a z-score of 1.645, our probability of obtaining such a value (or higher) is <code>pnorm(1.645, lower.tail = FALSE)</code> = 0.0499849 – our p-value for a one-sided test.</p>
-<p>We can simulate the power of our statistical test (in this case, the z-statistic). Take a sample of 30 people from the French population, calculate the z-statistic, it’s p-value, and store the p-value. Do this 1,000 times. Plot the distribution of p-values. What can we conclude about the sample size?</p>
+<p>We can simulate the power of our statistical test (in this case, the z-statistic). Take a sample of 30 people from the French population, calculate the z-statistic, its p-value, and store the p-value. Do this 1,000 times. Plot the distribution of p-values. What can we conclude about the sample size?</p>
 <div class="cell">
 
 </div>
 </section>
 <section id="exercise-18" class="level3" data-number="0.2.9">
 <h3 data-number="0.2.9" class="anchored" data-anchor-id="exercise-18"><span class="header-section-number">0.2.9</span> Exercise</h3>
-<p>Now calculate the power by calculating the proportion of pvalues that are below 0.05. That’s your power: The proportion of tests that will detect that there’s a true effect. In our case, that effect is a difference of 2.6cm.</p>
+<p>Now calculate the proportion of p-values that are below 0.05. That’s your power: The proportion of tests that will detect that there’s a true effect. In our case, that effect is a difference of 2.6cm.</p>
 <div class="cell">
 
 </div>

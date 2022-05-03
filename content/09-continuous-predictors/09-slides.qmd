@@ -2,7 +2,7 @@
 title: "Slides"
 ---
 
-Below you can find the slides for intro to simulations:
+Below you can find the slides for continuous predictors:
 
 <div>
 

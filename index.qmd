@@ -2,13 +2,13 @@
 title: "Welcome"
 ---
 
-Hello. Internet etiquette dictates that any website that deals with stats starts with a GIF to signal that this'll be fun. I'm not one to deny etiquette, so here we go:
+Hello. Internet etiquette dictates that any website that deals with stats starts with a GIF to signal that this'll be fun. I'm not one to break with etiquette, so here we go:
 
 ![](https://media.giphy.com/media/MCZ39lz83o5lC/giphy.gif)
 
 ## This website
 
-This website collects the materials for a 2-day workshop on power that [I'm](https://www.niklasjohannes.com/) giving at the [University of Vienna May 4th and 5th 2022](https://vds-sosci.univie.ac.at/your-benefits/career-development-and-internationalisation/international-workshops/). Rather than dumping the materials in zip folder somewhere, I thought this format will be better for a) participants to revisit, b) those who might be interested in the content but couldn't make it. That's also the reason most of the materials are so annoyingly verbose: I wanted readers to be able to follow.
+This website collects the materials for a 2-day workshop on simulating power with R that [I'm](https://www.niklasjohannes.com/) giving at the [University of Vienna on May 4th and 5th 2022](https://vds-sosci.univie.ac.at/your-benefits/career-development-and-internationalisation/international-workshops/). Rather than dumping the materials in zip folder somewhere, I thought this format will be better for a) participants to revisit, b) those who might be interested in the content but couldn't make it. That's also the reason most of the materials are so annoyingly verbose: I wanted readers to be able to follow.
 
 ## Goal
 
@@ -102,7 +102,7 @@ What you'll need for the workshop:
 - A laptop
 - A working installation of [R](https://www.r-project.org/) and preferably [RStudio](https://www.rstudio.com/)
 - [GPower](https://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower) installed
-- For communiction, please join this discord channel that we'll use throughout the 2 days: <https://discord.gg/veejMFnNHF>
+- For communication, please join this discord channel that we'll use throughout the 2 days: <https://discord.gg/veejMFnNHF>
 
 ## Structure
 

@@ -1,12 +1,5 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
-  },
-  {
     "objectID": "content/01-intro/01-slides.html",
     "href": "content/01-intro/01-slides.html",
     "title": "Slides",
@@ -60,7 +53,7 @@
     "href": "content/01-intro/slides/index.html#what-you-can-expect-from-me",
     "title": "Welcome",
     "section": "What you can expect from me",
-    "text": "What you can expect from me\n\nComprehensive overview\nLots of exercises to apply what you learned\nFlexible in schedule\nEnthusiasm for 2 days"
+    "text": "What you can expect from me\n\nComprehensive overview\nLots of exercises to apply what you learned\nFlexibility in schedule\nEnthusiasm for 2 days"
   },
   {
     "objectID": "content/01-intro/slides/index.html#principle",
@@ -165,7 +158,7 @@
     "href": "content/02-whats-power/02-slides.html",
     "title": "Slides",
     "section": "",
-    "text": "Below you can find the slides for session on Power:\n\n\n\nIf you want to see the slides in full screen, you can click here. To download them as PDFs, hit the ‘e’ button when you got the presentation open and then Ctrl+P print to PDF. This will work best in Chrome (in Firefox, it didn’t print the headings for me)."
+    "text": "Below you can find the slides for session on power:\n\n\n\nIf you want to see the slides in full screen, you can click here. To download them as PDFs, hit the ‘e’ button when you got the presentation open and then Ctrl+P print to PDF. This will work best in Chrome (in Firefox, it didn’t print the headings for me)."
   },
   {
     "objectID": "content/02-whats-power/slides/index.html#where-it-all-started",
@@ -354,28 +347,28 @@
     "href": "content/02-whats-power/slides/index.html#how-true-is-a-study",
     "title": "What’s power?",
     "section": "How true is a study?",
-    "text": "How true is a study?\nHow many effects will we expect?\n\nProbability to find an effect = power\nOdds of there being an effect = R\n\nSo:\n\\[\\begin{gather*}\npower \\ * R\n\\end{gather*}\\]"
+    "text": "How true is a study?\nHow many effects will we expect?\n\nProbability to find an effect = power\nOdds of there being an effect = R\n\nSo:\n\\[\\begin{gather*}\npower \\times R\n\\end{gather*}\\]"
   },
   {
     "objectID": "content/02-whats-power/slides/index.html#how-true-is-a-study-1",
     "href": "content/02-whats-power/slides/index.html#how-true-is-a-study-1",
     "title": "What’s power?",
     "section": "How true is a study?",
-    "text": "How true is a study?\nHow many significant results do we expect?\n\nTrue effects (power x R)\nFalse positive\n\n\\[\\begin{gather*}\npower \\ * R + \\alpha\n\\end{gather*}\\]"
+    "text": "How true is a study?\nHow many significant results do we expect?\n\nTrue effects (power x R)\nFalse positive\n\n\\[\\begin{gather*}\npower \\times R + \\alpha\n\\end{gather*}\\]"
   },
   {
     "objectID": "content/02-whats-power/slides/index.html#positive-predictive-value",
     "href": "content/02-whats-power/slides/index.html#positive-predictive-value",
     "title": "What’s power?",
     "section": "Positive predictive value",
-    "text": "Positive predictive value\nWhat is the probability that a significant effect is indeed true? The rate of significant results that represent true effects divided by all significant results.\n\\[\\begin{gather*}\nPPV = \\frac{power*R}{power*R + \\alpha}\n\\end{gather*}\\]"
+    "text": "Positive predictive value\nWhat is the probability that a significant effect is indeed true? The rate of significant results that represent true effects divided by all significant results.\n\\[\\begin{gather*}\nPPV = \\frac{power \\times R}{power \\times R + \\alpha}\n\\end{gather*}\\]"
   },
   {
     "objectID": "content/02-whats-power/slides/index.html#an-example",
     "href": "content/02-whats-power/slides/index.html#an-example",
     "title": "What’s power?",
     "section": "An example",
-    "text": "An example\nLet’s assume our hypothesis has a 25% of being true and we go for the “conventional” alpha-level (5%).\n\\[\\begin{gather*}\nPPV = \\frac{power*R}{power*R + \\alpha}\n= \\frac{power*\\frac{P(effect)}{P(No \\ effect)}}{power*\\frac{P(effect)}{P(No \\ effect)} + \\alpha}\n\\end{gather*}\\]\n\n\nWith 95% power and 1/4 odds?\n86%\nWith 40% power and 1/4 odds?\n73%"
+    "text": "An example\nLet’s assume our hypothesis has a 25% of being true and we go for the “conventional” alpha-level (5%).\n\\[\\begin{gather*}\nPPV = \\frac{power \\times R}{power \\times R + \\alpha}\n= \\frac{power \\times \\frac{P(effect)}{P(No \\ effect)}}{power \\times \\frac{P(effect)}{P(No \\ effect)} + \\alpha}\n\\end{gather*}\\]\n\n\nWith 95% power and 1/4 odds?\n86%\nWith 40% power and 1/4 odds?\n73%"
   },
   {
     "objectID": "content/02-whats-power/slides/index.html#what-does-this-mean",
@@ -417,28 +410,28 @@
     "href": "content/03-simulations-in-r/03-exercise.html#block-1",
     "title": "Exercise I",
     "section": "0.1 Block 1",
-    "text": "0.1 Block 1\n\n0.1.1 Exercise\nYou have three groups. Name the groups, randomly sample ten cases (total), and then create a simple data frame that contains a variable for the group called condition.\n\n\n\n\n\n0.1.2 Exercise\nSame three groups. This time you want each case to have a 70% to be in the first group, a 20% to be in the second group, and a 10% to be in the third group. Get 100 participants (no need for a data frame). Use set.seed(1). How many are in the first group?\n\n\n\n\n\n0.1.3 Exercise\nShow that sample with assigned probability (prob = argument) is the same as rbinom. Conduct 10 coin flips with a an unfair coin that has a 60% of landing heads. Remember to set a seed (tip: twice).\n\n\n\n\n\n0.1.4 Exercise\nDraw random letters from the alphabet until the alphabet is empty.\n\n\n\n\n\n0.1.5 Exercise\nDraw all letters from the alphabet and explicitly assign the same probability for each letter (tip: repeat the same probability).\n\n\n\n\n\n0.1.6 Exercise\nCreate a data set. In the data set, each participant has an identifier (called id), a group identifier (condition), and an identifier what number of measurement we have for this participant (trial). There are 3 participants in each of three groups with 5 trials in each group.\n\n\n\n\n\n0.1.7 Exercise\nYou have two groups, a control and a treatment group. In each group, there are 10 participants. Each participant flips a coin 10 times. The control group has a fair coin: 50% heads. The treatment group has an unfair coin: 70% heads. Create a data frame with a participant identifier (id), group membership (condition), and a total head count for that participant (heads). Check that the two groups indeed have different means on the number of heads (roughly corresponding to the two probabilities)\n\n\n\n\n\n0.1.8 Exercise\nYou have 100 participants. Each participants reports their age which lies uniformly between 20 and 40. They also report grumpiness on a 100-point scale (with a 10-point SD). Each extra year predicts 0.5 higher grumpiness. Create the two variables (no need for a data frame) and conduct a correlation with cor. What’s the correlation?\n\n\n\n\n\n0.1.9 Exercise\nWe track how many calls you get during this exercise. Nobody calls anymore, so there’ll be very few. Create a data frame with 20 participants, a participant number and the number of calls per participant. Plot the calls and show that 0 is the most common value.\n\n\n\n\n\n0.1.10 Exercise\nProfessors get more calls. Add 20 more participants who have much higher call numbers. Also include a condition variable that marks whether participants are students (first 20 people) or professors (new 20 people). Conduct an independent sample t-test (t.test) and also plot the different groups as a boxplot."
+    "text": "0.1 Block 1\n\n0.1.1 Exercise\nYou have three groups. Name the groups, randomly sample ten cases (total), and then create a simple data frame that contains a variable for the group called condition.\n\n\n\n\n\n0.1.2 Exercise\nSame three groups. This time you want each case to have a 70% to be in the first group, a 20% to be in the second group, and a 10% to be in the third group. Get 100 participants (no need for a data frame). Use set.seed(1). How many are in the first group?\n\n\n\n\n\n0.1.3 Exercise\nShow that sample with assigned probability (prob = argument) is the same as rbinom. Conduct 10 coin flips with a an unfair coin that has a 60% of landing heads. Remember to set a seed (tip: twice).\n\n\n\n\n\n0.1.4 Exercise\nDraw random letters from the alphabet until the alphabet is empty.\n\n\n\n\n\n0.1.5 Exercise\nDraw all letters from the alphabet and explicitly assign the same probability for each letter (tip: repeat the same probability).\n\n\n\n\n\n0.1.6 Exercise\nCreate a data set. In the data set, each participant has an identifier (called id), a group identifier (condition), and an identifier of what number of measurement we have for this participant (trial). There are 3 participants in each of three groups with 5 trials in each group.\n\n\n\n\n\n0.1.7 Exercise\nYou have two groups, a control and a treatment group. In each group, there are 10 participants. Each participant flips a coin 10 times. The control group has a fair coin: 50% heads. The treatment group has an unfair coin: 70% heads. Create a data frame with a participant identifier (id), group membership (condition), and a total head count for that participant (heads). Check that the two groups indeed have different means of how often they get heads (roughly corresponding to the two probabilities)\n\n\n\n\n\n0.1.8 Exercise\nYou have 100 participants. Each participants reports their age which lies uniformly between 20 and 40. They also report grumpiness on a 100-point scale (with a 10-point SD). Each extra year predicts 0.5 higher grumpiness (Tip: Check the lecture slides; you’ll need to add some error). Create the two variables (no need for a data frame) and conduct a correlation with cor. What’s the correlation?\n\n\n\n\n\n0.1.9 Exercise\nWe track how many calls you get during this exercise. Nobody calls anymore, so there’ll be very few. Create a data frame with 20 participants, a participant number and the number of calls per participant. Plot the calls and show that 0 is the most common value.\n\n\n\n\n\n0.1.10 Exercise\nProfessors get more calls. Add 20 more participants who have much higher call numbers. Also include a condition variable that marks whether participants are students (first 20 people) or professors (new 20 people). Conduct an independent sample t-test (t.test) and also plot the different groups as a boxplot."
   },
   {
     "objectID": "content/03-simulations-in-r/03-exercise.html#block-2",
     "href": "content/03-simulations-in-r/03-exercise.html#block-2",
     "title": "Exercise I",
     "section": "0.2 Block 2",
-    "text": "0.2 Block 2\nIn this section, you’ll use the basics from above to perform your first power analysis. You’ll apply repeated simulations over a range of values and extracting and storing results to summarize them.\n\n0.2.1 Exercise\nThere are four groups. Each group comes from a different normal distribution. The means are c(100, 105, 107, 109). The SDs are c(9, 12, 10, 17). Each group should be 20 cases. Store everything in a data frame and have a variable that indicates the group. Tip: Remember that R uses vectors, even for arguments in a function.\n\n\n\n\n\n0.2.2 Exercise\nYou need 5 samples. Each sample contains 10 unique letters from the alphabet. (Use replicate.)\n\n\n\n\n\n0.2.3 Exercise\nSame as before, but this time you need 10 samples from a normal distribution with a mean of 10 and an SD of 2. Use replicate first, then a for loop.\n\n\n\n\n\n0.2.4 Exercise\nAssume we know the population mean in height (168cm) and its standard deviation (20). Assume we draw 10,000 samples from this distribution. Each sample has 50 participants. The standard deviation of these 10,000 sample means is the standard error.\nSimulate the standard error and compare it to the theoretical value: \\(SE = \\frac{\\sigma}{\\sqrt{n}}\\). (\\(\\sigma\\) is the standard deviation of the population.)\n\n\n\n\n\n0.2.5 Exercise\nSame population. Draw 1,000 observations for each sample size between 20 and 100. Calculate the standard error for each sample size (like you did above) and plot it against the sample size. (Tip: You’ll need to iterate over two things.)\n\n\n\n\n\n0.2.6 Exercise\nTurn the above into a function so that you can change the population effect size, SD, number of simulations, and sample size range. The function should also return the plot from above.\n\n\n\n\n\n0.2.7 Exercise\nTry out the function with two plots: when the population SD is 5 and when you do 10 draws. What changes?\n\n\n\n\n\n0.2.8 Exercise\nThe average height of men in Spain is 173cm (says Wikipedia). The population standard deviation is probablay around 7cm (source).\nYou draw a sample of men and want to test whether they’re significantly different from that mean (our H0). In fact, these men you have sampled are truly French (175.6cm, our true “effect size”). In other words, can we reject the null hypothesis that these men we sampled come from a different country in favor of our alternative hypothesis that the true population value is greater than the Spanish population mean?\nYou calculate the z-statistic, which is calculated as follows: \\(\\frac{\\bar{X} - \\mu_0}{\\sigma/\\sqrt{N}}\\) This simply tells us how far from the population mean (well, the suspected population mean under the null hypothesis) our sample mean is in terms of standard errors. \\(\\bar{X}\\) is the sample mean, \\(\\mu_0\\) is the population mean under H0, \\(\\sigma\\) is the population standard deviation, and \\(N\\) is the sample size.\nThen we can look up the z-score to see what the probability is to score this high or higher (does that definition ring a bell?). In R, you can simply do that with a built-in function: pnorm(). For example, if we have a z-score of 1.645, our probability of obtaining such a value (or higher) is pnorm(1.645, lower.tail = FALSE) = 0.0499849 – our p-value for a one-sided test.\nWe can simulate the power of our statistical test (in this case, the z-statistic). Take a sample of 30 people from the French population, calculate the z-statistic, it’s p-value, and store the p-value. Do this 1,000 times. Plot the distribution of p-values. What can we conclude about the sample size?\n\n\n\n\n\n0.2.9 Exercise\nNow calculate the power by calculating the proportion of pvalues that are below 0.05. That’s your power: The proportion of tests that will detect that there’s a true effect. In our case, that effect is a difference of 2.6cm.\n\n\n\n\n\n0.2.10 Exercise\nNow let’s do what we did before: Put the loop from above inside another loop that iterates over different sample sizes. Then put that all into a function that let’s you set the parameters of interest (sample size range, h0, h1, etc.). Then simulate power (1,000 simulations each) for samples between 30 and 100. Plot the sample size against power.\n\n\n\n\n\n0.2.11 Exercise\nNow do the same thing with a one-sample t-test. (Tip: You only need to replace the z-scores with a t.test from which you can extract the p-value). (Another tip: Use the $ sign on where you stored the t-test results.)\n\n\n\n\n\n0.2.12 Exercise\nJust for funsies (and for our next session), see what happens when the true effect is only 1cm in difference."
+    "text": "0.2 Block 2\nIn this section, you’ll use the basics from above to perform your first power analysis. You’ll apply repeated simulations over a range of values and extracting and storing results to summarize them.\n\n0.2.1 Exercise\nThere are four groups. Each group comes from a different normal distribution. The means are c(100, 105, 107, 109). The SDs are c(9, 12, 10, 17). Each group should be 20 cases. Store everything in a data frame and have a variable that indicates the group. Tip: Remember that R uses vectors, even for arguments in a function.\n\n\n\n\n\n0.2.2 Exercise\nYou need 5 samples. Each sample contains 10 unique letters from the alphabet. (Use replicate.)\n\n\n\n\n\n0.2.3 Exercise\nSame as before, but this time you need 10 samples from a normal distribution with a mean of 10 and an SD of 2. Use replicate first, then a for loop.\n\n\n\n\n\n0.2.4 Exercise\nAssume we know the population mean in height (168cm) and its standard deviation (20). Assume we draw 10,000 samples from this distribution. Each sample has 50 participants. The standard deviation of these 10,000 sample means is the standard error.\nSimulate the standard error and compare it to the theoretical value: \\(SE = \\frac{\\sigma}{\\sqrt{n}}\\). (\\(\\sigma\\) is the standard deviation of the population.)\n\n\n\n\n\n0.2.5 Exercise\nSame population. Draw 1,000 observations for each sample size between 20 and 100. Calculate the standard error for each sample size (like you did above) and plot it against the sample size. (Tip: You’ll need to iterate over two things.)\n\n\n\n\n\n0.2.6 Exercise\nTurn the above into a function so that you can change the population effect size, SD, number of simulations, and sample size range. The function should also return the plot from above.\n\n\n\n\n\n0.2.7 Exercise\nTry out the function with two plots: when the population SD is 5 and when you do 10 draws. What changes?\n\n\n\n\n\n0.2.8 Exercise\nThe average height of men in Spain is 173cm (says Wikipedia). The population standard deviation is probablay around 7cm (source).\nYou draw a sample of men and want to test whether they’re significantly different from that mean (our H0). In fact, these men you have sampled are truly French (175.6cm, our true “effect size”). In other words, can we reject the null hypothesis that these men we sampled come from the Spanish distribution in favor of our alternative hypothesis that the true population value is greater than the Spanish population mean?\nYou calculate the z-statistic, which is calculated as follows: \\(\\frac{\\bar{X} - \\mu_0}{\\sigma/\\sqrt{N}}\\) This simply tells us how far from the population mean (well, the suspected population mean under the null hypothesis) our sample mean is in terms of standard errors. \\(\\bar{X}\\) is the sample mean, \\(\\mu_0\\) is the population mean under H0, \\(\\sigma\\) is the population standard deviation, and \\(N\\) is the sample size.\nThen we can look up the z-score to see what the probability is to score this high or higher (does that definition ring a bell?). In R, you can simply do that with a built-in function: pnorm(). For example, if we have a z-score of 1.645, our probability of obtaining such a value (or higher) is pnorm(1.645, lower.tail = FALSE) = 0.0499849 – our p-value for a one-sided test.\nWe can simulate the power of our statistical test (in this case, the z-statistic). Take a sample of 30 people from the French population, calculate the z-statistic, its p-value, and store the p-value. Do this 1,000 times. Plot the distribution of p-values. What can we conclude about the sample size?\n\n\n\n\n\n0.2.9 Exercise\nNow calculate the proportion of p-values that are below 0.05. That’s your power: The proportion of tests that will detect that there’s a true effect. In our case, that effect is a difference of 2.6cm.\n\n\n\n\n\n0.2.10 Exercise\nNow let’s do what we did before: Put the loop from above inside another loop that iterates over different sample sizes. Then put that all into a function that let’s you set the parameters of interest (sample size range, h0, h1, etc.). Then simulate power (1,000 simulations each) for samples between 30 and 100. Plot the sample size against power.\n\n\n\n\n\n0.2.11 Exercise\nNow do the same thing with a one-sample t-test. (Tip: You only need to replace the z-scores with a t.test from which you can extract the p-value). (Another tip: Use the $ sign on where you stored the t-test results.)\n\n\n\n\n\n0.2.12 Exercise\nJust for funsies (and for our next session), see what happens when the true effect is only 1cm in difference."
   },
   {
     "objectID": "content/03-simulations-in-r/03-slides.html",
     "href": "content/03-simulations-in-r/03-slides.html",
     "title": "Slides",
     "section": "",
-    "text": "Below you can find the slides for intro to simulations:\n\n\n\nIf you want to see the slides in full screen, you can click here. To download them as PDFs, hit the ‘e’ button when you got the presentation open and then Ctrl+P print to PDF. This will work best in Chrome (in Firefox, it didn’t print the headings for me)."
+    "text": "Below you can find the slides for the intro to simulations:\n\n\n\nIf you want to see the slides in full screen, you can click here. To download them as PDFs, hit the ‘e’ button when you got the presentation open and then Ctrl+P print to PDF. This will work best in Chrome (in Firefox, it didn’t print the headings for me)."
   },
   {
     "objectID": "content/03-simulations-in-r/slides/index.html#why-should-i-simulate",
     "href": "content/03-simulations-in-r/slides/index.html#why-should-i-simulate",
     "title": "Simulations in R",
     "section": "Why should I simulate",
-    "text": "Why should I simulate\n\nCooking vs. eating\nMakes you truly understand what you’re doing\nForces you to put a number on things"
+    "text": "Why should I simulate\n\nCooking vs. eating\nMakes you truly understand what you’re doing\nForces you to put a number on things\nSimulate the data generating process (we’ll get back to that)"
   },
   {
     "objectID": "content/03-simulations-in-r/slides/index.html#going-through-the-motions",
@@ -494,14 +487,14 @@
     "href": "content/03-simulations-in-r/slides/index.html#some-basic-commands-first",
     "title": "Simulations in R",
     "section": "Some basic commands first",
-    "text": "Some basic commands first\nSampling a certain number of elements from a set.\n\nmy_sample <- 1:20\n\nsample(\n  x = my_sample,\n  size = 2\n)\n\n[1] 3 5"
+    "text": "Some basic commands first\nSampling a certain number of elements from a set.\n\nmy_sample <- 1:20\n\nsample(\n  x = my_sample,\n  size = 2\n)\n\n[1]  9 14"
   },
   {
     "objectID": "content/03-simulations-in-r/slides/index.html#sampling",
     "href": "content/03-simulations-in-r/slides/index.html#sampling",
     "title": "Simulations in R",
     "section": "Sampling",
-    "text": "Sampling\nWith or without replacement?\n\nmy_sample <- c(\"a\", \"b\", \"c\")\n\nsample(\n  x = my_sample,\n  size = 4,\n  replace = TRUE\n)\n\n[1] \"c\" \"a\" \"a\" \"c\""
+    "text": "Sampling\nWith or without replacement?\n\nmy_sample <- c(\"a\", \"b\", \"c\")\n\nsample(\n  x = my_sample,\n  size = 4,\n  replace = TRUE\n)\n\n[1] \"a\" \"c\" \"a\" \"a\""
   },
   {
     "objectID": "content/03-simulations-in-r/slides/index.html#on-those-letters",
@@ -515,14 +508,14 @@
     "href": "content/03-simulations-in-r/slides/index.html#sampling-1",
     "title": "Simulations in R",
     "section": "Sampling",
-    "text": "Sampling\nUsing those letters.\n\nmy_sample <- letters[1:3]\n\nsample(\n  x = my_sample,\n  size = 4,\n  replace = TRUE\n)\n\n[1] \"c\" \"c\" \"c\" \"c\""
+    "text": "Sampling\nUsing those letters.\n\nmy_sample <- letters[1:3]\n\nsample(\n  x = my_sample,\n  size = 4,\n  replace = TRUE\n)\n\n[1] \"b\" \"b\" \"b\" \"b\""
   },
   {
     "objectID": "content/03-simulations-in-r/slides/index.html#sampling-2",
     "href": "content/03-simulations-in-r/slides/index.html#sampling-2",
     "title": "Simulations in R",
     "section": "Sampling",
-    "text": "Sampling\nAssigning different probabilities.\n\nmy_sample <- c(\"black\", \"blue\")\n\nsample(\n  x = my_sample,\n  size = 10,\n  replace = TRUE,\n  prob = c(0.2, 0.8)\n)\n\n [1] \"blue\"  \"blue\"  \"black\" \"blue\"  \"blue\"  \"black\" \"black\" \"blue\"  \"blue\" \n[10] \"blue\""
+    "text": "Sampling\nAssigning different probabilities.\n\nmy_sample <- c(\"black\", \"blue\")\n\nsample(\n  x = my_sample,\n  size = 10,\n  replace = TRUE,\n  prob = c(0.2, 0.8)\n)\n\n [1] \"blue\"  \"blue\"  \"black\" \"black\" \"blue\"  \"blue\"  \"blue\"  \"blue\"  \"blue\" \n[10] \"blue\""
   },
   {
     "objectID": "content/03-simulations-in-r/slides/index.html#remember-seeds",
@@ -851,56 +844,56 @@
     "href": "content/03-simulations-in-r/slides/index.html#into-a-loop",
     "title": "Simulations in R",
     "section": "Into a loop",
-    "text": "Into a loop\n\nset.seed(42)\nfor (current_year in 2:years) {\n  # how many new phds (15% chance in 4 \"trials\")\n  newbies <- rbinom(n = 1, size = profs, prob = money)\n  \n  # how many see the light and quit\n  enlightened <- rbinom(n = 1, size = results, prob = quitting)\n  \n  # new total\n  results[current_year] <- results[current_year - 1] + newbies - enlightened\n  \n  cat(\"Current year:\", current_year, \"Newbies:\", newbies, \"Enlightened:\", enlightened, \"Total:\", results[current_year], \"\\n\")\n}\n\nCurrent year: 2 Newbies: 2 Enlightened: 2 Total: 12 \nCurrent year: 3 Newbies: 0 Enlightened: 1 Total: 11 \nCurrent year: 4 Newbies: 1 Enlightened: 0 Total: 12 \nCurrent year: 5 Newbies: 1 Enlightened: 0 Total: 13 \nCurrent year: 6 Newbies: 1 Enlightened: 1 Total: 13 \nCurrent year: 7 Newbies: 0 Enlightened: 1 Total: 12 \nCurrent year: 8 Newbies: 2 Enlightened: 0 Total: 14 \nCurrent year: 9 Newbies: 0 Enlightened: 2 Total: 12 \nCurrent year: 10 Newbies: 2 Enlightened: 0 Total: 14 \nCurrent year: 11 Newbies: 0 Enlightened: 1 Total: 13 \nCurrent year: 12 Newbies: 2 Enlightened: 0 Total: 15 \nCurrent year: 13 Newbies: 3 Enlightened: 2 Total: 16 \nCurrent year: 14 Newbies: 0 Enlightened: 0 Total: 16 \nCurrent year: 15 Newbies: 0 Enlightened: 2 Total: 14 \nCurrent year: 16 Newbies: 0 Enlightened: 1 Total: 13 \nCurrent year: 17 Newbies: 1 Enlightened: 1 Total: 13 \nCurrent year: 18 Newbies: 0 Enlightened: 1 Total: 12 \nCurrent year: 19 Newbies: 0 Enlightened: 1 Total: 11 \nCurrent year: 20 Newbies: 0 Enlightened: 0 Total: 11 \nCurrent year: 21 Newbies: 2 Enlightened: 1 Total: 12 \nCurrent year: 22 Newbies: 0 Enlightened: 0 Total: 12 \nCurrent year: 23 Newbies: 0 Enlightened: 2 Total: 10 \nCurrent year: 24 Newbies: 0 Enlightened: 2 Total: 8 \nCurrent year: 25 Newbies: 1 Enlightened: 1 Total: 8"
+    "text": "Into a loop\n\nset.seed(42)\nfor (current_year in 2:years) {\n  # how many new phds (15% chance in 4 \"trials\")\n  newbies <- rbinom(n = 1, size = profs, prob = money)\n  \n  # how many see the light and quit\n  enlightened <- rbinom(n = 1, size = results[current_year  - 1], prob = quitting)\n  \n  # new total\n  results[current_year] <- results[current_year - 1] + newbies - enlightened\n  \n  cat(\"Current year:\", current_year, \"Newbies:\", newbies, \"Enlightened:\", enlightened, \"Total:\", results[current_year], \"\\n\")\n}\n\nCurrent year: 2 Newbies: 2 Enlightened: 2 Total: 12 \nCurrent year: 3 Newbies: 0 Enlightened: 1 Total: 11 \nCurrent year: 4 Newbies: 1 Enlightened: 0 Total: 12 \nCurrent year: 5 Newbies: 1 Enlightened: 0 Total: 13 \nCurrent year: 6 Newbies: 1 Enlightened: 1 Total: 13 \nCurrent year: 7 Newbies: 0 Enlightened: 1 Total: 12 \nCurrent year: 8 Newbies: 2 Enlightened: 0 Total: 14 \nCurrent year: 9 Newbies: 0 Enlightened: 2 Total: 12 \nCurrent year: 10 Newbies: 2 Enlightened: 0 Total: 14 \nCurrent year: 11 Newbies: 0 Enlightened: 1 Total: 13 \nCurrent year: 12 Newbies: 2 Enlightened: 0 Total: 15 \nCurrent year: 13 Newbies: 3 Enlightened: 2 Total: 16 \nCurrent year: 14 Newbies: 0 Enlightened: 1 Total: 15 \nCurrent year: 15 Newbies: 0 Enlightened: 2 Total: 13 \nCurrent year: 16 Newbies: 0 Enlightened: 1 Total: 12 \nCurrent year: 17 Newbies: 1 Enlightened: 1 Total: 12 \nCurrent year: 18 Newbies: 0 Enlightened: 1 Total: 11 \nCurrent year: 19 Newbies: 0 Enlightened: 1 Total: 10 \nCurrent year: 20 Newbies: 0 Enlightened: 0 Total: 10 \nCurrent year: 21 Newbies: 2 Enlightened: 1 Total: 11 \nCurrent year: 22 Newbies: 0 Enlightened: 0 Total: 11 \nCurrent year: 23 Newbies: 0 Enlightened: 2 Total: 9 \nCurrent year: 24 Newbies: 0 Enlightened: 2 Total: 7 \nCurrent year: 25 Newbies: 1 Enlightened: 0 Total: 8"
   },
   {
     "objectID": "content/03-simulations-in-r/slides/index.html#plot-and-summarize-the-results",
     "href": "content/03-simulations-in-r/slides/index.html#plot-and-summarize-the-results",
     "title": "Simulations in R",
     "section": "Plot and summarize the results",
-    "text": "Plot and summarize the results\n\nmean(results)\n\n[1] 12.36\n\nplot(results, type = \"l\", xlab = \"Year\", ylab = \"Number of PhDs\")"
+    "text": "Plot and summarize the results\n\nmean(results)\n\n[1] 11.92\n\nplot(results, type = \"l\", xlab = \"Year\", ylab = \"Number of PhDs\")"
   },
   {
     "objectID": "content/03-simulations-in-r/slides/index.html#lets-repeat-those-repetitions",
     "href": "content/03-simulations-in-r/slides/index.html#lets-repeat-those-repetitions",
     "title": "Simulations in R",
     "section": "Let’s repeat those repetitions",
-    "text": "Let’s repeat those repetitions\nLet’s run the above simulation several times: a loop in a loop.\n\nset.seed(42)\n\nexperiments <- 3\noutcomes <- list()\n\nfor (i in 1:experiments) {\n  \n  results <- NULL\n  results[1] <- starting\n  \n  for (current_year in 2:years) {\n    # how many new phds (15% chance in 4 \"trials\")\n    newbies <- rbinom(n = 1, size = profs, prob = money)\n    \n    # how many see the light and quit\n    enlightened <- rbinom(n = 1, size = results, prob = quitting)\n    \n    # new total\n    results[current_year] <- results[current_year - 1] + newbies - enlightened\n    \n    # store in overall outcomes\n    outcomes[[i]] <- results\n  }\n}"
+    "text": "Let’s repeat those repetitions\nLet’s run the above simulation several times: a loop in a loop.\n\nset.seed(42)\n\nexperiments <- 3\noutcomes <- list()\n\nfor (i in 1:experiments) {\n  \n  results <- NULL\n  results[1] <- starting\n  \n  for (current_year in 2:years) {\n    # how many new phds (15% chance in 4 \"trials\")\n    newbies <- rbinom(n = 1, size = profs, prob = money)\n    \n    # how many see the light and quit\n    enlightened <- rbinom(n = 1, size = results[current_year - 1], prob = quitting)\n    \n    # new total\n    results[current_year] <- results[current_year - 1] + newbies - enlightened\n    \n    # store in overall outcomes\n    outcomes[[i]] <- results\n  }\n}"
   },
   {
     "objectID": "content/03-simulations-in-r/slides/index.html#what-did-we-just-do",
     "href": "content/03-simulations-in-r/slides/index.html#what-did-we-just-do",
     "title": "Simulations in R",
     "section": "What did we just do?",
-    "text": "What did we just do?\n\n# what we created\noutcomes\n\n[[1]]\n [1] 12 12 11 12 13 13 12 14 12 14 13 15 16 16 14 13 13 12 11 11 12 12 10  8  8\n\n[[2]]\n [1] 12 13 13 12 11 12 12 10 10 11 10 11 11 11 10 10 10 11 10 10 10 10 11  9 10\n\n[[3]]\n [1] 12 12 12 13 13 13 13 14 14 15 16 16 16 16 16 17 17 16 17 16 16 17 17 17 16\n\n# the means per \"experiment\"\nlapply(outcomes, mean)\n\n[[1]]\n[1] 12.36\n\n[[2]]\n[1] 10.8\n\n[[3]]\n[1] 15.08"
+    "text": "What did we just do?\n\n# what we created\noutcomes\n\n[[1]]\n [1] 12 12 11 12 13 13 12 14 12 14 13 15 16 15 13 12 12 11 10 10 11 11  9  7  8\n\n[[2]]\n [1] 12 13 13 12 11 12 12 10 11 12 11 12 12 12 11 11 11 12 11 12 12 12 13 11 12\n\n[[3]]\n [1] 12 12 12 13 13 13 13 14 14 15 15 15 15 15 15 16 15 14 15 14 14 15 15 15 14\n\n# the means per \"experiment\"\nlapply(outcomes, mean)\n\n[[1]]\n[1] 11.92\n\n[[2]]\n[1] 11.72\n\n[[3]]\n[1] 14.12"
   },
   {
     "objectID": "content/03-simulations-in-r/slides/index.html#lets-have-a-look",
     "href": "content/03-simulations-in-r/slides/index.html#lets-have-a-look",
     "title": "Simulations in R",
     "section": "Let’s have a look",
-    "text": "Let’s have a look\n\n# the mean of the means\nmean(sapply(outcomes, mean))\n\n[1] 12.74667\n\nmatplot(matrix(unlist(outcomes), ncol = 3), type = \"l\", xlab = \"Year\", ylab = \"Number of PhDs\")"
+    "text": "Let’s have a look\n\n# the mean of the means\nmean(sapply(outcomes, mean))\n\n[1] 12.58667\n\nmatplot(matrix(unlist(outcomes), ncol = 3), type = \"l\", xlab = \"Year\", ylab = \"Number of PhDs\")"
   },
   {
     "objectID": "content/03-simulations-in-r/slides/index.html#what-if-we-want-to-change-stuff",
     "href": "content/03-simulations-in-r/slides/index.html#what-if-we-want-to-change-stuff",
     "title": "Simulations in R",
     "section": "What if we want to change stuff?",
-    "text": "What if we want to change stuff?\nIf we want to quickly change a parameter, it makes sense to turn this all into a function.\n\ncounting_phds <- \n  function(\n    starting = 12,\n    profs = 4,\n    money = 0.15,\n    quitting = 0.05,\n    years = 25\n  ) {\n    \n    # create our output vector\n    results <- NULL\n    results[1] <- starting\n    \n    # then our loop\n    for (current_year in 2:years) {\n      # how many new phds\n      newbies <- rbinom(n = 1, size = profs, prob = money)\n      \n      # how many see the light and quit\n      enlightened <- rbinom(n = 1, size = results, prob = quitting)\n      \n      # new total\n      results[current_year] <- results[current_year - 1] + newbies - enlightened\n    }\n    \n    return(results)\n  }"
+    "text": "What if we want to change stuff?\nIf we want to quickly change a parameter, it makes sense to turn this all into a function.\n\ncounting_phds <- \n  function(\n    starting = 12,\n    profs = 4,\n    money = 0.15,\n    quitting = 0.05,\n    years = 25\n  ) {\n    \n    # create our output vector\n    results <- NULL\n    results[1] <- starting\n    \n    # then our loop\n    for (current_year in 2:years) {\n      # how many new phds\n      newbies <- rbinom(n = 1, size = profs, prob = money)\n      \n      # how many see the light and quit\n      enlightened <- rbinom(n = 1, size = results[current_year - 1], prob = quitting)\n      \n      # new total\n      results[current_year] <- results[current_year - 1] + newbies - enlightened\n    }\n    \n    return(results)\n  }"
   },
   {
     "objectID": "content/03-simulations-in-r/slides/index.html#lets-call-that-function",
     "href": "content/03-simulations-in-r/slides/index.html#lets-call-that-function",
     "title": "Simulations in R",
     "section": "Let’s call that function",
-    "text": "Let’s call that function\nNow we can change parameters of the “experiment” as we wish.\n\ncounting_phds()\n\n [1] 12 12 10 10 11 12 12 12 11 12 13 14 14 14 15 15 15 15 15 16 16 16 17 17 16\n\ncounting_phds(profs = 10)\n\n [1] 12 12 12 13 14 17 20 20 24 25 25 26 26 28 28 29 28 28 29 29 30 31 35 34 36\n\ncounting_phds(years = 10)\n\n [1] 12 11 11 12 12 10 10 10  9  9\n\ncounting_phds(quitting = 0)\n\n [1] 12 13 14 15 15 15 17 17 17 18 18 20 21 21 22 22 22 23 23 23 23 23 23 23 23"
+    "text": "Let’s call that function\nNow we can change parameters of the “experiment” as we wish.\n\ncounting_phds()\n\n [1] 12 12 10 10 11 12 12 12 11 13 14 15 15 15 16 15 15 15 15 15 15 15 16 16 15\n\ncounting_phds(profs = 10)\n\n [1] 12 12 12 13 14 16 18 17 20 21 21 22 21 22 22 23 21 20 21 21 22 23 26 23 24\n\ncounting_phds(years = 10)\n\n [1] 12 11 11 12 12 10 10 10  9  9\n\ncounting_phds(quitting = 0)\n\n [1] 12 13 14 15 15 15 17 17 17 18 18 20 21 21 22 22 22 23 23 23 23 23 23 23 23"
   },
   {
     "objectID": "content/03-simulations-in-r/slides/index.html#running-experiments-one-more-time",
     "href": "content/03-simulations-in-r/slides/index.html#running-experiments-one-more-time",
     "title": "Simulations in R",
     "section": "Running experiments one more time",
-    "text": "Running experiments one more time\nWe can do the loop in a loop again, but this time we just call the function.\n\nset.seed(42)\n\nexperiments <- 3\noutcomes <- list()\n\nfor (i in 1:experiments) {\n  \n  # run one experiment and store the results\n  results <- counting_phds()\n  \n  # put results into our outcomes\n  outcomes[[i]] <- results\n\n}\n\noutcomes\n\n[[1]]\n [1] 12 12 11 12 13 13 12 14 12 14 13 15 16 16 14 13 13 12 11 11 12 12 10  8  8\n\n[[2]]\n [1] 12 13 13 12 11 12 12 10 10 11 10 11 11 11 10 10 10 11 10 10 10 10 11  9 10\n\n[[3]]\n [1] 12 12 12 13 13 13 13 14 14 15 16 16 16 16 16 17 17 16 17 16 16 17 17 17 16"
+    "text": "Running experiments one more time\nWe can do the loop in a loop again, but this time we just call the function.\n\nset.seed(42)\n\nexperiments <- 3\noutcomes <- list()\n\nfor (i in 1:experiments) {\n  \n  # run one experiment and store the results\n  results <- counting_phds()\n  \n  # put results into our outcomes\n  outcomes[[i]] <- results\n\n}\n\noutcomes\n\n[[1]]\n [1] 12 12 11 12 13 13 12 14 12 14 13 15 16 15 13 12 12 11 10 10 11 11  9  7  8\n\n[[2]]\n [1] 12 13 13 12 11 12 12 10 11 12 11 12 12 12 11 11 11 12 11 12 12 12 13 11 12\n\n[[3]]\n [1] 12 12 12 13 13 13 13 14 14 15 15 15 15 15 15 16 15 14 15 14 14 15 15 15 14"
   },
   {
     "objectID": "content/03-simulations-in-r/slides/index.html#combining-it-all",
@@ -928,7 +921,14 @@
     "href": "content/03-simulations-in-r/slides/index.html#lets-summarize-and-plot",
     "title": "Simulations in R",
     "section": "Let’s summarize and plot",
-    "text": "Let’s summarize and plot\nWith those parameters, does it make sense to have more profs?\n\n\n\n  Group.1      x\n1       1  7.873\n2       2  9.285\n3       3 10.527\n4       4 12.042"
+    "text": "Let’s summarize and plot\nWith those parameters, does it make sense to have more profs?\n\n\n\n  Group.1      x\n1       1  8.630\n2       2  9.750\n3       3 10.819\n4       4 12.023"
+  },
+  {
+    "objectID": "content/03-simulations-in-r/slides/index.html#a-note-on-efficiency",
+    "href": "content/03-simulations-in-r/slides/index.html#a-note-on-efficiency",
+    "title": "Simulations in R",
+    "section": "A note on efficiency",
+    "text": "A note on efficiency\nRight now, we’re appending our data to an object that grows with each iteration:\n\n# turn into a row and add to outcomes\nour_row <- data.frame(experiment = i, prof = aprof, total = total)\noutcomes <- rbind(outcomes, our_row)\n\nThis procedure helps with explaining the logic, but is inefficient. It’s much faster to pre-allocate space:\n\noutcomes <- \n  data.frame(\n    experiment = rep(1:years, each = profs),\n    prof = rep(1:profs, times = years),\n    total = NA\n  )\n\noutcomes$total[i] <- total\n\nFor your own simulations, when efficiency matters, you should always pre-allocate space."
   },
   {
     "objectID": "content/03-simulations-in-r/slides/index.html#references",
@@ -970,7 +970,7 @@
     "href": "content/04-effect-sizes/04-exercise.html#exercise-4",
     "title": "Exercise II",
     "section": "1.5 Exercise",
-    "text": "1.5 Exercise\nGuess what? The power analysis you did above was on the standardized scale. Do you know why? Let’s look at the formula for Cohen’s d again:\n\\(d = \\frac{M_1-M_2}{pooled \\ SD}\\)\nAbove, our means were 4 for the control group, and 4.2, 4,5, and 4.8 for the treatment group. Crucially, the SD was 1 for all groups. That means, very conveniently, that the differences are 0.2, 0.5, and 0.8 standard deviations–and Cohen’s \\(d\\) is measured in standard deviations.\nYou can verify that yourself. Simulate a normally distributed control group (10,000) cases with a mean of 100 and an SD of 1. Also simulate a treatment group with a mean of 101 and and SD of 1. Then do two more groups, but this time increase the SD for both groups to 2. What should happen to Cohen’s \\(d\\) from the first comparison to the second? Verify your intuition by using effectsize::cohens_d function."
+    "text": "1.5 Exercise\nGuess what? The power analysis you did above was on the standardized scale. Do you know why? Let’s look at the formula for Cohen’s d again:\n\\(d = \\frac{M_1-M_2}{pooled \\ SD}\\)\nAbove, our means were 4 for the control group, and 4.2, 4,5, and 4.8 for the treatment group. Crucially, the SD was 1 for all groups. That means, very conveniently, that the differences are 0.2, 0.5, and 0.8 standard deviations–and Cohen’s \\(d\\) is measured in standard deviations. 0.2, 0.5, and 0.8 are also the heuristics for a small, medium, and large effect, respectively.\nYou can verify that yourself. Simulate a normally distributed control group (10,000 cases) with a mean of 100 and an SD of 1. Also simulate a treatment group with a mean of 101 and and SD of 1. Then do two more groups, but this time increase the SD for both groups to 2. What should happen to Cohen’s \\(d\\) from the first comparison to the second? Verify your intuition by using the effectsize::cohens_d function."
   },
   {
     "objectID": "content/04-effect-sizes/04-exercise.html#exercise-5",
@@ -984,7 +984,7 @@
     "href": "content/04-effect-sizes/04-exercise.html#exercise-6",
     "title": "Exercise II",
     "section": "1.7 Exercise",
-    "text": "1.7 Exercise\nHow much power do we gain if we specify the direction of a test? Run a simulation with a Cohen’s \\(d\\) of 0.5 for sample sizes of 20 to 100 (1,000 samples each). For each run, do a one-tailed and a two-tailed t-test. Then plot the power curves and calculate the average power (across all sample sizes) for the two.\nIf you store the following data frame, you can use the below code for plotting. ::: {.cell}\noutcomes <- \n  data.frame(\n    sample_size = NULL,\n    type = NULL, # for one vs. two-tailed\n    power = NULL\n  )\n:::"
+    "text": "1.7 Exercise\nHow much power do we gain if we specify the direction of a test? Run a simulation with a Cohen’s \\(d\\) of 0.5 for sample sizes of 20 to 100 (1,000 samples each). For each run, do a one-tailed and a two-tailed t-test. Then plot the power curves and calculate the average power (across all sample sizes) for the two.\nIf you store the following data frame, you can use the below code for plotting.\n\nggplot(outcomes, aes(x = sample_size, y = power, color = as.factor(type))) + geom_line() + theme_bw()"
   },
   {
     "objectID": "content/04-effect-sizes/04-exercise.html#exercise-7",
@@ -1012,14 +1012,14 @@
     "href": "content/04-effect-sizes/04-exercise.html#exercise-10",
     "title": "Exercise II",
     "section": "2.1 Exercise",
-    "text": "2.1 Exercise\nAlright, now let’s get familiar with the while function. Simulate (200 runs) an independent (we’ll go paired soon enough) t-test (two-tailed) for two difference effect sizes. The SD for both groups is 2. The mean for the control group is 100. In the small effects condition, the treatment group is 0.5 points larger. In the large effects condition, the treatment group is 1 points larger.\nStart at a sample size of 25 and stop when you reach 95% power. Plot the power curve and show that the larger effect size stops much earlier.\n\nlibrary(ggplot2)\n\nggplot(outcomes, aes(x = sample_size, y = power, color = as.factor(effect_size))) + geom_line() + geom_hline(yintercept = 0.95) + theme_bw()\n\n\neffect_sizes <- c(small = 0.5, large = 1)\nn <- 30\ndraws <- 200\n\noutcomes <- data.frame(\n  effect_size = NULL,\n  sample_size = NULL,\n  power = NULL\n)\n\nfor (asize in effect_sizes) {\n  \n  n <- 30\n  power <- 0\n  \n  while (power < 0.95) {\n    \n    pvalues <- NULL\n    \n    for (i in 1:draws) {\n      control <- rnorm(n, 100, 2)\n      treatment <- rnorm(n, 100 + asize, 2)\n      t <- t.test(control, treatment)\n      \n      pvalues[i] <- t$p.value\n    }\n    \n    power <- sum(pvalues < 0.05) / length(pvalues)\n    \n    outcomes <- rbind(\n      outcomes,\n      data.frame(\n        effect_size = asize,\n        sample_size = n,\n        power = sum(pvalues < 0.05) / length(pvalues)\n      )\n    )\n    \n    n <- n + 1\n  }\n}\n\nggplot(outcomes, aes(x = sample_size, y = power, color = as.factor(effect_size))) + geom_line() + geom_hline(yintercept = 0.95) + theme_bw()"
+    "text": "2.1 Exercise\nAlright, now let’s get familiar with the while function. Simulate (200 runs) an independent (we’ll go paired soon enough) t-test (two-tailed) for two different effect sizes. The SD for both groups is 2. The mean for the control group is 100. In the small effects condition, the treatment group is 0.5 points larger. In the large effects condition, the treatment group is 1 points larger.\nStart at a sample size of 25 and stop when you reach 95% power. Plot the power curve and show that the larger effect size stops much earlier.\n\nlibrary(ggplot2)\n\nggplot(outcomes, aes(x = sample_size, y = power, color = as.factor(effect_size))) + geom_line() + geom_hline(yintercept = 0.95) + theme_bw()\n\n\neffect_sizes <- c(small = 0.5, large = 1)\nn <- 30\ndraws <- 200\n\noutcomes <- data.frame(\n  effect_size = NULL,\n  sample_size = NULL,\n  power = NULL\n)\n\nfor (asize in effect_sizes) {\n  \n  n <- 30\n  power <- 0\n  \n  while (power < 0.95) {\n    \n    pvalues <- NULL\n    \n    for (i in 1:draws) {\n      control <- rnorm(n, 100, 2)\n      treatment <- rnorm(n, 100 + asize, 2)\n      t <- t.test(control, treatment)\n      \n      pvalues[i] <- t$p.value\n    }\n    \n    power <- sum(pvalues < 0.05) / length(pvalues)\n    \n    outcomes <- rbind(\n      outcomes,\n      data.frame(\n        effect_size = asize,\n        sample_size = n,\n        power = sum(pvalues < 0.05) / length(pvalues)\n      )\n    )\n    \n    n <- n + 1\n  }\n}\n\nggplot(outcomes, aes(x = sample_size, y = power, color = as.factor(effect_size))) + geom_line() + geom_hline(yintercept = 0.95) + theme_bw()"
   },
   {
     "objectID": "content/04-effect-sizes/04-exercise.html#exercise-11",
     "href": "content/04-effect-sizes/04-exercise.html#exercise-11",
     "title": "Exercise II",
     "section": "2.2 Exercise",
-    "text": "2.2 Exercise\nYou’re measuring people’s mood twice: right before and right after lunch. You know from extensive study on effect sizes that mood needs to increase by 0.5 points on a 7-point scale for other people to notice. You assume the the SD is somewhere around 1.5, with a bit more variation before lunch (1.7) than after lunch (1.5). You also assume that mood is correlated to some degree, say 0.5.\nYou have budget for a maximum sample of 100. How many people do you need to measure to achieve 87% power to detect this 1-point effect–and do you need to go to your max? Use 500 simulations per run. (Tip: the samples are correlated, so you’ll need to specify a variance-covariance matrix.) Verify with GPower."
+    "text": "2.2 Exercise\nYou’re measuring people’s mood twice: right before and right after lunch. You know from extensive study on effect sizes that mood needs to increase by 1 point on a 7-point scale for other people to notice. You assume the the SD is somewhere around 1.5, with a bit more variation before lunch (1.7) than after lunch (1.5). You also assume that mood is correlated to some degree, say 0.5.\nYou have budget for a maximum sample of 100. How many people do you need to measure to achieve 87% power to detect this 1-point effect–and do you need to go to your max? Use 500 simulations per run. (Tip: the samples are correlated, so you’ll need to specify a variance-covariance matrix.) Verify with GPower."
   },
   {
     "objectID": "content/04-effect-sizes/04-exercise.html#exercise-12",
@@ -1054,14 +1054,14 @@
     "href": "content/04-effect-sizes/04-slides-part1.html",
     "title": "Slides - Part 1",
     "section": "",
-    "text": "Below you can find the slides for intro to simulations:\n\n\n\nIf you want to see the slides in full screen, you can click here. To download them as PDFs, hit the ‘e’ button when you got the presentation open and then Ctrl+P print to PDF. This will work best in Chrome (in Firefox, it didn’t print the headings for me)."
+    "text": "Below you can find the slides for the session on effect sizes (part I, before the exercise):\n\n\n\nIf you want to see the slides in full screen, you can click here. To download them as PDFs, hit the ‘e’ button when you got the presentation open and then Ctrl+P print to PDF. This will work best in Chrome (in Firefox, it didn’t print the headings for me)."
   },
   {
     "objectID": "content/04-effect-sizes/04-slides-part2.html",
     "href": "content/04-effect-sizes/04-slides-part2.html",
     "title": "Slides - Part 2",
     "section": "",
-    "text": "Below you can find the slides for intro to simulations:\n\n\n\nIf you want to see the slides in full screen, you can click here. To download them as PDFs, hit the ‘e’ button when you got the presentation open and then Ctrl+P print to PDF. This will work best in Chrome (in Firefox, it didn’t print the headings for me)."
+    "text": "Below you can find the slides for the session on effect sizes (part II, for the second block of exercises):\n\n\n\nIf you want to see the slides in full screen, you can click here. To download them as PDFs, hit the ‘e’ button when you got the presentation open and then Ctrl+P print to PDF. This will work best in Chrome (in Firefox, it didn’t print the headings for me)."
   },
   {
     "objectID": "content/04-effect-sizes/slides-part1/index.html#whats-an-effect-size",
@@ -1187,7 +1187,7 @@
     "href": "content/04-effect-sizes/slides-part1/index.html#differences",
     "title": "Effect sizes",
     "section": "Differences",
-    "text": "Differences\n\nExpress difference between groups in variance units, not raw units\nNot “How many cm is the difference in height between the groups”\nBut “How many standard deviation difference in height between the groups”\n\n\\(d = \\frac{M_1-M_2}{pooled\\ \\sigma}\\)\n\\(pooled\\ \\sigma = \\sqrt{\\frac{(sd_1^2 + sd_2^2)}{2}}\\)"
+    "text": "Differences\n\nExpress difference between groups in variance units, not raw units\nNot “How many cm is the difference in height between the groups”\nBut “How many standard deviations difference in height between the groups”\n\n\\(d = \\frac{M_1-M_2}{pooled\\ \\sigma}\\)\n\\(pooled\\ \\sigma = \\sqrt{\\frac{(sd_1^2 + sd_2^2)}{2}}\\)"
   },
   {
     "objectID": "content/04-effect-sizes/slides-part1/index.html#poor-cohen",
@@ -1411,7 +1411,7 @@
     "href": "content/04-effect-sizes/slides-part1/index.html#sesoi",
     "title": "Effect sizes",
     "section": "SESOI",
-    "text": "SESOI\nSmallest effect size of interest (Anvari et al. 2021)\n\nWhy rely on previous research that is notoriously unreliable?\nYou should define what effect you find worth looking for?\nAt what point do you not care about an effect anymore?\nMake falsifiable and testable studies"
+    "text": "SESOI\nSmallest effect size of interest (Anvari et al. 2021)\n\nWhy rely on previous research that is notoriously unreliable?\nYou should define what effect you find worth looking for\nAt what point do you not care about an effect anymore?\nMake falsifiable and testable studies"
   },
   {
     "objectID": "content/04-effect-sizes/slides-part1/index.html#tradition",
@@ -1439,7 +1439,7 @@
     "href": "content/04-effect-sizes/slides-part1/index.html#empirical-benchmarks",
     "title": "Effect sizes",
     "section": "Empirical benchmarks",
-    "text": "Empirical benchmarks\n\n\n\n\n\nWhat’s the performance gap between low and high performers in school\nThat’s the minimum effect we want to achieve\nAnything less is uninteresting and we should invest our resources somewhere else\n\n(Hill et al. 2008)"
+    "text": "Empirical benchmarks\n\n\n\n\n\nWhat’s the performance gap between low and high performers in school?\nThat’s the minimum effect we want to achieve\nAnything less is uninteresting and we should invest our resources somewhere else\n\n(Hill et al. 2008)"
   },
   {
     "objectID": "content/04-effect-sizes/slides-part1/index.html#empirical-benchmarks-1",
@@ -1516,14 +1516,7 @@
     "href": "content/04-effect-sizes/slides-part2/index.html#what-about-two-measures-from-the-same-person",
     "title": "Interlude: Correlated measures",
     "section": "What about two measures from the same person",
-    "text": "What about two measures from the same person\n\nThink of a typical pre/posttest design\nSomeone who has a tendency to score low will therefore score low on both pre- and post-test measure\nThe measures are correlated\nWe need to take into account that measures come from the same unit in simulating"
-  },
-  {
-    "objectID": "content/04-effect-sizes/slides-part2/index.html#each-person-gets-their-own-distribution",
-    "href": "content/04-effect-sizes/slides-part2/index.html#each-person-gets-their-own-distribution",
-    "title": "Interlude: Correlated measures",
-    "section": "Each person gets their own distribution",
-    "text": "Each person gets their own distribution\nWe’ve already done that with replicate and for loops: Each person gets their own distribution rather than drawing from the same distribution (although in effect this is the same here).\n\nn <- 200\nd1 <- data.frame(\n  id = rep(letters[1:2], each = n/2),\n  x = rnorm(n)\n)\nd2 <- \n  data.frame(\n    x = replicate(2, rnorm(n/2))\n  )\nd2 <- stack(d2)\nd2$id <- rep(letters[1:2], each = n/2)"
+    "text": "What about two measures from the same person\n\nThink of a typical pre/posttest design\nSomeone who has a tendency to score low will therefore score low on both pre- and post-test measure\nThe measures are correlated\nWe need to take into account that measures come from the same unit when simulating"
   },
   {
     "objectID": "content/04-effect-sizes/slides-part2/index.html#so-how-do-we-get-correlated-measures",
@@ -1579,7 +1572,7 @@
     "href": "content/04-effect-sizes/slides-part2/index.html#getting-variance-and-covariances",
     "title": "Interlude: Correlated measures",
     "section": "Getting variance and covariances",
-    "text": "Getting variance and covariances\nSD is just the square root of the variance. So we go \\(Var = sd^2\\) and we got our variance.\nCovariance is just the correlation times the SDs. So we go \\(covariance = r(pre, post) * sd_{pre} * sd_{post}\\)\n\nvar_pre <- pre_sd**2\nvar_post <- post_sd**2\n\ncovariance <- correlation * pre_sd * post_sd"
+    "text": "Getting variance and covariances\nSD is just the square root of the variance. So we go \\(Var = sd^2\\) and we got our variance.\nCovariance is just the correlation times the SDs. So we go \\(covariance = r(pre, post) \\times sd_{pre} \\times sd_{post}\\)\n\nvar_pre <- pre_sd**2\nvar_post <- post_sd**2\n\ncovariance <- correlation * pre_sd * post_sd"
   },
   {
     "objectID": "content/04-effect-sizes/slides-part2/index.html#now-lets-combine-all-that-into-a-matrix",
@@ -1593,21 +1586,21 @@
     "href": "content/04-effect-sizes/slides-part2/index.html#ready-to-simulate-now",
     "title": "Interlude: Correlated measures",
     "section": "Ready to simulate now",
-    "text": "Ready to simulate now\nWe use the mvrnorm function for, well, multivariate normal distributions, from the MASS package. Let’s get a massive sample of 10,000 people.\n\nlibrary(MASS)\n\nd <- \n  mvrnorm(\n    10000,\n    means,\n    our_matrix\n  )\nd <- as.data.frame(d)\nhead(d)\n\n        pre      post\n1  9.641884  8.709398\n2 12.824293 11.082426\n3  9.895452 11.851025\n4 11.295242 10.025020\n5  9.940425  8.382987\n6  8.671538  9.648427"
+    "text": "Ready to simulate now\nWe use the mvrnorm function for, well, multivariate normal distributions, from the MASS package. Let’s get a massive sample of 10,000 people.\n\nlibrary(MASS)\n\nd <- \n  mvrnorm(\n    10000,\n    means,\n    our_matrix\n  )\nd <- as.data.frame(d)\nhead(d)\n\n        pre      post\n1  9.750371  7.936974\n2 10.001516 10.519466\n3 11.279047 10.630203\n4 11.081401  8.563613\n5 10.086696  9.591592\n6 11.432761 10.631188"
   },
   {
     "objectID": "content/04-effect-sizes/slides-part2/index.html#lets-check-that",
     "href": "content/04-effect-sizes/slides-part2/index.html#lets-check-that",
     "title": "Interlude: Correlated measures",
     "section": "Let’s check that",
-    "text": "Let’s check that\nLet’s first check the sample to see whether we can recover our numbers.\n\nmean(d$pre); mean(d$post)\n\n[1] 10.00596\n\n\n[1] 10.48671\n\nsd(d$pre); sd(d$post)\n\n[1] 1.496022\n\n\n[1] 2.002508\n\ncor(d$pre, d$post)\n\n[1] 0.4097954"
+    "text": "Let’s check that\nLet’s first check the sample to see whether we can recover our numbers.\n\nmean(d$pre); mean(d$post)\n\n[1] 10.00843\n\n\n[1] 10.48749\n\nsd(d$pre); sd(d$post)\n\n[1] 1.496285\n\n\n[1] 2.004229\n\ncor(d$pre, d$post)\n\n[1] 0.4119397"
   },
   {
     "objectID": "content/04-effect-sizes/slides-part2/index.html#run-our-test",
     "href": "content/04-effect-sizes/slides-part2/index.html#run-our-test",
     "title": "Interlude: Correlated measures",
     "section": "Run our test",
-    "text": "Run our test\n\nt.test(\n  d$pre,\n  d$post,\n  paired = TRUE\n)\n\n\n    Paired t-test\n\ndata:  d$pre and d$post\nt = -24.686, df = 9999, p-value < 2.2e-16\nalternative hypothesis: true difference in means is not equal to 0\n95 percent confidence interval:\n -0.5189280 -0.4425778\nsample estimates:\nmean of the differences \n             -0.4807529"
+    "text": "Run our test\n\nt.test(\n  d$pre,\n  d$post,\n  paired = TRUE\n)\n\n\n    Paired t-test\n\ndata:  d$pre and d$post\nt = -24.623, df = 9999, p-value < 2.2e-16\nalternative hypothesis: true difference in means is not equal to 0\n95 percent confidence interval:\n -0.5171917 -0.4409192\nsample estimates:\nmean of the differences \n             -0.4790554"
   },
   {
     "objectID": "content/04-effect-sizes/slides-part2/index.html#the-while-operator",
@@ -1635,14 +1628,14 @@
     "href": "content/04-effect-sizes/slides-part2/index.html#what-did-we-just-do",
     "title": "Interlude: Correlated measures",
     "section": "What did we just do?",
-    "text": "What did we just do?\n\nhead(d)\n\n  sample_size power\n1          60 0.857\n2          61 0.852\n3          62 0.867\n4          63 0.884\n5          64 0.887\n6          65 0.889\n\nplot(d$sample_size, d$power)\nabline(h = 0.95)"
+    "text": "What did we just do?\n\nhead(d)\n\n  sample_size power\n1          60 0.845\n2          61 0.856\n3          62 0.872\n4          63 0.854\n5          64 0.885\n6          65 0.874\n\nplot(d$sample_size, d$power)\nabline(h = 0.95)"
   },
   {
     "objectID": "content/05-alpha-beta-sensitivity/05-exercise.html#exercise",
     "href": "content/05-alpha-beta-sensitivity/05-exercise.html#exercise",
     "title": "Exercise III",
     "section": "0.1 Exercise",
-    "text": "0.1 Exercise\nThe False Positive Rate is the proportion of false positive findings among all positive (aka signifiant) findings. It’s defined as follows:\n\\[\\begin{align}\nFalse \\ positive \\ rate = \\frac{False \\ positives}{False \\ positives + True \\ positives}\\\\\\\\\nFalse \\ positives = \\phi * \\alpha\\\\\nTrue \\ positives = power * (1 - \\phi)\\\\\\\\\nFalse \\ positive \\ rate = \\frac{\\phi * \\alpha}{\\phi * \\alpha + power * (1 - \\phi)}\n\\end{align}\\]\n\\(\\phi\\) is the proportion of null hypotheses, in general in a field, that are true, \\(\\alpha\\) your false positive error rate, and power is \\((1-\\beta)\\).\nPlot how the false positive rate develops as \\(\\phi\\) goes from 0 to 1 for two \\(\\alpha\\) levels (.05 and .01.) and two levels of power (80% and 95%). No need for a simulation here. You can just straight up use the formula above to calculate the false positive rate. For that, it’s probably easiest to create a data.frame. Try out the expand.grid command which creates a data frame of all combinations of several variables. For example:\n\niq_scores <- seq(100, 105, 1)\nsample_size <- c(10, 20)\nd <- expand.grid(iq_scores, sample_size)\n\nYou can use the following code (make sure the variables are named accordingly):\n\nlibrary(ggplot2)\nggplot(d, aes(x = phis, y = fpr, color = as.factor(alphas))) + geom_line() + facet_wrap(~ power) + theme_bw()\n\n\n\n\nIn physics, they use a five sigma rule. That means their alpha is \\(3*10^-7\\) or 1 in 3.5 million. Do the above again, but this time plot “our” 0.05 against five sigma and compare false positive rates."
+    "text": "0.1 Exercise\nThe False Positive Rate is the proportion of false positive findings among all positive (aka signifiant) findings. It’s defined as follows:\n\\[\\begin{align}\nFalse \\ positive \\ rate = \\frac{False \\ positives}{False \\ positives + True \\ positives}\\\\\\\\\nFalse \\ positives = \\phi * \\alpha\\\\\nTrue \\ positives = power * (1 - \\phi)\\\\\\\\\nFalse \\ positive \\ rate = \\frac{\\phi * \\alpha}{\\phi * \\alpha + power * (1 - \\phi)}\n\\end{align}\\]\n\\(\\phi\\) is the proportion of null hypotheses, in general in a field, that are true, \\(\\alpha\\) your false positive error rate, and power is \\((1-\\beta)\\).\nPlot how the false positive rate develops as \\(\\phi\\) goes from 0 to 1 for two \\(\\alpha\\) levels (.05 and .01.) and two levels of power (80% and 95%). No need for a simulation here. You can just straight up use the formula above to calculate the false positive rate. For that, it’s probably easiest to create a data.frame. Try out the expand.grid command which creates a data frame of all combinations of several variables. For example:\n\niq_scores <- seq(100, 105, 1)\nsample_size <- c(10, 20)\nd <- expand.grid(iq_scores, sample_size)\n\nd\n\nYou can use the following code (make sure the variables are named accordingly):\n\nlibrary(ggplot2)\nggplot(d, aes(x = phis, y = fpr, color = as.factor(alphas))) + geom_line() + facet_wrap(~ power) + theme_bw()\n\n\n\n\nIn physics, they use a five sigma rule. That means their alpha is \\(3*10^-7\\) or 1 in 3.5 million. Do the above again, but this time plot “our” 0.05 against five sigma and compare false positive rates."
   },
   {
     "objectID": "content/05-alpha-beta-sensitivity/05-exercise.html#exercise-1",
@@ -1677,14 +1670,14 @@
     "href": "content/05-alpha-beta-sensitivity/05-exercise.html#exercise-5",
     "title": "Exercise III",
     "section": "0.6 Exercise",
-    "text": "0.6 Exercise\nDo the above again, but this time on the standardized scale. Verify your results with GPower. (Tip: Compute Cohen’s \\(d\\) each time after you’ve simulated your sample and then take the mean for each combination.)"
+    "text": "0.6 Exercise\nDo the above again, but this time on the standardized scale. Verify your results with GPower. Now you can’t plot the raw effect size, but you need the standardized one. However, the standardized one in this setting will depend on the SD of the difference. Therefore, you need to calculate the empirical Cohen’s \\(d\\) for each run, store it, and then take the mean of all \\(d\\)s per combination."
   },
   {
     "objectID": "content/05-alpha-beta-sensitivity/05-slides.html",
     "href": "content/05-alpha-beta-sensitivity/05-slides.html",
     "title": "Slides",
     "section": "",
-    "text": "Below you can find the slides for intro to simulations:\n\n\n\nIf you want to see the slides in full screen, you can click here. To download them as PDFs, hit the ‘e’ button when you got the presentation open and then Ctrl+P print to PDF. This will work best in Chrome (in Firefox, it didn’t print the headings for me)."
+    "text": "Below you can find the slides for alpha, beta, and sensitivity:\n\n\n\nIf you want to see the slides in full screen, you can click here. To download them as PDFs, hit the ‘e’ button when you got the presentation open and then Ctrl+P print to PDF. This will work best in Chrome (in Firefox, it didn’t print the headings for me)."
   },
   {
     "objectID": "content/05-alpha-beta-sensitivity/slides/index.html#remember-what-determines-power",
@@ -1705,7 +1698,7 @@
     "href": "content/05-alpha-beta-sensitivity/slides/index.html#remember-positive-predictive-value",
     "title": "Alpha, beta, and sensitivity",
     "section": "Remember positive predictive value?",
-    "text": "Remember positive predictive value?\nHow likely is it that our significant result represents a true effect? Depends on:\n\nThe odds of it being true in the first place (\\(R\\))\nOur power (how sensitive was our test to detect it)\nOur \\(\\alpha\\) (how many false positives we get)\n\n\\[\\begin{gather*}\nPPV = \\frac{power*R}{power*R + \\alpha}\n\\end{gather*}\\]"
+    "text": "Remember positive predictive value?\nHow likely is it that our significant result represents a true effect? Depends on:\n\nThe odds of it being true in the first place (\\(R\\))\nOur power (how sensitive was our test to detect it)\nOur \\(\\alpha\\) (how many false positives we get)\n\n\\[\\begin{gather*}\nPPV = \\frac{power \\times R}{power \\times R + \\alpha}\n\\end{gather*}\\]"
   },
   {
     "objectID": "content/05-alpha-beta-sensitivity/slides/index.html#reversing-the-logic",
@@ -1719,14 +1712,14 @@
     "href": "content/05-alpha-beta-sensitivity/slides/index.html#formally",
     "title": "Alpha, beta, and sensitivity",
     "section": "Formally",
-    "text": "Formally\n\nProportion of null hypotheses that are true (\\(\\phi\\))\nOur error rate for false positives (\\(\\alpha\\))\nOur power (how good are we in finding true positives)\n\n\\[\\begin{gather*}\nFalse \\ positives = \\phi * \\alpha\\\\\nTrue \\ positives = power * (1 - \\phi)\n\\end{gather*}\\]"
+    "text": "Formally\n\nProportion of null hypotheses that are true (\\(\\phi\\))\nOur error rate for false positives (\\(\\alpha\\))\nOur power (how good are we in finding true positives)\n\n\\[\\begin{gather*}\nFalse \\ positives = \\phi \\times \\alpha\\\\\nTrue \\ positives = power \\times (1 - \\phi)\n\\end{gather*}\\]"
   },
   {
     "objectID": "content/05-alpha-beta-sensitivity/slides/index.html#plug-it-all-in",
     "href": "content/05-alpha-beta-sensitivity/slides/index.html#plug-it-all-in",
     "title": "Alpha, beta, and sensitivity",
     "section": "Plug it all in",
-    "text": "Plug it all in\n\\[\\begin{gather*}\nFalse \\ positive \\ rate = \\frac{False \\ positives}{False \\ positives + True \\ positives}\\\\\\\\\nFalse \\ positives = \\phi * \\alpha\\\\\nTrue \\ positives = power * (1 - \\phi)\\\\\\\\\nFalse \\ positive \\ rate = \\frac{\\phi * \\alpha}{\\phi * \\alpha + power * (1 - \\phi)}\n\\end{gather*}\\]"
+    "text": "Plug it all in\n\\[\\begin{gather*}\nFalse \\ positive \\ rate = \\frac{False \\ positives}{False \\ positives + True \\ positives}\\\\\\\\\nFalse \\ positives = \\phi \\times \\alpha\\\\\nTrue \\ positives = power \\times (1 - \\phi)\\\\\\\\\nFalse \\ positive \\ rate = \\frac{\\phi \\times \\alpha}{\\phi \\times \\alpha + power \\times (1 - \\phi)}\n\\end{gather*}\\]"
   },
   {
     "objectID": "content/05-alpha-beta-sensitivity/slides/index.html#the-alpha-debate-1",
@@ -1873,28 +1866,28 @@
     "href": "content/05-alpha-beta-sensitivity/slides/index.html#whats-our-real-type-i-error-rate",
     "title": "Alpha, beta, and sensitivity",
     "section": "What’s our (real) Type I error rate?",
-    "text": "What’s our (real) Type I error rate?\nProbability of committing a false positive: How many nulls are there and what’s our chance of falsely flagging a null as a true effect?\n\\[\\begin{gather*}\nProbability \\ H_0 \\ is \\ true * Probability \\ Type \\ I \\ error \\\\\nP(H_0)*\\alpha\n\\end{gather*}\\]"
+    "text": "What’s our (real) Type I error rate?\nProbability of committing a false positive: How many nulls are there and what’s our chance of falsely flagging a null as a true effect?\n\\[\\begin{gather*}\nProbability \\ H_0 \\ is \\ true \\times Probability \\ Type \\ I \\ error \\\\\nP(H_0)*\\alpha\n\\end{gather*}\\]"
   },
   {
     "objectID": "content/05-alpha-beta-sensitivity/slides/index.html#whats-our-real-type-ii-error-rate",
     "href": "content/05-alpha-beta-sensitivity/slides/index.html#whats-our-real-type-ii-error-rate",
     "title": "Alpha, beta, and sensitivity",
     "section": "What’s our (real) Type II error rate?",
-    "text": "What’s our (real) Type II error rate?\nProbability of commmiting a false negative: How many true effects are there and what’s our chance of missing them?\n\\[\\begin{gather*}\nProbability \\ H_1 \\ is \\ true * Probability \\ Type \\ II \\ error \\\\\nP(H_1)*\\beta\n\\end{gather*}\\]"
+    "text": "What’s our (real) Type II error rate?\nProbability of commmiting a false negative: How many true effects are there and what’s our chance of missing them?\n\\[\\begin{gather*}\nProbability \\ H_1 \\ is \\ true \\times Probability \\ Type \\ II \\ error \\\\\nP(H_1) \\times \\beta\n\\end{gather*}\\]"
   },
   {
     "objectID": "content/05-alpha-beta-sensitivity/slides/index.html#weighted-combined-error-rate",
     "href": "content/05-alpha-beta-sensitivity/slides/index.html#weighted-combined-error-rate",
     "title": "Alpha, beta, and sensitivity",
     "section": "Weighted combined error rate",
-    "text": "Weighted combined error rate\nLet’s combine our (real) Type I and Type II error rates and put them in:\n\n\\(\\alpha\\) = .05\n\\(\\beta\\) = .20 (aka power is 80%)\nPrior odds of H1 being true: 3:1 (i.e., 75%)\n\n\\[\\begin{gather*}\n(P(H_0)*\\alpha) + (P(H_1)*\\beta) \\\\\n(0.25 * 0.05) + (0.75 * 0.20) = 0.1625\n\\end{gather*}\\]"
+    "text": "Weighted combined error rate\nLet’s combine our (real) Type I and Type II error rates and put them in:\n\n\\(\\alpha\\) = .05\n\\(\\beta\\) = .20 (aka power is 80%)\nPrior odds of H1 being true: 3:1 (i.e., 75%)\n\n\\[\\begin{gather*}\n(P(H_0) \\times \\alpha) + (P(H_1) \\times \\beta) \\\\\n(0.25 \\times 0.05) + (0.75 \\times 0.20) = 0.1625\n\\end{gather*}\\]"
   },
   {
     "objectID": "content/05-alpha-beta-sensitivity/slides/index.html#is-that-the-best-we-can-do",
     "href": "content/05-alpha-beta-sensitivity/slides/index.html#is-that-the-best-we-can-do",
     "title": "Alpha, beta, and sensitivity",
     "section": "Is that the best we can do?",
-    "text": "Is that the best we can do?\nNow let’s change our \\(\\alpha\\) to 0.10. That makes our power go up to 88%. Our \\(\\beta\\), therefore, is .12. (Remember: iterative). Put those in:\n\\[\\begin{gather*}\n(P(H_0)*\\alpha) + (P(H_1)*\\beta) \\\\\n(0.25 * 0.10) + (0.75 * 0.12) = 0.115\n\\end{gather*}\\]"
+    "text": "Is that the best we can do?\nNow let’s change our \\(\\alpha\\) to 0.10. That makes our power go up to 88%. Our \\(\\beta\\), therefore, is .12. (Remember: iterative). Put those in:\n\\[\\begin{gather*}\n(P(H_0) \\times \\alpha) + (P(H_1) \\times \\beta) \\\\\n(0.25 \\times 0.10) + (0.75 \\times 0.12) = 0.115\n\\end{gather*}\\]"
   },
   {
     "objectID": "content/05-alpha-beta-sensitivity/slides/index.html#comparing-the-two",
@@ -1908,14 +1901,14 @@
     "href": "content/05-alpha-beta-sensitivity/slides/index.html#pesky-reality",
     "title": "Alpha, beta, and sensitivity",
     "section": "Pesky reality",
-    "text": "Pesky reality\nWhat if the probabilities of our hypotheses are different? Say the odds of H1 being true aren’t 3:1, but 1:3.\n\\[\\begin{gather*}\n(0.75 * 0.05) + (0.25 * 0.20) = 0.0875\\\\\n(0.75 * 0.10) + (0.25 * 0.12) = 0.105\n\\end{gather*}\\]\nTry it out."
+    "text": "Pesky reality\nWhat if the probabilities of our hypotheses are different? Say the odds of H1 being true aren’t 3:1, but 1:3.\n\\[\\begin{gather*}\n(0.75 \\times 0.05) + (0.25 \\times 0.20) = 0.0875\\\\\n(0.75 \\times 0.10) + (0.25 \\times 0.12) = 0.105\n\\end{gather*}\\]\nTry it out."
   },
   {
     "objectID": "content/05-alpha-beta-sensitivity/slides/index.html#general-logic",
     "href": "content/05-alpha-beta-sensitivity/slides/index.html#general-logic",
     "title": "Alpha, beta, and sensitivity",
     "section": "General logic",
-    "text": "General logic\nIf an effect is likely, we don’t want to miss it. We cast a wider net and consider more effects significant because the (real) risk of false positives is lowered. The higher \\(P(H_1)\\), the less strict \\(\\alpha\\).\nIf an effect is unlikely, we don’t want to false claim it’s there. We cast a narrower net and consider less effects significant because the (real) risk of false positive is increased. The higher \\(P(H_0)\\), the more strict \\(\\alpha\\)."
+    "text": "General logic\nIf an effect is likely, we don’t want to miss it. We cast a wider net and consider more effects significant because the (real) risk of false positives is lowered. The higher \\(P(H_1)\\), the less strict \\(\\alpha\\).\nIf an effect is unlikely, we don’t want to falsely claim it’s there. We cast a narrower net and consider less effects significant because the (real) risk of false positive is increased. The higher \\(P(H_0)\\), the more strict \\(\\alpha\\)."
   },
   {
     "objectID": "content/05-alpha-beta-sensitivity/slides/index.html#a-balancing-act",
@@ -1936,7 +1929,7 @@
     "href": "content/05-alpha-beta-sensitivity/slides/index.html#some-considerations",
     "title": "Alpha, beta, and sensitivity",
     "section": "Some considerations",
-    "text": "Some considerations\n\nPublishing a false positive: bad!\nBut the benefits could be huge: publish away then!\nBut it costs a lot of get these benefits: Hm, maybe not."
+    "text": "Some considerations\n\nPublishing a false positive: bad!\nBut the benefits could be huge: publish away then!\nBut it costs a lot to get these benefits: Hm, maybe not."
   },
   {
     "objectID": "content/05-alpha-beta-sensitivity/slides/index.html#the-compromise",
@@ -1964,7 +1957,7 @@
     "href": "content/05-alpha-beta-sensitivity/slides/index.html#the-bible",
     "title": "Alpha, beta, and sensitivity",
     "section": "The Bible",
-    "text": "The Bible\n (Lakens 2022)"
+    "text": "The Bible\n\n(Lakens 2022)"
   },
   {
     "objectID": "content/05-alpha-beta-sensitivity/slides/index.html#other-ways",
@@ -2020,7 +2013,7 @@
     "href": "content/06-recap/06-slides.html",
     "title": "Slides",
     "section": "",
-    "text": "Below you can find the slides for intro to simulations:\n\n\n\nIf you want to see the slides in full screen, you can click here. To download them as PDFs, hit the ‘e’ button when you got the presentation open and then Ctrl+P print to PDF. This will work best in Chrome (in Firefox, it didn’t print the headings for me)."
+    "text": "Below you can find the slides for the mid-workshop recap:\n\n\n\nIf you want to see the slides in full screen, you can click here. To download them as PDFs, hit the ‘e’ button when you got the presentation open and then Ctrl+P print to PDF. This will work best in Chrome (in Firefox, it didn’t print the headings for me)."
   },
   {
     "objectID": "content/06-recap/slides/index.html#why-this-workshop",
@@ -2097,7 +2090,7 @@
     "href": "content/07-categorical-predictors/07-exercise.html#exercise-4",
     "title": "Exercise IV",
     "section": "0.5 Exercise",
-    "text": "0.5 Exercise\nSo far, we’ve worked with dummy coding for our explanatory factor. That presumes that we’re interested in those contrasts where the second and third condition are compared to the first.\nSometimes, however, we’re not interested in these comparisons and would rather like to know the difference between our conditions and the grand mean. In that case, we should use sum to zero coding.\nTake the data set below:\n\nset.seed(42)\nn <- 100\nd <- \n  data.frame(\n    condition = as.factor(rep(letters[1:3], times = n)),\n    scores = rnorm(n*3, c(100, 150, 200), c(7, 10, 12))\n  )\n\nLet’s have a look at the contrasts:\n\n\n\nIt’s the familiar dummy coding. This means, going row by row, that the intercept will be the mean of condition a, the first contrast will be the mean of condition b in comparison to a, and the third contrast will be the mean of condition c in comparison to a.\nLet’s have a look at contrast coding instead:\n\ncontrasts(d$condition) <- contr.sum\ncontrasts(d$condition)\n\n  [,1] [,2]\na    1    0\nb    0    1\nc   -1   -1\n\n\nNow the intercept is our grand mean (the overall mean of the outcome), the first contrast compares the score in condition a against the grand mean and the second contrast compares the mean of condition b against the grand mean.\n\nsummary(lm(scores~condition, d))\n\n\nCall:\nlm(formula = scores ~ condition, data = d)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-32.364  -6.417  -0.009   6.081  26.953 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)    \n(Intercept) 149.8348     0.5700 262.872   <2e-16 ***\ncondition1  -50.0140     0.8061 -62.045   <2e-16 ***\ncondition2   -0.6376     0.8061  -0.791     0.43    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 9.873 on 297 degrees of freedom\nMultiple R-squared:  0.946, Adjusted R-squared:  0.9456 \nF-statistic:  2600 on 2 and 297 DF,  p-value: < 2.2e-16\n\n\nIf we want a different comparison, we can reorder the factor levels:\n\nd$condition <- factor(d$condition, levels = c(\"b\", \"c\", \"a\")) \ncontrasts(d$condition) <- contr.sum\ncontrasts(d$condition)\n\n  [,1] [,2]\nb    1    0\nc    0    1\na   -1   -1\n\n\nNow the first contrasts compares condition b against the grand mean, and the second contrast compares condition c against the grand mean.\nFor later sessions on interactions, we’ll rely on this kind of sum coding (also called effect coding), so let’s get familiar with it here. Create four groups: a placebo group, a low dose group, a medium dose group, and a high dose group.\nYou want to know whether the low dose, the medium dose, and the high dose are significantly different from the grand mean. Simulate a data set, set the contrasts, and run a linear model. Choose mean values as you like, but make sure you can find them again in the model output. How would you get the mean of the placebo group now? (Tip: Look at the contrasts, take the grand mean, and apply the contrasts to each estimate.)"
+    "text": "0.5 Exercise\nSo far, we’ve worked with dummy coding for our explanatory factor. That presumes that we’re interested in those contrasts where the second and third condition are compared to the first.\nSometimes, however, we’re not interested in these comparisons and would rather like to know the difference between our conditions and the grand mean. In that case, we should use sum to zero coding.\nTake the data set below:\n\nset.seed(42)\nn <- 100\nd <- \n  data.frame(\n    condition = as.factor(rep(letters[1:3], times = n)),\n    scores = rnorm(n*3, c(100, 150, 200), c(7, 10, 12))\n  )\n\nLet’s have a look at the contrasts:\n\ncontrasts(d$condition)\n\n  b c\na 0 0\nb 1 0\nc 0 1\n\n\nIt’s the familiar dummy coding. This means, going row by row, that the intercept will be the mean of condition a, the first contrast will be the mean of condition b in comparison to a, and the third contrast will be the mean of condition c in comparison to a.\nLet’s have a look at contrast coding instead:\n\ncontrasts(d$condition) <- contr.sum\ncontrasts(d$condition)\n\n  [,1] [,2]\na    1    0\nb    0    1\nc   -1   -1\n\n\nNow the intercept is our grand mean (the overall mean of the outcome), the first contrast compares the score in condition a against the grand mean and the second contrast compares the mean of condition b against the grand mean.\n\nsummary(lm(scores~condition, d))\n\n\nCall:\nlm(formula = scores ~ condition, data = d)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-32.364  -6.417  -0.009   6.081  26.953 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)    \n(Intercept) 149.8348     0.5700 262.872   <2e-16 ***\ncondition1  -50.0140     0.8061 -62.045   <2e-16 ***\ncondition2   -0.6376     0.8061  -0.791     0.43    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 9.873 on 297 degrees of freedom\nMultiple R-squared:  0.946, Adjusted R-squared:  0.9456 \nF-statistic:  2600 on 2 and 297 DF,  p-value: < 2.2e-16\n\n\nIf we want a different comparison, we can reorder the factor levels:\n\nd$condition <- factor(d$condition, levels = c(\"b\", \"c\", \"a\")) \ncontrasts(d$condition) <- contr.sum\ncontrasts(d$condition)\n\n  [,1] [,2]\nb    1    0\nc    0    1\na   -1   -1\n\n\nNow the first contrasts compares condition b against the grand mean, and the second contrast compares condition c against the grand mean.\nFor later sessions on interactions, we’ll rely on this kind of sum-to-zero coding (also called effect coding), so let’s get familiar with it here. Create four groups: a placebo group, a low dose group, a medium dose group, and a high dose group.\nYou want to know whether the low dose, the medium dose, and the high dose are significantly different from the grand mean. Simulate a data set, set the contrasts, and run a linear model. Choose mean values as you like, but make sure you can find them again in the model output. How would you get the mean of the placebo group now? (Tip: Look at the contrasts, take the grand mean, and apply the contrasts to each estimate.)"
   },
   {
     "objectID": "content/07-categorical-predictors/07-exercise.html#exercise-5",
@@ -2111,28 +2104,28 @@
     "href": "content/07-categorical-predictors/07-exercise.html#exercise-6",
     "title": "Exercise IV",
     "section": "0.7 Exercise",
-    "text": "0.7 Exercise\nThe previous study worked. Nice. Now you want to know whether positive framing scales: Can you reduce positivity and agreeing reduces proportionally? You run a follow-up experiment where you now have a neutral condition, a low positivity condition (half the positivity of your previous positive condition), and a high positivity condition (the positivity of your original positive condition). Your effect size remains: 0.25 for the comparison between neutral and high positivity (the original positive condition). You expect, therefore, that half the positivity should leave to half the effect size: 0.125. That’s your new SESOI.\nThe previous study also showed that you weren’t too far off with an SD of 1, but this time you’ll use 0.8 for all scores.\nHowever, you expect that, because the two positivity conditions are so similar, they’ll correlate higher than the correlation between neutral and positivity. So you expect a correlation between neutral and either positivity condition to be 0.3, but 0.6 between the two positivity conditions.\nBecause your department was so happy with how well you designed the previous study, they gave you more money. Now you can collect a maximum of 500 participants. Last time, the power simulation took quite some time, so this time you want to stop whenever you reach 95% power. Also, because this time you want to be more stringent, you set \\(\\alpha\\) to 0.01.\nDo 500 runs, start with 60 people and go in in steps of 10. Use treatment contrasts. This can take a while."
+    "text": "0.7 Exercise\nThe previous study worked. Nice. Now you want to know whether positive framing scales: Can you reduce positivity and agreeing reduces proportionally? You run a follow-up experiment where you now have a neutral condition, a low positivity condition (half the positivity of your previous positive condition), and a high positivity condition (the positivity of your original positive condition). Your effect size remains: 0.25 for the comparison between neutral and high positivity (the original positive condition). You expect, therefore, that half the positivity should lead to half the effect size: 0.125. That’s your new SESOI.\nThe previous study also showed that you weren’t too far off with an SD of 1, but this time you’ll use 0.8 for all scores.\nHowever, you expect that, because the two positivity conditions are so similar, they’ll correlate higher than the correlation between neutral and positivity. So you expect a correlation between neutral and either positivity condition to be 0.3, but 0.6 between the two positivity conditions.\nBecause your department was so happy with how well you designed the previous study, they gave you more money. Now you can collect a maximum of 500 participants. Last time, the power simulation took quite some time, so this time you want to stop whenever you reach 95% power. Also, because this time you want to be more stringent, you set \\(\\alpha\\) to 0.01.\nDo 500 runs, start with 60 people and go in in steps of 10. Use treatment contrasts. This can take a while."
   },
   {
     "objectID": "content/07-categorical-predictors/07-exercise.html#exercise-7",
     "href": "content/07-categorical-predictors/07-exercise.html#exercise-7",
     "title": "Exercise IV",
     "section": "0.8 Exercise",
-    "text": "0.8 Exercise\nUsually when you run an ANOVA, you specify your contrasts before-hand so you know which groups you want to compare beyond just the overall effect of your condition. Let’s take the data set below. The overall effect of condition is significant:\n\n\n\nLet’s inspect the post-hoc comparisons between the groups with the emmeans package. Here, not every comparison is significant.\n\n\n\nRun a power simulation that finds the sample size for which we have 90% power for the smallest post-hoc contrast (aka the largest of the three p-values.) Go about it as you think is best, but save both the main effect p-value and the largest p-value of the posthoc contrasts to be able to compare power. In effect, you’re powering for a t-test, which only emphasizes that you should work on the raw scale and specify each comparison. (Tip: summary turns the pairs(postdocs) into a data frame.)"
+    "text": "0.8 Exercise\nUsually when you run an ANOVA, you specify your contrasts before-hand so you know which groups you want to compare beyond just the overall effect of your condition. Let’s take the data set below. The overall effect of condition is significant:\n\nlibrary(MASS)\nlibrary(tidyr)\n\nmeans <- c(neutral = 10, low = 12, high = 14)\nsd <- 8\ncorrelation <- 0.6\nn <- 80\n\ncovariance <- correlation * sd * sd\n\nsigma <- matrix(\n  c(\n    sd**2, covariance, covariance,\n    covariance, sd**2, covariance,\n    covariance, covariance, sd**2\n  ),\n  ncol = 3\n)\n\nd <- data.frame(\n  mvrnorm(\n    n,\n    means,\n    sigma\n  )\n)\n\nd$id <- factor(1:n)\n    \nd <- pivot_longer(\n  d,\n  cols = -id,\n  values_to = \"scores\",\n  names_to = \"condition\"\n)\n\nd$condition <- as.factor(d$condition)\n\nm <- aov(scores ~ condition + Error(id), d)\n\nsummary(m)\n\n\nError: id\n          Df Sum Sq Mean Sq F value Pr(>F)\nResiduals 79   8525   107.9               \n\nError: Within\n           Df Sum Sq Mean Sq F value  Pr(>F)    \ncondition   2    863   431.5   15.41 7.7e-07 ***\nResiduals 158   4425    28.0                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nLet’s inspect the post-hoc comparisons between the groups with the emmeans package. Here, not every comparison is significant.\n\n\n\nRun a power simulation that finds the sample size for which we have 90% power for the smallest post-hoc contrast (aka the largest of the three p-values.) Go about it as you think is best, but save both the main effect p-value and the largest p-value of the posthoc contrasts to be able to compare power. In effect, you’re powering for a t-test, which only emphasizes that you should work on the raw scale and specify each comparison. (Tip: summary turns the pairs(postdocs) into a data frame.)"
   },
   {
     "objectID": "content/07-categorical-predictors/07-exercise.html#exercise-8",
     "href": "content/07-categorical-predictors/07-exercise.html#exercise-8",
     "title": "Exercise IV",
     "section": "0.9 Exercise",
-    "text": "0.9 Exercise\nRather than doing posthoc comparisons between each group, we can rely on planned contrasts. If that’s completely new to you, have a read here. The blog post does a really nice job explaining planned contrasts.\nIn effect, rather than relying on sum to zero or treatment coding, we create our own comparisons. Let’s say we want to compare neutral to both low positivity and high positivity (as a general test that framing works). Then, our second contrast compares the two framing conditions. For simplicity, let’s go three independent groups with means of c(4, 4.3, 4.4) and a common SD of 1.1. Custom contrasts will allow us to directly make the two comparisons we’re interested in like such:\n\nd <- data.frame(\n  scores = rnorm(150, c(4., 4.3, 4.4), 1.1),\n  condition = factor(rep(c(\"neutral\", \"low\", \"high\"), 50))\n)\n\ncontrasts(d$condition)\n\n        low neutral\nhigh      0       0\nlow       1       0\nneutral   0       1\n\nhighlow_vs_neutral <- c(1, 1, -2)\nhigh_vs_low <- c(1, -1, 0)\n\ncontrasts(d$condition) <- cbind(highlow_vs_neutral, high_vs_low)\ncontrasts(d$condition)\n\n        highlow_vs_neutral high_vs_low\nhigh                     1           1\nlow                      1          -1\nneutral                 -2           0\n\nsummary.lm(aov(scores ~ condition, d))\n\n\nCall:\naov(formula = scores ~ condition, data = d)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-2.36436 -0.66718 -0.03486  0.75111  2.70774 \n\nCoefficients:\n                            Estimate Std. Error t value Pr(>|t|)    \n(Intercept)                  4.21370    0.08293  50.809   <2e-16 ***\nconditionhighlow_vs_neutral  0.10082    0.05864   1.719   0.0877 .  \nconditionhigh_vs_low         0.04212    0.10157   0.415   0.6790    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.016 on 147 degrees of freedom\nMultiple R-squared:  0.02083,   Adjusted R-squared:  0.007511 \nF-statistic: 1.564 on 2 and 147 DF,  p-value: 0.2128\n\n\nRun a power simulation where you first run standard treatment contrasts. Then, run posthoc tests (emmeans::emmeans) on that test. For simplicity, focus on the comparison of high vs. low. Select the p-value for that posthoc contrast. In the same run, change the contrasts to custom from above, run the model again, and extract the p-value for the high vs. low comparison. Do that for samples ranging from 50 to 200 in steps of 10. Do 200 runs to save a bit of time, then plot the two types of power against each other. Which approach is more “powerful”?"
+    "text": "0.9 Exercise\nRather than doing posthoc comparisons between each group, we can rely on planned contrasts. If that’s completely new to you, have a read here. The blog post does a really nice job explaining planned contrasts.\nIn effect, rather than relying on sum to zero or treatment coding, we create our own comparisons. Let’s say we want to compare neutral to both low positivity and high positivity (as a general test that framing works). Then, our second contrast compares the two framing conditions. For simplicity, let’s go three independent groups with means of c(4, 4.3, 4.4) and a common SD of 1.1. Custom contrasts will allow us to directly make the two comparisons we’re interested in like such:\n\nd <- data.frame(\n  scores = rnorm(150, c(4., 4.3, 4.4), 1.1),\n  condition = factor(rep(c(\"neutral\", \"low\", \"high\"), 50))\n)\n\ncontrasts(d$condition)\n\n        low neutral\nhigh      0       0\nlow       1       0\nneutral   0       1\n\nhighlow_vs_neutral <- c(1, 1, -2)\nhigh_vs_low <- c(1, -1, 0)\n\ncontrasts(d$condition) <- cbind(highlow_vs_neutral, high_vs_low)\ncontrasts(d$condition)\n\n        highlow_vs_neutral high_vs_low\nhigh                     1           1\nlow                      1          -1\nneutral                 -2           0\n\nsummary.lm(aov(scores ~ condition, d))\n\n\nCall:\naov(formula = scores ~ condition, data = d)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-3.1774 -0.6477  0.0810  0.8252  2.4652 \n\nCoefficients:\n                            Estimate Std. Error t value Pr(>|t|)    \n(Intercept)                  4.20863    0.08797  47.842   <2e-16 ***\nconditionhighlow_vs_neutral  0.11400    0.06220   1.833   0.0689 .  \nconditionhigh_vs_low         0.16492    0.10774   1.531   0.1280    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.077 on 147 degrees of freedom\nMultiple R-squared:  0.03734,   Adjusted R-squared:  0.02424 \nF-statistic: 2.851 on 2 and 147 DF,  p-value: 0.061\n\n\nRun a power simulation where you first run standard treatment contrasts. Then, run posthoc tests (emmeans::emmeans) on that test. For simplicity, focus on the comparison of high vs. low. Select the p-value for that posthoc contrast. In the same run, change the contrasts to custom from above, run the model again, and extract the p-value for the high vs. low comparison. Do that for samples ranging from 50 to 200 in steps of 10. Do 200 runs to save a bit of time, then plot the two types of power against each other. Which approach is more “powerful”?"
   },
   {
     "objectID": "content/07-categorical-predictors/07-slides.html",
     "href": "content/07-categorical-predictors/07-slides.html",
     "title": "Slides",
     "section": "",
-    "text": "Below you can find the slides for intro to simulations:\n\n\n\nIf you want to see the slides in full screen, you can click here. To download them as PDFs, hit the ‘e’ button when you got the presentation open and then Ctrl+P print to PDF. This will work best in Chrome (in Firefox, it didn’t print the headings for me)."
+    "text": "Below you can find the slides for the session on categorical predictors (multiple groups):\n\n\n\nIf you want to see the slides in full screen, you can click here. To download them as PDFs, hit the ‘e’ button when you got the presentation open and then Ctrl+P print to PDF. This will work best in Chrome (in Firefox, it didn’t print the headings for me)."
   },
   {
     "objectID": "content/07-categorical-predictors/slides/index.html#whats-that-data-generating-process",
@@ -2174,7 +2167,7 @@
     "href": "content/07-categorical-predictors/slides/index.html#remember-our-t-tests",
     "title": "The linear model and comparing multiple groups",
     "section": "Remember our t-tests?",
-    "text": "Remember our t-tests?\nYou are explicitly claiming that the observable outcome (the data) have been generated by this true underlying process. The process is a normal distribution with a true effect size (\\(\\mu\\)) and a true standard deviation (\\(\\sigma\\)) for two data generating processes: \\(Normal(100, 15)\\) and \\(Normal(105, 15)\\)\n\ncontrol <- rnorm(100, 100, 15)\ntreatment <- rnorm(100, 105, 15)\n\nt.test(control, treatment)\n\n\n    Welch Two Sample t-test\n\ndata:  control and treatment\nt = -3.4637, df = 195.54, p-value = 0.0006547\nalternative hypothesis: true difference in means is not equal to 0\n95 percent confidence interval:\n -11.307355  -3.102537\nsample estimates:\nmean of x mean of y \n 99.46125 106.66619"
+    "text": "Remember our t-tests?\nYou are explicitly claiming that the observable outcome (the data) have been generated by this true underlying process. The process is a normal distribution with a true effect size (\\(\\mu\\)) and a true standard deviation (\\(\\sigma\\)) for two data generating processes: \\(Normal(100, 15)\\) and \\(Normal(105, 15)\\)\n\ncontrol <- rnorm(100, 100, 15)\ntreatment <- rnorm(100, 105, 15)\n\nt.test(control, treatment)\n\n\n    Welch Two Sample t-test\n\ndata:  control and treatment\nt = -1.1754, df = 197.45, p-value = 0.2413\nalternative hypothesis: true difference in means is not equal to 0\n95 percent confidence interval:\n -6.741042  1.706352\nsample estimates:\nmean of x mean of y \n 101.2524  103.7698"
   },
   {
     "objectID": "content/07-categorical-predictors/slides/index.html#thats-why-simulation-is-cool",
@@ -2216,21 +2209,21 @@
     "href": "content/07-categorical-predictors/slides/index.html#finding-our-inputs-again",
     "title": "The linear model and comparing multiple groups",
     "section": "Finding our inputs again",
-    "text": "Finding our inputs again\n\nDataBoxplot\n\n\n\n\n\n\n\ngroup\ny\nx\n\n\n\n\ncontrol\n-0.3194356\n0\n\n\ncontrol\n0.3585550\n0\n\n\ncontrol\n1.5481581\n0\n\n\ncontrol\n-0.6961869\n0\n\n\ncontrol\n-0.4232888\n0\n\n\ncontrol\n1.5934332\n0\n\n\ncontrol\n-0.1338498\n0\n\n\ncontrol\n-1.2877882\n0\n\n\ncontrol\n-0.9552430\n0\n\n\ncontrol\n-0.8878082\n0\n\n\ncontrol\n1.2804773\n0\n\n\ncontrol\n-0.6618312\n0\n\n\ncontrol\n-0.8125412\n0\n\n\ncontrol\n0.9591038\n0\n\n\ncontrol\n-0.9532822\n0\n\n\ntreatment\n0.9695439\n1\n\n\ntreatment\n1.5932081\n1\n\n\ntreatment\n1.8339306\n1\n\n\ntreatment\n0.8066507\n1\n\n\ntreatment\n0.8896708\n1\n\n\ntreatment\n2.1606060\n1\n\n\ntreatment\n1.7075100\n1\n\n\ntreatment\n2.3765138\n1\n\n\ntreatment\n1.3702932\n1\n\n\ntreatment\n1.7360955\n1\n\n\ntreatment\n2.5859261\n1\n\n\ntreatment\n1.5827067\n1\n\n\ntreatment\n1.9846912\n1\n\n\ntreatment\n-0.5751406\n1\n\n\ntreatment\n0.1101549\n1"
+    "text": "Finding our inputs again\n\nDataBoxplot\n\n\n\n\n\n\n\ngroup\ny\nx\n\n\n\n\ncontrol\n0.9491471\n0\n\n\ncontrol\n-0.6305564\n0\n\n\ncontrol\n1.6165922\n0\n\n\ncontrol\n1.9321441\n0\n\n\ncontrol\n1.4504006\n0\n\n\ncontrol\n0.3784709\n0\n\n\ncontrol\n0.3682505\n0\n\n\ncontrol\n0.1533605\n0\n\n\ncontrol\n-0.4041498\n0\n\n\ncontrol\n0.4531013\n0\n\n\ncontrol\n-0.1104567\n0\n\n\ncontrol\n1.4286343\n0\n\n\ncontrol\n-0.1438349\n0\n\n\ncontrol\n0.5281626\n0\n\n\ncontrol\n0.0478245\n0\n\n\ntreatment\n0.8625424\n1\n\n\ntreatment\n2.6063584\n1\n\n\ntreatment\n2.0013070\n1\n\n\ntreatment\n1.0906478\n1\n\n\ntreatment\n0.7576385\n1\n\n\ntreatment\n0.2998429\n1\n\n\ntreatment\n-0.1946010\n1\n\n\ntreatment\n0.2727508\n1\n\n\ntreatment\n1.5156190\n1\n\n\ntreatment\n-0.6516735\n1\n\n\ntreatment\n0.7354749\n1\n\n\ntreatment\n0.4019778\n1\n\n\ntreatment\n0.9427690\n1\n\n\ntreatment\n0.3678989\n1\n\n\ntreatment\n1.5958018\n1"
   },
   {
     "objectID": "content/07-categorical-predictors/slides/index.html#what-happens-when-x-is-zero",
     "href": "content/07-categorical-predictors/slides/index.html#what-happens-when-x-is-zero",
     "title": "The linear model and comparing multiple groups",
     "section": "What happens when \\(x\\) is zero?",
-    "text": "What happens when \\(x\\) is zero?\n\\[\\begin{align}\n& y = \\beta_0 + \\beta_1x\\\\\n& y = \\beta_0 + \\beta_1*0\\\\\n& y = \\beta_0\n\\end{align}\\]\nIn other words, when we predict values for the control (aka \\(x=0\\)) group, our best predictor for outcome scores becomes \\(\\beta_0\\) (also known as the intercept): the mean for the control group."
+    "text": "What happens when \\(x\\) is zero?\n\\[\\begin{align}\n& y = \\beta_0 + \\beta_1x\\\\\n& y = \\beta_0 + \\beta_1 \\times 0\\\\\n& y = \\beta_0\n\\end{align}\\]\nIn other words, when we predict values for the control (aka \\(x=0\\)) group, our best predictor for outcome scores becomes \\(\\beta_0\\) (also known as the intercept): the mean for the control group."
   },
   {
     "objectID": "content/07-categorical-predictors/slides/index.html#what-happens-when-x-is-one",
     "href": "content/07-categorical-predictors/slides/index.html#what-happens-when-x-is-one",
     "title": "The linear model and comparing multiple groups",
     "section": "What happens when \\(x\\) is one?",
-    "text": "What happens when \\(x\\) is one?\n\\[\\begin{align}\n& y = \\beta_0 + \\beta_1x\\\\\n& y = \\beta_0 + \\beta_1*1\\\\\n& y = \\beta_0 + \\beta_1\\\\\n& y = mean(control) + ?\n\\end{align}\\]\nWe already know that the intercept (\\(\\beta_0\\)) is the mean of the control group. How would we now go from that mean to predicting scores of the treatment group? What do we need to add to the mean of the control group to get the mean of the treatment group?"
+    "text": "What happens when \\(x\\) is one?\n\\[\\begin{align}\n& y = \\beta_0 + \\beta_1x\\\\\n& y = \\beta_0 + \\beta_1 \\times 1\\\\\n& y = \\beta_0 + \\beta_1\\\\\n& y = mean(control) + ?\n\\end{align}\\]\nWe already know that the intercept (\\(\\beta_0\\)) is the mean of the control group. How would we now go from that mean to predicting scores of the treatment group? What do we need to add to the mean of the control group to get the mean of the treatment group?"
   },
   {
     "objectID": "content/07-categorical-predictors/slides/index.html#pictures-please",
@@ -2244,14 +2237,14 @@
     "href": "content/07-categorical-predictors/slides/index.html#lets-check-that",
     "title": "The linear model and comparing multiple groups",
     "section": "Let’s check that",
-    "text": "Let’s check that\n\n\nMean of the control group (our intercept or \\(\\beta_0\\)):\n\nmean(d$y[d$x==0])\n\n[1] -0.0927685\n\n\nDifference (our slope or \\(\\beta_1\\)):\n\nmean(d$y[d$x==1]) - mean(d$y[d$x==0])\n\n[1] 1.501593\n\n\nMean of the treatment group (\\(\\beta_0 + \\beta_1\\)):\n\nmean(d$y[d$x==1])\n\n[1] 1.408824\n\n\n\nLinear model:\n\nmodel <- lm(y ~ x, data = d)\n\nsummary(model)\n\n\nCall:\nlm(formula = y ~ x, data = d)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-1.98396 -0.60311 -0.03981  0.54473  1.68620 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)    \n(Intercept) -0.09277    0.23782  -0.390  0.69943    \nx1           1.50159    0.33632   4.465  0.00012 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.9211 on 28 degrees of freedom\nMultiple R-squared:  0.4159,    Adjusted R-squared:  0.395 \nF-statistic: 19.93 on 1 and 28 DF,  p-value: 0.0001196"
+    "text": "Let’s check that\n\n\nMean of the control group (our intercept or \\(\\beta_0\\)):\n\nmean(d$y[d$x==0])\n\n[1] 0.5344727\n\n\nDifference (our slope or \\(\\beta_1\\)):\n\nmean(d$y[d$x==1]) - mean(d$y[d$x==0])\n\n[1] 0.3058176\n\n\nMean of the treatment group (\\(\\beta_0 + \\beta_1\\)):\n\nmean(d$y[d$x==1])\n\n[1] 0.8402903\n\n\n\nLinear model:\n\nmodel <- lm(y ~ x, data = d)\n\nsummary(model)\n\n\nCall:\nlm(formula = y ~ x, data = d)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-1.49196 -0.52700 -0.09373  0.61017  1.76607 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)  \n(Intercept)   0.5345     0.2093   2.553   0.0164 *\nx1            0.3058     0.2960   1.033   0.3104  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.8107 on 28 degrees of freedom\nMultiple R-squared:  0.03672,   Adjusted R-squared:  0.002315 \nF-statistic: 1.067 on 1 and 28 DF,  p-value: 0.3104"
   },
   {
     "objectID": "content/07-categorical-predictors/slides/index.html#so-theyre-really-the-same",
     "href": "content/07-categorical-predictors/slides/index.html#so-theyre-really-the-same",
     "title": "The linear model and comparing multiple groups",
     "section": "So they’re really the same?",
-    "text": "So they’re really the same?\n\n\n\nt.test(control, treatment, var.equal = TRUE)\n\n\n    Two Sample t-test\n\ndata:  control and treatment\nt = -4.4647, df = 28, p-value = 0.0001196\nalternative hypothesis: true difference in means is not equal to 0\n95 percent confidence interval:\n -2.1905222 -0.8126629\nsample estimates:\n mean of x  mean of y \n-0.0927685  1.4088241 \n\n\n\n\nsummary(lm(y ~ x, d))\n\n\nCall:\nlm(formula = y ~ x, data = d)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-1.98396 -0.60311 -0.03981  0.54473  1.68620 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)    \n(Intercept) -0.09277    0.23782  -0.390  0.69943    \nx1           1.50159    0.33632   4.465  0.00012 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.9211 on 28 degrees of freedom\nMultiple R-squared:  0.4159,    Adjusted R-squared:  0.395 \nF-statistic: 19.93 on 1 and 28 DF,  p-value: 0.0001196"
+    "text": "So they’re really the same?\n\n\n\nt.test(control, treatment, var.equal = TRUE)\n\n\n    Two Sample t-test\n\ndata:  control and treatment\nt = -1.0331, df = 28, p-value = 0.3104\nalternative hypothesis: true difference in means is not equal to 0\n95 percent confidence interval:\n -0.9121837  0.3005485\nsample estimates:\nmean of x mean of y \n0.5344727 0.8402903 \n\n\n\n\nsummary(lm(y ~ x, d))\n\n\nCall:\nlm(formula = y ~ x, data = d)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-1.49196 -0.52700 -0.09373  0.61017  1.76607 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)  \n(Intercept)   0.5345     0.2093   2.553   0.0164 *\nx1            0.3058     0.2960   1.033   0.3104  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.8107 on 28 degrees of freedom\nMultiple R-squared:  0.03672,   Adjusted R-squared:  0.002315 \nF-statistic: 1.067 on 1 and 28 DF,  p-value: 0.3104"
   },
   {
     "objectID": "content/07-categorical-predictors/slides/index.html#same-logic-for-a-one-sample-t-test",
@@ -2272,21 +2265,21 @@
     "href": "content/07-categorical-predictors/slides/index.html#lets-check-that-once-more",
     "title": "The linear model and comparing multiple groups",
     "section": "Let’s check that once more",
-    "text": "Let’s check that once more\n\n\nMean of the treatment group (our intercept or \\(\\beta_0\\)):\n\nmean(d$y[d$x==1])\n\n[1] 1.408824\n\n\n\nLinear model:\n\nmodel <- lm(y ~ 1, data = d[d$x==1,])\n\nsummary(model)\n\n\nCall:\nlm(formula = y ~ 1, data = d[d$x == 1, ])\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-1.9840 -0.4792  0.1844  0.5005  1.1771 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)    \n(Intercept)   1.4088     0.2194   6.421  1.6e-05 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.8498 on 14 degrees of freedom"
+    "text": "Let’s check that once more\n\n\nMean of the treatment group (our intercept or \\(\\beta_0\\)):\n\nmean(d$y[d$x==1])\n\n[1] 0.8402903\n\n\n\nLinear model:\n\nmodel <- lm(y ~ 1, data = d[d$x==1,])\n\nsummary(model)\n\n\nCall:\nlm(formula = y ~ 1, data = d[d$x == 1, ])\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-1.49196 -0.50642 -0.08265  0.46284  1.76607 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)   \n(Intercept)   0.8403     0.2173   3.868  0.00171 **\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.8414 on 14 degrees of freedom"
   },
   {
     "objectID": "content/07-categorical-predictors/slides/index.html#so-theyre-really-the-same-1",
     "href": "content/07-categorical-predictors/slides/index.html#so-theyre-really-the-same-1",
     "title": "The linear model and comparing multiple groups",
     "section": "So they’re really the same?",
-    "text": "So they’re really the same?\n\n\n\nt.test(treatment)\n\n\n    One Sample t-test\n\ndata:  treatment\nt = 6.421, df = 14, p-value = 1.598e-05\nalternative hypothesis: true mean is not equal to 0\n95 percent confidence interval:\n 0.9382424 1.8794058\nsample estimates:\nmean of x \n 1.408824 \n\n\n\n\nsummary(lm(y ~ 1, d[d$x==1,]))\n\n\nCall:\nlm(formula = y ~ 1, data = d[d$x == 1, ])\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-1.9840 -0.4792  0.1844  0.5005  1.1771 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)    \n(Intercept)   1.4088     0.2194   6.421  1.6e-05 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.8498 on 14 degrees of freedom"
+    "text": "So they’re really the same?\n\n\n\nt.test(treatment)\n\n\n    One Sample t-test\n\ndata:  treatment\nt = 3.8678, df = 14, p-value = 0.001707\nalternative hypothesis: true mean is not equal to 0\n95 percent confidence interval:\n 0.3743297 1.3062509\nsample estimates:\nmean of x \n0.8402903 \n\n\n\n\nsummary(lm(y ~ 1, d[d$x==1,]))\n\n\nCall:\nlm(formula = y ~ 1, data = d[d$x == 1, ])\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-1.49196 -0.50642 -0.08265  0.46284  1.76607 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)   \n(Intercept)   0.8403     0.2173   3.868  0.00171 **\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.8414 on 14 degrees of freedom"
   },
   {
     "objectID": "content/07-categorical-predictors/slides/index.html#same-logic-for-a-paired-samples-t-test",
     "href": "content/07-categorical-predictors/slides/index.html#same-logic-for-a-paired-samples-t-test",
     "title": "The linear model and comparing multiple groups",
     "section": "Same logic for a paired-samples t-test",
-    "text": "Same logic for a paired-samples t-test\nRemember: Paired samples t-test is just testing the difference in scores against H0. This way, it turns into a one-sample t-test, so all we’re left with is, once again, the intercept, which we test against our H0. A single number (aka the mean) predicts \\(y\\) (technically \\(y_{difference}\\).\n\\[\\begin{align}\n& y_{treatment} - y_{control} = \\beta_0\n\\end{align}\\]"
+    "text": "Same logic for a paired-samples t-test\nRemember: Paired samples t-test is just testing the difference in scores against H0. This way, it turns into a one-sample t-test, so all we’re left with is, once again, the intercept, which we test against our H0. A single number (aka the mean) predicts \\(y\\) (technically \\(y_{difference}\\)).\n\\[\\begin{align}\n& y_{treatment} - y_{control} = \\beta_0\n\\end{align}\\]"
   },
   {
     "objectID": "content/07-categorical-predictors/slides/index.html#pictures-please-2",
@@ -2307,14 +2300,14 @@
     "href": "content/07-categorical-predictors/slides/index.html#lets-check-that-once-more-1",
     "title": "The linear model and comparing multiple groups",
     "section": "Let’s check that once more",
-    "text": "Let’s check that once more\n\n\nMean of the difference (our intercept or \\(\\beta_0\\)):\n\nmean(treatment-control)\n\n[1] 1.501593\n\n\n\nLinear model:\n\nmodel <- lm(treatment-control ~ 1)\n\nsummary(model)\n\n\nCall:\nlm(formula = treatment - control ~ 1)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-3.0358 -0.3525 -0.1886  0.7834  2.1627 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)    \n(Intercept)   1.5016     0.3156   4.758 0.000306 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.222 on 14 degrees of freedom"
+    "text": "Let’s check that once more\n\n\nMean of the difference (our intercept or \\(\\beta_0\\)):\n\nmean(treatment-control)\n\n[1] 0.3058176\n\n\n\nLinear model:\n\nmodel <- lm(treatment-control ~ 1)\n\nsummary(model)\n\n\nCall:\nlm(formula = treatment - control ~ 1)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-1.4106 -0.9336 -0.3845  0.6604  2.9311 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)\n(Intercept)   0.3058     0.3165   0.966     0.35\n\nResidual standard error: 1.226 on 14 degrees of freedom"
   },
   {
     "objectID": "content/07-categorical-predictors/slides/index.html#so-theyre-really-the-same-2",
     "href": "content/07-categorical-predictors/slides/index.html#so-theyre-really-the-same-2",
     "title": "The linear model and comparing multiple groups",
     "section": "So they’re really the same?",
-    "text": "So they’re really the same?\n\n\n\nt.test(treatment-control)\n\n\n    One Sample t-test\n\ndata:  treatment - control\nt = 4.7584, df = 14, p-value = 0.0003056\nalternative hypothesis: true mean is not equal to 0\n95 percent confidence interval:\n 0.8247735 2.1784116\nsample estimates:\nmean of x \n 1.501593 \n\n\n\n\nsummary(lm(treatment-control ~ 1))\n\n\nCall:\nlm(formula = treatment - control ~ 1)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-3.0358 -0.3525 -0.1886  0.7834  2.1627 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)    \n(Intercept)   1.5016     0.3156   4.758 0.000306 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.222 on 14 degrees of freedom"
+    "text": "So they’re really the same?\n\n\n\nt.test(treatment-control)\n\n\n    One Sample t-test\n\ndata:  treatment - control\nt = 0.9663, df = 14, p-value = 0.3503\nalternative hypothesis: true mean is not equal to 0\n95 percent confidence interval:\n -0.3729694  0.9846046\nsample estimates:\nmean of x \n0.3058176 \n\n\n\n\nsummary(lm(treatment-control ~ 1))\n\n\nCall:\nlm(formula = treatment - control ~ 1)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-1.4106 -0.9336 -0.3845  0.6604  2.9311 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)\n(Intercept)   0.3058     0.3165   0.966     0.35\n\nResidual standard error: 1.226 on 14 degrees of freedom"
   },
   {
     "objectID": "content/07-categorical-predictors/slides/index.html#what-about-anova-then",
@@ -2328,21 +2321,21 @@
     "href": "content/07-categorical-predictors/slides/index.html#getting-the-score-for-control",
     "title": "The linear model and comparing multiple groups",
     "section": "Getting the score for control",
-    "text": "Getting the score for control\n\n\n\ngroups\n\\(x_1\\)\n\\(x_2\\)\n\n\n\n\ncontrol\n0\n0\n\n\nlow\n1\n0\n\n\nhigh\n0\n1\n\n\n\n\\[\\begin{align}\n& y = \\beta_0 + \\beta_1x_1 + \\beta_2x_2\\\\\n& y = \\beta_0 + \\beta_1*0 + \\beta_2*0\\\\\n& y = \\beta_0\n\\end{align}\\]"
+    "text": "Getting the score for control\n\n\n\ngroups\n\\(x_1\\)\n\\(x_2\\)\n\n\n\n\ncontrol\n0\n0\n\n\nlow\n1\n0\n\n\nhigh\n0\n1\n\n\n\n\\[\\begin{align}\n& y = \\beta_0 + \\beta_1x_1 + \\beta_2x_2\\\\\n& y = \\beta_0 + \\beta_1 \\times 0 + \\beta_2 \\times 0\\\\\n& y = \\beta_0\n\\end{align}\\]"
   },
   {
     "objectID": "content/07-categorical-predictors/slides/index.html#getting-the-score-for-low",
     "href": "content/07-categorical-predictors/slides/index.html#getting-the-score-for-low",
     "title": "The linear model and comparing multiple groups",
     "section": "Getting the score for low",
-    "text": "Getting the score for low\n\n\n\ngroups\n\\(x_1\\)\n\\(x_2\\)\n\n\n\n\ncontrol\n0\n0\n\n\nlow\n1\n0\n\n\nhigh\n0\n1\n\n\n\n\\[\\begin{align}\n& y = \\beta_0 + \\beta_1x_1 + \\beta_2x_2\\\\\n& y = \\beta_0 + \\beta_1*1 + \\beta_2*0\\\\\n& y = \\beta_0 + \\beta_1\n\\end{align}\\]"
+    "text": "Getting the score for low\n\n\n\ngroups\n\\(x_1\\)\n\\(x_2\\)\n\n\n\n\ncontrol\n0\n0\n\n\nlow\n1\n0\n\n\nhigh\n0\n1\n\n\n\n\\[\\begin{align}\n& y = \\beta_0 + \\beta_1x_1 + \\beta_2x_2\\\\\n& y = \\beta_0 + \\beta_1 \\times 1 + \\beta_2 \\times 0\\\\\n& y = \\beta_0 + \\beta_1\n\\end{align}\\]"
   },
   {
     "objectID": "content/07-categorical-predictors/slides/index.html#getting-the-score-for-high",
     "href": "content/07-categorical-predictors/slides/index.html#getting-the-score-for-high",
     "title": "The linear model and comparing multiple groups",
     "section": "Getting the score for high",
-    "text": "Getting the score for high\n\n\n\ngroups\n\\(x_1\\)\n\\(x_2\\)\n\n\n\n\ncontrol\n0\n0\n\n\nlow\n1\n0\n\n\nhigh\n0\n1\n\n\n\n\\[\\begin{align}\n& y = \\beta_0 + \\beta_1x_1 + \\beta_2x_2\\\\\n& y = \\beta_0 + \\beta_1*0 + \\beta_2*1\\\\\n& y = \\beta_0 + \\beta_2\n\\end{align}\\]"
+    "text": "Getting the score for high\n\n\n\ngroups\n\\(x_1\\)\n\\(x_2\\)\n\n\n\n\ncontrol\n0\n0\n\n\nlow\n1\n0\n\n\nhigh\n0\n1\n\n\n\n\\[\\begin{align}\n& y = \\beta_0 + \\beta_1x_1 + \\beta_2x_2\\\\\n& y = \\beta_0 + \\beta_1 \\times 0 + \\beta_2 \\times 1\\\\\n& y = \\beta_0 + \\beta_2\n\\end{align}\\]"
   },
   {
     "objectID": "content/07-categorical-predictors/slides/index.html#what-are-beta_1-and-beta_2-then",
@@ -2510,35 +2503,35 @@
     "href": "content/08-interactions/08-exercise.html#exercise",
     "title": "Exercise V",
     "section": "0.1 Exercise",
-    "text": "0.1 Exercise\nYou plan to analyze data from a content analysis. You’re interested in what predicts the number of Twitter followers for celebrities (including C-list, whatever that means). You believe that blue check mark definitely means having more followers compared to not having a check mark. Your dependent measure is, well, just the number of followers. You also expect that this difference will be stronger if a celebrity is more active, say tweets at least once a week.\nNow you want to run a power analysis to test that idea. First draw (on a piece of paper or digitally) your interaction. You can use the function below to try out some “drawings”. Start with putting in some of the means to roughly get the pattern described above.\n\nlibrary(tidyverse)\n\ntwobytwo <-\n  function(\n    means = c(0, 5, 2, 7),\n    factors = c(\"Factor 1\", \"Factor 2\"),\n    levels1 = c(\"Level 1\", \"Level 2\"),\n    levels2 = c(\"Level 1\", \"Level 2\"),\n    outcome = \"Outcome\"\n  ){\n    d <- \n      data.frame(\n        f1 = rep(levels1, times = 2),\n        f2 = rep(levels2, each = 2),\n        outcome = means\n      )\n    \n    names(d) <- c(factors, outcome)\n    \n    p <- \n      ggplot(d, aes(x = .data[[factors[1]]], y = .data[[outcome]], shape = .data[[factors[2]]], group = .data[[factors[2]]])) +\n      geom_point(size = 3) +\n      geom_line(aes(linetype = .data[[factors[2]]]), size = 1) +\n      theme_bw() +\n      theme(\n        axis.ticks.y = element_blank(),\n        axis.text.y = element_blank()\n      )\n    \n    return(p)\n  }\n\nFor example, the below would be a complete reversal:\n\ntwobytwo(\n  means = c(0, 2, 2, 0),\n  factors = c(\"Verified\", \"Activity\"),\n  levels1 = c(\"No\", \"Yes\"),\n  levels2 = c(\"Lurker\", \"Active\"),\n  outcome = \"Followers\"\n)\n\n\n\n\n\n\n\nFor our case, we’re interested in an attenuation effect: There’s an effect (well, it’s not a causal effect in that sense, but let’s not get into that for now) regardless of the activity type, but it’ll be stronger. How much stronger? And what follower counts should you expect for the different groups? This is where common sense and thinking about effect sizes on the raw scale comes in. Let’s go back to the linear model:\n\\(Characters = \\beta_0 + \\beta_1Verification + \\beta_2Activity + \\beta_3Verification \\times Activity + \\epsilon\\)\nGo back to the slides if you need a refresher what each beta represents. Let’s talk about our expectations. Let’s say we expect those without verification and low activity to have something like 20,000 followers. We expect that verification makes a big difference, such that verified celebrities, even when they’re not active, have, on average, 50,000 followers. Now comes the tricky bit: How many more followers will an unverified, but active person have? Let’s say it’s 25,000. As for the interaction: How much does activity add to the already massive difference between unverified and verified lurkers? Let’s say it adds 1,000 followers.\nRun a power analysis with these values where you figure out how many participants you need per group. “Recruiting” people won’t be difficult, so all you need is a rough estimate. Start at 500 celebrities and then go up in steps of 20 until 1,500. Use the linear model from above to create the scores. As for error: You’re really not sure about your estimates, so you add a lot of erro. Use a normally distributed error term of 5,000 with a standard deviation of 5,000. For now, you’re not interested in the actual contrasts, only in whether an interaction is present. So run an lm model with and one without the interaction term and compare them with anova. Do 1,000 runs per combo. Also, you really don’t want to commit a Type I error, so you set your alpha to 0.001."
+    "text": "0.1 Exercise\nYou plan to analyze data from a content analysis. You’re interested in what predicts the number of Twitter followers for celebrities (including C-list celebrities, whatever that means). You believe that blue check mark definitely means having more followers compared to not having a check mark. Your dependent measure is, well, just the number of followers. You also expect that this difference will be stronger if a celebrity is more active, say tweets at least once a week.\nNow you want to run a power analysis to test that idea. First draw (on a piece of paper or digitally) your interaction. You can use the function below to try out some “drawings”. Start with putting in some of the means to roughly get the pattern described above.\n\nlibrary(tidyverse)\n\ntwobytwo <-\n  function(\n    means = c(0, 0, 0, 0),\n    factors = c(\"Factor 1\", \"Factor 2\"),\n    levels1 = c(\"Level 1\", \"Level 2\"),\n    levels2 = c(\"Level 1\", \"Level 2\"),\n    outcome = \"Outcome\"\n  ){\n    d <- \n      data.frame(\n        f1 = rep(levels1, times = 2),\n        f2 = rep(levels2, each = 2),\n        outcome = means\n      )\n    \n    names(d) <- c(factors, outcome)\n    \n    p <- \n      ggplot(d, aes(x = .data[[factors[1]]], y = .data[[outcome]], shape = .data[[factors[2]]], group = .data[[factors[2]]])) +\n      geom_point(size = 3) +\n      geom_line(aes(linetype = .data[[factors[2]]]), size = 1) +\n      theme_bw() +\n      theme(\n        axis.ticks.y = element_blank(),\n        axis.text.y = element_blank()\n      )\n    \n    return(p)\n  }\n\nFor example, the below would be a complete reversal:\n\ntwobytwo(\n  means = c(0, 2, 2, 0),\n  factors = c(\"Verified\", \"Activity\"),\n  levels1 = c(\"No\", \"Yes\"),\n  levels2 = c(\"Lurker\", \"Active\"),\n  outcome = \"Followers\"\n)\n\n\n\n\n\n\n\nFor our case, we’re interested in an attenuation effect: There’s an effect of verification (well, it’s not a causal effect in that sense, but let’s not get into that for now) regardless of the activity type, but it’ll be stronger with higher activity. How much stronger? And what follower counts should you expect for the different groups? This is where common sense and thinking about effect sizes on the raw scale comes in. Let’s go back to the linear model:\n\\(Characters = \\beta_0 + \\beta_1Verification + \\beta_2Activity + \\beta_3Verification \\times Activity + \\epsilon\\)\nGo back to the slides if you need a refresher what each beta represents. Let’s talk about our expectations. Let’s say we expect those without verification and low activity to have something like 20,000 followers. We expect that verification makes a big difference, such that verified celebrities, even when they’re not active, have, on average, 50,000 followers. Now comes the tricky bit: How many more followers will an unverified, but active person have? Let’s say it’s 25,000. As for the interaction: How much does activity add to the already massive difference between unverified and verified lurkers? Let’s say it adds 1,000 followers.\nRun a power analysis with these values where you figure out how many participants you need per group. “Recruiting” people won’t be difficult, so all you need is a rough estimate. Start at 500 celebrities and then go up in steps of 20 until 1,500. Use the linear model from above to create the scores. As for error: You’re really not sure about your estimates, so you add a lot of erro. Use a normally distributed error term of 5,000 with a standard deviation of 5,000. For now, you’re not interested in the actual contrasts, only in whether an interaction is present. So run an lm model with and one without the interaction term and compare them with anova. Do 1,000 runs per combo. Also, you really don’t want to commit a Type I error, so you set your alpha to 0.001."
   },
   {
     "objectID": "content/08-interactions/08-exercise.html#exercise-1",
     "href": "content/08-interactions/08-exercise.html#exercise-1",
     "title": "Exercise V",
     "section": "0.2 Exercise",
-    "text": "0.2 Exercise\nWe conduct an experiment. Previous research has shown that reading a story in the first person leads to more enjoyment than in the third person. For your thesis, you want to understand that effect better. You believe that the effect will be stronger if there’s lots of action compared to a tame story. In fact, you think that story type can completely knock out the effect (see here).\nThe linear model for enjoyment, measured on a 7-point Likert-scale, is as follows:\n\\(Enjoyment = \\beta_0 + \\beta_1Perspective + \\beta_2Type + \\beta_3Perspective \\times Type\\)\nYou believe the \\(\\beta\\) are as follows:\n\\[\\begin{align}\n&\\beta_0 = 4.3\\\\\n&\\beta_1 = 0.01\\\\\n&\\beta_2 = -0.03\\\\\n&\\beta_3 = 0.4\n\\end{align}\\]\nFirst draw the interaction to make sure you understand what it’s supposed to look like (either on paper or digitally). This time, you’d like to decompose the error, meaning rather than adding overall variance, you want to add variance per group. Therefore, you simulate the data with four group means, not with the linear model. You set the SD to 0.6 for all groups, except for the first-person action condition where you expect opinions will be a bit more divided, setting the SD here to 0.9.\nEven though you want to power for the interaction, you’re also interested in main effects you can interpret. Therefore, use type 3 sums of squares with contrast coding for the factors. Start at 30 participants per group and keep going in steps of 5 per group until you reach 95%. Because this is exploratory, and you really don’t want to miss an effect, you set your alpha to 0.15. Do 1,000 runs per combo."
+    "text": "0.2 Exercise\nWe conduct an experiment. Previous research has shown that reading a story in the first person leads to more enjoyment on a 7-point Likert-scale than in the third person. For your thesis, you want to understand that effect better. You believe that the effect will be stronger if there’s lots of action compared to a tame story. In fact, you think that story type can completely knock out the effect (see here).\nThe linear model for enjoyment, measured on a 7-point Likert-scale, is as follows:\n\\(Enjoyment = \\beta_0 + \\beta_1Perspective + \\beta_2Type + \\beta_3Perspective \\times Type\\)\nYou believe the \\(\\beta\\) are as follows:\n\\[\\begin{align}\n&\\beta_0 = 4.3\\\\\n&\\beta_1 = 0.01\\\\\n&\\beta_2 = -0.03\\\\\n&\\beta_3 = 0.4\n\\end{align}\\]\nFirst draw the interaction to make sure you understand what it’s supposed to look like (either on paper or digitally). This time, you’d like to decompose the error, meaning rather than adding overall variance, you want to add variance per group. Therefore, you simulate the data with four group means, not with the linear model. You set the SD to 0.6 for all groups, except for the first-person action condition where you expect opinions will be a bit more divided, setting the SD here to 0.9.\nEven though you want to power for the interaction, you’re also interested in main effects you can interpret. Therefore, use type 3 sums of squares with contrast coding for the factors. Start at 30 participants per group and keep going in steps of 5 per group until you reach 95%. Because this is exploratory, and you really don’t want to miss an effect, you set your alpha to 0.15. Do 1,000 runs per combo."
   },
   {
     "objectID": "content/08-interactions/08-exercise.html#exercise-2",
     "href": "content/08-interactions/08-exercise.html#exercise-2",
     "title": "Exercise V",
     "section": "0.3 Exercise",
-    "text": "0.3 Exercise\nGPower will give you the same sample size for a power analysis for an interaction as for a t-test if the effect size of the interaction is the same as in the t-test. Let’s check that. The effect size is the same if the effect is completely reversed (see (here)[https://approachingblog.wordpress.com/2018/01/24/powering-your-interaction-2/) once more). Let’s say our first experiment produced a difference between control and treatment of 15 points. The mean and SD of the control were 100 and 15. For treatment: 115 and 15. That’s a massive effect size of one standard deviation. Now would a complete reversal look like? As in: A second factor completely reverse the effect of the first factor. Like this, using the plotting function from above:\n\ntwobytwo(means = c(100, 115, 115, 100))\n\n\n\n\nFirst, calculate power for the original effect (Circles above in the graph) in GPower (two-tailed). Alpha is 0.05 and power should be 95%. The groups should have the same size. Now simulate the above interaction and calculate power for the interaction effect. Compare your estimate to the GPower estimate you just got. Go about it as you think is best. (Tip: Turn the below into a function; you’ll need it again for the next exercises.)"
+    "text": "0.3 Exercise\nGPower will give you the same sample size for a power analysis for an interaction as for a t-test if the effect size of the interaction is the same as in the t-test. Let’s check that. The effect size is the same if the effect is completely reversed (see here once more). Let’s say our first experiment produced a difference between control and treatment of 15 points. The mean and SD of the control were 100 and 15. For treatment: 115 and 15. That’s a massive effect size of one standard deviation. Now would a complete reversal look like? As in: A second factor completely reverse the effect of the first factor. Like this, using the plotting function from above:\n\ntwobytwo(means = c(100, 115, 115, 100))\n\n\n\n\nFirst, calculate power for the original effect (Circles above in the graph) in GPower (two-tailed). Alpha is 0.05 and power should be 95%. The groups should have the same size. Now simulate the above interaction and calculate power for the interaction effect. Compare your estimate to the GPower estimate you just got. Go about it as you think is best. (Tip: Turn the solution into a function; you’ll need it again for the next exercises.)"
   },
   {
     "objectID": "content/08-interactions/08-exercise.html#exercise-3",
     "href": "content/08-interactions/08-exercise.html#exercise-3",
     "title": "Exercise V",
     "section": "0.4 Exercise",
-    "text": "0.4 Exercise\nWhat if an effect is attenuated? Say the original effect was between two groups with means of 4.4 and 4.9 and SDs of 0.6 and 0.7, respectively. Calculate Cohen’s d, then put that into GPower for an independent t-test (two-tailed) with an alpha of 0.05. Note down the sample size needed for 95% power. Next, we introduce a second factor that attenuates the original effect, such that the effect is half is large when we consider the second condition. The graph below (hopefully) shows what I mean:\n\n\n\nThat means, for the two groups under the second condition, we need to half the effect size. First, half the effect size that you put into GPower and calculate the sample size again. Note down the number you get. Then get to simulation: For the new (half-sized) two groups, half the difference between them. The SDs can be the same as for the first two groups. Calculate power for the interaction effect and compare the sample size needed for 95% to the two estimates you got from GPower. To save yourself time, use the function you wrote for the previous exercise. Also, use the GPower estimates as a ballpark figure to set your sample sizes in the simulation. What does adding an interaction add to your sample size? Compare to the case here."
+    "text": "0.4 Exercise\nWhat if an effect is attenuated? Say the original effect was between two groups with means of 4.4 and 4.9 and SDs of 0.6 and 0.7, respectively. Calculate Cohen’s d, then put that into GPower for an independent t-test (two-tailed) with an alpha of 0.05. Note down the sample size needed for 95% power. Next, we introduce a second factor that attenuates the original effect, such that the effect is half is large when we consider the second condition. The graph below (hopefully) shows what I mean:\n\ntwobytwo(\n  means = c(0, 1, 0, 0.5),\n  factors = c(\"Comparison\", \"Which condition?\"),\n  levels1 = c(\"A\", \"B\"),\n  levels2 = c(\"Old condition\", \"New condition\")\n)\n\n\n\n\nThat means, for the two groups under the second condition, we need to half the effect size. First, half the effect size that you put into GPower and calculate the sample size again. Note down the number you get. Then get to simulation: For the new (half-sized) two groups, half the difference between them. The SDs can be the same as for the first two groups. Calculate power for the interaction effect and compare the sample size needed for 95% to the two estimates you got from GPower. To save yourself time, use the function you wrote for the previous exercise. Also, use the GPower estimates as a ballpark figure to set your sample sizes in the simulation. What does adding an interaction add to your sample size? Compare to the case here. Tip: You’ll need to calculate the standardized effect size first for GPower; then set the means for the new two groups in relation to that standardized effect size."
   },
   {
     "objectID": "content/08-interactions/08-exercise.html#exercise-4",
     "href": "content/08-interactions/08-exercise.html#exercise-4",
     "title": "Exercise V",
     "section": "0.5 Exercise",
-    "text": "0.5 Exercise\nSo far, we’ve only considered the overall interaction effect. But a significant interaction can mean many different patterns, which is why we always follow up with simple effects. Take the attenuation from the previous exercise: There are 6 comparisons that could be of interest to us, one for each possible contrasts. Say for our hypothesis of attenuation to hold, we’re interested in two simple effects: The comparison of the two levels under the old condition and the comparison of the two levels under the new condition.\nTherefore, repeated the above simulation, but this time also extract the p-values of these two posthoc simple effects. You can do that with pairs(emmeans::emmeans(interactions, \"factor1\", by = \"factor2\")). Save the power of the overall interaction term and the two simple effects and plot them. You can use the following code, assuming your data frame is called results, has a variable with the sample size sample_size, the type of power type, and power. You’ll need to adjust your function above or start from scratch. What’s the power of the simple effects compared to the overall interaction effect?\n\nlibrary(ggplot2)\n\nggplot(results, aes(x = sample_size, y = power, color = type, group = type)) + geom_point() + theme_bw()"
+    "text": "0.5 Exercise\nSo far, we’ve only considered the overall interaction effect. But a significant interaction can mean many different patterns, which is why we always follow up with simple effects. Take the attenuation from the previous exercise: There are 6 comparisons that could be of interest to us, one for each possible contrasts. Say for our hypothesis of attenuation to hold, we’re interested in two simple effects: The comparison of the two levels under the old condition and the comparison of the two levels under the new condition.\nTherefore, repeat the above simulation, but this time also extract the p-values of these two posthoc simple effects. You can do that with pairs(emmeans::emmeans(interactions, \"factor1\", by = \"factor2\")). Save the power of the overall interaction term and the two simple effects and plot them. You can use the following code, assuming your data frame is called results, has a variable with the sample size sample_size, the type of power type, and power. You’ll need to adjust your function above or start from scratch. What’s the power of the simple effects compared to the overall interaction effect?\n\nlibrary(ggplot2)\n\nggplot(results, aes(x = sample_size, y = power, color = type, group = type)) + geom_point() + theme_bw()"
   },
   {
     "objectID": "content/08-interactions/08-exercise.html#exercise-5",
@@ -2552,14 +2545,14 @@
     "href": "content/08-interactions/08-exercise.html#exercise-6",
     "title": "Exercise V",
     "section": "0.7 Exercise",
-    "text": "0.7 Exercise\nYou have a natural experiment coming up because you know that some users in the UK get a new streaming service before users in France. You want to know whether access to another streaming service increases satisfaction with people’s media diet. From the waiting list for that streaming service, you want to sample comparable users in the UK and France, ask them how satisfied they are with their media variety, wait for a month to give the UK users time to try out the new streaming service whereas the French users will be the control group. In other words, you have a mixed design with a pre-post measure within, but condition aka country (access to streaming) between.\nYou need to run a power analysis. For your measure of satisfaction, you use 7-point Likert-scale. You assume that France at the pre-measure will score above the midpoint, given how many providers are already out there, say 3.9. You also expect no change, maybe even a slight decline seeing how the UK is getting access, so you set the post-measure to 3.8. For the UK, you expect a somewhat higher satisfaction already at pre-measure because they usually get stuff directly after the US, say 4.3. Importantly, you believe access to this new streaming service will increase satisfaction by 0.4 points–that’s the mimimum amount of change on that measure that predicts more users in the future. As for the SDs: You don’t see any reason why variation would increase from pre- to post-measure. However, you do believe there’s a bit more variation in France than in the UK based on previous research with large samples. You set the SD for France to 1.2, but for the UK to 0.9. As for correlations between pre- and post-measures: You expect France to be more consistent (0.6) than the UK (0.4).\nSimulate power. You’ll need to do a variance-covariance matrix for correlated measures for each country. Base your power analysis on the interaction effect, not the simple effects. To run the ANOVA, you’ll need to properly nest the error, meaning Error(id/Time) in the aov_car command. You have money for a max of N total participants.You set your alpha to 0.01 and want to stop at 90% power. Start at 100 people per country and go up in steps of 20."
+    "text": "0.7 Exercise\nYou have a natural experiment coming up because you know that some users in the UK get a new streaming service before users in France. You want to know whether access to another streaming service increases satisfaction with people’s media diet. From the waiting list for that streaming service, you want to sample comparable users in the UK and France, ask them how satisfied they are with their media variety, wait for a month to give the UK users time to try out the new streaming service whereas the French users will be the control group. In other words, you have a mixed design with a pre-post measure within, but condition aka country (access to streaming) between.\nYou need to run a power analysis. For your measure of satisfaction, you use a 7-point Likert-scale. You assume that France at the pre-measure will score above the midpoint, given how many providers are already out there, say 3.9. You also expect no change, maybe even a slight decline seeing how the UK is getting access, so you set the post-measure to 3.8. For the UK, you expect a somewhat higher satisfaction already at pre-measure because they usually get stuff directly after the US, say 4.3. Importantly, you believe access to this new streaming service will increase satisfaction by 0.4 points–that’s the mimimum amount of change on that measure that predicts more users in the future. As for the SDs: You don’t see any reason why variation would increase from pre- to post-measure. However, you do believe there’s a bit more variation in France than in the UK based on previous research with large samples. You set the SD for France to 1.2, but for the UK to 0.9. As for correlations between pre- and post-measures: You expect France to be more consistent (0.6) than the UK (0.4).\nSimulate power. You’ll need to do a variance-covariance matrix for correlated measures for each country. Base your power analysis on the interaction effect, not the simple effects. To run the ANOVA, you’ll need to properly nest the error, meaning Error(id/Time) in the aov_car command. You have money for a max of N total participants.You set your alpha to 0.01 and want to stop at 90% power. Start at 100 people per country and go up in steps of 20."
   },
   {
     "objectID": "content/08-interactions/08-slides.html",
     "href": "content/08-interactions/08-slides.html",
     "title": "Slides",
     "section": "",
-    "text": "Below you can find the slides for intro to simulations:\n\n\n\nIf you want to see the slides in full screen, you can click here. To download them as PDFs, hit the ‘e’ button when you got the presentation open and then Ctrl+P print to PDF. This will work best in Chrome (in Firefox, it didn’t print the headings for me)."
+    "text": "Below you can find the slides for interactions:\n\n\n\nIf you want to see the slides in full screen, you can click here. To download them as PDFs, hit the ‘e’ button when you got the presentation open and then Ctrl+P print to PDF. This will work best in Chrome (in Firefox, it didn’t print the headings for me)."
   },
   {
     "objectID": "content/08-interactions/slides/index.html#whats-an-interaction",
@@ -2720,7 +2713,7 @@
     "href": "content/08-interactions/slides/index.html#directly-make-the-groups",
     "title": "Interactions",
     "section": "Directly make the groups",
-    "text": "Directly make the groups\n\nset.seed(42)\n\npeace_easy <- 0\nviolent_easy <- 2\npeace_hard <- 3\nviolent_hard <- 6\n\nd <- \n  data.frame(\n    Game = rep(c(0, 1, 0, 1), each = 50),\n    Difficulty = rep(c(0, 0, 1, 1), each = 50),\n    Aggression = c(\n      rnorm(50, peace_easy, 1),\n      rnorm(50, violent_easy, 1),\n      rnorm(50, peace_hard, 1),\n      rnorm(50, violent_hard, 1)\n    )\n  )"
+    "text": "Directly make the groups\n\nset.seed(42)\n\npeace_easy <- 0\nviolent_easy <- 2\npeace_hard <- 3\nviolent_hard <- 6\n\nd <- \n  data.frame(\n    Game = rep(c(0, 1), each = 50, times = 2),\n    Difficulty = rep(c(0, 1), each = 50*2),\n    Aggression = c(\n      rnorm(50, peace_easy, 1),\n      rnorm(50, violent_easy, 1),\n      rnorm(50, peace_hard, 1),\n      rnorm(50, violent_hard, 1)\n    )\n  )"
   },
   {
     "objectID": "content/08-interactions/slides/index.html#same-result",
@@ -2734,7 +2727,7 @@
     "href": "content/08-interactions/slides/index.html#a-more-extreme-example",
     "title": "Interactions",
     "section": "A more extreme example",
-    "text": "A more extreme example\n\npeace_easy <- 0\nviolent_easy <- 3\npeace_hard <- 3\nviolent_hard <- 0\n\nd <- \n  data.frame(\n    Game = rep(c(0, 1, 0, 1), each = 50),\n    Difficulty = rep(c(0, 0, 1, 1), each = 50),\n    Aggression = c(\n      rnorm(50, peace_easy, 1),\n      rnorm(50, violent_easy, 1),\n      rnorm(50, peace_hard, 1),\n      rnorm(50, violent_hard, 1)\n    )\n  )"
+    "text": "A more extreme example\n\npeace_easy <- 0\nviolent_easy <- 3\npeace_hard <- 3\nviolent_hard <- 0\n\nd <- \n  data.frame(\n    Game = rep(c(0, 1), each = 50, times = 2),\n    Difficulty = rep(c(0, 1), each = 50*2),\n    Aggression = c(\n      rnorm(50, peace_easy, 1),\n      rnorm(50, violent_easy, 1),\n      rnorm(50, peace_hard, 1),\n      rnorm(50, violent_hard, 1)\n    )\n  )"
   },
   {
     "objectID": "content/08-interactions/slides/index.html#full-cross-over",
@@ -2874,7 +2867,7 @@
     "href": "content/08-interactions/slides/index.html#full-reversal",
     "title": "Interactions",
     "section": "Full reversal",
-    "text": "Full reversal\n\nFor full details, picture from here"
+    "text": "Full reversal\n\nFor full details, see here."
   },
   {
     "objectID": "content/08-interactions/slides/index.html#attentuation",
@@ -2916,7 +2909,7 @@
     "href": "content/08-interactions/slides/index.html#power-for-the-interaction-term",
     "title": "Interactions",
     "section": "Power for the interaction term",
-    "text": "Power for the interaction term\n\nn <- 50\nm1 <- 4\nm2 <- 4\nm3 <- 4\nm4 <- 4.5\nsd <- 1.5\ndraws <- 1e3\n\npvalues <- NULL\n\nfor (i in 1:n) {\n\n  group1 <- rnorm(n, m1, sd)\n  group2 <- rnorm(n, m2, sd)\n  group3 <- rnorm(n, m3, sd)\n  group4 <- rnorm(n, m4, sd)\n\n  d <- data.frame(\n    id = factor(1:c(4*n)),\n    scores = c(group1, group2, group3, group4),\n    group1 = factor(rep(c(\"a\", \"b\", \"a\", \"b\"), each = n)),\n    group2 = factor(rep(c(\"a\", \"a\", \"b\", \"b\"), each = n))\n  )\n  \n  contrasts(d$group1) <- contr.sum\n  contrasts(d$group2) <- contr.sum\n  \n  m <- suppressMessages(afex::aov_car(scores ~ group1*group2 + Error(id), data = d, type = 3))\n  \n  pvalues[i] <- m$anova_table$`Pr(>F)`[3]\n}\n\nsum(pvalues < 0.05) / length(pvalues)\n\n[1] 0.2"
+    "text": "Power for the interaction term\n\nn <- 50\nm1 <- 4\nm2 <- 4\nm3 <- 4\nm4 <- 4.5\nsd <- 1.5\ndraws <- 1e3\n\npvalues <- NULL\n\nfor (i in 1:n) {\n\n  group1 <- rnorm(n, m1, sd)\n  group2 <- rnorm(n, m2, sd)\n  group3 <- rnorm(n, m3, sd)\n  group4 <- rnorm(n, m4, sd)\n\n  d <- data.frame(\n    id = factor(1:c(4*n)),\n    scores = c(group1, group2, group3, group4),\n    group1 = factor(rep(c(\"a\", \"b\"), each = n, times = 2)),\n    group2 = factor(rep(c(\"a\", \"b\"), each = n*2))\n  )\n  \n  contrasts(d$group1) <- contr.sum\n  contrasts(d$group2) <- contr.sum\n  \n  m <- suppressMessages(afex::aov_car(scores ~ group1*group2 + Error(id), data = d, type = 3))\n  \n  pvalues[i] <- m$anova_table$`Pr(>F)`[3]\n}\n\nsum(pvalues < 0.05) / length(pvalues)\n\n[1] 0.2"
   },
   {
     "objectID": "content/09-continuous-predictors/09-exercise.html#exercise",
@@ -2944,21 +2937,21 @@
     "href": "content/09-continuous-predictors/09-exercise.html#exercise-3",
     "title": "Exercise VI",
     "section": "0.4 Exercise",
-    "text": "0.4 Exercise\nYour colleague comes to you and tells you that they predicted satisfaction with a film by people’s enjoyment. However, they only had 20 people in their sample. Run a sensitivity analysis and check for what \\(r\\) 20 people give you 90% power, even if you allow a more liberal alpha of 0.10. Increase \\(r\\) in steps of 0.01 and go the full distance, checking all effect sizes from 0 to 1. Do 500 runs per step."
+    "text": "0.4 Exercise\nYour colleague comes to you and tells you that they predicted satisfaction with a film with people’s enjoyment. However, they only had 20 people in their sample. Run a sensitivity analysis and check for what \\(r\\) 20 people give you 90% power, even if you allow a more liberal alpha of 0.10. Increase \\(r\\) in steps of 0.01 and go the full distance, checking all effect sizes from 0 to 1. Do 500 runs per step. Verify with GPower."
   },
   {
     "objectID": "content/09-continuous-predictors/09-exercise.html#exercise-4",
     "href": "content/09-continuous-predictors/09-exercise.html#exercise-4",
     "title": "Exercise VI",
     "section": "0.5 Exercise",
-    "text": "0.5 Exercise\nYou design a follow-up study where you measure enjoyment and satisfaction with films, but this time you want to determine a SESOI and do a power analysis before-hand. You measure both variables on a 5-point index Likert-scale. You know enjoyment usually scores above the midpoint, say a mean of 3.9 sounds realistic. The SD will be narrow: 0.5. For satisfaction, you expect a score below the midpoint of the scale, at 2.1, but with a larger SD of 1. Your smallest effect size of interest is 0.7 points because a previous analysis shows that this is the point where satisfaction translates to higher well-being for the day.\nYou want to be strict, so you set your alpha to 0.005, but at the same time, you don’t mind missing a true effect just as much, which is why you set your power goal to 85%. Run the power analysis (1000 runs per combo). Start at 50 people and go up in steps of 1 until you reach your desired power level. (Tip: Use the raw effect and SDs to get \\(r\\) and from the a variance-covariance matrix). Verify with GPower."
+    "text": "0.5 Exercise\nYou design a follow-up study where you measure enjoyment and satisfaction with films, but this time you want to determine a SESOI and do a power analysis before-hand. You measure both variables on a 5-point index Likert-scale (by index I mean it’s the average of several items). You know enjoyment usually scores above the midpoint, say a mean of 3.9 sounds realistic. The SD will be narrow: 0.5. For satisfaction, you expect a score below the midpoint of the scale, at 2.1, but with a larger SD of 1. Your smallest effect size of interest is 0.7 points because a previous analysis shows that this is the point where satisfaction translates to higher well-being for the day.\nYou want to be strict, so you set your alpha to 0.005, but at the same time, you don’t mind missing a true effect just as much, which is why you set your power goal to 85%. Run the power analysis (1000 runs per combo). Start at 50 people and go up in steps of 1 until you reach your desired power level. (Tip: Use the raw effect and SDs to get \\(r\\) to use in a variance-covariance matrix). Verify with GPower."
   },
   {
     "objectID": "content/09-continuous-predictors/09-exercise.html#exercise-5",
     "href": "content/09-continuous-predictors/09-exercise.html#exercise-5",
     "title": "Exercise VI",
     "section": "0.6 Exercise",
-    "text": "0.6 Exercise\nA colleague has found that films with higher ratings on IMDB bring in more money at the box office. However, you think this effect is mostly due to genre: for comedies, there is an effect of quality on success, but for action films this doesn’t matter. In other words, you predict an interaction, such that the positive effect of quality (i.e., IMDB rating) is only present in one condition (genre: comedies), but not in the other condition.\nYou want to test that hypothesis and start your power simulation. Specifically, you want to power for the interaction effect. IMDB ratings range from 0-10. Success is measured in million dollar steps. For genre, action films will be your baseline. You’ll also center the rating so that 0 represents an average rating. Overall, when a film is an action flick and has an average rating, you expect it to bring in 20 million. You expect a main effect of quality because the quality effect will depend on genre. You do expect, however, a main effect of genre, such that, at average quality, action flicks bring in 5 million more than comedies. Crucially, you expect an interaction effect: For comedies, each 1-point increase in quality will generate 2 million extra at the box office.\nAs for error: You expect normally distributed error with a mean of 0 and an SD of 15. Simulate the data and see how many films you need to code to have enough power to detect the interaction effect with 95% power with an alpha of 0.05. Start at 10 and go up in steps of 10 to a maximum of 250. Do 1,000 runs per combo. (Tip: Generate a large data set with the linear model formula first and plot the means before getting into the simulation.)"
+    "text": "0.6 Exercise\nA colleague has found that films with higher ratings on IMDB bring in more money at the box office. However, you think this effect is mostly due to genre: for comedies, there is an effect of quality on success, but for action films this doesn’t matter. In other words, you predict an interaction, such that the positive effect of quality (i.e., IMDB rating) is only present in one condition (genre: comedies), but not in the other condition.\nYou want to test that hypothesis and start your power simulation. Specifically, you want to power for the interaction effect. IMDB ratings range from 0-10. Success is measured in million dollar steps. For genre, action films will be your baseline. You’ll also center the rating so that 0 represents an average rating. Overall, when a film is an action flick and has an average rating, you expect it to bring in 20 million. You don’t expect a main effect of quality because the quality effect will depend on genre. You do expect, however, a main effect of genre, such that, at average quality, action flicks bring in 5 million more than comedies. Crucially, you expect an interaction effect: For comedies, each 1-point increase in quality will generate 2 million extra at the box office.\nAs for error: You expect a normally distributed error with a mean of 0 and an SD of 15. Simulate the data and see how many films you need to code to have enough power to detect the interaction effect with 95% power with an alpha of 0.05. Start at 10 and go up in steps of 10 to a maximum of 250. Do 1,000 runs per combo. (Tip: Generate a large data set with the linear model formula first and plot the means before getting into the simulation.)"
   },
   {
     "objectID": "content/09-continuous-predictors/09-exercise.html#exercise-6",
@@ -2979,7 +2972,7 @@
     "href": "content/09-continuous-predictors/09-slides.html",
     "title": "Slides",
     "section": "",
-    "text": "Below you can find the slides for intro to simulations:\n\n\n\nIf you want to see the slides in full screen, you can click here. To download them as PDFs, hit the ‘e’ button when you got the presentation open and then Ctrl+P print to PDF. This will work best in Chrome (in Firefox, it didn’t print the headings for me)."
+    "text": "Below you can find the slides for continuous predictors:\n\n\n\nIf you want to see the slides in full screen, you can click here. To download them as PDFs, hit the ‘e’ button when you got the presentation open and then Ctrl+P print to PDF. This will work best in Chrome (in Firefox, it didn’t print the headings for me)."
   },
   {
     "objectID": "content/09-continuous-predictors/slides/index.html#back-to-the-linear-model",
@@ -3007,7 +3000,7 @@
     "href": "content/09-continuous-predictors/slides/index.html#simulating-this-process-is-trivial",
     "title": "Continuous predictors",
     "section": "Simulating this process is trivial",
-    "text": "Simulating this process is trivial\nWe get our age, put it into the formula, and we have our outcome.\n\nage <- rnorm(100, 50, 20)\ndisagreeableness <- 0 + age\n\nsummary(lm(disagreeableness ~ age))\n\n\nCall:\nlm(formula = disagreeableness ~ age)\n\nResiduals:\n       Min         1Q     Median         3Q        Max \n-1.033e-13 -3.260e-16  8.990e-16  2.048e-15  1.134e-14 \n\nCoefficients:\n             Estimate Std. Error   t value Pr(>|t|)    \n(Intercept) 3.411e-14  3.310e-15 1.030e+01   <2e-16 ***\nage         1.000e+00  5.734e-17 1.744e+16   <2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.077e-14 on 98 degrees of freedom\nMultiple R-squared:      1, Adjusted R-squared:      1 \nF-statistic: 3.042e+32 on 1 and 98 DF,  p-value: < 2.2e-16"
+    "text": "Simulating this process is trivial\nWe get our age, put it into the formula, and we have our outcome.\n\nage <- rnorm(100, 50, 20)\ndisagreeableness <- 0 + age\n\nsummary(lm(disagreeableness ~ age))\n\n\nCall:\nlm(formula = disagreeableness ~ age)\n\nResiduals:\n       Min         1Q     Median         3Q        Max \n-1.116e-14 -1.916e-15 -1.118e-15 -3.500e-16  1.073e-13 \n\nCoefficients:\n             Estimate Std. Error   t value Pr(>|t|)    \n(Intercept) 2.842e-14  2.826e-15 1.006e+01   <2e-16 ***\nage         1.000e+00  5.558e-17 1.799e+16   <2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.105e-14 on 98 degrees of freedom\nMultiple R-squared:      1, Adjusted R-squared:      1 \nF-statistic: 3.237e+32 on 1 and 98 DF,  p-value: < 2.2e-16"
   },
   {
     "objectID": "content/09-continuous-predictors/slides/index.html#perfect-fit",
@@ -3021,7 +3014,7 @@
     "href": "content/09-continuous-predictors/slides/index.html#adding-error",
     "title": "Continuous predictors",
     "section": "Adding error",
-    "text": "Adding error\nIf there’s lots of error, it’ll be harder to separate signal (aka our true 1-point effect) from noise (the total variation in our outcome).\n\nerror <- rnorm(100, 0, 100)\ndisagreeableness <- 0 + age + error\n\nsummary(lm(disagreeableness ~ age))\n\n\nCall:\nlm(formula = disagreeableness ~ age)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-238.605  -70.520   -2.553   73.705  250.891 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)\n(Intercept)  32.1866    34.1387   0.943    0.348\nage           0.4196     0.5913   0.709    0.480\n\nResidual standard error: 111.1 on 98 degrees of freedom\nMultiple R-squared:  0.00511,   Adjusted R-squared:  -0.005042 \nF-statistic: 0.5034 on 1 and 98 DF,  p-value: 0.4797"
+    "text": "Adding error\nIf there’s lots of error, it’ll be harder to separate signal (aka our true 1-point effect) from noise (the total variation in our outcome).\n\nerror <- rnorm(100, 0, 100)\ndisagreeableness <- 0 + age + error\n\nsummary(lm(disagreeableness ~ age))\n\n\nCall:\nlm(formula = disagreeableness ~ age)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-255.56  -68.48   -3.78   71.10  270.62 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)   \n(Intercept) -19.6928    25.2369  -0.780  0.43708   \nage           1.4879     0.4964   2.998  0.00345 **\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 98.72 on 98 degrees of freedom\nMultiple R-squared:  0.08399,   Adjusted R-squared:  0.07465 \nF-statistic: 8.986 on 1 and 98 DF,  p-value: 0.003447"
   },
   {
     "objectID": "content/09-continuous-predictors/slides/index.html#psst-scale",
@@ -3042,7 +3035,7 @@
     "href": "content/09-continuous-predictors/slides/index.html#two-independent-effects",
     "title": "Continuous predictors",
     "section": "Two independent effects",
-    "text": "Two independent effects\n\nsummary(lm(disagreeableness ~ age + relatives))\n\n\nCall:\nlm(formula = disagreeableness ~ age + relatives)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-20.1912  -6.6745  -0.5498   6.1220  19.9923 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)    \n(Intercept) -1.08277    2.96305  -0.365    0.716    \nage          0.93585    0.04528  20.667  < 2e-16 ***\nrelatives    1.90126    0.41083   4.628 1.14e-05 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 9.068 on 97 degrees of freedom\nMultiple R-squared:  0.8365,    Adjusted R-squared:  0.8331 \nF-statistic: 248.2 on 2 and 97 DF,  p-value: < 2.2e-16"
+    "text": "Two independent effects\n\nsummary(lm(disagreeableness ~ age + relatives))\n\n\nCall:\nlm(formula = disagreeableness ~ age + relatives)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-22.153  -7.315  -0.845   6.763  37.427 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)    \n(Intercept) -7.62921    3.53263  -2.160 0.033266 *  \nage          1.07665    0.05346  20.138  < 2e-16 ***\nrelatives    1.57641    0.45327   3.478 0.000758 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 10.31 on 97 degrees of freedom\nMultiple R-squared:  0.8188,    Adjusted R-squared:  0.8151 \nF-statistic: 219.2 on 2 and 97 DF,  p-value: < 2.2e-16"
   },
   {
     "objectID": "content/09-continuous-predictors/slides/index.html#varying-effect-sizes",
@@ -3056,7 +3049,7 @@
     "href": "content/09-continuous-predictors/slides/index.html#in-r",
     "title": "Continuous predictors",
     "section": "In R",
-    "text": "In R\n\ndisagreeableness <- 0 + 0.25*age + 5*relatives + error\nsummary(lm(disagreeableness ~ age + relatives))\n\n\nCall:\nlm(formula = disagreeableness ~ age + relatives)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-20.1912  -6.6745  -0.5498   6.1220  19.9923 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)    \n(Intercept) -1.08277    2.96305  -0.365    0.716    \nage          0.18585    0.04528   4.104 8.45e-05 ***\nrelatives    5.90126    0.41083  14.364  < 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 9.068 on 97 degrees of freedom\nMultiple R-squared:  0.7213,    Adjusted R-squared:  0.7155 \nF-statistic: 125.5 on 2 and 97 DF,  p-value: < 2.2e-16"
+    "text": "In R\n\ndisagreeableness <- 0 + 0.25*age + 5*relatives + error\nsummary(lm(disagreeableness ~ age + relatives))\n\n\nCall:\nlm(formula = disagreeableness ~ age + relatives)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-22.153  -7.315  -0.845   6.763  37.427 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)    \n(Intercept) -7.62921    3.53263   -2.16   0.0333 *  \nage          0.32665    0.05346    6.11 2.07e-08 ***\nrelatives    5.57641    0.45327   12.30  < 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 10.31 on 97 degrees of freedom\nMultiple R-squared:  0.6818,    Adjusted R-squared:  0.6752 \nF-statistic: 103.9 on 2 and 97 DF,  p-value: < 2.2e-16"
   },
   {
     "objectID": "content/09-continuous-predictors/slides/index.html#thats-the-data-generating-process",
@@ -3077,14 +3070,14 @@
     "href": "content/09-continuous-predictors/slides/index.html#in-r-1",
     "title": "Continuous predictors",
     "section": "In R",
-    "text": "In R\nThe effect for age doesn’t change, but the interpretation of the intercept does: Now it’s the disagreeableness when there’s no relatives and average age.\n\ncentered_age <- scale(age, center = TRUE, scale = FALSE)\n\nsummary(lm(disagreeableness ~ centered_age + relatives))\n\n\nCall:\nlm(formula = disagreeableness ~ centered_age + relatives)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-20.1912  -6.6745  -0.5498   6.1220  19.9923 \n\nCoefficients:\n             Estimate Std. Error t value Pr(>|t|)    \n(Intercept)   8.18718    2.30947   3.545 0.000606 ***\ncentered_age  0.18585    0.04528   4.104 8.45e-05 ***\nrelatives     5.90126    0.41083  14.364  < 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 9.068 on 97 degrees of freedom\nMultiple R-squared:  0.7213,    Adjusted R-squared:  0.7155 \nF-statistic: 125.5 on 2 and 97 DF,  p-value: < 2.2e-16"
+    "text": "In R\nThe effect for age doesn’t change, but the interpretation of the intercept does: Now it’s the disagreeableness when there’s no relatives and average age.\n\ncentered_age <- scale(age, center = TRUE, scale = FALSE)\n\nsummary(lm(disagreeableness ~ centered_age + relatives))\n\n\nCall:\nlm(formula = disagreeableness ~ centered_age + relatives)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-22.153  -7.315  -0.845   6.763  37.427 \n\nCoefficients:\n             Estimate Std. Error t value Pr(>|t|)    \n(Intercept)   9.24419    2.49815    3.70 0.000357 ***\ncentered_age  0.32665    0.05346    6.11 2.07e-08 ***\nrelatives     5.57641    0.45327   12.30  < 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 10.31 on 97 degrees of freedom\nMultiple R-squared:  0.6818,    Adjusted R-squared:  0.6752 \nF-statistic: 103.9 on 2 and 97 DF,  p-value: < 2.2e-16"
   },
   {
     "objectID": "content/09-continuous-predictors/slides/index.html#simulate-power",
     "href": "content/09-continuous-predictors/slides/index.html#simulate-power",
     "title": "Continuous predictors",
     "section": "Simulate power",
-    "text": "Simulate power\n\nn <- 100\neffect <- 0.10\nruns <- 1000\n\npvalues <- NULL\n\nfor (i in 1:runs) {\n  \n  age <- rnorm(n, 50, 20)\n  centered_age <- scale(age, center = TRUE, scale = FALSE)\n  error <- rnorm(n, 0, 10)\n  \n  disagreeableness <- 50 + effect*centered_age + error\n  \n  disagreeableness <- ifelse(disagreeableness > 100, 100, disagreeableness)\n  disagreeableness <- ifelse(disagreeableness < 0, 0, disagreeableness)\n  \n  m <- summary(lm(disagreeableness ~ centered_age))\n  \n  pvalues[i] <- broom::glance(m)$p.value\n}\n\nsum(pvalues < 0.05) / length(pvalues)\n\n[1] 0.496"
+    "text": "Simulate power\n\nn <- 100\neffect <- 0.10\nruns <- 1000\n\npvalues <- NULL\n\nfor (i in 1:runs) {\n  \n  age <- rnorm(n, 50, 20)\n  centered_age <- scale(age, center = TRUE, scale = FALSE)\n  error <- rnorm(n, 0, 10)\n  \n  disagreeableness <- 50 + effect*centered_age + error\n  \n  disagreeableness <- ifelse(disagreeableness > 100, 100, disagreeableness)\n  disagreeableness <- ifelse(disagreeableness < 0, 0, disagreeableness)\n  \n  m <- summary(lm(disagreeableness ~ centered_age))\n  \n  pvalues[i] <- broom::glance(m)$p.value\n}\n\nsum(pvalues < 0.05) / length(pvalues)\n\n[1] 0.492"
   },
   {
     "objectID": "content/09-continuous-predictors/slides/index.html#standardized-effects",
@@ -3098,7 +3091,7 @@
     "href": "content/09-continuous-predictors/slides/index.html#lets-compare",
     "title": "Continuous predictors",
     "section": "Let’s compare",
-    "text": "Let’s compare\n\ncor(age, disagreeableness)\n\n[1] 0.454076\n\nsummary(lm(stan_dis ~ stan_age))\n\n\nCall:\nlm(formula = stan_dis ~ stan_age)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-2.40339 -0.63082  0.04665  0.62860  2.11086 \n\nCoefficients:\n              Estimate Std. Error t value Pr(>|t|)    \n(Intercept) -2.178e-17  8.955e-02   0.000        1    \nstan_age     4.541e-01  9.000e-02   5.045 2.08e-06 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.8955 on 98 degrees of freedom\nMultiple R-squared:  0.2062,    Adjusted R-squared:  0.1981 \nF-statistic: 25.45 on 1 and 98 DF,  p-value: 2.084e-06"
+    "text": "Let’s compare\n\ncor(age, disagreeableness)\n\n[1] 0.4718219\n\nsummary(lm(stan_dis ~ stan_age))\n\n\nCall:\nlm(formula = stan_dis ~ stan_age)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-1.87517 -0.60125 -0.09701  0.55452  2.77099 \n\nCoefficients:\n             Estimate Std. Error t value Pr(>|t|)    \n(Intercept) 1.369e-17  8.862e-02   0.000        1    \nstan_age    4.718e-01  8.906e-02   5.298 7.22e-07 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.8862 on 98 degrees of freedom\nMultiple R-squared:  0.2226,    Adjusted R-squared:  0.2147 \nF-statistic: 28.06 on 1 and 98 DF,  p-value: 7.22e-07"
   },
   {
     "objectID": "content/09-continuous-predictors/slides/index.html#not-super-clean",
@@ -3112,21 +3105,21 @@
     "href": "content/09-continuous-predictors/slides/index.html#r-0.20",
     "title": "Continuous predictors",
     "section": "\\(r\\) = 0.20?",
-    "text": "\\(r\\) = 0.20?\n\nsummary(lm(stan_dis ~ stan_age))\n\n\nCall:\nlm(formula = stan_dis ~ stan_age)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-1.12177 -0.20155  0.00071  0.19505  1.15715 \n\nCoefficients:\n             Estimate Std. Error t value Pr(>|t|)    \n(Intercept) 0.0004231  0.0029580   0.143    0.886    \nstan_age    0.2025336  0.0029717  68.155   <2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.2957 on 9998 degrees of freedom\nMultiple R-squared:  0.3172,    Adjusted R-squared:  0.3172 \nF-statistic:  4645 on 1 and 9998 DF,  p-value: < 2.2e-16"
+    "text": "\\(r\\) = 0.20?\n\nsummary(lm(stan_dis ~ stan_age))\n\n\nCall:\nlm(formula = stan_dis ~ stan_age)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-1.25822 -0.19978  0.00152  0.20423  1.12575 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)    \n(Intercept) 0.002094   0.002959   0.708    0.479    \nstan_age    0.198285   0.002979  66.569   <2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.2959 on 9998 degrees of freedom\nMultiple R-squared:  0.3071,    Adjusted R-squared:  0.307 \nF-statistic:  4431 on 1 and 9998 DF,  p-value: < 2.2e-16"
   },
   {
     "objectID": "content/09-continuous-predictors/slides/index.html#wait-a-second",
     "href": "content/09-continuous-predictors/slides/index.html#wait-a-second",
     "title": "Continuous predictors",
     "section": "Wait a second",
-    "text": "Wait a second\nWhy isn’t the effect as we specified?\n\ncor(stan_dis, stan_age)\n\n[1] 0.5632243"
+    "text": "Wait a second\nWhy isn’t the effect as we specified?\n\ncor(stan_dis, stan_age)\n\n[1] 0.5541769"
   },
   {
     "objectID": "content/09-continuous-predictors/slides/index.html#because-we-didnt-standardize",
     "href": "content/09-continuous-predictors/slides/index.html#because-we-didnt-standardize",
     "title": "Continuous predictors",
     "section": "Because we didn’t standardize",
-    "text": "Because we didn’t standardize\nWe created the standardized version of disagreeableness with\n\nstan_dis <- 0 + 0.2*stan_age + rnorm(n, 0, 0.3)\n\nThat means the variable isn’t actually standardized:\n\nmean(stan_dis); sd(stan_dis)\n\n[1] 0.004260645\n\n\n[1] 0.357896"
+    "text": "Because we didn’t standardize\nWe created the standardized version of disagreeableness with\n\nstan_dis <- 0 + 0.2*stan_age + rnorm(n, 0, 0.3)\n\nThat means the variable isn’t actually standardized:\n\nmean(stan_dis); sd(stan_dis)\n\n[1] 0.00196558\n\n\n[1] 0.355469"
   },
   {
     "objectID": "content/09-continuous-predictors/slides/index.html#how-do-we-fix-this",
@@ -3147,14 +3140,14 @@
     "href": "content/09-continuous-predictors/slides/index.html#lets-simulate-that",
     "title": "Continuous predictors",
     "section": "Let’s simulate that",
-    "text": "Let’s simulate that\n\nlibrary(MASS)\n\nmeans <- c(age = 0, disagreeableness = 0)\n\nsigma <- \n  matrix(\n    c(1, correlation, \n      correlation, 1),\n    ncol = 2\n  )\n\nd <- mvrnorm(\n  n,\n  means,\n  sigma\n)\n\nd <- as.data.frame(d)\n\ncor(d$age, d$disagreeableness)\n\n[1] 0.2097569"
+    "text": "Let’s simulate that\n\nlibrary(MASS)\n\nmeans <- c(age = 0, disagreeableness = 0)\n\nsigma <- \n  matrix(\n    c(1, correlation, \n      correlation, 1),\n    ncol = 2\n  )\n\nd <- mvrnorm(\n  n,\n  means,\n  sigma\n)\n\nd <- as.data.frame(d)\n\ncor(d$age, d$disagreeableness)\n\n[1] 0.1919835"
   },
   {
     "objectID": "content/09-continuous-predictors/slides/index.html#what-if-we-want-both",
     "href": "content/09-continuous-predictors/slides/index.html#what-if-we-want-both",
     "title": "Continuous predictors",
     "section": "What if we want both?",
-    "text": "What if we want both?\nSo now we know how to:\n\nSpecify an outcome on the raw scale, but we sort of eyeball the error\nSpecify both predictor and outcome on the standardized scale, full control over means, SDs, but we prefer unstandardized\n\nHow do we specify a an effect on the raw scale, but use the multivariate normal distribution? Remember the formula for \\(r\\)?\n\\(r = B_{xy} \\frac{\\sigma_x}{\\sigma_Y}\\)"
+    "text": "What if we want both?\nSo now we know how to:\n\nSpecify an outcome on the raw scale, but we sort of eyeball the error\nSpecify both predictor and outcome on the standardized scale, full control over means, SDs, but we prefer unstandardized\n\nHow do we specify an effect on the raw scale, but use the multivariate normal distribution? Remember the formula for \\(r\\)?\n\\(r = B_{xy} \\frac{\\sigma_x}{\\sigma_Y}\\)"
   },
   {
     "objectID": "content/09-continuous-predictors/slides/index.html#just-plug-in-the-number-then",
@@ -3182,14 +3175,14 @@
     "href": "content/09-continuous-predictors/slides/index.html#lets-check-it-all-worked",
     "title": "Continuous predictors",
     "section": "Let’s check it all worked",
-    "text": "Let’s check it all worked\nCan we recover our raw effect of 0.5?\n\nsummary(lm(disagreeableness ~ age, d))\n\n\nCall:\nlm(formula = disagreeableness ~ age, data = d)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-38.608  -7.526  -0.044   7.349  40.545 \n\nCoefficients:\n             Estimate Std. Error t value Pr(>|t|)    \n(Intercept) 34.605431   0.296897  116.56   <2e-16 ***\nage          0.506088   0.005497   92.06   <2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 11.1 on 9998 degrees of freedom\nMultiple R-squared:  0.4588,    Adjusted R-squared:  0.4587 \nF-statistic:  8475 on 1 and 9998 DF,  p-value: < 2.2e-16"
+    "text": "Let’s check it all worked\nCan we recover our raw effect of 0.5?\n\nsummary(lm(disagreeableness ~ age, d))\n\n\nCall:\nlm(formula = disagreeableness ~ age, data = d)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-45.924  -7.591  -0.165   7.689  43.261 \n\nCoefficients:\n             Estimate Std. Error t value Pr(>|t|)    \n(Intercept) 35.173093   0.303332  115.96   <2e-16 ***\nage          0.495243   0.005605   88.36   <2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 11.22 on 9998 degrees of freedom\nMultiple R-squared:  0.4385,    Adjusted R-squared:  0.4384 \nF-statistic:  7807 on 1 and 9998 DF,  p-value: < 2.2e-16"
   },
   {
     "objectID": "content/09-continuous-predictors/slides/index.html#standardized-effect-size",
     "href": "content/09-continuous-predictors/slides/index.html#standardized-effect-size",
     "title": "Continuous predictors",
     "section": "Standardized effect size",
-    "text": "Standardized effect size\n\\(r = B_{xy} \\frac{\\sigma_x}{\\sigma_Y}\\)\n\nb <- coef(summary(lm(disagreeableness ~ age, d)))[2]\n\nb * sd(d$age)/sd(d$disagreeableness)\n\n[1] 0.6773417\n\ncor(d$age, d$disagreeableness)\n\n[1] 0.6773417"
+    "text": "Standardized effect size\n\\(r = B_{xy} \\frac{\\sigma_x}{\\sigma_Y}\\)\n\nb <- coef(summary(lm(disagreeableness ~ age, d)))[2]\n\nb * sd(d$age)/sd(d$disagreeableness)\n\n[1] 0.6621742\n\ncor(d$age, d$disagreeableness)\n\n[1] 0.6621742"
   },
   {
     "objectID": "content/09-continuous-predictors/slides/index.html#a-word-on-getting-that-r",
@@ -3203,14 +3196,14 @@
     "href": "content/09-continuous-predictors/slides/index.html#data-generating-process-creates-limits",
     "title": "Continuous predictors",
     "section": "Data generating process creates limits",
-    "text": "Data generating process creates limits\nWhen we determine the “raw” regression slope, we also determine the causal structure. In other words: If we say Y is caused by X, the SD of Y will be dependent on the SD of X.\nPerfect correlation: SD is exactly half.\n\nx <- rnorm(n, 50, 20)\ny <- 0.5*x\n\nsd(x); sd(y)\n\n[1] 20.06879\n\n\n[1] 10.0344"
+    "text": "Data generating process creates limits\nWhen we determine the “raw” regression slope, we also determine the causal structure. In other words: If we say Y is caused by X, the SD of Y will be dependent on the SD of X.\nPerfect correlation: SD is exactly half.\n\nx <- rnorm(n, 50, 20)\ny <- 0.5*x\n\nsd(x); sd(y)\n\n[1] 20.12684\n\n\n[1] 10.06342"
   },
   {
     "objectID": "content/09-continuous-predictors/slides/index.html#maximum-correlation",
     "href": "content/09-continuous-predictors/slides/index.html#maximum-correlation",
     "title": "Continuous predictors",
     "section": "Maximum correlation",
-    "text": "Maximum correlation\n\nsummary(lm(y ~ x))\n\n\nCall:\nlm(formula = y ~ x)\n\nResiduals:\n       Min         1Q     Median         3Q        Max \n-9.740e-15 -3.600e-16 -1.000e-16  1.600e-16  1.001e-12 \n\nCoefficients:\n              Estimate Std. Error    t value Pr(>|t|)    \n(Intercept) -2.274e-14  2.695e-16 -8.437e+01   <2e-16 ***\nx            5.000e-01  5.001e-18  9.998e+16   <2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.004e-14 on 9998 degrees of freedom\nMultiple R-squared:      1, Adjusted R-squared:      1 \nF-statistic: 9.996e+33 on 1 and 9998 DF,  p-value: < 2.2e-16"
+    "text": "Maximum correlation\n\nsummary(lm(y ~ x))\n\n\nCall:\nlm(formula = y ~ x)\n\nResiduals:\n       Min         1Q     Median         3Q        Max \n-5.470e-14 -8.000e-16 -5.000e-16 -3.000e-16  5.408e-12 \n\nCoefficients:\n             Estimate Std. Error   t value Pr(>|t|)    \n(Intercept) 1.364e-13  1.450e-15 9.406e+01   <2e-16 ***\nx           5.000e-01  2.688e-17 1.860e+16   <2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 5.41e-14 on 9998 degrees of freedom\nMultiple R-squared:      1, Adjusted R-squared:      1 \nF-statistic: 3.46e+32 on 1 and 9998 DF,  p-value: < 2.2e-16"
   },
   {
     "objectID": "content/09-continuous-predictors/slides/index.html#maximum-correlation-1",
@@ -3224,14 +3217,14 @@
     "href": "content/09-continuous-predictors/slides/index.html#lets-add-some-error",
     "title": "Continuous predictors",
     "section": "Let’s add some error",
-    "text": "Let’s add some error\n\nx <- rnorm(n, 50, 20)\ny <- 0.5*x + rnorm(n, 0, 50)\n\nsd(x); sd(y)\n\n[1] 19.97224\n\n\n[1] 51.54321"
+    "text": "Let’s add some error\n\nx <- rnorm(n, 50, 20)\ny <- 0.5*x + rnorm(n, 0, 50)\n\nsd(x); sd(y)\n\n[1] 20.12589\n\n\n[1] 51.14636"
   },
   {
     "objectID": "content/09-continuous-predictors/slides/index.html#now-our-correlation-is-lower",
     "href": "content/09-continuous-predictors/slides/index.html#now-our-correlation-is-lower",
     "title": "Continuous predictors",
     "section": "Now our correlation is lower",
-    "text": "Now our correlation is lower\n\nb <- coef(lm(y~x))[2]\nb\n\n        x \n0.5042151 \n\n\n\nb * sd(x)/sd(y)\n\n       x \n0.195376 \n\ncor(x,y)\n\n[1] 0.195376"
+    "text": "Now our correlation is lower\n\nb <- coef(lm(y~x))[2]\nb\n\n       x \n0.542289 \n\n\n\nb * sd(x)/sd(y)\n\n        x \n0.2133886 \n\ncor(x,y)\n\n[1] 0.2133886"
   },
   {
     "objectID": "content/09-continuous-predictors/slides/index.html#bottom-line",
@@ -3259,7 +3252,7 @@
     "href": "content/09-continuous-predictors/slides/index.html#power",
     "title": "Continuous predictors",
     "section": "Power",
-    "text": "Power\n\nmeans <- c(x = 4, y = 4)\nsd_x <- 1.2\nsd_y <- 0.9\nsesoi <- 0.3\nr <- sesoi * sd_x/sd_y\ncovariance <- r * sd_x * sd_y\nn <- 50\nruns <- 500\n\nsigma <- \n  matrix(\n    c(sd_x**2, covariance,\n      covariance, sd_y),\n    ncol = 2\n  )\n\npvalues <- NULL\n\nfor (i in 1:runs) {\n  \n  d <- mvrnorm(\n    n,\n    means,\n    sigma\n  )\n  \n  d <- as.data.frame(d)\n  \n  pvalues[i] <- broom::glance(summary((lm(y ~ x, d))))$p.value\n}\n\nsum(pvalues < 0.05) / length(pvalues)\n\n[1] 0.804"
+    "text": "Power\n\nmeans <- c(x = 4, y = 4)\nsd_x <- 1.2\nsd_y <- 0.9\nsesoi <- 0.3\nr <- sesoi * sd_x/sd_y\ncovariance <- r * sd_x * sd_y\nn <- 50\nruns <- 500\n\nsigma <- \n  matrix(\n    c(sd_x**2, covariance,\n      covariance, sd_y),\n    ncol = 2\n  )\n\npvalues <- NULL\n\nfor (i in 1:runs) {\n  \n  d <- mvrnorm(\n    n,\n    means,\n    sigma\n  )\n  \n  d <- as.data.frame(d)\n  \n  pvalues[i] <- broom::glance(summary((lm(y ~ x, d))))$p.value\n}\n\nsum(pvalues < 0.05) / length(pvalues)\n\n[1] 0.79"
   },
   {
     "objectID": "content/09-continuous-predictors/slides/index.html#more-than-one-cause",
@@ -3406,7 +3399,7 @@
     "href": "content/09-continuous-predictors/slides/index.html#lets-create-those-scores-1",
     "title": "Continuous predictors",
     "section": "Let’s create those scores",
-    "text": "Let’s create those scores\nOnce more, we measure agreement on a 100-point scale. We make several assumptions:\n\nWe’ll center both predictors: It makes it easier to think about the interaction.\nAt average liking and trustworthiness (0 = centered), agreement is on the mid-point of the scale: 50\nThere’s a main effect of liking: With each extra point (at average trustworthiness), agreement should go up by 3 points.\nThere’s a main effect of trustworthiness: With each extra point (at average liking), agreement should go up by 2 points.\nWe expect that going up on trustworthiness will enhance our framing liking effect by 2 points"
+    "text": "Let’s create those scores\nOnce more, we measure agreement on a 100-point scale. We make several assumptions:\n\nWe’ll center both predictors: It makes it easier to think about the interaction.\nAt average liking and trustworthiness (0 = centered), agreement is on the mid-point of the scale: 50\nThere’s a main effect of liking: With each extra point (at average trustworthiness), agreement should go up by 3 points.\nThere’s a main effect of trustworthiness: With each extra point (at average liking), agreement should go up by 2 points.\nWe expect that going up on trustworthiness will enhance our liking effect by 2 points"
   },
   {
     "objectID": "content/09-continuous-predictors/slides/index.html#put-into-numbers-1",
@@ -3497,7 +3490,7 @@
     "href": "content/10-goodbye/10-slides.html",
     "title": "Slides",
     "section": "",
-    "text": "Below you can find the slides for intro to simulations:\n\n\n\nIf you want to see the slides in full screen, you can click here. To download them as PDFs, hit the ‘e’ button when you got the presentation open and then Ctrl+P print to PDF. This will work best in Chrome (in Firefox, it didn’t print the headings for me)."
+    "text": "Below you can find the slides for the final wrap up:\n\n\n\nIf you want to see the slides in full screen, you can click here. To download them as PDFs, hit the ‘e’ button when you got the presentation open and then Ctrl+P print to PDF. This will work best in Chrome (in Firefox, it didn’t print the headings for me)."
   },
   {
     "objectID": "content/10-goodbye/slides/index.html#why-this-workshop",
@@ -3574,7 +3567,7 @@
     "href": "index.html#this-website",
     "title": "Welcome",
     "section": "This website",
-    "text": "This website\nThis website collects the materials for a 2-day workshop on power that I’m giving at the University of Vienna May 4th and 5th 2022. Rather than dumping the materials in zip folder somewhere, I thought this format will be better for a) participants to revisit, b) those who might be interested in the content but couldn’t make it. That’s also the reason most of the materials are so annoyingly verbose: I wanted readers to be able to follow."
+    "text": "This website\nThis website collects the materials for a 2-day workshop on simulating power with R that I’m giving at the University of Vienna on May 4th and 5th 2022. Rather than dumping the materials in zip folder somewhere, I thought this format will be better for a) participants to revisit, b) those who might be interested in the content but couldn’t make it. That’s also the reason most of the materials are so annoyingly verbose: I wanted readers to be able to follow."
   },
   {
     "objectID": "index.html#goal",
@@ -3602,7 +3595,7 @@
     "href": "index.html#prerequisites",
     "title": "Welcome",
     "section": "Prerequisites",
-    "text": "Prerequisites\nI expect that you’re somewhat familiar (though not deeply) with R and vaguely remember your undergrad stats classes. Other than that, you should be good to go.\nWhat you’ll need for the workshop:\n\nA laptop\nA working installation of R and preferably RStudio\nGPower installed\nFor communiction, please join this discord channel that we’ll use throughout the 2 days: https://discord.gg/veejMFnNHF"
+    "text": "Prerequisites\nI expect that you’re somewhat familiar (though not deeply) with R and vaguely remember your undergrad stats classes. Other than that, you should be good to go.\nWhat you’ll need for the workshop:\n\nA laptop\nA working installation of R and preferably RStudio\nGPower installed\nFor communication, please join this discord channel that we’ll use throughout the 2 days: https://discord.gg/veejMFnNHF"
   },
   {
     "objectID": "index.html#structure",

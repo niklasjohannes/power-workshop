@@ -184,12 +184,12 @@ Guess what? The power analysis you did above was on the standardized scale. Do y
 
 $d = \frac{M_1-M_2}{pooled \ SD}$
 
-Above, our means were 4 for the control group, and 4.2, 4,5, and 4.8 for the treatment group. Crucially, the SD was 1 for all groups. That means, very conveniently, that the differences are 0.2, 0.5, and 0.8 standard deviations--and Cohen's $d$ is measured in standard deviations.
+Above, our means were 4 for the control group, and 4.2, 4,5, and 4.8 for the treatment group. Crucially, the SD was 1 for all groups. That means, very conveniently, that the differences are 0.2, 0.5, and 0.8 standard deviations--and Cohen's $d$ is measured in standard deviations. 0.2, 0.5, and 0.8 are also the heuristics for a small, medium, and large effect, respectively.
 
-You can verify that yourself. Simulate a normally distributed control group (10,000) cases with a mean of 100 and an SD of 1. Also simulate a treatment group with a mean of 101 and and SD of 1. Then do two more groups, but this time increase the SD for both groups to 2. What should happen to Cohen's $d$ from the first comparison to the second? Verify your intuition by using `effectsize::cohens_d` function.
+You can verify that yourself. Simulate a normally distributed control group (10,000 cases) with a mean of 100 and an SD of 1. Also simulate a treatment group with a mean of 101 and and SD of 1. Then do two more groups, but this time increase the SD for both groups to 2. What should happen to Cohen's $d$ from the first comparison to the second? Verify your intuition by using the `effectsize::cohens_d` function.
 
 ```{r}
-n <- 1e4
+n <- 1e4`
 control1 <- rnorm(n, 100, 1)
 treatment1 <- rnorm(n, 101, 1)
 
@@ -247,16 +247,12 @@ abline(h = 0.80)
 How much power do we gain if we specify the direction of a test? Run a simulation with a Cohen's $d$ of 0.5 for sample sizes of 20 to 100 (1,000 samples each). For each run, do a one-tailed and a two-tailed t-test. Then plot the power curves and calculate the average power (across all sample sizes) for the two.
 
 If you store the following data frame, you can use the below code for plotting.
+
 ```{r}
 #| eval: false
 #| echo: true
 
-outcomes <- 
-  data.frame(
-    sample_size = NULL,
-    type = NULL, # for one vs. two-tailed
-    power = NULL
-  )
+ggplot(outcomes, aes(x = sample_size, y = power, color = as.factor(type))) + geom_line() + theme_bw()
 ```
 
 ```{r}
@@ -434,7 +430,7 @@ ggplot(d, aes(x = sample_size, y = power, color = as.factor(sd))) + geom_line() 
 
 ## Exercise
 
-Alright, now let's get familiar with the `while` function. Simulate (200 runs) an independent (we'll go paired soon enough) t-test (two-tailed) for two difference effect sizes. The SD for both groups is 2. The mean for the control group is 100. In the small effects condition, the treatment group is 0.5 points larger. In the large effects condition, the treatment group is 1 points larger.
+Alright, now let's get familiar with the `while` function. Simulate (200 runs) an independent (we'll go paired soon enough) t-test (two-tailed) for two different effect sizes. The SD for both groups is 2. The mean for the control group is 100. In the small effects condition, the treatment group is 0.5 points larger. In the large effects condition, the treatment group is 1 points larger.
 
 Start at a sample size of 25 and stop when you reach 95% power. Plot the power curve and show that the larger effect size stops much earlier.
 
@@ -498,7 +494,7 @@ ggplot(outcomes, aes(x = sample_size, y = power, color = as.factor(effect_size))
 
 ## Exercise
 
-You're measuring people's mood twice: right before and right after lunch. You know from extensive study on effect sizes that mood needs to increase by 0.5 points on a 7-point scale for other people to notice. You assume the the SD is somewhere around 1.5, with a bit more variation before lunch (1.7) than after lunch (1.5). You also assume that mood is correlated to some degree, say 0.5.
+You're measuring people's mood twice: right before and right after lunch. You know from extensive study on effect sizes that mood needs to increase by 1 point on a 7-point scale for other people to notice. You assume the the SD is somewhere around 1.5, with a bit more variation before lunch (1.7) than after lunch (1.5). You also assume that mood is correlated to some degree, say 0.5.
 
 You have budget for a maximum sample of 100. How many people do you need to measure to achieve 87% power to detect this 1-point effect--and do you need to go to your max? Use 500 simulations per run. (Tip: the samples are correlated, so you'll need to specify a variance-covariance matrix.) Verify with GPower.
 

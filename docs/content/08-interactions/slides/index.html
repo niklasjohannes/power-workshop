@@ -828,8 +828,8 @@ F-statistic: 318.6 on 3 and 196 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb7-7"><a href="#cb7-7"></a></span>
 <span id="cb7-8"><a href="#cb7-8"></a>d <span class="ot">&lt;-</span> </span>
 <span id="cb7-9"><a href="#cb7-9"></a>  <span class="fu">data.frame</span>(</span>
-<span id="cb7-10"><a href="#cb7-10"></a>    <span class="at">Game =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>), <span class="at">each =</span> <span class="dv">50</span>),</span>
-<span id="cb7-11"><a href="#cb7-11"></a>    <span class="at">Difficulty =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>), <span class="at">each =</span> <span class="dv">50</span>),</span>
+<span id="cb7-10"><a href="#cb7-10"></a>    <span class="at">Game =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">each =</span> <span class="dv">50</span>, <span class="at">times =</span> <span class="dv">2</span>),</span>
+<span id="cb7-11"><a href="#cb7-11"></a>    <span class="at">Difficulty =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">each =</span> <span class="dv">50</span><span class="sc">*</span><span class="dv">2</span>),</span>
 <span id="cb7-12"><a href="#cb7-12"></a>    <span class="at">Aggression =</span> <span class="fu">c</span>(</span>
 <span id="cb7-13"><a href="#cb7-13"></a>      <span class="fu">rnorm</span>(<span class="dv">50</span>, peace_easy, <span class="dv">1</span>),</span>
 <span id="cb7-14"><a href="#cb7-14"></a>      <span class="fu">rnorm</span>(<span class="dv">50</span>, violent_easy, <span class="dv">1</span>),</span>
@@ -877,8 +877,8 @@ F-statistic: 324.1 on 3 and 196 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb10-5"><a href="#cb10-5"></a></span>
 <span id="cb10-6"><a href="#cb10-6"></a>d <span class="ot">&lt;-</span> </span>
 <span id="cb10-7"><a href="#cb10-7"></a>  <span class="fu">data.frame</span>(</span>
-<span id="cb10-8"><a href="#cb10-8"></a>    <span class="at">Game =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>), <span class="at">each =</span> <span class="dv">50</span>),</span>
-<span id="cb10-9"><a href="#cb10-9"></a>    <span class="at">Difficulty =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>), <span class="at">each =</span> <span class="dv">50</span>),</span>
+<span id="cb10-8"><a href="#cb10-8"></a>    <span class="at">Game =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">each =</span> <span class="dv">50</span>, <span class="at">times =</span> <span class="dv">2</span>),</span>
+<span id="cb10-9"><a href="#cb10-9"></a>    <span class="at">Difficulty =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">each =</span> <span class="dv">50</span><span class="sc">*</span><span class="dv">2</span>),</span>
 <span id="cb10-10"><a href="#cb10-10"></a>    <span class="at">Aggression =</span> <span class="fu">c</span>(</span>
 <span id="cb10-11"><a href="#cb10-11"></a>      <span class="fu">rnorm</span>(<span class="dv">50</span>, peace_easy, <span class="dv">1</span>),</span>
 <span id="cb10-12"><a href="#cb10-12"></a>      <span class="fu">rnorm</span>(<span class="dv">50</span>, violent_easy, <span class="dv">1</span>),</span>
@@ -1160,7 +1160,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <section id="full-reversal" class="slide level2">
 <h2>Full reversal</h2>
 
-<img data-src="reversal.jpg" class="r-stretch"><p>For full details, picture from <a href="https://approachingblog.wordpress.com/2018/01/24/powering-your-interaction-2/">here</a></p>
+<img data-src="reversal.jpg" class="r-stretch"><p>For full details, see <a href="https://approachingblog.wordpress.com/2018/01/24/powering-your-interaction-2/">here</a>.</p>
 </section>
 <section id="attentuation" class="slide level2">
 <h2>Attentuation</h2>
@@ -1256,8 +1256,8 @@ Difficulty = hard:
 <span id="cb35-18"><a href="#cb35-18"></a>  d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
 <span id="cb35-19"><a href="#cb35-19"></a>    <span class="at">id =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">c</span>(<span class="dv">4</span><span class="sc">*</span>n)),</span>
 <span id="cb35-20"><a href="#cb35-20"></a>    <span class="at">scores =</span> <span class="fu">c</span>(group1, group2, group3, group4),</span>
-<span id="cb35-21"><a href="#cb35-21"></a>    <span class="at">group1 =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>), <span class="at">each =</span> n)),</span>
-<span id="cb35-22"><a href="#cb35-22"></a>    <span class="at">group2 =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"b"</span>), <span class="at">each =</span> n))</span>
+<span id="cb35-21"><a href="#cb35-21"></a>    <span class="at">group1 =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>), <span class="at">each =</span> n, <span class="at">times =</span> <span class="dv">2</span>)),</span>
+<span id="cb35-22"><a href="#cb35-22"></a>    <span class="at">group2 =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>), <span class="at">each =</span> n<span class="sc">*</span><span class="dv">2</span>))</span>
 <span id="cb35-23"><a href="#cb35-23"></a>  )</span>
 <span id="cb35-24"><a href="#cb35-24"></a>  </span>
 <span id="cb35-25"><a href="#cb35-25"></a>  <span class="fu">contrasts</span>(d<span class="sc">$</span>group1) <span class="ot">&lt;-</span> contr.sum</span>

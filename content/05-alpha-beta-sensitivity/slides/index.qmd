@@ -44,7 +44,7 @@ How likely is it that our significant result represents a true effect? Depends o
 
 ```{=tex}
 \begin{gather*}
-PPV = \frac{power*R}{power*R + \alpha}
+PPV = \frac{power \times R}{power \times R + \alpha}
 \end{gather*}
 ```
 ## Reversing the logic
@@ -64,8 +64,8 @@ False \ positive \ rate = \frac{False \ positives}{False \ positives + True \ po
 
 ```{=tex}
 \begin{gather*}
-False \ positives = \phi * \alpha\\
-True \ positives = power * (1 - \phi)
+False \ positives = \phi \times \alpha\\
+True \ positives = power \times (1 - \phi)
 \end{gather*}
 ```
 ## Plug it all in
@@ -73,9 +73,9 @@ True \ positives = power * (1 - \phi)
 ```{=tex}
 \begin{gather*}
 False \ positive \ rate = \frac{False \ positives}{False \ positives + True \ positives}\\\\
-False \ positives = \phi * \alpha\\
-True \ positives = power * (1 - \phi)\\\\
-False \ positive \ rate = \frac{\phi * \alpha}{\phi * \alpha + power * (1 - \phi)}
+False \ positives = \phi \times \alpha\\
+True \ positives = power \times (1 - \phi)\\\\
+False \ positive \ rate = \frac{\phi \times \alpha}{\phi \times \alpha + power \times (1 - \phi)}
 \end{gather*}
 ```
 ## The $\alpha$ debate
@@ -201,7 +201,7 @@ Probability of committing a false positive: How many nulls are there and what's 
 
 ```{=tex}
 \begin{gather*}
-Probability \ H_0 \ is \ true * Probability \ Type \ I \ error \\
+Probability \ H_0 \ is \ true \times Probability \ Type \ I \ error \\
 P(H_0)*\alpha
 \end{gather*}
 ```
@@ -211,8 +211,8 @@ Probability of commmiting a false negative: How many true effects are there and 
 
 ```{=tex}
 \begin{gather*}
-Probability \ H_1 \ is \ true * Probability \ Type \ II \ error \\
-P(H_1)*\beta
+Probability \ H_1 \ is \ true \times Probability \ Type \ II \ error \\
+P(H_1) \times \beta
 \end{gather*}
 ```
 ## Weighted combined error rate
@@ -225,8 +225,8 @@ Let's combine our (real) Type I and Type II error rates and put them in:
 
 ```{=tex}
 \begin{gather*}
-(P(H_0)*\alpha) + (P(H_1)*\beta) \\
-(0.25 * 0.05) + (0.75 * 0.20) = 0.1625
+(P(H_0) \times \alpha) + (P(H_1) \times \beta) \\
+(0.25 \times 0.05) + (0.75 \times 0.20) = 0.1625
 \end{gather*}
 ```
 ## Is that the best we can do?
@@ -235,8 +235,8 @@ Now let's change our $\alpha$ to 0.10. That makes our power go up to 88%. Our $\
 
 ```{=tex}
 \begin{gather*}
-(P(H_0)*\alpha) + (P(H_1)*\beta) \\
-(0.25 * 0.10) + (0.75 * 0.12) = 0.115
+(P(H_0) \times \alpha) + (P(H_1) \times \beta) \\
+(0.25 \times 0.10) + (0.75 \times 0.12) = 0.115
 \end{gather*}
 ```
 ## Comparing the two
@@ -253,8 +253,8 @@ What if the probabilities of our hypotheses are different? Say the odds of H~1~ 
 
 ```{=tex}
 \begin{gather*}
-(0.75 * 0.05) + (0.25 * 0.20) = 0.0875\\
-(0.75 * 0.10) + (0.25 * 0.12) = 0.105
+(0.75 \times 0.05) + (0.25 \times 0.20) = 0.0875\\
+(0.75 \times 0.10) + (0.25 \times 0.12) = 0.105
 \end{gather*}
 ```
 Try it [out.](https://maxma1er.shinyapps.io/JustifyAlpha/){preview-link="true"}
@@ -263,7 +263,7 @@ Try it [out.](https://maxma1er.shinyapps.io/JustifyAlpha/){preview-link="true"}
 
 If an effect is likely, we don't want to miss it. We cast a wider net and consider more effects significant because the (real) risk of false positives is lowered. The higher $P(H_1)$, the less strict $\alpha$.
 
-If an effect is unlikely, we don't want to false claim it's there. We cast a narrower net and consider less effects significant because the (real) risk of false positive is increased. The higher $P(H_0)$, the more strict $\alpha$.
+If an effect is unlikely, we don't want to falsely claim it's there. We cast a narrower net and consider less effects significant because the (real) risk of false positive is increased. The higher $P(H_0)$, the more strict $\alpha$.
 
 ## A balancing act
 
@@ -281,7 +281,7 @@ Try it [out.](https://maxma1er.shinyapps.io/JustifyAlpha/){preview-link="true"}
 
 -   Publishing a false positive: bad!
 -   But the benefits could be huge: publish away then!
--   But it costs a lot of get these benefits: Hm, maybe not.
+-   But it costs a lot to get these benefits: Hm, maybe not.
 
 ## The compromise
 
@@ -304,7 +304,8 @@ For the full experience: <https://psyarxiv.com/ts4r6>
 
 ## The Bible
 
-![](bible.jpg)
+![](bible.jpg){width="500"}
+
 [@lakens2022]
 
 ## Other ways
@@ -395,5 +396,5 @@ abline(h = 0.95)
 
 ## References
 
-:::{#refs}
+::: {#refs}
 :::

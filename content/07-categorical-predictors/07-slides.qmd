@@ -2,7 +2,7 @@
 title: "Slides"
 ---
 
-Below you can find the slides for intro to simulations:
+Below you can find the slides for the session on categorical predictors (multiple groups):
 
 <div>
 

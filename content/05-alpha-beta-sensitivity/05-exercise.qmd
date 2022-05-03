@@ -12,7 +12,6 @@ execute:
   warning: false
 ---
 
----
 # Overview {.unnumbered}
 
 This set of exercises won't introduce new technical skills. Instead, you'll apply your simulation skills to different concepts to get a better feeling for the false positive rate, the role of alpha, and how a sensitivity analysis works. 
@@ -40,6 +39,8 @@ Plot how the false positive rate develops as $\phi$ goes from 0 to 1 for two $\a
 iq_scores <- seq(100, 105, 1)
 sample_size <- c(10, 20)
 d <- expand.grid(iq_scores, sample_size)
+
+d
 ```
 
 You can use the following code (make sure the variables are named accordingly):
@@ -82,7 +83,7 @@ ggplot(d, aes(x = phis, y = fpr, color = as.factor(alphas))) + geom_line() + fac
 
 ## Exercise
 
-How does the alpha level influence your power? Simulate two correlated scores. The means of the scores are 4 and 4.2; their SDs are 0.4 and 0.7. Their correlation is 0.65. Simulate power (500 runs) for sample sizes starting at 30 and going to a maximum of 110. Stop whenever you reach 95% power (so use `while`). Do that for 5 different alpha levels: c(0.005, 0.001, 0.01, 0.05, 0.10). Plot the results. As always, you can use the code below. What's the influence of the alpha compared to the sample size?
+How does the alpha level influence your power? Simulate two correlated scores. The means of the scores are 4 and 4.2; their SDs are 0.4 and 0.7. Their correlation is 0.65. Simulate power (500 runs) for sample sizes starting at 30 and going to a maximum of 110. Stop whenever you reach 95% power (so use `while`). Do that for 5 different alpha levels: `c(0.005, 0.001, 0.01, 0.05, 0.10)`. Plot the results. As always, you can use the code below. What's the influence of the alpha compared to the sample size?
 
 ```{r}
 #| eval: false
@@ -124,7 +125,7 @@ outcomes <-
   )
 
 for (analpha in alphas) {
-  print(analpha)
+  
   n <- 30
   power <- 0
   
@@ -266,7 +267,7 @@ abline(h = 0.95)
 
 ## Exercise
 
-Run a sensitivity analysis on a paired samples t-test (one-tailed). You had 47 participants; the means were 56 and 60; the SDs were 16 and 13; the correlation between the measures was 0.4. Get sensitivity for three different alpha levels: c(0.005, 0.01, 0.05). As for effect sizes: Increase the effect size by 1 until you have 90% power. For each combination, do 1,000 simulations. Plot the results with `ggplot` like you did earlier.
+Run a sensitivity analysis on a paired samples t-test (one-tailed). You had 47 participants; the means were 56 and 60; the SDs were 16 and 13; the correlation between the measures was 0.4. Get sensitivity for three different alpha levels: `c(0.005, 0.01, 0.05)`. As for effect sizes: Increase the effect size by 1 until you have 90% power. For each combination, do 1,000 simulations. Plot the results with `ggplot` like you did earlier.
 
 ```{r}
 n <- 32
@@ -286,7 +287,7 @@ outcomes <-
   )
 
 for (analpha in alphas) {
-  print(analpha)
+  
   effect_size <- 0
   power <- 0
   
@@ -342,7 +343,7 @@ ggplot(outcomes, aes(x = effect_size, y = power, color = as.factor(alpha))) + ge
 
 ## Exercise
 
-Do the above again, but this time on the standardized scale. Verify your results with GPower. (Tip: Compute Cohen's $d$ each time after you've simulated your sample and then take the mean for each combination.)
+Do the above again, but this time on the standardized scale. Verify your results with GPower. Now you can't plot the raw effect size, but you need the standardized one. However, the standardized one in this setting will depend on the SD of the difference. Therefore, you need to calculate the empirical Cohen's $d$ for each run, store it, and then take the mean of all $d$s per combination.
 
 ```{r}
 n <- 32

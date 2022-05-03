@@ -2,7 +2,7 @@
 title: "Slides"
 ---
 
-Below you can find the slides for session on Power:
+Below you can find the slides for session on power:
 
 <div>
 

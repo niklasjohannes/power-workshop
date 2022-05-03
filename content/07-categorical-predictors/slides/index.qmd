@@ -219,7 +219,7 @@ boxplot(d$y ~ d$x)
 ```{=tex}
 \begin{align}
 & y = \beta_0 + \beta_1x\\
-& y = \beta_0 + \beta_1*0\\
+& y = \beta_0 + \beta_1 \times 0\\
 & y = \beta_0
 \end{align}
 ```
@@ -231,7 +231,7 @@ In other words, when we predict values for the control (aka $x=0$) group, our be
 ```{=tex}
 \begin{align}
 & y = \beta_0 + \beta_1x\\
-& y = \beta_0 + \beta_1*1\\
+& y = \beta_0 + \beta_1 \times 1\\
 & y = \beta_0 + \beta_1\\
 & y = mean(control) + ?
 \end{align}
@@ -393,7 +393,7 @@ summary(lm(y ~ 1, d[d$x==1,]))
 
 ## Same logic for a paired-samples t-test
 
-Remember: Paired samples t-test is just testing the difference in scores against H~0~. This way, it turns into a one-sample t-test, so all we're left with is, once again, the intercept, which we test against our H~0~. A single number (aka the mean) predicts $y$ (technically $y_{difference}$.
+Remember: Paired samples t-test is just testing the difference in scores against H~0~. This way, it turns into a one-sample t-test, so all we're left with is, once again, the intercept, which we test against our H~0~. A single number (aka the mean) predicts $y$ (technically $y_{difference}$).
 
 ```{=tex}
 \begin{align}
@@ -501,7 +501,7 @@ Same as before: We predict scores with the group membership (aka the mean in eac
 ```{=tex}
 \begin{align}
 & y = \beta_0 + \beta_1x_1 + \beta_2x_2\\
-& y = \beta_0 + \beta_1*0 + \beta_2*0\\
+& y = \beta_0 + \beta_1 \times 0 + \beta_2 \times 0\\
 & y = \beta_0
 \end{align}
 ```
@@ -517,7 +517,7 @@ Same as before: We predict scores with the group membership (aka the mean in eac
 ```{=tex}
 \begin{align}
 & y = \beta_0 + \beta_1x_1 + \beta_2x_2\\
-& y = \beta_0 + \beta_1*1 + \beta_2*0\\
+& y = \beta_0 + \beta_1 \times 1 + \beta_2 \times 0\\
 & y = \beta_0 + \beta_1
 \end{align}
 ```
@@ -533,7 +533,7 @@ Same as before: We predict scores with the group membership (aka the mean in eac
 ```{=tex}
 \begin{align}
 & y = \beta_0 + \beta_1x_1 + \beta_2x_2\\
-& y = \beta_0 + \beta_1*0 + \beta_2*1\\
+& y = \beta_0 + \beta_1 \times 0 + \beta_2 \times 1\\
 & y = \beta_0 + \beta_2
 \end{align}
 ```
