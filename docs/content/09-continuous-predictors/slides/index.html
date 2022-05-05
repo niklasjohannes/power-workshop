@@ -454,18 +454,18 @@ lm(formula = disagreeableness ~ age)
 
 Residuals:
        Min         1Q     Median         3Q        Max 
--4.771e-15 -1.117e-15 -1.464e-16  7.138e-16  1.486e-14 
+-1.959e-14 -6.098e-16  3.027e-16  8.871e-16  4.968e-15 
 
 Coefficients:
              Estimate Std. Error   t value Pr(&gt;|t|)    
-(Intercept) 5.684e-15  6.254e-16 9.088e+00 1.15e-14 ***
-age         1.000e+00  1.151e-17 8.686e+16  &lt; 2e-16 ***
+(Intercept) 5.684e-15  7.775e-16 7.311e+00 7.25e-11 ***
+age         1.000e+00  1.454e-17 6.877e+16  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 2.294e-15 on 98 degrees of freedom
+Residual standard error: 2.489e-15 on 98 degrees of freedom
 Multiple R-squared:      1, Adjusted R-squared:      1 
-F-statistic: 7.545e+33 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
+F-statistic: 4.729e+33 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </section>
@@ -490,19 +490,17 @@ Call:
 lm(formula = disagreeableness ~ age)
 
 Residuals:
-    Min      1Q  Median      3Q     Max 
--243.88  -52.96   -0.63   57.42  234.14 
+     Min       1Q   Median       3Q      Max 
+-264.960  -75.457    6.974   69.968  212.830 
 
 Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) -29.4048    25.5215  -1.152    0.252    
-age           1.9249     0.4698   4.097 8.61e-05 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+            Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)   7.8891    34.3198   0.230    0.819
+age           0.5369     0.6419   0.836    0.405
 
-Residual standard error: 93.62 on 98 degrees of freedom
-Multiple R-squared:  0.1463,    Adjusted R-squared:  0.1375 
-F-statistic: 16.79 on 1 and 98 DF,  p-value: 8.612e-05</code></pre>
+Residual standard error: 109.9 on 98 degrees of freedom
+Multiple R-squared:  0.007087,  Adjusted R-squared:  -0.003045 
+F-statistic: 0.6995 on 1 and 98 DF,  p-value: 0.405</code></pre>
 </div>
 </div>
 </section>
@@ -534,19 +532,19 @@ lm(formula = disagreeableness ~ age + relatives)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--17.9431  -6.6089  -0.2283   5.7388  27.0296 
+-27.6188  -5.8441   0.6991   6.5781  29.3758 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  0.05282    3.51031   0.015   0.9880    
-age          1.02277    0.04819  21.223   &lt;2e-16 ***
-relatives    0.98549    0.47153   2.090   0.0392 *  
+(Intercept) -3.96855    3.63094  -1.093   0.2771    
+age          1.07027    0.05184  20.646   &lt;2e-16 ***
+relatives    0.87174    0.39420   2.211   0.0294 *  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 9.788 on 97 degrees of freedom
-Multiple R-squared:  0.8272,    Adjusted R-squared:  0.8236 
-F-statistic: 232.1 on 2 and 97 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 9.487 on 97 degrees of freedom
+Multiple R-squared:  0.8147,    Adjusted R-squared:  0.8109 
+F-statistic: 213.3 on 2 and 97 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </section>
@@ -570,19 +568,19 @@ lm(formula = disagreeableness ~ age + relatives)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--17.9431  -6.6089  -0.2283   5.7388  27.0296 
+-27.6188  -5.8441   0.6991   6.5781  29.3758 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  0.05282    3.51031   0.015    0.988    
-age          0.27277    0.04819   5.660 1.54e-07 ***
-relatives    4.98549    0.47153  10.573  &lt; 2e-16 ***
+(Intercept) -3.96855    3.63094  -1.093    0.277    
+age          0.32027    0.05184   6.178 1.52e-08 ***
+relatives    4.87174    0.39420  12.358  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 9.788 on 97 degrees of freedom
-Multiple R-squared:  0.6134,    Adjusted R-squared:  0.6054 
-F-statistic: 76.94 on 2 and 97 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 9.487 on 97 degrees of freedom
+Multiple R-squared:  0.6498,    Adjusted R-squared:  0.6426 
+F-statistic:    90 on 2 and 97 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </section>
@@ -610,19 +608,19 @@ lm(formula = disagreeableness ~ centered_age + relatives)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--17.9431  -6.6089  -0.2283   5.7388  27.0296 
+-27.6188  -5.8441   0.6991   6.5781  29.3758 
 
 Coefficients:
              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  14.35472    2.62259   5.473 3.46e-07 ***
-centered_age  0.27277    0.04819   5.660 1.54e-07 ***
-relatives     4.98549    0.47153  10.573  &lt; 2e-16 ***
+(Intercept)  12.66630    2.25158   5.626 1.79e-07 ***
+centered_age  0.32027    0.05184   6.178 1.52e-08 ***
+relatives     4.87174    0.39420  12.358  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 9.788 on 97 degrees of freedom
-Multiple R-squared:  0.6134,    Adjusted R-squared:  0.6054 
-F-statistic: 76.94 on 2 and 97 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 9.487 on 97 degrees of freedom
+Multiple R-squared:  0.6498,    Adjusted R-squared:  0.6426 
+F-statistic:    90 on 2 and 97 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </section>
@@ -653,7 +651,7 @@ F-statistic: 76.94 on 2 and 97 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb13-22"><a href="#cb13-22"></a></span>
 <span id="cb13-23"><a href="#cb13-23"></a><span class="fu">sum</span>(pvalues <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">/</span> <span class="fu">length</span>(pvalues)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
-<pre><code>[1] 0.515</code></pre>
+<pre><code>[1] 0.525</code></pre>
 </div>
 </div>
 </section>
@@ -674,7 +672,7 @@ F-statistic: 76.94 on 2 and 97 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell">
 <div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">cor</span>(age, disagreeableness)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
-<pre><code>[1] 0.6216423</code></pre>
+<pre><code>[1] 0.473261</code></pre>
 </div>
 <div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(stan_dis <span class="sc">~</span> stan_age))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
@@ -684,18 +682,18 @@ lm(formula = stan_dis ~ stan_age)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--1.81226 -0.53248  0.08387  0.46933  2.54295 
+-2.17441 -0.69351  0.05916  0.67471  2.54917 
 
 Coefficients:
               Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) -2.353e-16  7.873e-02   0.000        1    
-stan_age     6.216e-01  7.913e-02   7.856 5.13e-12 ***
+(Intercept) -1.588e-18  8.854e-02   0.000        1    
+stan_age     4.733e-01  8.899e-02   5.318 6.61e-07 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.7873 on 98 degrees of freedom
-Multiple R-squared:  0.3864,    Adjusted R-squared:  0.3802 
-F-statistic: 61.72 on 1 and 98 DF,  p-value: 5.129e-12</code></pre>
+Residual standard error: 0.8854 on 98 degrees of freedom
+Multiple R-squared:  0.224, Adjusted R-squared:  0.2161 
+F-statistic: 28.28 on 1 and 98 DF,  p-value: 6.608e-07</code></pre>
 </div>
 </div>
 </section>
@@ -720,18 +718,18 @@ lm(formula = stan_dis ~ stan_age)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--1.18572 -0.20073 -0.00362  0.20055  1.23239 
+-1.18003 -0.20496 -0.00331  0.20734  1.14808 
 
 Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) -0.001180   0.003006  -0.393    0.695    
-stan_age     0.203066   0.003010  67.468   &lt;2e-16 ***
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -0.0008077  0.0030056  -0.269    0.788    
+stan_age     0.2063262  0.0029956  68.877   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Residual standard error: 0.3005 on 9998 degrees of freedom
-Multiple R-squared:  0.3129,    Adjusted R-squared:  0.3128 
-F-statistic:  4552 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
+Multiple R-squared:  0.3218,    Adjusted R-squared:  0.3217 
+F-statistic:  4744 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </section>
@@ -741,7 +739,7 @@ F-statistic:  4552 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell">
 <div class="sourceCode" id="cb23"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">cor</span>(stan_dis, stan_age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
-<pre><code>[1] 0.5593303</code></pre>
+<pre><code>[1] 0.5672752</code></pre>
 </div>
 </div>
 </section>
@@ -755,10 +753,10 @@ F-statistic:  4552 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell">
 <div class="sourceCode" id="cb26"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">mean</span>(stan_dis); <span class="fu">sd</span>(stan_dis)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
-<pre><code>[1] -0.002990146</code></pre>
+<pre><code>[1] -0.003450633</code></pre>
 </div>
 <div class="cell-output-stdout">
-<pre><code>[1] 0.3625476</code></pre>
+<pre><code>[1] 0.3649157</code></pre>
 </div>
 </div>
 </section>
@@ -830,7 +828,7 @@ r\times sd \times sd &amp; sd^2 \\
 <span id="cb30-19"><a href="#cb30-19"></a></span>
 <span id="cb30-20"><a href="#cb30-20"></a><span class="fu">cor</span>(d<span class="sc">$</span>age, d<span class="sc">$</span>disagreeableness)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
-<pre><code>[1] 0.1846365</code></pre>
+<pre><code>[1] 0.2006764</code></pre>
 </div>
 </div>
 </section>
@@ -898,18 +896,18 @@ lm(formula = disagreeableness ~ age, data = d)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--42.161  -7.611  -0.062   7.447  37.560 
+-42.822  -7.698  -0.016   7.708  49.845 
 
 Coefficients:
              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) 35.143759   0.300315  117.02   &lt;2e-16 ***
-age          0.498304   0.005565   89.55   &lt;2e-16 ***
+(Intercept) 34.482452   0.303658  113.56   &lt;2e-16 ***
+age          0.508476   0.005636   90.22   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 11.17 on 9998 degrees of freedom
-Multiple R-squared:  0.4451,    Adjusted R-squared:  0.445 
-F-statistic:  8019 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 11.24 on 9998 degrees of freedom
+Multiple R-squared:  0.4488,    Adjusted R-squared:  0.4487 
+F-statistic:  8139 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </section>
@@ -921,11 +919,11 @@ F-statistic:  8019 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb37-2"><a href="#cb37-2"></a></span>
 <span id="cb37-3"><a href="#cb37-3"></a>b <span class="sc">*</span> <span class="fu">sd</span>(d<span class="sc">$</span>age)<span class="sc">/</span><span class="fu">sd</span>(d<span class="sc">$</span>disagreeableness)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
-<pre><code>[1] 0.6671444</code></pre>
+<pre><code>[1] 0.6698934</code></pre>
 </div>
 <div class="sourceCode" id="cb39"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="fu">cor</span>(d<span class="sc">$</span>age, d<span class="sc">$</span>disagreeableness)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
-<pre><code>[1] 0.6671444</code></pre>
+<pre><code>[1] 0.6698934</code></pre>
 </div>
 </div>
 </section>
@@ -951,10 +949,10 @@ F-statistic:  8019 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb43-3"><a href="#cb43-3"></a></span>
 <span id="cb43-4"><a href="#cb43-4"></a><span class="fu">sd</span>(x); <span class="fu">sd</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
-<pre><code>[1] 20.21242</code></pre>
+<pre><code>[1] 19.98161</code></pre>
 </div>
 <div class="cell-output-stdout">
-<pre><code>[1] 10.10621</code></pre>
+<pre><code>[1] 9.990806</code></pre>
 </div>
 </div>
 </section>
@@ -969,18 +967,18 @@ lm(formula = y ~ x)
 
 Residuals:
        Min         1Q     Median         3Q        Max 
--7.060e-15 -3.400e-16 -7.000e-17  1.800e-16  7.103e-13 
+-1.662e-12 -9.000e-17  1.600e-16  4.200e-16  1.615e-14 
 
 Coefficients:
               Estimate Std. Error    t value Pr(&gt;|t|)    
-(Intercept) -2.274e-14  1.907e-16 -1.192e+02   &lt;2e-16 ***
-x            5.000e-01  3.532e-18  1.416e+17   &lt;2e-16 ***
+(Intercept) -4.093e-14  4.473e-16 -9.150e+01   &lt;2e-16 ***
+x            5.000e-01  8.326e-18  6.005e+16   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 7.138e-15 on 9998 degrees of freedom
+Residual standard error: 1.664e-14 on 9998 degrees of freedom
 Multiple R-squared:      1, Adjusted R-squared:      1 
-F-statistic: 2.005e+34 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
+F-statistic: 3.606e+33 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </section>
@@ -1015,10 +1013,10 @@ F-statistic: 2.005e+34 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb54-3"><a href="#cb54-3"></a></span>
 <span id="cb54-4"><a href="#cb54-4"></a><span class="fu">sd</span>(x); <span class="fu">sd</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
-<pre><code>[1] 19.88302</code></pre>
+<pre><code>[1] 19.96094</code></pre>
 </div>
 <div class="cell-output-stdout">
-<pre><code>[1] 50.40315</code></pre>
+<pre><code>[1] 51.15288</code></pre>
 </div>
 </div>
 </section>
@@ -1029,18 +1027,18 @@ F-statistic: 2.005e+34 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb57-2"><a href="#cb57-2"></a>b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>        x 
-0.4715451 </code></pre>
+0.5351745 </code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode" id="cb59"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a>b <span class="sc">*</span> <span class="fu">sd</span>(x)<span class="sc">/</span><span class="fu">sd</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
-<pre><code>       x 
-0.186015 </code></pre>
+<pre><code>        x 
+0.2088365 </code></pre>
 </div>
 <div class="sourceCode" id="cb61"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a><span class="fu">cor</span>(x,y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
-<pre><code>[1] 0.186015</code></pre>
+<pre><code>[1] 0.2088365</code></pre>
 </div>
 </div>
 </section>
@@ -1098,7 +1096,7 @@ F-statistic: 2.005e+34 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb65-31"><a href="#cb65-31"></a></span>
 <span id="cb65-32"><a href="#cb65-32"></a><span class="fu">sum</span>(pvalues <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">/</span> <span class="fu">length</span>(pvalues)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
-<pre><code>[1] 0.806</code></pre>
+<pre><code>[1] 0.828</code></pre>
 </div>
 </div>
 </section>

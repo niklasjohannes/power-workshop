@@ -6,8 +6,8 @@ format:
     toc-depth: 3
     number-sections: true
 execute: 
-  eval: false
-  echo: false
+  eval: true
+  echo: true
 ---
 
 # Overview {.unnumbered}
@@ -189,7 +189,7 @@ Above, our means were 4 for the control group, and 4.2, 4,5, and 4.8 for the tre
 You can verify that yourself. Simulate a normally distributed control group (10,000 cases) with a mean of 100 and an SD of 1. Also simulate a treatment group with a mean of 101 and and SD of 1. Then do two more groups, but this time increase the SD for both groups to 2. What should happen to Cohen's $d$ from the first comparison to the second? Verify your intuition by using the `effectsize::cohens_d` function.
 
 ```{r}
-n <- 1e4`
+n <- 1e4
 control1 <- rnorm(n, 100, 1)
 treatment1 <- rnorm(n, 101, 1)
 
@@ -448,7 +448,6 @@ ggplot(outcomes, aes(x = sample_size, y = power, color = as.factor(effect_size))
 #| echo: true
 
 effect_sizes <- c(small = 0.5, large = 1)
-n <- 30
 draws <- 200
 
 outcomes <- data.frame(
@@ -481,7 +480,7 @@ for (asize in effect_sizes) {
       data.frame(
         effect_size = asize,
         sample_size = n,
-        power = sum(pvalues < 0.05) / length(pvalues)
+        power = power
       )
     )
     
