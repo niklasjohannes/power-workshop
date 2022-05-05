@@ -6,8 +6,8 @@ format:
     toc-depth: 3
     number-sections: true
 execute: 
-  eval: false
-  echo: false
+  eval: true
+  echo: true
 ---
 
 # Overview {.unnumbered}
@@ -20,7 +20,7 @@ This part might be boring to you if you're already a seasoned R user. In that ca
 
 ### Exercise
 
-You have three groups. Name the groups, randomly sample ten cases (total), and then create a simple data frame that contains a variable for the group called `condition`.
+You have three groups. Name the groups, randomly sample ten cases (in total, so uneven numbers per group), and then create a simple data frame that contains a variable for the group called `condition`.
 
 ```{r}
 groups <- letters[1:3]
