@@ -392,7 +392,7 @@
 <section id="exercise" class="level3" data-number="0.1.1">
 <h3 data-number="0.1.1" class="anchored" data-anchor-id="exercise"><span class="header-section-number">0.1.1</span> Exercise</h3>
 <p>You have three groups. Name the groups, randomly sample ten cases (in total, so uneven numbers per group), and then create a simple data frame that contains a variable for the group called <code>condition</code>.</p>
-<div class="cell">
+<div class="cell" data-hash="03-exercise_cache/html/unnamed-chunk-2_049a4c0a58e3e34ab7efd0e7229f9624">
 <div class="sourceCode" id="cb1"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>groups <span class="ot">&lt;-</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>my_sample <span class="ot">&lt;-</span> <span class="fu">sample</span>(groups, <span class="dv">10</span>, <span class="cn">TRUE</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">condition =</span> <span class="fu">as.factor</span>(my_sample))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -401,7 +401,7 @@
 <section id="exercise-1" class="level3" data-number="0.1.2">
 <h3 data-number="0.1.2" class="anchored" data-anchor-id="exercise-1"><span class="header-section-number">0.1.2</span> Exercise</h3>
 <p>Same three groups. This time you want each case to have a 70% to be in the first group, a 20% to be in the second group, and a 10% to be in the third group. Get 100 participants (no need for a data frame). Use <code>set.seed(1)</code>. How many are in the first group?</p>
-<div class="cell">
+<div class="cell" data-hash="03-exercise_cache/html/unnamed-chunk-4_e5c4a5b8cfff22a8baf682ccdd42b860">
 <div class="sourceCode" id="cb2"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>groups <span class="ot">&lt;-</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>my_sample <span class="ot">&lt;-</span> </span>
@@ -420,7 +420,7 @@
 <section id="exercise-2" class="level3" data-number="0.1.3">
 <h3 data-number="0.1.3" class="anchored" data-anchor-id="exercise-2"><span class="header-section-number">0.1.3</span> Exercise</h3>
 <p>Show that <code>sample</code> with assigned probability (<code>prob =</code> argument) is the same as <code>rbinom</code>. Conduct 10 coin flips with a an unfair coin that has a 60% of landing heads. Remember to set a seed (tip: twice).</p>
-<div class="cell">
+<div class="cell" data-hash="03-exercise_cache/html/unnamed-chunk-6_e534e4c9da3448b49202bfffcad28a67">
 <div class="sourceCode" id="cb4"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, <span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.4</span>, <span class="fl">0.6</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
@@ -436,7 +436,7 @@
 <section id="exercise-3" class="level3" data-number="0.1.4">
 <h3 data-number="0.1.4" class="anchored" data-anchor-id="exercise-3"><span class="header-section-number">0.1.4</span> Exercise</h3>
 <p>Draw random letters from the alphabet until the alphabet is empty.</p>
-<div class="cell">
+<div class="cell" data-hash="03-exercise_cache/html/unnamed-chunk-8_bcec4655acf911fdc03e018c66e63a1d">
 <div class="sourceCode" id="cb8"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(letters, <span class="fu">length</span>(letters))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code> [1] "s" "a" "u" "x" "j" "n" "v" "g" "i" "o" "e" "p" "r" "w" "q" "l" "b" "m" "d"
@@ -447,7 +447,7 @@
 <section id="exercise-4" class="level3" data-number="0.1.5">
 <h3 data-number="0.1.5" class="anchored" data-anchor-id="exercise-4"><span class="header-section-number">0.1.5</span> Exercise</h3>
 <p>Draw all letters from the alphabet and explicitly assign the same probability for each letter (tip: repeat the same probability).</p>
-<div class="cell">
+<div class="cell" data-hash="03-exercise_cache/html/unnamed-chunk-10_d997b98f9ecda65bca160b7794cf4659">
 <div class="sourceCode" id="cb10"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>probs <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">/</span><span class="fu">length</span>(letters), <span class="fu">length</span>(letters))</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(letters, <span class="at">prob =</span> probs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
@@ -459,7 +459,7 @@
 <section id="exercise-5" class="level3" data-number="0.1.6">
 <h3 data-number="0.1.6" class="anchored" data-anchor-id="exercise-5"><span class="header-section-number">0.1.6</span> Exercise</h3>
 <p>Create a data set. In the data set, each participant has an identifier (called <code>id</code>), a group identifier (<code>condition</code>), and an identifier of what number of measurement we have for this participant (<code>trial</code>). There are 3 participants in each of three groups with 5 trials in each group.</p>
-<div class="cell">
+<div class="cell" data-hash="03-exercise_cache/html/unnamed-chunk-12_2adaebbf277f9c6c9f87b0700b41b35d">
 <div class="sourceCode" id="cb12"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>groups <span class="ot">&lt;-</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>participants <span class="ot">&lt;-</span> <span class="fu">length</span>(groups) <span class="sc">*</span> <span class="dv">3</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>trials <span class="ot">&lt;-</span> <span class="dv">5</span></span>
@@ -525,7 +525,7 @@
 <section id="exercise-6" class="level3" data-number="0.1.7">
 <h3 data-number="0.1.7" class="anchored" data-anchor-id="exercise-6"><span class="header-section-number">0.1.7</span> Exercise</h3>
 <p>You have two groups, a control and a treatment group. In each group, there are 10 participants. Each participant flips a coin 10 times. The control group has a fair coin: 50% heads. The treatment group has an unfair coin: 70% heads. Create a data frame with a participant identifier (<code>id</code>), group membership (<code>condition</code>), and a total head count for that participant (<code>heads</code>). Check that the two groups indeed have different means of how often they get heads (roughly corresponding to the two probabilities)</p>
-<div class="cell">
+<div class="cell" data-hash="03-exercise_cache/html/unnamed-chunk-14_30229e0d085f811bb9cd65b51392e475">
 <div class="sourceCode" id="cb14"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>groups <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"control"</span>, <span class="st">"treatment"</span>)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">20</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>flips <span class="ot">&lt;-</span> <span class="dv">10</span></span>
@@ -552,7 +552,7 @@
 <section id="exercise-7" class="level3" data-number="0.1.8">
 <h3 data-number="0.1.8" class="anchored" data-anchor-id="exercise-7"><span class="header-section-number">0.1.8</span> Exercise</h3>
 <p>You have 100 participants. Each participants reports their age which lies uniformly between 20 and 40. They also report grumpiness on a 100-point scale (with a 10-point SD). Each extra year predicts 0.5 higher grumpiness (Tip: Check the lecture slides; you’ll need to add some error). Create the two variables (no need for a data frame) and conduct a correlation with <code>cor</code>. What’s the correlation?</p>
-<div class="cell">
+<div class="cell" data-hash="03-exercise_cache/html/unnamed-chunk-16_2305dd178db34d1595077789c81acc71">
 <div class="sourceCode" id="cb16"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="fu">runif</span>(n, <span class="dv">20</span>, <span class="dv">40</span>)</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>grumpiness <span class="ot">&lt;-</span> age<span class="sc">*</span><span class="fl">0.5</span> <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">100</span>, <span class="dv">10</span>)</span>
@@ -565,7 +565,7 @@
 <section id="exercise-8" class="level3" data-number="0.1.9">
 <h3 data-number="0.1.9" class="anchored" data-anchor-id="exercise-8"><span class="header-section-number">0.1.9</span> Exercise</h3>
 <p>We track how many calls you get during this exercise. Nobody calls anymore, so there’ll be very few. Create a data frame with 20 participants, a participant number and the number of calls per participant. Plot the calls and show that 0 is the most common value.</p>
-<div class="cell">
+<div class="cell" data-hash="03-exercise_cache/html/unnamed-chunk-18_41154134649ebe490742d88e4e580fa6">
 <div class="sourceCode" id="cb18"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">20</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
@@ -582,7 +582,7 @@
 <section id="exercise-9" class="level3" data-number="0.1.10">
 <h3 data-number="0.1.10" class="anchored" data-anchor-id="exercise-9"><span class="header-section-number">0.1.10</span> Exercise</h3>
 <p>Professors get more calls. Add 20 more participants who have much higher call numbers. Also include a <code>condition</code> variable that marks whether participants are students (first 20 people) or professors (new 20 people). Conduct an independent sample t-test (<code>t.test</code>) and also plot the different groups as a boxplot.</p>
-<div class="cell">
+<div class="cell" data-hash="03-exercise_cache/html/unnamed-chunk-20_5dc885113016a10be38e5b75cd8ea677">
 <div class="sourceCode" id="cb19"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  d,</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data.frame</span>(</span>
@@ -621,7 +621,7 @@ sample estimates:
 <section id="exercise-10" class="level3" data-number="0.2.1">
 <h3 data-number="0.2.1" class="anchored" data-anchor-id="exercise-10"><span class="header-section-number">0.2.1</span> Exercise</h3>
 <p>There are four groups. Each group comes from a different normal distribution. The means are <code>c(100, 105, 107, 109)</code>. The SDs are <code>c(9, 12, 10, 17)</code>. Each group should be 20 cases. Store everything in a data frame and have a variable that indicates the group. Tip: Remember that R uses vectors, even for arguments in a function.</p>
-<div class="cell">
+<div class="cell" data-hash="03-exercise_cache/html/unnamed-chunk-22_4f724f13a1680ddb431916b515651873">
 <div class="sourceCode" id="cb22"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">105</span>, <span class="dv">107</span>, <span class="dv">109</span>)</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>sds <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">12</span>, <span class="dv">10</span>, <span class="dv">17</span>)</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">20</span></span>
@@ -636,7 +636,7 @@ sample estimates:
 <section id="exercise-11" class="level3" data-number="0.2.2">
 <h3 data-number="0.2.2" class="anchored" data-anchor-id="exercise-11"><span class="header-section-number">0.2.2</span> Exercise</h3>
 <p>You need 5 samples. Each sample contains 10 unique letters from the alphabet. (Use <code>replicate</code>.)</p>
-<div class="cell">
+<div class="cell" data-hash="03-exercise_cache/html/unnamed-chunk-24_6cb2307340440e01727bd87fb05b9fa9">
 <div class="sourceCode" id="cb23"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">replicate</span>(<span class="dv">5</span>, <span class="fu">sample</span>(letters, <span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>      [,1] [,2] [,3] [,4] [,5]
@@ -656,7 +656,7 @@ sample estimates:
 <section id="exercise-12" class="level3" data-number="0.2.3">
 <h3 data-number="0.2.3" class="anchored" data-anchor-id="exercise-12"><span class="header-section-number">0.2.3</span> Exercise</h3>
 <p>Same as before, but this time you need 10 samples from a normal distribution with a mean of 10 and an SD of 2. Use <code>replicate</code> first, then a <code>for</code> loop.</p>
-<div class="cell">
+<div class="cell" data-hash="03-exercise_cache/html/unnamed-chunk-26_92ef7d93db2e2ad565c1274709c102cf">
 <div class="sourceCode" id="cb25"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">replicate</span>(<span class="dv">5</span>, <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>           [,1]      [,2]      [,3]      [,4]      [,5]
@@ -692,7 +692,7 @@ sample estimates:
 <h3 data-number="0.2.4" class="anchored" data-anchor-id="exercise-13"><span class="header-section-number">0.2.4</span> Exercise</h3>
 <p>Assume we know the population mean in height (168cm) and its standard deviation (20). Assume we draw 10,000 samples from this distribution. Each sample has 50 participants. The standard deviation of these 10,000 sample means is the standard error.</p>
 <p>Simulate the standard error and compare it to the theoretical value: <span class="math inline">\(SE = \frac{\sigma}{\sqrt{n}}\)</span>. (<span class="math inline">\(\sigma\)</span> is the standard deviation of the population.)</p>
-<div class="cell">
+<div class="cell" data-hash="03-exercise_cache/html/unnamed-chunk-28_8d5152155dbbc488433be1bd9bb207af">
 <div class="sourceCode" id="cb29"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">168</span></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="dv">20</span></span>
@@ -724,7 +724,7 @@ sample estimates:
 <section id="exercise-14" class="level3" data-number="0.2.5">
 <h3 data-number="0.2.5" class="anchored" data-anchor-id="exercise-14"><span class="header-section-number">0.2.5</span> Exercise</h3>
 <p>Same population. Draw 1,000 observations for each sample size between 20 and 100. Calculate the standard error for each sample size (like you did above) and plot it against the sample size. (Tip: You’ll need to iterate over two things.)</p>
-<div class="cell">
+<div class="cell" data-hash="03-exercise_cache/html/unnamed-chunk-30_e506a5b549206e8909f32bbff80fa3e9">
 <div class="sourceCode" id="cb33"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">168</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="dv">20</span></span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>draws <span class="ot">&lt;-</span> <span class="fl">1e3</span></span>
@@ -765,7 +765,7 @@ sample estimates:
 <section id="exercise-15" class="level3" data-number="0.2.6">
 <h3 data-number="0.2.6" class="anchored" data-anchor-id="exercise-15"><span class="header-section-number">0.2.6</span> Exercise</h3>
 <p>Turn the above into a function so that you can change the population effect size, SD, number of simulations, and sample size range. The function should also return the plot from above.</p>
-<div class="cell">
+<div class="cell" data-hash="03-exercise_cache/html/unnamed-chunk-32_7eef02043c44d7cedf95605879664747">
 <div class="sourceCode" id="cb34"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>sample_against_se <span class="ot">&lt;-</span> </span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mu =</span> <span class="dv">168</span>,</span>
@@ -806,7 +806,7 @@ sample estimates:
 <section id="exercise-16" class="level3" data-number="0.2.7">
 <h3 data-number="0.2.7" class="anchored" data-anchor-id="exercise-16"><span class="header-section-number">0.2.7</span> Exercise</h3>
 <p>Try out the function with two plots: when the population SD is 5 and when you do 10 draws. What changes?</p>
-<div class="cell">
+<div class="cell" data-hash="03-exercise_cache/html/unnamed-chunk-34_689cdfc2ae218fb787534e78277ff45a">
 <div class="sourceCode" id="cb35"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_against_se</span>(<span class="at">sd =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="03-exercise_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid" width="672"></p>
@@ -824,7 +824,7 @@ sample estimates:
 <p>You calculate the z-statistic, which is calculated as follows: <span class="math inline">\(\frac{\bar{X} - \mu_0}{\sigma/\sqrt{N}}\)</span> This simply tells us how far from the population mean (well, the suspected population mean under the null hypothesis) our sample mean is in terms of standard errors. <span class="math inline">\(\bar{X}\)</span> is the sample mean, <span class="math inline">\(\mu_0\)</span> is the population mean under H<sub>0</sub>, <span class="math inline">\(\sigma\)</span> is the population standard deviation, and <span class="math inline">\(N\)</span> is the sample size.</p>
 <p>Then we can look up the z-score to see what the probability is to score this high or higher (does that definition ring a bell?). In R, you can simply do that with a built-in function: <code>pnorm()</code>. For example, if we have a z-score of 1.645, our probability of obtaining such a value (or higher) is <code>pnorm(1.645, lower.tail = FALSE)</code> = 0.0499849 – our p-value for a one-sided test.</p>
 <p>We can simulate the power of our statistical test (in this case, the z-statistic). Take a sample of 30 people from the French population, calculate the z-statistic, its p-value, and store the p-value. Do this 1,000 times. Plot the distribution of p-values. What can we conclude about the sample size?</p>
-<div class="cell">
+<div class="cell" data-hash="03-exercise_cache/html/unnamed-chunk-36_18a12bfbb82f87bb25760226a28db43d">
 <div class="sourceCode" id="cb37"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sample size</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">30</span></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>h0 <span class="ot">&lt;-</span> <span class="dv">173</span> <span class="co"># test against this null</span></span>
@@ -850,7 +850,7 @@ sample estimates:
 <section id="exercise-18" class="level3" data-number="0.2.9">
 <h3 data-number="0.2.9" class="anchored" data-anchor-id="exercise-18"><span class="header-section-number">0.2.9</span> Exercise</h3>
 <p>Now calculate the proportion of p-values that are below 0.05. That’s your power: The proportion of tests that will detect that there’s a true effect. In our case, that effect is a difference of 2.6cm.</p>
-<div class="cell">
+<div class="cell" data-hash="03-exercise_cache/html/unnamed-chunk-38_b2003c378c45df27038294da4c0e5f2f">
 <div class="sourceCode" id="cb38"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(pvalues <span class="sc">&lt;</span> <span class="fl">0.05</span>)<span class="sc">/</span><span class="fu">length</span>(pvalues)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stdout">
 <pre><code>[1] 0.668</code></pre>
@@ -860,7 +860,7 @@ sample estimates:
 <section id="exercise-19" class="level3" data-number="0.2.10">
 <h3 data-number="0.2.10" class="anchored" data-anchor-id="exercise-19"><span class="header-section-number">0.2.10</span> Exercise</h3>
 <p>Now let’s do what we did before: Put the loop from above inside another loop that iterates over different sample sizes. Then put that all into a function that let’s you set the parameters of interest (sample size range, h0, h1, etc.). Then simulate power (1,000 simulations each) for samples between 30 and 100. Plot the sample size against power.</p>
-<div class="cell">
+<div class="cell" data-hash="03-exercise_cache/html/unnamed-chunk-40_3343b0a2e0527ac4f75c2b39ae0dfba1">
 <div class="sourceCode" id="cb40"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>power_function <span class="ot">&lt;-</span> </span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(</span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">h0 =</span> <span class="dv">173</span>,</span>
@@ -908,7 +908,7 @@ sample estimates:
 <section id="exercise-20" class="level3" data-number="0.2.11">
 <h3 data-number="0.2.11" class="anchored" data-anchor-id="exercise-20"><span class="header-section-number">0.2.11</span> Exercise</h3>
 <p>Now do the same thing with a one-sample t-test. (Tip: You only need to replace the z-scores with a <code>t.test</code> from which you can extract the p-value). (Another tip: Use the $ sign on where you stored the t-test results.)</p>
-<div class="cell">
+<div class="cell" data-hash="03-exercise_cache/html/unnamed-chunk-42_428de09da28fbecbc6c443728a6bd0f3">
 <div class="sourceCode" id="cb41"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>power_function_t <span class="ot">&lt;-</span> </span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(</span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">h0 =</span> <span class="dv">173</span>,</span>
@@ -956,7 +956,7 @@ sample estimates:
 <section id="exercise-21" class="level3" data-number="0.2.12">
 <h3 data-number="0.2.12" class="anchored" data-anchor-id="exercise-21"><span class="header-section-number">0.2.12</span> Exercise</h3>
 <p>Just for funsies (and for our next session), see what happens when the true effect is only 1cm in difference.</p>
-<div class="cell">
+<div class="cell" data-hash="03-exercise_cache/html/unnamed-chunk-44_3d2ef7efa92886d7ae7526c881e0350d">
 <div class="sourceCode" id="cb42"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">power_function_t</span>(<span class="at">h1 =</span> h0<span class="sc">+</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="03-exercise_files/figure-html/unnamed-chunk-44-1.png" class="img-fluid" width="672"></p>

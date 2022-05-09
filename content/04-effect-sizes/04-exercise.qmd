@@ -6,8 +6,11 @@ format:
     toc-depth: 3
     number-sections: true
 execute: 
+  cache: true
   eval: true
   echo: true
+  message: false
+  warning: false
 ---
 
 # Overview {.unnumbered}
