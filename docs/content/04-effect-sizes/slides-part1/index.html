@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.9.88">
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.0.38">
+
   <meta name="author" content="Niklas Johannes">
   <title>Effect sizes</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -10,9 +17,6 @@
   <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reveal.css">
   <style>
-    .reveal .sourceCode {  /* see #7635 */
-      overflow: visible;
-    }
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     span.underline{text-decoration: underline;}
@@ -49,39 +53,40 @@
       }
     pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
     div.sourceCode
-      {   }
+      { color: #003b4f; background-color: #f1f3f5; }
     @media screen {
     pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
     }
-    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-    code span.at { color: #7d9029; } /* Attribute */
-    code span.bn { color: #40a070; } /* BaseN */
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
     code span.bu { } /* BuiltIn */
-    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #4070a0; } /* Char */
-    code span.cn { color: #880000; } /* Constant */
-    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-    code span.dt { color: #902000; } /* DataType */
-    code span.dv { color: #40a070; } /* DecVal */
-    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
     code span.ex { } /* Extension */
-    code span.fl { color: #40a070; } /* Float */
-    code span.fu { color: #06287e; } /* Function */
-    code span.im { } /* Import */
-    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-    code span.op { color: #666666; } /* Operator */
-    code span.ot { color: #007020; } /* Other */
-    code span.pp { color: #bc7a00; } /* Preprocessor */
-    code span.sc { color: #4070a0; } /* SpecialChar */
-    code span.ss { color: #bb6688; } /* SpecialString */
-    code span.st { color: #4070a0; } /* String */
-    code span.va { color: #19177c; } /* Variable */
-    code span.vs { color: #4070a0; } /* VerbatimString */
-    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
@@ -103,14 +108,6 @@
     }
   </style>
   <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto.css" id="theme">
-
-  <script src="../../../site_libs/clipboard/clipboard.min.js"></script>
-  <script src="../../../site_libs/quarto-html/tabby.min.js"></script>
-  <script src="../../../site_libs/quarto-html/popper.min.js"></script>
-  <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-  <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-  <link href="../../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet">
-  <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
   <link href="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -126,7 +123,7 @@
   }
 
   .callout.callout-style-simple { 
-    padding: 0em 0.7em;
+    padding: 0em 0.5em;
     border-left: solid #acacac .3rem;
     border-right: solid 1px silver;
     border-top: solid 1px silver;
@@ -237,8 +234,7 @@
     display: none !important;
   }
 
-  .callout.callout-captioned .callout-body > :last-child,
-  .callout.callout-captioned .callout-body > div > :last-child {
+  .callout.callout-captioned .callout-body > .callout-content > :last-child {
     margin-bottom: 0.5rem;
   }
 
@@ -327,12 +323,6 @@
     .reveal .slide:not(.center) {
       height: 100%;
     }
-    .reveal #title-slide.center,
-    .reveal .title-slide.center,
-    .reveal .controls .navigate-left .controls-arrow,
-    .reveal .controls .navigate-right .controls-arrow {
-      margin-top: -15px;
-    }
     .reveal .slide.scrollable {
       overflow-y: auto;
     }
@@ -409,7 +399,7 @@
     }
   </style>
 </head>
-<body>
+<body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
@@ -431,18 +421,18 @@
 <section id="whats-an-effect-size" class="slide level2">
 <h2>What’s an effect size</h2>
 
-<img data-src="effect_size_wikipedia.jpg" class="r-stretch quarto-figure-center"><p><a href="effect_size_wikipedia.jpg">Source</a>](https://en.wikipedia.org/wiki/Effect_size#Cohen’s_%C6%922)</p>
+<img data-src="effect_size_wikipedia.jpg" class="r-stretch quarto-figure-center"><p><a href="https://en.wikipedia.org/wiki/Effect_size#Cohen's_%C6%922">Source</a></p>
 </section>
 <section id="an-example" class="slide level2">
 <h2>An example</h2>
 <p>Age predicts grumpiness with a large effect. But the sample is too small for significance.</p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
 <span id="cb1-2"><a href="#cb1-2"></a>age <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">80</span>)</span>
 <span id="cb1-3"><a href="#cb1-3"></a>grumpiness <span class="ot">&lt;-</span> <span class="dv">50</span> <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">*</span> age <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">20</span>)</span>
 <span id="cb1-4"><a href="#cb1-4"></a></span>
 <span id="cb1-5"><a href="#cb1-5"></a><span class="fu">cor.test</span>(age, grumpiness)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's product-moment correlation
 
@@ -461,11 +451,11 @@ sample estimates:
 <h2>An example, this time larger</h2>
 <p>Age predicts grumpiness with a super tiny effect, but we have a sample of a million, so the effect is significant.</p>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>age <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="fl">1e6</span>, <span class="dv">20</span>, <span class="dv">80</span>)</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>age <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="fl">1e6</span>, <span class="dv">20</span>, <span class="dv">80</span>)</span>
 <span id="cb3-2"><a href="#cb3-2"></a>grumpiness <span class="ot">&lt;-</span> <span class="dv">50</span> <span class="sc">+</span> <span class="fl">0.01</span> <span class="sc">*</span> age <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="fl">1e6</span>, <span class="dv">0</span>, <span class="dv">20</span>)</span>
 <span id="cb3-3"><a href="#cb3-3"></a></span>
 <span id="cb3-4"><a href="#cb3-4"></a><span class="fu">cor.test</span>(age, grumpiness)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's product-moment correlation
 
@@ -484,11 +474,11 @@ sample estimates:
 <h2>An example, this time null</h2>
 <p>Age doesn’t predict grumpiness. Can a nonsignificant p-value tell us that?</p>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>age <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="fl">1e6</span>, <span class="dv">20</span>, <span class="dv">80</span>)</span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>age <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="fl">1e6</span>, <span class="dv">20</span>, <span class="dv">80</span>)</span>
 <span id="cb5-2"><a href="#cb5-2"></a>grumpiness <span class="ot">&lt;-</span> <span class="dv">50</span> <span class="sc">+</span> <span class="dv">0</span> <span class="sc">*</span> age <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="fl">1e6</span>, <span class="dv">0</span>, <span class="dv">20</span>)</span>
 <span id="cb5-3"><a href="#cb5-3"></a></span>
 <span id="cb5-4"><a href="#cb5-4"></a><span class="fu">cor.test</span>(age, grumpiness)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's product-moment correlation
 
@@ -538,7 +528,7 @@ sample estimates:
 <blockquote>
 <p>“…If one in twenty does not seem high enough odds, we may, if we prefer it, draw the line at one in fifty or one in a hundred. Personally, the writer prefers to set a low standard of significance at the 5 per cent point, and ignore entirely all results which fails to reach this level. A scientific fact should be regarded as experimentally established only if a properly designed experiment rarely fails to give this level of significance.”</p>
 </blockquote>
-<p>From Fisher RA. The arrangement of field experiments. Journal of the Ministry of Agriculture of Great Britain 1926; 33:503-513.</p>
+<p><span class="citation" data-cites="fisher1926">(<a href="#/ref-fisher1926" role="doc-biblioref" onclick="return false;">Fisher 1926</a>)</span></p>
 </section>
 <section id="what-are-we-claiming" class="slide level2">
 <h2>What are we claiming?</h2>
@@ -565,7 +555,7 @@ sample estimates:
 <section id="lets-simulate-that-previous-study" class="slide level2">
 <h2>Let’s simulate that “previous study”</h2>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
 <span id="cb7-2"><a href="#cb7-2"></a>d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
 <span id="cb7-3"><a href="#cb7-3"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">60</span>,</span>
 <span id="cb7-4"><a href="#cb7-4"></a>  <span class="at">condition =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"control"</span>, <span class="st">"Treatment A"</span>, <span class="st">"Treatment B"</span>), <span class="at">times =</span> <span class="dv">20</span>),</span>
@@ -578,14 +568,14 @@ sample estimates:
 <span id="cb7-11"><a href="#cb7-11"></a>  )</span>
 <span id="cb7-12"><a href="#cb7-12"></a></span>
 <span id="cb7-13"><a href="#cb7-13"></a>effectsize<span class="sc">::</span><span class="fu">eta_squared</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code># Effect Size for ANOVA
 
 Parameter | Eta2 |       95% CI
 -------------------------------
 condition | 0.21 | [0.06, 1.00]
 
-- One-sided CIs: upper bound fixed at (1).</code></pre>
+- One-sided CIs: upper bound fixed at [1.00].</code></pre>
 </div>
 </div>
 </section>
@@ -595,25 +585,25 @@ condition | 0.21 | [0.06, 1.00]
 <div class="column">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
 </div>
 </div>
 </div><div class="column">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-12-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></p>
 </div>
 </div>
 </div><div class="column">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-14-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></p>
 </div>
 </div>
 </div><div class="column">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-16-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -656,7 +646,7 @@ condition | 0.21 | [0.06, 1.00]
 <img data-src="https://media.giphy.com/media/JCAZQKoMefkoX6TyTb/giphy.gif" class="r-stretch"></section>
 <section id="an-example-1" class="slide level2">
 <h2>An example</h2>
-<p>Control group has a mean of 100 and an SD of 20. The treatment group has a mean of 105 and an SD of 10. The difference in the means is <span class="math inline">\(105-100 = 15\)</span> (simplified). The pooled SD is (simplified!) <span class="math inline">\(\frac{20+10}{2} = 15\)</span>. So our difference is <span class="math inline">\(5/15\)</span> or simply <span class="math inline">\(d = 0.33\)</span>. In other words, our difference is a third of a standard deviation unit.</p>
+<p>Control group has a mean of 100 and an SD of 20. The treatment group has a mean of 105 and an SD of 10. The difference in the means is <span class="math inline">\(105-100 = 5\)</span> (simplified). The pooled SD is (simplified!) <span class="math inline">\(\frac{20+10}{2} = 15\)</span>. So our difference is <span class="math inline">\(5/15\)</span> or simply <span class="math inline">\(d = 0.33\)</span>. In other words, our difference is a third of a standard deviation unit.</p>
 </section>
 <section id="so" class="slide level2">
 <h2>So…</h2>
@@ -679,7 +669,7 @@ condition | 0.21 | [0.06, 1.00]
 <li>Not “How many points does grumpiness go up with one extra year”</li>
 <li>But “How many standard deviations does grumpiness go up with one extra standard deviation of age”</li>
 </ul>
-<p><span class="math inline">\(r = B_{xy} \frac{\sigma_x}{\sigma_Y}\)</span></p>
+<p><span class="math inline">\(r = B_{xy} \frac{\sigma_x}{\sigma_y}\)</span></p>
 </section>
 <section id="an-example-2" class="slide level2">
 <h2>An example</h2>
@@ -704,7 +694,7 @@ condition | 0.21 | [0.06, 1.00]
 <h2>Variance explained</h2>
 <p>Strength of association is just another way of saying magnitude of shared variance between variables. Or: Does the blue line do better than the black line?</p>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"></section>
 <section id="variance-explained-1" class="slide level2">
 <h2>Variance explained</h2>
 <ul>
@@ -784,7 +774,7 @@ condition | 0.21 | [0.06, 1.00]
 <li>Might be useful for model fit, but less intuitive for individual effect</li>
 </ul>
 <blockquote>
-<p>Squaring the r is not merely uninformative; for purposes of evaluating effect size, the practice is actively misleading. [<span class="citation" data-cites="funder2019">Funder and Ozer (<a href="#/ref-funder2019" role="doc-biblioref" onclick="return false;">2019</a>)</span>, p.&nbsp;3]</p>
+<p>Squaring the r is not merely uninformative; for purposes of evaluating effect size, the practice is actively misleading. <span class="citation" data-cites="funder2019">(<a href="#/ref-funder2019" role="doc-biblioref" onclick="return false;">Funder and Ozer 2019, 3</a>)</span></p>
 </blockquote>
 </section>
 <section id="about-squaring-things-1" class="slide level2">
@@ -796,7 +786,7 @@ condition | 0.21 | [0.06, 1.00]
 <li>Reporting them isn’t really informative</li>
 </ul>
 <blockquote>
-<p>As a rule, reports of effect size should focus on 1 <em>df</em> effects. [<span class="citation" data-cites="baguley2009">Baguley (<a href="#/ref-baguley2009" role="doc-biblioref" onclick="return false;">2009</a>)</span>, p.&nbsp;614]</p>
+<p>As a rule, reports of effect size should focus on 1 <em>df</em> effects. <span class="citation" data-cites="baguley2009">(<a href="#/ref-baguley2009" role="doc-biblioref" onclick="return false;">Baguley 2009, 614</a>)</span></p>
 </blockquote>
 </section>
 <section id="so-what-effect-sizes-are-typical" class="slide level2">
@@ -857,7 +847,7 @@ condition | 0.21 | [0.06, 1.00]
 <h2>Getting too much of a feel</h2>
 <ul>
 <li>Violent video game vs.&nbsp;racing game condition: <span class="math inline">\(d\)</span> = 3.46 <span class="citation" data-cites="hilgard2021">(<a href="#/ref-hilgard2021" role="doc-biblioref" onclick="return false;">Hilgard 2021</a>)</span></li>
-<li>Cancer-prone personality 121 times more likely to die of disease <a href="https://www.theguardian.com/science/2019/oct/11/work-of-renowned-uk-psychologist-hans-eysenck-ruled-unsafe">source</a></li>
+<li>Cancer-prone personality 121 times more likely to die of disease ( <a href="https://www.theguardian.com/science/2019/oct/11/work-of-renowned-uk-psychologist-hans-eysenck-ruled-unsafe">source</a>)</li>
 <li>Massive effect sizes are often a sign that something fishy is going on</li>
 </ul>
 </section>
@@ -997,6 +987,10 @@ condition | 0.21 | [0.06, 1.00]
 <li>Look at the average difference in scores for those who say there’s improvement</li>
 </ol>
 </section>
+<section id="let-the-people-speak" class="slide level2">
+<h2>Let the people speak</h2>
+
+<img data-src="anchor_example.jpg" class="r-stretch"></section>
 <section id="empirical-benchmarks-4" class="slide level2">
 <h2>Empirical benchmarks</h2>
 
@@ -1079,6 +1073,9 @@ Fanelli, Daniele. 2012. <span>“Negative Results Are Disappearing from Most Dis
 <div id="ref-ferguson2021" class="csl-entry" role="doc-biblioentry">
 Ferguson, Christopher J., and Moritz Heene. 2021. <span>“Providing a Lower-Bound Estimate for Psychology<span>’</span>s <span>“</span>Crud Factor<span>”</span>: The Case of Aggression.”</span> <em>Professional Psychology: Research and Practice</em> 52 (6): 620–26. <a href="https://doi.org/10.1037/pro0000386">https://doi.org/10.1037/pro0000386</a>.
 </div>
+<div id="ref-fisher1926" class="csl-entry" role="doc-biblioentry">
+Fisher, Ronald A. 1926. <span>“The Arrangement of Field Experiments.”</span> <em>Journal of the Ministry of Agriculture</em> 33: 503–15.
+</div>
 <div id="ref-funder2019" class="csl-entry" role="doc-biblioentry">
 Funder, David C., and Daniel J. Ozer. 2019. <span>“Evaluating Effect Size in Psychological Research: Sense and Nonsense.”</span> <em>Advances in Methods and Practices in Psychological Science</em> 2 (2): 156–68. <a href="https://doi.org/10.1177/2515245919847202">https://doi.org/10.1177/2515245919847202</a>.
 </div>
@@ -1124,7 +1121,7 @@ Szucs, Denes, and John P. A. Ioannidis. 2017. <span>“Empirical Assessment of P
 </div>
 
 <div class="footer footer-default">
-<p><a href="https://niklasjohannes.github.io/power-workshop/" class="uri">https://niklasjohannes.github.io/power-workshop/</a></p>
+<p><a href="https://niklasjohannes.github.io/power-workshop/">Home</a></p>
 </div>
 </section></section>
     </div>
@@ -1132,7 +1129,6 @@ Szucs, Denes, and John P. A. Ioannidis. 2017. <span>“Empirical Assessment of P
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
   <script src="../../../site_libs/revealjs/dist/reveal.js"></script>
-
   <!-- reveal.js plugins -->
   <script src="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
   <script src="../../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
@@ -1140,12 +1136,13 @@ Szucs, Denes, and John P. A. Ioannidis. 2017. <span>“Empirical Assessment of P
   <script src="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
   <script src="../../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
   <script src="../../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
   <script src="../../../site_libs/revealjs/plugin/notes/notes.js"></script>
   <script src="../../../site_libs/revealjs/plugin/search/search.js"></script>
   <script src="../../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
   <script src="../../../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
-
 
   <script>
 
@@ -1159,11 +1156,10 @@ Szucs, Denes, and John P. A. Ioannidis. 2017. <span>“Empirical Assessment of P
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
-
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":false},
 'smaller': false,
-
+ 
         // Display controls in the bottom right corner
         controls: false,
 
@@ -1383,8 +1379,26 @@ Szucs, Denes, and John P. A. Ioannidis. 2017. <span>“Empirical Assessment of P
       })();
     </script>
 
-    <script type="application/javascript">
+    <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
       const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
       tabsets.forEach(function(tabset) {
         const tabby = new Tabby('#' + tabset.id);
@@ -1401,7 +1415,10 @@ Szucs, Denes, and John P. A. Ioannidis. 2017. <span>“Empirical Assessment of P
         button.blur();
         // flash "checked"
         button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
         setTimeout(function() {
+          button.setAttribute("title", currentTitle);
           button.classList.remove('code-copy-button-checked');
         }, 1000);
         // clear code selection

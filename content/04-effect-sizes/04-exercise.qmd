@@ -15,7 +15,7 @@ execute:
 
 # Overview {.unnumbered}
 
-Welcome to the next set of exercises. At this point, I hope you feel somewhat comfortable with the logic of simulations as well as the commands that get you there. Now, we'll try to use these commands to add to your understanding of effect sizes and add an extra layer (aka another loop level). That's what you'll do in the first block.
+Welcome to the next set of exercises. At this point, I hope you feel somewhat comfortable with the logic of simulations as well as the commands that get you there. Now we'll try to use these commands to add to your understanding of effect sizes and add an extra layer (aka another loop level). That's what you'll do in the first block.
 
 In the second block, we'll add a tad more complexity. You'll get going with correlated measures (aka paired-sampled t-test) and get to know the `while` command.
 
@@ -44,6 +44,29 @@ for (i in 1:runs) {
 
 hist(pvalues)
 ```
+
+:::{.callout-tip collapse="true"}
+## Expand to get a tip
+
+Nothing fancy here. Start with declaring your variables, create an object to store the p-values, then create two groups and run a t-test in a loop:
+
+```{r}
+#| eval: false
+#| echo: true
+
+for (i in 1:?) {
+  control <- ?
+  treatment <- ?
+  
+  t <- t.test(control, treatment)
+  
+  # store the p-value
+  ? <- t$p.value
+
+}
+```
+
+:::
 
 ## Exercise
 
@@ -98,6 +121,50 @@ library(ggplot2)
 
 ggplot(d, aes(x = pvalue, color = condition)) + geom_density() + xlim(c(0, 0.05)) + ylim(c(0, runs/5)) + theme_bw()
 ```
+
+:::{.callout-tip collapse="true"}
+## Expand to get a tip
+
+You do the same as above, only this time you do two "experiments" inside the loop and therefore store two results.
+
+```{r}
+#| eval: false
+#| echo: true
+
+d <- 
+  data.frame(
+    null = NULL,
+    effect = NULL
+  )
+
+for (i in 1:?) {
+  
+  # no difference experiment
+  control1 <- ?
+  treatment1 <- ?
+  
+  t1 <- # first t-test
+  
+    # massive difference experiment
+  control2 <- ?
+  treatment2 <- ?
+  
+  t2 <- ?
+  
+    # then store them in a data frame
+  d <- 
+    rbind(
+      d,
+      data.frame(
+        condition = c("null", "effect"),
+        pvalue = c(t1$p.value, t2$p.value)
+      )
+    )
+
+}
+```
+
+:::
 
 ## Exercise
 
@@ -181,6 +248,61 @@ for (asize in effect_sizes) {
 ggplot(outcome, aes(x = sample_size, y = power, color = as.factor(effect_size))) + geom_line() + theme_bw()
 ```
 
+:::{.callout-tip collapse="true"}
+## Expand to get a tip
+
+Let's fill in the provided structure:
+
+```{r}
+#| eval: false
+#| echo: true
+
+effect_sizes <- ?
+min_sample <- ?
+max_sample <- ?
+runs <- 200
+sd <- 1
+
+# a data frame to store all of our results
+outcome <- 
+  data.frame(
+    effect_size = NULL,
+    sample_size = NULL,
+    power = NULL
+  )
+
+for (asize in effect_sizes) { # iterate over the differences in effect sizes
+  
+  for (asample in min_sample:max_sample) {
+    
+    # somewhere to store the results of the following 200 runs
+    run_results <- NULL
+    
+    for (arun in 1:runs) {
+      control <- rnorm(?, 4, sd)
+      treatment <- rnorm(?, ?, sd)
+      
+      t <- t.test(control, treatment)
+      
+      run_results[arun] <- t$p.value
+    }
+    
+    # store it all
+    outcome <- 
+      rbind(
+        outcome,
+        data.frame(
+          effect_size = asize,
+          sample_size = asample,
+          power = ?
+        )
+      )
+  }
+}
+```
+
+:::
+
 ## Exercise
 
 Guess what? The power analysis you did above was on the standardized scale. Do you know why? Let's look at the formula for Cohen's d again:
@@ -245,6 +367,56 @@ plot(outcomes$sample_size, outcomes$power, type = "l")
 abline(h = 0.80)
 ```
 
+:::{.callout-tip collapse="true"}
+## Expand to get a tip
+
+Nothing here should be new. You define the parameters first, then apply a loop to every sample size, and for every sample size, you do a number of simulations and extract the p-values.
+
+```{r}
+#| eval: false
+#| echo: true
+
+draws <- ?
+min_sample <- ?
+max_sample <- ?
+cohens_d <- ?
+
+# our outcome
+outcomes <- data.frame(
+  sample_size = NULL,
+  power = NULL
+)
+
+# first loop over the different sample sizes
+for (i in ?:?) {
+  
+  # store our pvalues somewhere
+  
+  # second loop over the draws/runs
+  for (j in 1:?) {
+    control <- rnorm(i)
+    treatment <- rnorm(i, ?)
+    
+    t <- t.test(control, treatment)
+    
+    # store that pvalue in the object your create in the first loop level
+  }
+  
+  # store the results for this sample size in out outcomes
+  outcomes <- rbind(
+    outcomes,
+    data.frame(
+      sample_size = ?,
+      power = ? # proportion of p-values < 0.05 for this sample size
+    )
+  )
+}
+```
+
+You can use the following code for plotting: `plot(outcomes$sample_size, outcomes$power, type = "l"); abline(h = 0.80)`.
+
+:::
+
 ## Exercise
 
 How much power do we gain if we specify the direction of a test? Run a simulation with a Cohen's $d$ of 0.5 for sample sizes of 20 to 100 (1,000 samples each). For each run, do a one-tailed and a two-tailed t-test. Then plot the power curves and calculate the average power (across all sample sizes) for the two.
@@ -304,6 +476,26 @@ aggregate(outcomes$power, by = list(outcomes$type), mean)
 ggplot(outcomes, aes(x = sample_size, y = power, color = as.factor(type))) + geom_line() + theme_bw()
 ```
 
+:::{.callout-tip collapse="true"}
+## Expand to get a tip
+
+You do the same as above, except this time you perform two t-tests inside the second loop:
+
+```{r}
+#| eval: false
+#| echo: true
+
+control <- rnorm(?)
+treatment <- rnorm(?, ?)
+
+t_one <- t.test(control, treatment, alternative = "less")
+t_two <- t.test(control, treatment, alternative = "two.sided")
+```
+
+You can get power for each type by running `aggregate(outcomes$power, by = list(outcomes$type), mean)`.
+
+:::
+
 ## Exercise
 
 So far, getting a pooled SD was easy because it was the same in both groups. Let's see how we can simulate standardized effect sizes (Cohen's $d$ in this case). Write a function that calculates the pooled SD from two SDs. The formula:
@@ -320,8 +512,8 @@ How large does the difference in means have to be for a $d$ of 0.25? Prove it wi
 
 n <- 1e4
 
-# control <- rnorm(n, ?, 0.5)
-# treatment <- rnorm(n, ?, 1.7)
+control <- rnorm(n, ?, 0.5)
+treatment <- rnorm(n, ?, 1.7)
 
 effectsize::cohens_d(control, treatment)
 ```
@@ -336,6 +528,7 @@ pooled_sd <-
     
     return(p_sd)
   }
+n <- 1e4
 
 sd <- pooled_sd(0.5, 1.7)
 cohens_d <- 0.25
@@ -345,6 +538,30 @@ treatment <- rnorm(n, 4 + sd*cohens_d, 1.7)
 
 effectsize::cohens_d(control, treatment)
 ```
+
+:::{.callout-tip collapse="true"}
+## Expand to get a tip
+
+This one isn't much about coding, but about understanding the concept behind effect sizes. First, let's do the function.
+
+```{r}
+#| eval: false
+#| echo: true
+
+pooled_sd <- 
+  function(
+    sd1,
+    sd2){
+    
+    p_sd <- ? # cohen's formula
+    
+    return(p_sd)
+  }
+```
+
+Now you can feed the two SDs to the formula: `pooled_sd(0.5, 1.7)`. There you go. That's your unit for a standardized effect size. If one group is 0.25 units larger than the other, all we need to do is feed `pooled_sd * cohens_d` into `rnorm` as the mean for the treatment group.
+
+:::
 
 ## Exercise
 
@@ -368,7 +585,7 @@ The first option is easy, but comes with all the limitations of standardized eff
 
 Standard deviations can be really hard to determine. In that case, you could also examine uncertainty around the SDs of each group. Simulate an independent t-test (one-sided, 1,000 simulations) over sample sizes 50:150. The control group has a mean of 100, the treatment group a mean of 105. Simulate over two conditions: Where the SD (both groups have the same SD) is 10 and one where it's 25.
 
-This time, save everything in a data frame: The `sd` (small or large), the `sample_size`, the number of the `run`, and the `pvalue`. That means your data frame will have 2 SD x 50 sample sizes x 1,000 simulations. With the data frame, get the power per SD and sample size (tip: use `aggregate` or `group_by` if you use the tidyverse). Then plot the two power curves. You can use the following code:
+This time, save everything in a data frame: The `sd` (small or large), the `sample_size`, the number of the `run`, and the `pvalue`. That means your data frame will have 2 SD x 50 sample sizes x 1,000 simulations. With the data frame, get the power per SD and sample size (tip: use `aggregate` or `group_by` if you use the tidyverse). For example: `aggregate(pvalue ~ sd + sample_size, data = outcomes, FUN = function(x) sum(x<.05)/length(x))`. Then plot the two power curves. You can use the following code:
 
 ```{r}
 #| eval: false
@@ -379,14 +596,28 @@ library(ggplot2)
 ggplot(d, aes(x = sample_size, y = power, color = as.factor(sd))) + geom_line() + theme_bw()
 ```
 
+Start with the following structure:
+
+```{r}
+#| eval: false
+#| echo: true
+
+for (an_sd in c(10, 25)) {
+  for (n_size in 50:150) {
+    for (run in 1:1e3) {
+      
+    }
+    
+  }
+}
+```
 
 Pay attention to two things: What does it do to your runtime? (Spoiler: It'll take a while!). Second: How does the SD influence power?
 
 ```{r}
-t1 <- Sys.time()
 min_sample <- 50
 max_sample <- 150
-runs <- 1e3
+runs <- 500
 sds <- c(10, 25)
 
 outcomes <- 
@@ -422,12 +653,68 @@ for (ansd in sds) {
   }
 }
 
-t2 <- Sys.time()
 library(tidyverse)
 d <- outcomes %>% group_by(sd, sample_size) %>% summarise(power = sum(pvalue<0.05)/n()) %>% ungroup()
 
 ggplot(d, aes(x = sample_size, y = power, color = as.factor(sd))) + geom_line() + theme_bw()
 ```
+
+:::{.callout-tip collapse="true"}
+## Expand to get a tip
+
+This is a 3-level loop, starting with the SD, then the sample size, then the actual simulations. We'll also need to store everything this time, so our results data frame will be large. That also means no need for storing summaries per run (our `pvalues` in earlier simulations).
+
+```{r}
+#| eval: false
+#| echo: true
+
+min_sample <- ?
+max_sample <- ?
+runs <- ?
+sds <- c(?, ?)
+
+# a data frame for us to store everything
+outcomes <- 
+  data.frame(
+    sd = NULL,
+    sample_size = NULL,
+    run = NULL,
+    pvalue = NULL
+  )
+
+# first level: SDs
+for (ansd in sds) {
+  
+  # second level: sample size
+  for (asize in min_sample:max_sample) {
+    
+    # third level: runs
+    for (arun in 1:runs) {
+      
+      control <- rnorm(?, 100, ?)
+      treatment <- rnorm(?, 105, ?)
+      
+      t <- t.test(control, treatment, alternative = "less")
+      
+      # then we store everything from this run
+      outcomes <- 
+        rbind(
+          outcomes,
+          data.frame(
+            sd = ?,
+            sample_size = ?,
+            run = ?,
+            pvalue = ? # single p-value
+          )
+        )
+    }
+  }
+}
+```
+
+Get the power per combo with aggregate: `aggregate(pvalue ~ sd + sample_size, data = outcomes, FUN = function(x) sum(x<.05)/length(x))`
+
+:::
 
 # Block 2
 
@@ -441,15 +728,24 @@ Start at a sample size of 25 and stop when you reach 95% power. Plot the power c
 #| eval: false
 #| echo: true
 
+for (asize in c(0.5, 1)) {
+  n <- 1
+  power <- 0
+  while (power < 0.95) {
+    for (i in 1:runs) {
+    }
+    power <- ?
+  }
+  n <- n + 1
+  
+}
+
 library(ggplot2)
 
 ggplot(outcomes, aes(x = sample_size, y = power, color = as.factor(effect_size))) + geom_line() + geom_hline(yintercept = 0.95) + theme_bw()
 ```
 
 ```{r}
-#| eval: false
-#| echo: true
-
 effect_sizes <- c(small = 0.5, large = 1)
 draws <- 200
 
@@ -494,9 +790,72 @@ for (asize in effect_sizes) {
 ggplot(outcomes, aes(x = sample_size, y = power, color = as.factor(effect_size))) + geom_line() + geom_hline(yintercept = 0.95) + theme_bw()
 ```
 
+:::{.callout-tip collapse="true"}
+## Expand to get a tip
+
+Remember that the logic is different. You start at the lowest sample size, then you run 200 simulations for this sample size, check whether it's below 95% and, if so, increase the sample size. You do this until power reaches our desired level.
+
+```{r}
+#| eval: false
+#| echo: true
+
+effect_sizes <- c(small = ?, large = ?)
+draws <- ?
+
+# store our results
+outcomes <- data.frame(
+  effect_size = NULL,
+  sample_size = NULL,
+  power = NULL
+)
+
+# we iterate over the two effect sizes; everything below we do for 0.5, and then again for 1
+for (asize in effect_sizes) {
+  
+  # our starting sample size
+  n <- 30
+  # our starting power
+  power <- 0
+  
+  # then our while statement: everything stops once we reach 95% power
+  while (power < 0.95) {
+    
+    # somewhere to store p-values
+    pvalues <- NULL
+    
+    # so while statement not satisfied, so we do simulations with the current sample size
+    for (i in 1:draws) {
+      control <- rnorm(n, ?, 2)
+      treatment <- rnorm(n, ?, 2)
+      t <- t.test(control, treatment)
+      
+      pvalues[i] <- t$p.value
+    }
+    
+    # now we store power
+    power <- ?
+    
+    # and put everything into our data frame
+    outcomes <- rbind(
+      outcomes,
+      data.frame(
+        effect_size = asize,
+        sample_size = n,
+        power = power
+      )
+    )
+    
+    # we need to increase the sample size because now we "go up" and check whether power < 95%; if not, we'll do this all again with our new n that is increased by 1
+    n <- n + 1
+  }
+}
+```
+
+:::
+
 ## Exercise
 
-You're measuring people's mood twice: right before and right after lunch. You know from extensive study on effect sizes that mood needs to increase by 1 point on a 7-point scale for other people to notice. You assume the the SD is somewhere around 1.5, with a bit more variation before lunch (1.7) than after lunch (1.5). You also assume that mood is correlated to some degree, say 0.5.
+You're measuring people's mood twice: right before and right after lunch. You know from extensive study on effect sizes that mood needs to increase by 1 point on a 7-point scale for other people to notice. You assume the SD is somewhere around 1.5, with a bit more variation before lunch (1.7) than after lunch (1.5). You also assume that mood is correlated to some degree, say 0.5.
 
 You have budget for a maximum sample of 100. How many people do you need to measure to achieve 87% power to detect this 1-point effect--and do you need to go to your max? Use 500 simulations per run. (Tip: the samples are correlated, so you'll need to specify a variance-covariance matrix.) Verify with GPower.
 
@@ -560,6 +919,82 @@ for (asample in min_sample:max_sample) {
 plot(outcomes$power)
 abline(h = 0.87)
 ```
+
+:::{.callout-tip collapse="true"}
+## Expand to get a tip
+
+This exercise is about you trying out the variance-covariance matrix. First, you declare your variables, like we did before. Essentially, you store every parameter from the instructions.
+
+```{r}
+#| eval: false
+#| echo: true
+
+runs <- ?
+min_sample <- ?
+max_sample <- ?
+means <- c(before = ?, after = ?)
+pre_sd <- ?
+post_sd <- ?
+correlation <- ?
+
+# store our results
+outcomes <- 
+  data.frame(
+    sample_size = NULL,
+    power = NULL
+  )
+```
+
+As a next step, you need to specify the variance/covariance matrix. For that, you'll need the variance (so squared SD) and the correlation between pre- and post-measure.
+
+```{r}
+#| eval: false
+#| echo: true
+
+sigma <- 
+  matrix(
+    c(
+      # pre SD squared,
+      correlation * pre_sd * post_sd,
+      correlation * pre_sd * post_sd,
+      # post SD squared
+    ),
+    ncol = ?
+  )
+```
+
+Now you have everything you need. Everything else is just as before: Loop over the sample size, which again loops over a number of simulations. For each run, you create correlated scores with the `mvrnorm` function, then run a paired t-test.
+
+```{r}
+#| eval: false
+#| echo: true
+
+
+for (asample in min_sample:max_sample) {
+  
+  pvalues <- NULL
+  
+  for (arun in 1:runs) {
+    d <- as.data.frame(
+      mvrnorm(
+        ?,
+        ?,
+        ?
+      )
+    )
+    
+    t <- t.test(?, ?, paired = TRUE, alternative = "less")
+    
+    pvalues[?] <- t$p.value
+  }
+  
+  # don't forget to store the outcomes
+}
+```
+
+You can plot the results with `plot(outcomes$power); abline(h = 0.87)`.
+
+:::
 
 ## Exercise
 
@@ -629,6 +1064,35 @@ for (acor in correlations) {
 ggplot(outcomes, aes(x = sample_size, y = power, color = as.factor(correlation))) + geom_line() + theme_classic() 
 ```
 
+:::{.callout-tip collapse="true"}
+## Expand to get a tip
+
+This time, the variance-covariance matrix changes because the correlation between measures changes. That means you need to create a variance-covariance matrix for each correlation (aka inside that loop level). The structure below should help
+
+```{r}
+#| eval: false
+#| echo: true
+
+# iteratre over correlations
+for (acor in correlations) {
+  
+  sigma <- ?
+  
+  for (asample in min_sample:max_sample) {
+    
+    # empty storage for p-values
+    
+    for (arun in 1:runs) {
+      # for each run, do mvrnorm and store the p-value
+    }
+    
+    # store correlation, sample size, and power in a data frame
+  }
+}
+```
+
+:::
+
 ## Exercise
 
 What's happening above? With higher correlations, you also have more power. The formula for Cohen's $d$ for a paired samples t-test is different from the independent samples t-test one:
@@ -670,7 +1134,7 @@ for (acor in correlations) {
   for (arun in 1:runs) {
     d <- as.data.frame(
     mvrnorm(
-      asample,
+      n,
       means,
       sigma
     )
@@ -695,9 +1159,78 @@ for (acor in correlations) {
 plot(outcomes$correlation, abs(outcomes$d))
 ```
 
+:::{.callout-tip collapse="true"}
+## Expand to get a tip
+
+So this time we're not looking at p-values; we're looking at $d$. Like above, we declare our variables first.
+
+```{r}
+#| eval: false
+#| echo: true
+
+means <- c(before = ?, after = ?)
+n <- ?
+runs <- ?
+pre_sd <- ?
+post_sd <- ?
+correlations <- seq(0.01, 0.99, 0.01)
+
+outcomes <- data.frame(
+  correlation = NULL,
+  d = NULL
+)
+```
+
+Then you need to iterate over every correlation. For each correlation, you need a separate variance-covariance matrix. Once you have that, you do your regular for-loop, except this time you calculate Cohen's $d$, not significance. You then store all of those and take the mean for your outcome.
+
+```{r}
+#| echo: true
+#| eval: false
+
+for (acor in correlations) {
+  
+  sigma <- /
+  
+    # somewhere to store the correlations
+  ds <- NULL
+  
+  # then get 1,000 samples for 1,000 ds
+  for (arun in 1:runs) {
+    d <- as.data.frame(
+    mvrnorm(
+      ?,
+      ?,
+      ?
+    )
+  )
+  
+  difference <- d$before-d$after
+  
+  cohens_d <- # translate the formula for Cohen's d into R code (you'll need the difference)
+    
+  # store the result
+  ds[?] <- cohens_d
+  }
+  
+  # store the results for this correlation
+  outcomes <- 
+    rbind(
+      outcomes,
+      data.frame(
+        correlation = ?,
+        d = mean(d?)
+      )
+    )
+}
+```
+
+Then plot the effect size against the correlation with `plot(outcomes$correlation, abs(outcomes$d))`.
+
+:::
+
 ## Exercise
 
-Now you see how standardized effect sizes can become quite the problem: With an increase in the correlation between measures, your $SD_{diff}$ beomes smaller, whereas the means remain unchanged. In other words, the effect sizes becomes larger with decreasing SD because the difference in means turns into more standard deviation units.
+Now you see how standardized effect sizes can become quite the problem: With an increase in the correlation between measures, your $SD_{diff}$ becomes smaller, whereas the means remain unchanged. In other words, the effect sizes becomes larger with decreasing SD because the difference in means turns into more standard deviation units.
 
 It's hard--if not impossible--to have an intuition about what Cohen's $d$ you can go for because you'll need to know the means, SDs, and their correlations. If you know those, you have enough information to work on the raw scale anyway--and as we know, the raw scale is much more intuitive.
 
@@ -751,6 +1284,70 @@ while (power < 0.93) {
 plot(outcomes$sample_size, outcomes$power)
 abline(h = 0.93)
 ```
+
+:::{.callout-tip collapse="true"}
+## Expand to get a tip
+
+This is actually not too hard. Like always, you start with declaring your variables:
+
+```{r}
+#| eval: false
+#| echo: true
+
+mean_sd <- ?
+mean_difference <- mean_sd * 0.4
+runs <- ?
+
+# initiate power
+power <- 0
+
+# start with our sample size
+n <- 20
+
+# store outcomes
+outcomes <- 
+  data.frame(
+    sample_size = NULL,
+    power = NULL
+  )
+```
+
+Next, you define a while loop that only stops once power is high enough. Then you do your regular simulations with a one-sample t-test and store the p-values like we always do. Last, you calculate power and increase the sample size.
+
+```{r}
+#| eval: false
+#| echo: true
+
+while (? < ?) {
+  
+  # store our p-values
+  pvalues <- NULL
+  
+  for (i in 1:runs) {
+    
+    difference <- rnorm(n, ?, ?)
+    t <- t.test(?, mu = 0)
+    
+    pvalues[i] <- t$p.value
+    
+  }
+  
+  power <- ?
+  
+  outcomes <- rbind(
+    outcomes,
+    data.frame(
+      sample_size = n,
+      power = power
+    )
+  )
+  
+  n <- ?
+}
+
+```
+
+:::
 
 ## Exercise 
 

@@ -8,7 +8,7 @@ format:
     slide-number: true
     chalkboard: 
       buttons: false
-    footer: <https://niklasjohannes.github.io/power-workshop/>
+    footer: "[Home](https://niklasjohannes.github.io/power-workshop/)"
 execute:
   echo: true
 bibliography: references.bib
@@ -24,7 +24,7 @@ bibliography: references.bib
 
 [![](effect_size_wikipedia.jpg)](https://en.wikipedia.org/wiki/Effect_size#Cohen's_%C6%922)
 
-[Source](effect_size_wikipedia.jpg)\](https://en.wikipedia.org/wiki/Effect_size#Cohen's\_%C6%922)
+[Source](https://en.wikipedia.org/wiki/Effect_size#Cohen's_%C6%922)
 
 ## An example
 
@@ -90,7 +90,7 @@ Remember $P(data|H)$, not $P(H|data)$?
 
 > "...If one in twenty does not seem high enough odds, we may, if we prefer it, draw the line at one in fifty or one in a hundred. Personally, the writer prefers to set a low standard of significance at the 5 per cent point, and ignore entirely all results which fails to reach this level. A scientific fact should be regarded as experimentally established only if a properly designed experiment rarely fails to give this level of significance."
 
-From Fisher RA. The arrangement of field experiments. Journal of the Ministry of Agriculture of Great Britain 1926; 33:503-513.
+[@fisher1926]
 
 ## What are we claiming?
 
@@ -231,7 +231,7 @@ $pooled\ \sigma = \sqrt{\frac{(sd_1^2 + sd_2^2)}{2}}$
 
 ## An example
 
-Control group has a mean of 100 and an SD of 20. The treatment group has a mean of 105 and an SD of 10. The difference in the means is $105-100 = 15$ (simplified). The pooled SD is (simplified!) $\frac{20+10}{2} = 15$. So our difference is $5/15$ or simply $d = 0.33$. In other words, our difference is a third of a standard deviation unit.
+Control group has a mean of 100 and an SD of 20. The treatment group has a mean of 105 and an SD of 10. The difference in the means is $105-100 = 5$ (simplified). The pooled SD is (simplified!) $\frac{20+10}{2} = 15$. So our difference is $5/15$ or simply $d = 0.33$. In other words, our difference is a third of a standard deviation unit.
 
 ## So...
 
@@ -253,7 +253,7 @@ $d = \frac{M_1-M_2}{pooled\ \sigma^*}$
 -   Not "How many points does grumpiness go up with one extra year"
 -   But "How many standard deviations does grumpiness go up with one extra standard deviation of age"
 
-$r = B_{xy} \frac{\sigma_x}{\sigma_Y}$
+$r = B_{xy} \frac{\sigma_x}{\sigma_y}$
 
 ## An example
 
@@ -363,7 +363,7 @@ All you need to remember:
 -   Why are we interested in variance and not standard deviations all of a sudden
 -   Might be useful for model fit, but less intuitive for individual effect
 
-> Squaring the r is not merely uninformative; for purposes of evaluating effect size, the practice is actively misleading. \[@funder2019, p. 3\]
+> Squaring the r is not merely uninformative; for purposes of evaluating effect size, the practice is actively misleading. [@funder2019, p. 3]
 
 ## About squaring things
 
@@ -373,7 +373,7 @@ The moment we move beyond two groups or bivariate relationships:
 -   Our hypotheses are rarely about partial effects or total model variance
 -   Reporting them isn't really informative
 
-> As a rule, reports of effect size should focus on 1 *df* effects. \[@baguley2009, p. 614\]
+> As a rule, reports of effect size should focus on 1 *df* effects. [@baguley2009, p. 614]
 
 ## So what effect sizes are typical?
 
@@ -434,7 +434,7 @@ So... is $r$ = .21 big then? [@meyer2001]
 ## Getting too much of a feel
 
 -   Violent video game vs. racing game condition: $d$ = 3.46 [@hilgard2021]
--   Cancer-prone personality 121 times more likely to die of disease [source](https://www.theguardian.com/science/2019/oct/11/work-of-renowned-uk-psychologist-hans-eysenck-ruled-unsafe)
+-   Cancer-prone personality 121 times more likely to die of disease ( [source](https://www.theguardian.com/science/2019/oct/11/work-of-renowned-uk-psychologist-hans-eysenck-ruled-unsafe))
 -   Massive effect sizes are often a sign that something fishy is going on
 
 ## Heard of the replication crisis?
@@ -573,6 +573,10 @@ Procedure [@anvari2021a]:
 3.  Ask them again how they feel
 4.  Ask whether it has gotten better or not
 5.  Look at the average difference in scores for those who say there's improvement
+
+## Let the people speak
+
+![](anchor_example.jpg)
 
 ## Empirical benchmarks
 

@@ -8,7 +8,7 @@ format:
     slide-number: true
     chalkboard: 
       buttons: false
-    footer: <https://niklasjohannes.github.io/power-workshop/>
+    footer: "[Home](https://niklasjohannes.github.io/power-workshop/)"
 execute:
   echo: true
 ---
@@ -169,7 +169,8 @@ covariance <- correlation * pre_sd * post_sd
 
 ```{r}
 our_matrix <- matrix(
-  c(var_pre, covariance, covariance, var_post),
+  c(var_pre, covariance, 
+    covariance, var_post),
   ncol = 2
 )
 
@@ -213,7 +214,9 @@ t.test(
 )
 ```
 
-## The while operator
+# The while operator
+
+## Logic
 
 At this point, we've worked with `for` loops and went from a minimum to a maximum. If that maximum is large, that can take quite some time. You can also consider the `while` function to stop when you've reached the point you want to be at.
 
