@@ -5,10 +5,13 @@ format:
     toc: true
     toc-depth: 3
     number-sections: true
+    
+callout-appearance: simple
+
 execute: 
   cache: true
-  eval: true
-  echo: true
+  eval: false
+  echo: false
   message: false
   warning: false
 ---
@@ -18,6 +21,24 @@ execute:
 This is the first set of exercises where you get familiar with basic commands that you'll need for data simulation. It'll make it easier later on when you do more complicated designs to have a good intuition how these commands work.
 
 This part might be boring to you if you're already a seasoned R user. In that case, I recommend you get a coffee, tea, and/or nap.
+
+After some feedback from a previous iteration of this workshop, I'll give quite a lot of tips. They'll come in the form below, and I recommend you ignore them and try it out on your own first:
+
+:::{.callout-tip collapse="true"}
+## Expand to get a tip
+
+Tips will appear here, such as:
+
+```{r}
+#| eval: false
+
+sample(
+  x = ?,
+  size = how many samples?
+)
+```
+
+:::
 
 ## Block 1
 
@@ -30,6 +51,25 @@ groups <- letters[1:3]
 my_sample <- sample(groups, 10, TRUE)
 d <- data.frame(condition = as.factor(my_sample))
 ```
+
+:::{.callout-tip collapse="true"}
+## Expand to get a tip
+
+First create an object that contains three names (can be anything, but I recommend using `letters`). Then:
+
+```{r}
+#| eval: false
+
+sample(
+  x = your groups,
+  size = ten cases,
+  replace = ?
+)
+```
+
+Then use `data.frame`.
+
+:::
 
 ### Exercise
 
@@ -48,6 +88,13 @@ my_sample <-
 sum(my_sample==groups[1])
 ```
 
+:::{.callout-tip collapse="true"}
+## Expand to get a tip
+
+Check `?sample` and have a look at the `prob` argument. You can count how many are in the first group by summing up (`sum`) the groups or using a table (`table`).
+
+:::
+
 ### Exercise
 
 Show that `sample` with assigned probability (`prob = ` argument) is the same as `rbinom`. Conduct 10 coin flips with a an unfair coin that has a 60% of landing heads. Remember to set a seed (tip: twice).
@@ -60,6 +107,26 @@ set.seed(1)
 rbinom(10, 1, 0.6)
 ```
 
+:::{.callout-tip collapse="true"}
+## Expand to get a tip
+
+Set the seed, then call `sample`:
+
+```{r}
+#| eval: false
+
+sample(
+  x = head or tails,
+  size = how many samples?,
+  replace = ?,
+  prob = c(0.5, 0.5)
+)
+```
+
+Then set the seed again and call `rbinom`. You need 10 "experiments" with only one outcome. Check `?rbinom` for the `prob` argument. 0.5 would give you a 50% chance of getting the outcome.
+
+:::
+
 ### Exercise
 
 Draw random letters from the alphabet until the alphabet is empty.
@@ -67,6 +134,13 @@ Draw random letters from the alphabet until the alphabet is empty.
 ```{r}
 sample(letters, length(letters))
 ```
+
+:::{.callout-tip collapse="true"}
+## Expand to get a tip
+
+Tell sample to draw as many letters as there are in the alphabet. Use `letters`.
+
+:::
 
 ### Exercise
 
@@ -76,6 +150,13 @@ Draw all letters from the alphabet and explicitly assign the same probability fo
 probs <- rep(1/length(letters), length(letters))
 sample(letters, prob = probs)
 ```
+
+:::{.callout-tip collapse="true"}
+## Expand to get a tip
+
+Use the `prob` argument. You need one probability for each letter. That probability is the same for each letter, so in effect, you can just repeat the probability. If only there were an R command to repeat things.
+
+:::
 
 ### Exercise
 
@@ -95,6 +176,40 @@ d <-
 
 d
 ```
+
+:::{.callout-tip collapse="true"}
+## Expand to get a tip
+
+Ultimately, you want to have something of the following form:
+
+```{r}
+groups <- letters[1:3]
+participants <- length(groups) * 3
+trials <- 5
+
+d <- 
+  data.frame(
+    id = rep(1:participants, each = trials),
+    condition = rep(groups, each = trials, times = 3),
+    trial = rep(1:trials, times = participants)
+  )
+
+d
+```
+
+So first create the groups/conditions. Then decide how many participants you want and how many trials you want. Next, create a data frame:
+
+```{r}
+#| eval: false
+
+data.frame(
+  id = # it should go id number for as many trials as there are: 11111 22222 etc.,
+  condition = # each id above needs to only have one condition as many times as there are trials: aaaaa bbbbb ccccc aaaaa etc.,
+  trial = # repeat 12345 as many times as there are participants
+)
+```
+
+:::
 
 ### Exercise
 
@@ -119,6 +234,29 @@ d <-
 aggregate(d$heads, by = list(d$condition), mean)
 ```
 
+:::{.callout-tip collapse="true"}
+## Expand to get a tip
+
+I recommend to define your parameters at the beginning (sometimes called declaring your variables or assignment block):
+
+```{r}
+#| eval: false
+#| echo: true
+
+groups <- #?
+n <- #?
+flips <- #?
+fair <- #?
+unfair <- #?
+probs <- #? (Check how you assigned probabilities for the alphabet exercise above)
+```
+
+Then you can create a data frame like you did above, with IDs running from minimum to maximum, the first half having control assignment, the second half having treatment assignment, and a head count with `rbinom` (which takes the number of experiments, how many flips there are per experiments, and the probability of heads for that experiments; the experiment is each participant).
+
+Then use `aggregate` or `table`.
+
+:::
+
 ### Exercise
 
 You have 100 participants. Each participants reports their age which lies uniformly between 20 and 40. They also report grumpiness on a 100-point scale (with a 10-point SD). Each extra year predicts 0.5 higher grumpiness (Tip: Check the lecture slides; you'll need to add some error). Create the two variables (no need for a data frame) and conduct a correlation with `cor`. What's the correlation?
@@ -129,6 +267,14 @@ age <- runif(n, 20, 40)
 grumpiness <- age*0.5 + rnorm(n, 100, 10)
 cor(age, grumpiness)
 ```
+
+:::{.callout-tip collapse="true"}
+## Expand to get a tip
+
+Go to slide 29 [here](https://niklasjohannes.github.io/power-workshop/content/03-simulations-in-r/03-slides.html) and replace the error (`norm`) with the one specified.
+
+:::
+
 
 ### Exercise
 
@@ -144,6 +290,14 @@ d <- data.frame(
 
 plot(density(d$calls)) 
 ```
+
+
+:::{.callout-tip collapse="true"}
+## Expand to get a tip
+
+Create a data frame with an `id` variable running from 1 to 20, then call `rpois` and play around with the lambda parameter until `plot(density(dataframe$calls))` shows a spike at zero.
+
+:::
 
 ### Exercise
 
@@ -166,9 +320,27 @@ t.test(d$calls ~ d$condition)
 boxplot(d$calls ~ d$condition)
 ```
 
+
+:::{.callout-tip collapse="true"}
+## Expand to get a tip
+
+Create a second data frame that has an `id` variables that runs from 21 to 40 as well as a `calls` variable that indicates the number of calls like you did before. Then use `rbind` to combine the data frame with the students with the data frame you just created. Add a `condition` variable:
+
+```{r}
+#| eval: false
+#| echo: true
+
+d$condition <- 
+  rep(c("students", "profs"), ?)
+```
+
+Now run a t-test and a boxplot (`boxplot`).
+
+:::
+
 ## Block 2
 
-In this section, you'll use the basics from above to perform your first power analysis. You'll apply repeated simulations over a range of values and extracting and storing results to summarize them.
+In this section, you'll use the basics from above to perform your first power analysis. You'll apply repeated simulations over a range of values and extract and store results to summarize them.
 
 ### Exercise
 
@@ -186,6 +358,25 @@ d <-
   )
 ```
 
+:::{.callout-tip collapse="true"}
+## Expand to get a tip
+
+```{r}
+#| eval: false
+#| echo: true
+
+means <- ?
+sds <- ?
+n <- ?
+
+d <- 
+  data.frame(
+    group = rep(c(letters[1:4]), ?), # make sure condition matches how the score below is drawn
+    score = rnorm(n*4, means, sds)
+  )
+```
+
+:::
 
 ### Exercise
 
@@ -197,7 +388,7 @@ replicate(5, sample(letters, 10))
 
 ### Exercise
 
-Same as before, but this time you need 10 samples from a normal distribution with a mean of 10 and an SD of 2. Use `replicate` first, then a `for` loop.
+Same as before, but this time you need 10 cases from a normal distribution with a mean of 10 and an SD of 2. Use `replicate` first, then a `for` loop.
 
 ```{r}
 replicate(5, rnorm(10, 10, 2))
@@ -206,6 +397,22 @@ for (i in 1:5) {
   print(rnorm(10, 10, 2))
 }
 ```
+
+:::{.callout-tip collapse="true"}
+## Expand to get a tip
+
+```{r}
+#| eval: false
+#| echo: true
+
+replicate(?, rnorm(?, ?, ?))
+
+for (i in 1:5) {
+  print(rnorm(?, ?, ?))
+}
+```
+
+:::
 
 ### Exercise
 
@@ -237,9 +444,45 @@ means <-
 sd(colMeans(means))
 ```
 
+:::{.callout-tip collapse="true"}
+## Expand to get a tip
+
+Like we did earlier, first declare your variables:
+
+```{r}
+#| eval: false
+#| echo: true
+
+n <- ?
+mu <- ? # mu is the greek value for the true mean in the population
+sd <- ?
+se <- sd / sqrt(n) # calculating standard error
+means <- NULL # somewhere to store the means in
+draws <- 1e5 # how many samples?
+```
+
+Then we iterate over the number of samples, generate that sample, and take its mean.
+
+```{r}
+#| eval: false
+#| echo: true
+
+for (i in 1:draws) {
+  current_sample <- rnorm(?, ?, ?)
+  current_mean <- mean(current_sample)
+  
+  # store
+  means[?] <- current_mean
+}
+```
+
+Now you can compare the SD of `means` with the standard error.
+
+:::
+
 ### Exercise
 
-Same population. Draw 1,000 observations for each sample size between 20 and 100. Calculate the standard error for each sample size (like you did above) and plot it against the sample size. (Tip: You'll need to iterate over two things.)
+Same population. Draw 1,000 observations for each sample size between 20 and 100. Calculate the standard error for each sample size (like you did above by taking the SD of sample means) and plot it against the sample size. (Tip: You'll need to iterate over two things.)
 
 ```{r}
 mu <- 168
@@ -275,6 +518,60 @@ for (i in min_sample:max_sample) {
 
 plot(results$sample_size, results$se)
 ```
+
+:::{.callout-tip collapse="true"}
+## Expand to get a tip
+
+Like we did earlier, first declare your variables and generate an object in which to store the results:
+
+```{r}
+#| eval: false
+#| echo: true
+
+mu <- ?
+sd <- ?
+draws <- ? # how many draws are we doing?
+min_sample <- ?# minimum sample size
+max_sample <- ? # maximum sample size
+  
+# container
+results <- 
+data.frame(
+  sample_size = NULL,
+  se = NULL
+)
+```
+
+Then we iterate over the sample size, and for each sample size do 1,000 "draws", then store the results for that sample size.
+
+```{r}
+#| eval: false
+#| echo: true
+
+for (i in min_sample:max_sample) { # the sample sizes we want to iterate over
+  
+  sample_means <- NULL # somewhere to store the means for each of the 1,000 samples we'll do for this sample size
+  
+  for (j in 1:draws) { # second loop where we draw 1,000 samples for each sample size
+    sample_means[?] <- mean(rnorm(?, ?, ?)) # store the mean of this sample
+  }
+  
+  se <- sd(?) # once we're done with 1,000 draws, we need to get the SD of the sample means of this sample size
+  
+  # store the results
+  results <- rbind(
+    results, # the previous results
+    data.frame( # a new data row
+      sample_size = ?, # what sample size did we do in this iteration of the loop? Where is it stored?
+      se = ? # you calculated this above
+    )
+  )
+}
+```
+
+That's it, you can plot the results with `plot(results$sample_size, results$se)`.
+
+:::
 
 ### Exercise
 
@@ -317,6 +614,37 @@ sample_against_se <-
     return(plot(results$sample_size, results$se))
   }
 ```
+
+:::{.callout-tip collapse="true"}
+## Expand to get a tip
+
+You basically do the variable declaration inside `function()`, then copy-paste everything else into the body of the function:
+
+```{r}
+#| eval: false
+#| echo: true
+
+sample_against_se <- # or whatever function name you want
+  function( # this should look familiar
+    mu = ?,
+    sd = ?,
+    draws = ?,
+    min_sample = ?,
+    max_sample = ?
+  ) {
+    # here you put everything from above in here
+    results <- 
+      data.frame(
+        sample_size = NULL,
+        se = NULL
+      ) #etc.
+    
+    # then don't forget to return
+    return(plot(results$sample_size, results$se))
+  }
+```
+
+:::
 
 ### Exercise
 
@@ -361,9 +689,46 @@ for (i in 1:draws) {
 plot(density(pvalues))
 ```
 
+:::{.callout-tip collapse="true"}
+## Expand to get a tip
+
+This all is much easier than it appears at first sight. Start with declaring your variables:
+
+```{r}
+#| eval: false
+#| echo: true
+
+n <- ? # sample size
+h0 <- ? # test against this null (read the description again to know which height is the null)
+h1 <- ? # true population effect (true height)
+sd <- ? # population SD
+draws <- ? # how many draws?
+```
+
+Now you do what you've been doing this whole time: Use a loop to draw a sample, then calculate the z statistic (this could be any statistical test), extract the p-value for that z-statistic (or p-value for any statistical test), and store the p-value somewhere.
+
+```{r}
+#| eval: false
+#| echo: true
+
+# somewhere to store pvalues
+pvalues <- NULL
+
+# then our loop
+for (i in 1:draws) {
+  d <- rnorm(?, ?, ?) # get a sample with the variables you declared above
+  z <- # translate the formula above into R code (?sqrt)
+  pvalues[?] <- ? # get the p-value with the code from the exercise instructions, but replace 1.645 with the z-value you calculated
+}
+```
+
+That's it. Have a look at how the p-values are distributed with `plot(density(pvalues))`.
+
+:::
+
 ### Exercise
 
-Now calculate the proportion of p-values that are below 0.05. That's your power: The proportion of tests that will detect that there's a true effect. In our case, that effect is a difference of 2.6cm.
+Now calculate the proportion of p-values that are below 0.05. That's your power: The proportion of tests that will detect that there's a true effect. In our case, that effect is a difference of 2.6cm. (Tip: Count or sum how many p-values are below 0.05 and divide by total number of p-values).
 
 ```{r}
 sum(pvalues < 0.05)/length(pvalues)
@@ -415,6 +780,64 @@ power_function <-
 power_function()
 ```
 
+:::{.callout-tip collapse="true"}
+## Expand to get a tip
+
+You basically do the variable declaration inside `function()` like you've done before, then copy-paste everything else into the body of the function:
+
+```{r}
+#| eval: false
+#| echo: true
+
+power_function <- # name as you please
+  function(
+    h0 = ?, # assign default values or scratch the "= ?" part
+    h1 = ?,
+    sd = ?,
+    alpha = ?,
+    draws = ?,
+    min_sample = ?, # the minimum sample size
+    max_sample = ? #  the maximum sample size
+  ) {
+    
+    # create a data frame to store results in
+    results <- 
+      data.frame(
+        sample_size = NULL,
+        power = NULL
+      )
+    
+    # first loop
+    for (i in min_sample:max_sample) {
+      
+      # store pvalues for each sample size
+      pvalues <- NULL
+      
+      # second loop
+      for (j in 1:draws) {
+        # do what you did above and store all pvalues for each draw in `pvalues`
+      }
+      
+      # add the results for this sample size (aka pvalues)
+      results <- rbind(
+        results,
+        data.frame(
+          sample_size = ?,
+          power = ? # proportion of pvalues under 0.05
+        )
+      )
+    }
+    
+    # don't forget to return the plot
+    return(plot(results$sample_size, results$power, type = "l"))
+  }
+
+# call the function
+power_function()
+```
+
+:::
+
 ### Exercise
 
 Now do the same thing with a one-sample t-test. (Tip: You only need to replace the z-scores with a `t.test` from which you can extract the p-value). (Another tip: Use the $ sign on where you stored the t-test results.)
@@ -460,6 +883,14 @@ power_function_t <-
 
 power_function()
 ```
+
+:::{.callout-tip collapse="true"}
+## Expand to get a tip
+
+Instead of calculating the z-value yourself, you run `t.test(data, mu = null hypothesis value, alternative = "greater")`, then extract the p-value with `t.test$p.value`. All you need is to change the code from above by two lines.
+
+:::
+
 ### Exercise
 
 Just for funsies (and for our next session), see what happens when the true effect is only 1cm in difference.

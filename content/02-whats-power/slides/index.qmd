@@ -8,7 +8,7 @@ format:
     slide-number: true
     chalkboard: 
       buttons: false
-    footer: <https://niklasjohannes.github.io/power-workshop/>
+    footer: "[Home](https://niklasjohannes.github.io/power-workshop/)"
 execute:
   echo: false
 bibliography: references-workshop.bib
@@ -17,8 +17,6 @@ bibliography: references-workshop.bib
 # Takeaways
 
 ```{r}
-#| echo: false
-
 library(tidyverse)
 
 theme_set(
@@ -104,7 +102,7 @@ Jerzy Neyman (1894-1981)
 
 ## Error rates
 
-Error rates are what we deem acceptable levels of being right/wrong in the long-run:
+If we're forced to make a decision, then error rates are what we deem acceptable levels of being right/wrong in the long-run:
 
 -   $\alpha$
 -   $\beta$
@@ -148,7 +146,7 @@ When there truly is an effect, two things can happen: We find no significant eff
 (Data|H_0) \neq (H_0|Data)
 \end{gather*}
 ```
-We can't find evidence for H~0~ with "classical" NHST. A nonsignificant p-value only means we can't reject H~0~, and can't accept H~1~, but we can't accept H~0~.
+We can't find evidence for H~0~ with "classical" NHST (unless we use equivalence tests). A nonsignificant p-value only means we can't reject H~0~, and therefore can't accept H~1~, but we can't accept H~0~.
 
 ## Where's our power?
 
@@ -170,8 +168,6 @@ Power is the probability of finding a significant result when there is an effect
 Let's assume we want to know whether the population mean is larger than 50. We sample *n* = 100.
 
 ```{r}
-#| echo: false
-
 # sample size
 n <- 100
 
@@ -207,11 +203,9 @@ d <-
 
 ## The null distribution
 
-This is the sample distribution if the null were true: The true effect is 50.
+This is the sampling distribution if the null were true: The true effect is 50.
 
 ```{r}
-#| echo: false
-
 # https://stackoverflow.com/questions/33244629/filling-under-the-a-curve-with-ggplot-graphsot
 # https://github.com/tidyverse/ggplot2/issues/1528
 # https://paulvanderlaken.com/2019/12/21/ggplot2-sampling-distribution-area-under-curve/
@@ -244,8 +238,6 @@ l1+l2
 Where does a sample need to fall for us to wrongly conclude there's a difference?
 
 ```{r}
-#| echo: false
-
 geom_vline(aes(xintercept = critical_raw)) -> l3
 
 scale_x_continuous(
@@ -261,8 +253,6 @@ l1+l2+l3+l4
 That's our $\alpha$: our false positives. Left of it: our true negatives (1-$\alpha$).
 
 ```{r}
-#| echo: false
-
 stat_function(
   data = d %>% filter(x < h0 + 4*se),
   fun = dnorm,
@@ -283,8 +273,6 @@ l1+l2+l3+l4+l5
 Our sampling distribution if the population value is 60. We commit a false positive if we assume a sample comes from the right distribution if in fact it comes from the left.
 
 ```{r}
-#| echo: false
-
 stat_function(
   fun = dnorm,
   geom = "area",
@@ -309,8 +297,6 @@ l1+l2+l3+l4+l6+l5
 Our $\beta$: our false negatives. We commit a false negative if we assume a sample comes from the left distribution if in fact it comes from the right.
 
 ```{r}
-#| echo: false
-
 stat_function(
   fun = dnorm,
   geom = "area",
@@ -328,8 +314,6 @@ l1+l2+l3+l4+l6+l7+l5
 ## Where's power then?
 
 ```{r}
-#| echo: false
-
 l1+l2+l3+l4+l6+l7+l5
 ```
 
@@ -338,8 +322,6 @@ l1+l2+l3+l4+l6+l7+l5
 Everything right of the critical value: If a sample comes from the right distribution, this is how often we'll correctly identify it.
 
 ```{r}
-#| echo: false
-
 stat_function(
   fun = dnorm,
   geom = "area",
@@ -377,7 +359,7 @@ Running studies with low power (aka underpowered studies) risks:
 Society has commissioned us to find out something. Why would we start by setting us up so that we're barely able to do that?
 
 -   Waste of resources
--   Super frustrating (personally)
+-   Super frustrating
 -   Dissuades others
 -   Can slow down entire research lines
 
@@ -386,8 +368,6 @@ Society has commissioned us to find out something. Why would we start by setting
 Let's go back to our example. Let's assume we want to know whether the population mean is larger than 50. We sample *n* = 100.
 
 ```{r}
-#| echo: false
-
 l1+l2+l3
 ```
 
@@ -396,8 +376,6 @@ l1+l2+l3
 The sampling distribution gets wider: Now a sample mean needs to be really large to be significant. The smaller our sample (aka the lower our power), the more extreme a sample has to be to "make it" across the critical value.
 
 ```{r}
-#| echo: false
-
 # sample size
 n <- 10
 
@@ -451,7 +429,54 @@ ggplot(
 
 ## Low power inflates effects
 
-If our study is small (has low power), only an overestimate will pass our threshold for significance. **With underpowered studies, significant results will always be an overestimate**.
+If our study is small (has low power), only an overestimate will pass our threshold for significance. **With underpowered studies, significant results will always be an overestimate**. Below, even effects that are larger than the average true effect won't be found.
+
+```{r}
+ggplot(
+  d2,
+  aes(x, alpha = 0.5)
+) +
+  theme(
+    legend.position = "none"
+  ) +
+  stat_function(
+    data = d2,
+    fun = dnorm,
+    fill = NA,
+    geom = "area",
+    linetype = "dashed",
+    color = "black",
+    args = list(
+      mean = h0,
+      sd = se2
+    )
+  ) +
+  geom_vline(aes(xintercept = critical_raw2), linetype = "dashed") +
+  stat_function(
+    data = d2,
+    fun = dnorm,
+    fill = NA,
+    geom = "area",,
+    color = "black",
+    args = list(
+      mean = h1,
+      sd = se2
+    )
+  ) +
+  stat_function(
+    data = d2 %>% filter(h1 < x & x < critical_raw2),
+    fun = dnorm,
+    geom = "area",
+    fill = "black",
+    args = list(
+      mean = h1,
+      sd = se2
+    ),
+    xlim = c(h1, critical_raw2)
+  )
+```
+
+## Put differently
 
 Tu put it differently: Small studies are only sensitive to large effects. But if the effect is truly small, we'll only get a significant result for the rare massive overestimate.
 
@@ -523,7 +548,7 @@ Heard of the replication crisis?
 
 ## Killer combo
 
--   Bad research research + low power
+-   Bad research + low power
 -   False positives
 -   Inflated effect sizes
 -   Inflated false positives = low credibility and a waste of resources

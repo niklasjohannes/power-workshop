@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.9.88">
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.0.38">
+
   <meta name="author" content="Niklas Johannes">
   <title>What’s power?</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -10,9 +17,6 @@
   <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reveal.css">
   <style>
-    .reveal .sourceCode {  /* see #7635 */
-      overflow: visible;
-    }
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     span.underline{text-decoration: underline;}
@@ -40,14 +44,6 @@
     }
   </style>
   <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto.css" id="theme">
-
-  <script src="../../../site_libs/clipboard/clipboard.min.js"></script>
-  <script src="../../../site_libs/quarto-html/tabby.min.js"></script>
-  <script src="../../../site_libs/quarto-html/popper.min.js"></script>
-  <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-  <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-  <link href="../../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet">
-  <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
   <link href="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -63,7 +59,7 @@
   }
 
   .callout.callout-style-simple { 
-    padding: 0em 0.7em;
+    padding: 0em 0.5em;
     border-left: solid #acacac .3rem;
     border-right: solid 1px silver;
     border-top: solid 1px silver;
@@ -174,8 +170,7 @@
     display: none !important;
   }
 
-  .callout.callout-captioned .callout-body > :last-child,
-  .callout.callout-captioned .callout-body > div > :last-child {
+  .callout.callout-captioned .callout-body > .callout-content > :last-child {
     margin-bottom: 0.5rem;
   }
 
@@ -264,12 +259,6 @@
     .reveal .slide:not(.center) {
       height: 100%;
     }
-    .reveal #title-slide.center,
-    .reveal .title-slide.center,
-    .reveal .controls .navigate-left .controls-arrow,
-    .reveal .controls .navigate-right .controls-arrow {
-      margin-top: -15px;
-    }
     .reveal .slide.scrollable {
       overflow-y: auto;
     }
@@ -346,7 +335,7 @@
     }
   </style>
 </head>
-<body>
+<body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
@@ -428,7 +417,7 @@ P = (Data|H_0)
 </section>
 <section id="error-rates" class="slide level2">
 <h2>Error rates</h2>
-<p>Error rates are what we deem acceptable levels of being right/wrong in the long-run:</p>
+<p>If we’re forced to make a decision, then error rates are what we deem acceptable levels of being right/wrong in the long-run:</p>
 <ul>
 <li><span class="math inline">\(\alpha\)</span></li>
 <li><span class="math inline">\(\beta\)</span></li>
@@ -474,7 +463,7 @@ P = (Data|H_0)
 <span class="math display">\[\begin{gather*}
 (Data|H_0) \neq (H_0|Data)
 \end{gather*}\]</span>
-<p>We can’t find evidence for H<sub>0</sub> with “classical” NHST. A nonsignificant p-value only means we can’t reject H<sub>0</sub>, and can’t accept H<sub>1</sub>, but we can’t accept H<sub>0</sub>.</p>
+<p>We can’t find evidence for H<sub>0</sub> with “classical” NHST (unless we use equivalence tests). A nonsignificant p-value only means we can’t reject H<sub>0</sub>, and therefore can’t accept H<sub>1</sub>, but we can’t accept H<sub>0</sub>.</p>
 </section>
 <section id="wheres-our-power" class="slide level2">
 <h2>Where’s our power?</h2>
@@ -523,38 +512,38 @@ P = (Data|H_0)
 </section>
 <section id="the-null-distribution" class="slide level2">
 <h2>The null distribution</h2>
-<p>This is the sample distribution if the null were true: The true effect is 50.</p>
+<p>This is the sampling distribution if the null were true: The true effect is 50.</p>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
 <section id="the-null-distribution-1" class="slide level2">
 <h2>The null distribution</h2>
 <p>Where does a sample need to fall for us to wrongly conclude there’s a difference?</p>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
 <section id="the-null-distribution-2" class="slide level2">
 <h2>The null distribution</h2>
 <p>That’s our <span class="math inline">\(\alpha\)</span>: our false positives. Left of it: our true negatives (1-<span class="math inline">\(\alpha\)</span>).</p>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
 <section id="where-would-we-conclude-its-coming-from-then" class="slide level2">
 <h2>Where would we conclude it’s coming from then?</h2>
 <p>Our sampling distribution if the population value is 60. We commit a false positive if we assume a sample comes from the right distribution if in fact it comes from the left.</p>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
 <section id="what-about-the-reverse" class="slide level2">
 <h2>What about the reverse?</h2>
 <p>Our <span class="math inline">\(\beta\)</span>: our false negatives. We commit a false negative if we assume a sample comes from the left distribution if in fact it comes from the right.</p>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"></section>
 <section id="wheres-power-then" class="slide level2">
 <h2>Where’s power then?</h2>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
 <section id="wheres-power-then-1" class="slide level2">
 <h2>Where’s power then?</h2>
 <p>Everything right of the critical value: If a sample comes from the right distribution, this is how often we’ll correctly identify it.</p>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"></section>
 <section id="what-determined-power-again" class="slide level2">
 <h2>What determined power again?</h2>
 <p>Power is the probability of finding a significant result when there is an effect. It’s determined (simplified) by:</p>
@@ -579,7 +568,7 @@ P = (Data|H_0)
 <p>Society has commissioned us to find out something. Why would we start by setting us up so that we’re barely able to do that?</p>
 <ul>
 <li>Waste of resources</li>
-<li>Super frustrating (personally)</li>
+<li>Super frustrating</li>
 <li>Dissuades others</li>
 <li>Can slow down entire research lines</li>
 </ul>
@@ -588,15 +577,19 @@ P = (Data|H_0)
 <h2>Inflating those effects we find</h2>
 <p>Let’s go back to our example. Let’s assume we want to know whether the population mean is larger than 50. We sample <em>n</em> = 100.</p>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-20-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"></section>
 <section id="what-if-we-sample-only-10" class="slide level2">
 <h2>What if we sample only 10?</h2>
 <p>The sampling distribution gets wider: Now a sample mean needs to be really large to be significant. The smaller our sample (aka the lower our power), the more extreme a sample has to be to “make it” across the critical value.</p>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-22-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
 <section id="low-power-inflates-effects" class="slide level2">
 <h2>Low power inflates effects</h2>
-<p>If our study is small (has low power), only an overestimate will pass our threshold for significance. <strong>With underpowered studies, significant results will always be an overestimate</strong>.</p>
+<p>If our study is small (has low power), only an overestimate will pass our threshold for significance. <strong>With underpowered studies, significant results will always be an overestimate</strong>. Below, even effects that are larger than the average true effect won’t be found.</p>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
+<section id="put-differently" class="slide level2">
+<h2>Put differently</h2>
 <p>Tu put it differently: Small studies are only sensitive to large effects. But if the effect is truly small, we’ll only get a significant result for the rare massive overestimate.</p>
 <p>Let’s have a look again: <a href="https://rpsychologist.com/d3/nhst/" data-preview-link="true">Preview</a></p>
 </section>
@@ -659,7 +652,7 @@ PPV = \frac{power \times R}{power \times R + \alpha}
 <section id="killer-combo" class="slide level2">
 <h2>Killer combo</h2>
 <ul>
-<li>Bad research research + low power</li>
+<li>Bad research + low power</li>
 <li>False positives</li>
 <li>Inflated effect sizes</li>
 <li>Inflated false positives = low credibility and a waste of resources</li>
@@ -697,7 +690,7 @@ Vazire, Simine. 2017. <span>“Quality uncertainty erodes trust in science.”</
 </div>
 
 <div class="footer footer-default">
-<p><a href="https://niklasjohannes.github.io/power-workshop/" class="uri">https://niklasjohannes.github.io/power-workshop/</a></p>
+<p><a href="https://niklasjohannes.github.io/power-workshop/">Home</a></p>
 </div>
 </section></section>
     </div>
@@ -705,7 +698,6 @@ Vazire, Simine. 2017. <span>“Quality uncertainty erodes trust in science.”</
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
   <script src="../../../site_libs/revealjs/dist/reveal.js"></script>
-
   <!-- reveal.js plugins -->
   <script src="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
   <script src="../../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
@@ -713,12 +705,13 @@ Vazire, Simine. 2017. <span>“Quality uncertainty erodes trust in science.”</
   <script src="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
   <script src="../../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
   <script src="../../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
   <script src="../../../site_libs/revealjs/plugin/notes/notes.js"></script>
   <script src="../../../site_libs/revealjs/plugin/search/search.js"></script>
   <script src="../../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
   <script src="../../../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
-
 
   <script>
 
@@ -732,11 +725,10 @@ Vazire, Simine. 2017. <span>“Quality uncertainty erodes trust in science.”</
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
-
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":false},
 'smaller': false,
-
+ 
         // Display controls in the bottom right corner
         controls: false,
 
@@ -956,8 +948,26 @@ Vazire, Simine. 2017. <span>“Quality uncertainty erodes trust in science.”</
       })();
     </script>
 
-    <script type="application/javascript">
+    <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
       const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
       tabsets.forEach(function(tabset) {
         const tabby = new Tabby('#' + tabset.id);
@@ -974,7 +984,10 @@ Vazire, Simine. 2017. <span>“Quality uncertainty erodes trust in science.”</
         button.blur();
         // flash "checked"
         button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
         setTimeout(function() {
+          button.setAttribute("title", currentTitle);
           button.classList.remove('code-copy-button-checked');
         }, 1000);
         // clear code selection

@@ -8,7 +8,7 @@ format:
     slide-number: true
     chalkboard: 
       buttons: false
-    footer: <https://niklasjohannes.github.io/power-workshop/>
+    footer: "[Home](https://niklasjohannes.github.io/power-workshop/)"
 execute:
   echo: true
 ---
@@ -23,7 +23,7 @@ execute:
 
 ![](gpower.jpg)
 
-## GPower is great
+## Nothing wrong with GPower
 
 - GPower works great!
 - Runs the risk of treating power just as a hoop to jump through
@@ -31,7 +31,12 @@ execute:
 
 ## So why are we here?
 
-The goal of the workshop is for you to (1) have an understanding of the philosophy behind using data to test claims, (2) get an intuition of how data generation processes work, (3) learn the technical skills to turn these processes into data, and (4) use these skills to simulate power for an informative study.
+The goal of the workshop is for you to
+
+1. have an understanding of the philosophy behind using data to test claims,
+2. get an intuition of how data generation processes work,
+3. learn the technical skills to turn these processes into data, and
+4. use these skills to simulate power for an informative study.
 
 ## So what will you learn
 
@@ -47,7 +52,7 @@ A bit of everything. It'll be a weird mix:
 - A vague memory of your stats courses
 - Some familiarity with R (and RStudio)
 - Tolerance for confusion
-- Enthusiasm for 2 days
+- Enthusiasm for 2 days (or at least resilience)
 
 ## What you can expect from me
 
@@ -134,19 +139,19 @@ We'll follow the same routine over and over: Learn, do, recall.
 - Extend this understanding to continuous (by categorical) interactions
 - Be able to translate that extension to generating data
 
-## You're guinea pigs
+## About that schedule
 
-- First time I'm giving this workshop, so timing might be way off
+- Timing will be way off: Schedule depends heavily on how much time is needed for exercises
+- Good news is: After half a day you'll know everything you need--everything else is just bonus
 - That's why these slides are so full: I wrote the entire thing so you can go and revisit
-- Always interrupt!
 
 ## Materials
 
 - Everything is up on: <https://github.com/niklasjohannes/power-workshop>
-- Just download everything as a zip file
+- Just download everything as a zip file (Code -> Zip)
 - Rendered to follow along here: <https://niklasjohannes.github.io/power-workshop/>
 - There, you'll also find instructions on how to download R, RStudio, and GPower
-- For discussions we use Discord: <https://discord.gg/veejMFnNHF>
+- For discussions we use Discord: <link>
 
 ## Stealing stuff
 

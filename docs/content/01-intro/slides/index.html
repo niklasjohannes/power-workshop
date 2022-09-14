@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.9.88">
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.0.38">
+
   <meta name="author" content="Niklas Johannes">
   <title>Welcome</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -10,9 +17,6 @@
   <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reveal.css">
   <style>
-    .reveal .sourceCode {  /* see #7635 */
-      overflow: visible;
-    }
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     span.underline{text-decoration: underline;}
@@ -21,14 +25,6 @@
     ul.task-list{list-style: none;}
   </style>
   <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto.css" id="theme">
-
-  <script src="../../../site_libs/clipboard/clipboard.min.js"></script>
-  <script src="../../../site_libs/quarto-html/tabby.min.js"></script>
-  <script src="../../../site_libs/quarto-html/popper.min.js"></script>
-  <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-  <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-  <link href="../../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet">
-  <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
   <link href="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -44,7 +40,7 @@
   }
 
   .callout.callout-style-simple { 
-    padding: 0em 0.7em;
+    padding: 0em 0.5em;
     border-left: solid #acacac .3rem;
     border-right: solid 1px silver;
     border-top: solid 1px silver;
@@ -155,8 +151,7 @@
     display: none !important;
   }
 
-  .callout.callout-captioned .callout-body > :last-child,
-  .callout.callout-captioned .callout-body > div > :last-child {
+  .callout.callout-captioned .callout-body > .callout-content > :last-child {
     margin-bottom: 0.5rem;
   }
 
@@ -245,12 +240,6 @@
     .reveal .slide:not(.center) {
       height: 100%;
     }
-    .reveal #title-slide.center,
-    .reveal .title-slide.center,
-    .reveal .controls .navigate-left .controls-arrow,
-    .reveal .controls .navigate-right .controls-arrow {
-      margin-top: -15px;
-    }
     .reveal .slide.scrollable {
       overflow-y: auto;
     }
@@ -327,7 +316,7 @@
     }
   </style>
 </head>
-<body>
+<body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
@@ -349,8 +338,8 @@
 <h2>Okay, so I use GPower?</h2>
 
 <img data-src="gpower.jpg" class="r-stretch"></section>
-<section id="gpower-is-great" class="slide level2">
-<h2>GPower is great</h2>
+<section id="nothing-wrong-with-gpower" class="slide level2">
+<h2>Nothing wrong with GPower</h2>
 <ul>
 <li>GPower works great!</li>
 <li>Runs the risk of treating power just as a hoop to jump through</li>
@@ -359,7 +348,13 @@
 </section>
 <section id="so-why-are-we-here" class="slide level2">
 <h2>So why are we here?</h2>
-<p>The goal of the workshop is for you to (1) have an understanding of the philosophy behind using data to test claims, (2) get an intuition of how data generation processes work, (3) learn the technical skills to turn these processes into data, and (4) use these skills to simulate power for an informative study.</p>
+<p>The goal of the workshop is for you to</p>
+<ol type="1">
+<li>have an understanding of the philosophy behind using data to test claims,</li>
+<li>get an intuition of how data generation processes work,</li>
+<li>learn the technical skills to turn these processes into data, and</li>
+<li>use these skills to simulate power for an informative study.</li>
+</ol>
 </section>
 <section id="so-what-will-you-learn" class="slide level2">
 <h2>So what will you learn</h2>
@@ -377,7 +372,7 @@
 <li>A vague memory of your stats courses</li>
 <li>Some familiarity with R (and RStudio)</li>
 <li>Tolerance for confusion</li>
-<li>Enthusiasm for 2 days</li>
+<li>Enthusiasm for 2 days (or at least resilience)</li>
 </ul>
 </section>
 <section id="what-you-can-expect-from-me" class="slide level2">
@@ -552,22 +547,22 @@
 <li>Be able to translate that extension to generating data</li>
 </ul>
 </section>
-<section id="youre-guinea-pigs" class="slide level2">
-<h2>You’re guinea pigs</h2>
+<section id="about-that-schedule" class="slide level2">
+<h2>About that schedule</h2>
 <ul>
-<li>First time I’m giving this workshop, so timing might be way off</li>
+<li>Timing will be way off: Schedule depends heavily on how much time is needed for exercises</li>
+<li>Good news is: After half a day you’ll know everything you need–everything else is just bonus</li>
 <li>That’s why these slides are so full: I wrote the entire thing so you can go and revisit</li>
-<li>Always interrupt!</li>
 </ul>
 </section>
 <section id="materials" class="slide level2">
 <h2>Materials</h2>
 <ul>
 <li>Everything is up on: <a href="https://github.com/niklasjohannes/power-workshop" class="uri">https://github.com/niklasjohannes/power-workshop</a></li>
-<li>Just download everything as a zip file</li>
+<li>Just download everything as a zip file (Code -&gt; Zip)</li>
 <li>Rendered to follow along here: <a href="https://niklasjohannes.github.io/power-workshop/" class="uri">https://niklasjohannes.github.io/power-workshop/</a></li>
 <li>There, you’ll also find instructions on how to download R, RStudio, and GPower</li>
-<li>For discussions we use Discord: <a href="https://discord.gg/veejMFnNHF" class="uri">https://discord.gg/veejMFnNHF</a></li>
+<li>For discussions we use Discord: <link></li>
 </ul>
 </section>
 <section id="stealing-stuff" class="slide level2">
@@ -593,7 +588,7 @@
 <h1>Let’s get started</h1>
 
 <div class="footer footer-default">
-<p><a href="https://niklasjohannes.github.io/power-workshop/" class="uri">https://niklasjohannes.github.io/power-workshop/</a></p>
+<p><a href="https://niklasjohannes.github.io/power-workshop/">Home</a></p>
 </div>
 </section>
     </div>
@@ -601,7 +596,6 @@
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
   <script src="../../../site_libs/revealjs/dist/reveal.js"></script>
-
   <!-- reveal.js plugins -->
   <script src="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
   <script src="../../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
@@ -609,12 +603,13 @@
   <script src="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
   <script src="../../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
   <script src="../../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
   <script src="../../../site_libs/revealjs/plugin/notes/notes.js"></script>
   <script src="../../../site_libs/revealjs/plugin/search/search.js"></script>
   <script src="../../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
   <script src="../../../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
-
 
   <script>
 
@@ -628,11 +623,10 @@
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
-
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":false},
 'smaller': false,
-
+ 
         // Display controls in the bottom right corner
         controls: false,
 
@@ -810,8 +804,26 @@
         ]
       });
     </script>
-    <script type="application/javascript">
+    <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
       const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
       tabsets.forEach(function(tabset) {
         const tabby = new Tabby('#' + tabset.id);
@@ -828,7 +840,10 @@
         button.blur();
         // flash "checked"
         button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
         setTimeout(function() {
+          button.setAttribute("title", currentTitle);
           button.classList.remove('code-copy-button-checked');
         }, 1000);
         // clear code selection

@@ -8,7 +8,7 @@ format:
     slide-number: true
     chalkboard: 
       buttons: false
-    footer: <https://niklasjohannes.github.io/power-workshop/>
+    footer: "[Home](https://niklasjohannes.github.io/power-workshop/)"
 execute:
   echo: true
 bibliography: references.bib
@@ -580,7 +580,7 @@ rep(
 Let's create a group.
 
 ```{r}
-condition <- rep("control", each = 4)
+condition <- rep("control", times = 4)
 outcome <- rnorm(4)
 d <- data.frame(condition, outcome)
 d
@@ -729,7 +729,7 @@ datasets
 
 ## A concrete example
 
-Let's model the growth of our department. This year, we have **12** PhD students. Each year, our **4** professors write one grant application. If they get the money, they'll hire one new PhD student. Their chance of getting the money is **15%**. But academia also sucks sometimes, so each PhD student each year has a **5%** chance of quitting and finally doing something with their lives. How large is the department after **25** years?
+Let's model the growth of our department. This year, we have **12** PhD students. Each year, our **4** professors write one grant application each. If they get the money, they'll hire one new PhD student. Their chance of getting the money is **15%**. But academia also sucks sometimes, so each PhD student each year has a **5%** chance of quitting and finally doing something with their lives. How large is the department after **25** years?
 
 ## Let's put that into numbers
 
