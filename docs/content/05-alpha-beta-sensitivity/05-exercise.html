@@ -401,7 +401,7 @@ True \ positives = power * (1 - \phi)\\\\
 False \ positive \ rate = \frac{\phi * \alpha}{\phi * \alpha + power * (1 - \phi)}
 \end{align}\]</span>
 <p><span class="math inline">\(\phi\)</span> is the proportion of null hypotheses, in general in a field, that are true, <span class="math inline">\(\alpha\)</span> your false positive error rate, and power is <span class="math inline">\((1-\beta)\)</span>.</p>
-<p>Plot how the false positive rate develops as <span class="math inline">\(\phi\)</span> goes from 0 to 1 for two <span class="math inline">\(\alpha\)</span> levels (.05 and .01.) and two levels of power (80% and 95%). No need for a simulation here. You can just straight up use the formula above to calculate the false positive rate. For that, it’s probably easiest to create a data.frame. Try out the <code>expand.grid</code> command which creates a data frame of all combinations of several variables. For example:</p>
+<p>Plot how the false positive rate develops as <span class="math inline">\(\phi\)</span> goes from 0 to 1 for two <span class="math inline">\(\alpha\)</span> levels (.05 and .01.) and two levels of power (80% and 95%). No need for a simulation here. You can just straight up use the formula above to calculate the false positive rate. For that, it’s probably easiest to create a data frame. Try out the <code>expand.grid</code> command which creates a data frame of all combinations of several variables. For example:</p>
 <div class="cell" data-hash="05-exercise_cache/html/unnamed-chunk-1_73f3212d66f208c00943719d8c01933a">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>iq_scores <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">100</span>, <span class="dv">105</span>, <span class="dv">1</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>sample_size <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>)</span>
@@ -432,7 +432,7 @@ False \ positive \ rate = \frac{\phi * \alpha}{\phi * \alpha + power * (1 - \phi
 <div class="cell" data-hash="05-exercise_cache/html/unnamed-chunk-3_95fadad75334b929ebaf38ee956796da">
 
 </div>
-<p>In physics, they use a five sigma rule. That means their alpha is <span class="math inline">\(3*10^-7\)</span> or 1 in 3.5 million. Do the above again, but this time plot “our” 0.05 against five sigma and compare false positive rates.</p>
+<p>In physics, they use a five sigma rule. That means their alpha is <span class="math inline">\(3*10^{-7}\)</span> or 1 in 3.5 million. Do the above again, but this time plot “our” 0.05 against five sigma and compare false positive rates.</p>
 <div class="cell" data-hash="05-exercise_cache/html/unnamed-chunk-4_7444bcf033f40e2473753475e58ce9e2">
 
 </div>

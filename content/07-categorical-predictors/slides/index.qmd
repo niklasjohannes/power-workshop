@@ -8,7 +8,7 @@ format:
     slide-number: true
     chalkboard: 
       buttons: false
-    footer: <https://niklasjohannes.github.io/power-workshop/>
+    footer: "[Home](https://niklasjohannes.github.io/power-workshop/)"
 execute:
   echo: true
 ---
@@ -804,7 +804,7 @@ $$
 $$
 \begin{bmatrix} 
 SD_{x_1} & r_{x_1x_2} & r_{x_1x_3}\\
-r_{x_2x_1} & SD_{x_2} & r_{x_2x_2}\\
+r_{x_2x_1} & SD_{x_2} & r_{x_2x_3}\\
 r_{x_3x_1} & r_{x_3x_2} & SD_{x_3}
 \end{bmatrix}
 $$
@@ -879,9 +879,29 @@ d2 <-
 
 ## Long format
 
+:::: {.columns}
+
+:::: {.column}
+
 ```{r}
-head(d); head(d2)
+#| echo: false
+
+knitr::kable(head(d))
 ```
+
+::::
+
+:::: {.column}
+
+```{r}
+#| echo: false
+
+knitr::kable(head(d2))
+```
+
+::::
+
+::::
 
 ## Let's run the RM ANOVA
 

@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.9.88">
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.0.38">
+
   <meta name="author" content="Niklas Johannes">
   <title>The linear model and comparing multiple groups</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -10,9 +17,6 @@
   <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reveal.css">
   <style>
-    .reveal .sourceCode {  /* see #7635 */
-      overflow: visible;
-    }
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     span.underline{text-decoration: underline;}
@@ -49,49 +53,42 @@
       }
     pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
     div.sourceCode
-      {   }
+      { color: #003b4f; background-color: #f1f3f5; }
     @media screen {
     pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
     }
-    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-    code span.at { color: #7d9029; } /* Attribute */
-    code span.bn { color: #40a070; } /* BaseN */
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
     code span.bu { } /* BuiltIn */
-    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #4070a0; } /* Char */
-    code span.cn { color: #880000; } /* Constant */
-    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-    code span.dt { color: #902000; } /* DataType */
-    code span.dv { color: #40a070; } /* DecVal */
-    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
     code span.ex { } /* Extension */
-    code span.fl { color: #40a070; } /* Float */
-    code span.fu { color: #06287e; } /* Function */
-    code span.im { } /* Import */
-    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-    code span.op { color: #666666; } /* Operator */
-    code span.ot { color: #007020; } /* Other */
-    code span.pp { color: #bc7a00; } /* Preprocessor */
-    code span.sc { color: #4070a0; } /* SpecialChar */
-    code span.ss { color: #bb6688; } /* SpecialString */
-    code span.st { color: #4070a0; } /* String */
-    code span.va { color: #19177c; } /* Variable */
-    code span.vs { color: #4070a0; } /* VerbatimString */
-    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto.css" id="theme">
-
-  <script src="../../../site_libs/clipboard/clipboard.min.js"></script>
-  <script src="../../../site_libs/quarto-html/tabby.min.js"></script>
-  <script src="../../../site_libs/quarto-html/popper.min.js"></script>
-  <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-  <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-  <link href="../../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet">
-  <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
   <link href="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -107,7 +104,7 @@
   }
 
   .callout.callout-style-simple { 
-    padding: 0em 0.7em;
+    padding: 0em 0.5em;
     border-left: solid #acacac .3rem;
     border-right: solid 1px silver;
     border-top: solid 1px silver;
@@ -218,8 +215,7 @@
     display: none !important;
   }
 
-  .callout.callout-captioned .callout-body > :last-child,
-  .callout.callout-captioned .callout-body > div > :last-child {
+  .callout.callout-captioned .callout-body > .callout-content > :last-child {
     margin-bottom: 0.5rem;
   }
 
@@ -308,12 +304,6 @@
     .reveal .slide:not(.center) {
       height: 100%;
     }
-    .reveal #title-slide.center,
-    .reveal .title-slide.center,
-    .reveal .controls .navigate-left .controls-arrow,
-    .reveal .controls .navigate-right .controls-arrow {
-      margin-top: -15px;
-    }
     .reveal .slide.scrollable {
       overflow-y: auto;
     }
@@ -390,7 +380,7 @@
     }
   </style>
 </head>
-<body>
+<body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
@@ -431,12 +421,12 @@
 <h2>What’s the process?</h2>
 <p>You measure height in a sample (the observable consequences). What’s the data generating process?</p>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"></section>
 <section id="we-have-a-simple-process" class="slide level2">
 <h2>We have a (simple) process</h2>
 <p><span class="math inline">\(Normal(\mu, \sigma)\)</span></p>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
 <section id="look-familiar" class="slide level2">
 <h2>Look familiar?</h2>
 <p><span class="math inline">\(Normal(174, 7)\)</span> aka <code>rnorm(174, 7)</code></p>
@@ -444,14 +434,14 @@
 <div class="column">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-3-1.png" width="960"></p>
 </div>
 </div>
 </div><div class="column">
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(<span class="fu">rnorm</span>(<span class="fl">1e4</span>, <span class="dv">174</span>, <span class="dv">7</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(<span class="fu">rnorm</span>(<span class="fl">1e4</span>, <span class="dv">174</span>, <span class="dv">7</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -470,22 +460,22 @@
 <h2>Remember our t-tests?</h2>
 <p>You are explicitly claiming that the observable outcome (the data) have been generated by this true underlying process. The process is a normal distribution with a true effect size (<span class="math inline">\(\mu\)</span>) and a true standard deviation (<span class="math inline">\(\sigma\)</span>) for two data generating processes: <span class="math inline">\(Normal(100, 15)\)</span> and <span class="math inline">\(Normal(105, 15)\)</span></p>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>control <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">15</span>)</span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>control <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">15</span>)</span>
 <span id="cb2-2"><a href="#cb2-2"></a>treatment <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">105</span>, <span class="dv">15</span>)</span>
 <span id="cb2-3"><a href="#cb2-3"></a></span>
 <span id="cb2-4"><a href="#cb2-4"></a><span class="fu">t.test</span>(control, treatment)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code>
     Welch Two Sample t-test
 
 data:  control and treatment
-t = -2.9677, df = 195.67, p-value = 0.003375
+t = -0.57372, df = 197.92, p-value = 0.5668
 alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
- -10.348190  -2.085494
+ -5.495395  3.018476
 sample estimates:
 mean of x mean of y 
- 100.2726  106.4894 </code></pre>
+ 100.3389  101.5774 </code></pre>
 </div>
 </div>
 </section>
@@ -513,7 +503,7 @@ mean of x mean of y
 <h2>Back to our control and treatment</h2>
 <p><span class="math inline">\(y = \beta_0 + \beta_1x\)</span>: What’s <span class="math inline">\(x\)</span> here?</p>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>control <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">15</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>control <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">15</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
 <span id="cb4-2"><a href="#cb4-2"></a>treatment <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">15</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -521,7 +511,7 @@ mean of x mean of y
 <h2>Group membership</h2>
 <p>Our group is <span class="math inline">\(x\)</span>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>d <span class="ot">&lt;-</span> </span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>d <span class="ot">&lt;-</span> </span>
 <span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">data.frame</span>(</span>
 <span id="cb5-3"><a href="#cb5-3"></a>    <span class="at">group =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"control"</span>, <span class="st">"treatment"</span>), <span class="at">each =</span> <span class="dv">15</span>),</span>
 <span id="cb5-4"><a href="#cb5-4"></a>    <span class="at">y =</span> <span class="fu">c</span>(control, treatment)</span>
@@ -549,152 +539,152 @@ mean of x mean of y
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">control</td>
-<td style="text-align: right;">0.6832608</td>
+<td style="text-align: right;">-0.2462229</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">control</td>
-<td style="text-align: right;">-0.2130011</td>
+<td style="text-align: right;">-0.9597997</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">control</td>
-<td style="text-align: right;">1.5556986</td>
+<td style="text-align: right;">-0.5238199</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">control</td>
-<td style="text-align: right;">0.3723847</td>
+<td style="text-align: right;">1.1407442</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">control</td>
-<td style="text-align: right;">-1.0498855</td>
+<td style="text-align: right;">-0.6588351</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">control</td>
-<td style="text-align: right;">-0.2019914</td>
+<td style="text-align: right;">-1.5772346</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">control</td>
-<td style="text-align: right;">-0.5228201</td>
+<td style="text-align: right;">0.6479015</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">control</td>
-<td style="text-align: right;">-0.3746018</td>
+<td style="text-align: right;">-0.1497161</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">control</td>
-<td style="text-align: right;">-0.0753989</td>
+<td style="text-align: right;">1.0852342</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">control</td>
-<td style="text-align: right;">-0.8473262</td>
+<td style="text-align: right;">0.4002139</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">control</td>
-<td style="text-align: right;">1.0647122</td>
+<td style="text-align: right;">0.9653700</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">control</td>
-<td style="text-align: right;">-0.4052670</td>
+<td style="text-align: right;">0.8700338</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">control</td>
-<td style="text-align: right;">-0.1004102</td>
+<td style="text-align: right;">-0.8435252</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">control</td>
-<td style="text-align: right;">-1.6920706</td>
+<td style="text-align: right;">-1.4519022</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">control</td>
-<td style="text-align: right;">0.3201272</td>
+<td style="text-align: right;">-0.4569357</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">treatment</td>
-<td style="text-align: right;">-0.3760464</td>
+<td style="text-align: right;">2.4476205</td>
 <td style="text-align: right;">1</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">treatment</td>
-<td style="text-align: right;">0.8331568</td>
+<td style="text-align: right;">0.2285001</td>
 <td style="text-align: right;">1</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">treatment</td>
-<td style="text-align: right;">2.1844667</td>
+<td style="text-align: right;">0.8593449</td>
 <td style="text-align: right;">1</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">treatment</td>
-<td style="text-align: right;">0.5646548</td>
+<td style="text-align: right;">1.2349919</td>
 <td style="text-align: right;">1</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">treatment</td>
-<td style="text-align: right;">0.9102634</td>
+<td style="text-align: right;">-0.1423595</td>
 <td style="text-align: right;">1</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">treatment</td>
-<td style="text-align: right;">1.5446405</td>
+<td style="text-align: right;">0.5735239</td>
 <td style="text-align: right;">1</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">treatment</td>
-<td style="text-align: right;">1.6885083</td>
+<td style="text-align: right;">0.7055050</td>
 <td style="text-align: right;">1</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">treatment</td>
-<td style="text-align: right;">-0.0664426</td>
+<td style="text-align: right;">2.4935786</td>
 <td style="text-align: right;">1</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">treatment</td>
-<td style="text-align: right;">1.2724447</td>
+<td style="text-align: right;">-0.5713438</td>
 <td style="text-align: right;">1</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">treatment</td>
-<td style="text-align: right;">0.1173216</td>
+<td style="text-align: right;">0.4377587</td>
 <td style="text-align: right;">1</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">treatment</td>
-<td style="text-align: right;">1.1477602</td>
+<td style="text-align: right;">2.8445324</td>
 <td style="text-align: right;">1</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">treatment</td>
-<td style="text-align: right;">2.0769580</td>
+<td style="text-align: right;">1.7562574</td>
 <td style="text-align: right;">1</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">treatment</td>
-<td style="text-align: right;">0.7944848</td>
+<td style="text-align: right;">0.5085672</td>
 <td style="text-align: right;">1</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">treatment</td>
-<td style="text-align: right;">1.4030050</td>
+<td style="text-align: right;">0.3798965</td>
 <td style="text-align: right;">1</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">treatment</td>
-<td style="text-align: right;">0.4692650</td>
+<td style="text-align: right;">1.6759042</td>
 <td style="text-align: right;">1</td>
 </tr>
 </tbody>
@@ -705,7 +695,7 @@ mean of x mean of y
 <div id="tabset-1-2">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-18-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -734,57 +724,57 @@ mean of x mean of y
 <section id="pictures-please" class="slide level2">
 <h2>Pictures, please</h2>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-20-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"></section>
 <section id="lets-check-that" class="slide level2">
 <h2>Let’s check that</h2>
 <div class="columns">
 <div class="column">
 <p>Mean of the control group (our intercept or <span class="math inline">\(\beta_0\)</span>):</p>
 <div class="cell">
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">mean</span>(d<span class="sc">$</span>y[d<span class="sc">$</span>x<span class="sc">==</span><span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>[1] -0.09910595</code></pre>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">mean</span>(d<span class="sc">$</span>y[d<span class="sc">$</span>x<span class="sc">==</span><span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.1172329</code></pre>
 </div>
 </div>
 <p>Difference (our slope or <span class="math inline">\(\beta_1\)</span>):</p>
 <div class="cell">
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">mean</span>(d<span class="sc">$</span>y[d<span class="sc">$</span>x<span class="sc">==</span><span class="dv">1</span>]) <span class="sc">-</span> <span class="fu">mean</span>(d<span class="sc">$</span>y[d<span class="sc">$</span>x<span class="sc">==</span><span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>[1] 1.070069</code></pre>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">mean</span>(d<span class="sc">$</span>y[d<span class="sc">$</span>x<span class="sc">==</span><span class="dv">1</span>]) <span class="sc">-</span> <span class="fu">mean</span>(d<span class="sc">$</span>y[d<span class="sc">$</span>x<span class="sc">==</span><span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.146051</code></pre>
 </div>
 </div>
 <p>Mean of the treatment group (<span class="math inline">\(\beta_0 + \beta_1\)</span>):</p>
 <div class="cell">
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">mean</span>(d<span class="sc">$</span>y[d<span class="sc">$</span>x<span class="sc">==</span><span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>[1] 0.9709627</code></pre>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">mean</span>(d<span class="sc">$</span>y[d<span class="sc">$</span>x<span class="sc">==</span><span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.028819</code></pre>
 </div>
 </div>
 </div><div class="column">
 <p>Linear model:</p>
 <div class="cell">
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> d)</span>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> d)</span>
 <span id="cb12-2"><a href="#cb12-2"></a></span>
 <span id="cb12-3"><a href="#cb12-3"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 lm(formula = y ~ x, data = d)
 
 Residuals:
-     Min       1Q   Median       3Q      Max 
--1.59296 -0.41936 -0.08179  0.46163  1.65480 
+    Min      1Q  Median      3Q     Max 
+-1.6002 -0.6345 -0.2464  0.7557  1.8157 
 
 Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) -0.09911    0.20363  -0.487 0.630270    
-x1           1.07007    0.28798   3.716 0.000896 ***
+            Estimate Std. Error t value Pr(&gt;|t|)   
+(Intercept)  -0.1172     0.2496  -0.470  0.64225   
+x1            1.1461     0.3530   3.246  0.00303 **
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.7887 on 28 degrees of freedom
-Multiple R-squared:  0.3303,    Adjusted R-squared:  0.3063 
-F-statistic: 13.81 on 1 and 28 DF,  p-value: 0.0008956</code></pre>
+Residual standard error: 0.9668 on 28 degrees of freedom
+Multiple R-squared:  0.2735,    Adjusted R-squared:  0.2475 
+F-statistic: 10.54 on 1 and 28 DF,  p-value: 0.003027</code></pre>
 </div>
 </div>
 </div>
@@ -795,43 +785,43 @@ F-statistic: 13.81 on 1 and 28 DF,  p-value: 0.0008956</code></pre>
 <div class="columns">
 <div class="column">
 <div class="cell">
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">t.test</span>(control, treatment, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">t.test</span>(control, treatment, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>
     Two Sample t-test
 
 data:  control and treatment
-t = -3.7157, df = 28, p-value = 0.0008956
+t = -3.2464, df = 28, p-value = 0.003027
 alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
- -1.6599754 -0.4801619
+ -1.8691755 -0.4229274
 sample estimates:
-  mean of x   mean of y 
--0.09910595  0.97096271 </code></pre>
+ mean of x  mean of y 
+-0.1172329  1.0288185 </code></pre>
 </div>
 </div>
 </div><div class="column">
 <div class="cell">
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(y <span class="sc">~</span> x, d))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(y <span class="sc">~</span> x, d))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 lm(formula = y ~ x, data = d)
 
 Residuals:
-     Min       1Q   Median       3Q      Max 
--1.59296 -0.41936 -0.08179  0.46163  1.65480 
+    Min      1Q  Median      3Q     Max 
+-1.6002 -0.6345 -0.2464  0.7557  1.8157 
 
 Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) -0.09911    0.20363  -0.487 0.630270    
-x1           1.07007    0.28798   3.716 0.000896 ***
+            Estimate Std. Error t value Pr(&gt;|t|)   
+(Intercept)  -0.1172     0.2496  -0.470  0.64225   
+x1            1.1461     0.3530   3.246  0.00303 **
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.7887 on 28 degrees of freedom
-Multiple R-squared:  0.3303,    Adjusted R-squared:  0.3063 
-F-statistic: 13.81 on 1 and 28 DF,  p-value: 0.0008956</code></pre>
+Residual standard error: 0.9668 on 28 degrees of freedom
+Multiple R-squared:  0.2735,    Adjusted R-squared:  0.2475 
+F-statistic: 10.54 on 1 and 28 DF,  p-value: 0.003027</code></pre>
 </div>
 </div>
 </div>
@@ -847,40 +837,40 @@ F-statistic: 13.81 on 1 and 28 DF,  p-value: 0.0008956</code></pre>
 <section id="pictures-please-1" class="slide level2">
 <h2>Pictures, please</h2>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-34-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"></section>
 <section id="lets-check-that-once-more" class="slide level2">
 <h2>Let’s check that once more</h2>
 <div class="columns">
 <div class="column">
 <p>Mean of the treatment group (our intercept or <span class="math inline">\(\beta_0\)</span>):</p>
 <div class="cell">
-<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">mean</span>(d<span class="sc">$</span>y[d<span class="sc">$</span>x<span class="sc">==</span><span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>[1] 0.9709627</code></pre>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">mean</span>(d<span class="sc">$</span>y[d<span class="sc">$</span>x<span class="sc">==</span><span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.028819</code></pre>
 </div>
 </div>
 </div><div class="column">
 <p>Linear model:</p>
 <div class="cell">
-<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> d[d<span class="sc">$</span>x<span class="sc">==</span><span class="dv">1</span>,])</span>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> d[d<span class="sc">$</span>x<span class="sc">==</span><span class="dv">1</span>,])</span>
 <span id="cb20-2"><a href="#cb20-2"></a></span>
 <span id="cb20-3"><a href="#cb20-3"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 lm(formula = y ~ 1, data = d[d$x == 1, ])
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--1.3470 -0.4540 -0.0607  0.5029  1.2135 
+-1.6002 -0.6200 -0.3233  0.6873  1.8157 
 
 Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   0.9710     0.1944   4.994 0.000197 ***
+            Estimate Std. Error t value Pr(&gt;|t|)   
+(Intercept)   1.0288     0.2619   3.929  0.00151 **
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.753 on 14 degrees of freedom</code></pre>
+Residual standard error: 1.014 on 14 degrees of freedom</code></pre>
 </div>
 </div>
 </div>
@@ -891,40 +881,40 @@ Residual standard error: 0.753 on 14 degrees of freedom</code></pre>
 <div class="columns">
 <div class="column">
 <div class="cell">
-<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">t.test</span>(treatment)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">t.test</span>(treatment)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>
     One Sample t-test
 
 data:  treatment
-t = 4.9939, df = 14, p-value = 0.0001967
+t = 3.9289, df = 14, p-value = 0.001513
 alternative hypothesis: true mean is not equal to 0
 95 percent confidence interval:
- 0.5539539 1.3879715
+ 0.467180 1.590457
 sample estimates:
 mean of x 
-0.9709627 </code></pre>
+ 1.028819 </code></pre>
 </div>
 </div>
 </div><div class="column">
 <div class="cell">
-<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(y <span class="sc">~</span> <span class="dv">1</span>, d[d<span class="sc">$</span>x<span class="sc">==</span><span class="dv">1</span>,]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(y <span class="sc">~</span> <span class="dv">1</span>, d[d<span class="sc">$</span>x<span class="sc">==</span><span class="dv">1</span>,]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 lm(formula = y ~ 1, data = d[d$x == 1, ])
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--1.3470 -0.4540 -0.0607  0.5029  1.2135 
+-1.6002 -0.6200 -0.3233  0.6873  1.8157 
 
 Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   0.9710     0.1944   4.994 0.000197 ***
+            Estimate Std. Error t value Pr(&gt;|t|)   
+(Intercept)   1.0288     0.2619   3.929  0.00151 **
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.753 on 14 degrees of freedom</code></pre>
+Residual standard error: 1.014 on 14 degrees of freedom</code></pre>
 </div>
 </div>
 </div>
@@ -940,44 +930,44 @@ Residual standard error: 0.753 on 14 degrees of freedom</code></pre>
 <section id="pictures-please-2" class="slide level2">
 <h2>Pictures, please</h2>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-44-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-22-1.png" width="960" class="r-stretch"></section>
 <section id="pictures-please-3" class="slide level2">
 <h2>Pictures, please</h2>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-46-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-23-1.png" width="960" class="r-stretch"></section>
 <section id="lets-check-that-once-more-1" class="slide level2">
 <h2>Let’s check that once more</h2>
 <div class="columns">
 <div class="column">
 <p>Mean of the difference (our intercept or <span class="math inline">\(\beta_0\)</span>):</p>
 <div class="cell">
-<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">mean</span>(treatment<span class="sc">-</span>control)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>[1] 1.070069</code></pre>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">mean</span>(treatment<span class="sc">-</span>control)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.146051</code></pre>
 </div>
 </div>
 </div><div class="column">
 <p>Linear model:</p>
 <div class="cell">
-<div class="sourceCode" id="cb28"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(treatment<span class="sc">-</span>control <span class="sc">~</span> <span class="dv">1</span>)</span>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(treatment<span class="sc">-</span>control <span class="sc">~</span> <span class="dv">1</span>)</span>
 <span id="cb28-2"><a href="#cb28-2"></a></span>
 <span id="cb28-3"><a href="#cb28-3"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 lm(formula = treatment - control ~ 1)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--2.1294 -0.8198 -0.1054  0.7833  2.0250 
+-2.8026 -0.8407  0.2060  0.8599  1.5478 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)   
-(Intercept)   1.0701     0.2817   3.798  0.00196 **
+(Intercept)   1.1461     0.3052   3.754  0.00213 **
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 1.091 on 14 degrees of freedom</code></pre>
+Residual standard error: 1.182 on 14 degrees of freedom</code></pre>
 </div>
 </div>
 </div>
@@ -988,40 +978,40 @@ Residual standard error: 1.091 on 14 degrees of freedom</code></pre>
 <div class="columns">
 <div class="column">
 <div class="cell">
-<div class="sourceCode" id="cb30"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">t.test</span>(treatment<span class="sc">-</span>control)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">t.test</span>(treatment<span class="sc">-</span>control)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>
     One Sample t-test
 
 data:  treatment - control
-t = 3.7981, df = 14, p-value = 0.001958
+t = 3.7545, df = 14, p-value = 0.002134
 alternative hypothesis: true mean is not equal to 0
 95 percent confidence interval:
- 0.4657981 1.6743392
+ 0.4913576 1.8007453
 sample estimates:
 mean of x 
- 1.070069 </code></pre>
+ 1.146051 </code></pre>
 </div>
 </div>
 </div><div class="column">
 <div class="cell">
-<div class="sourceCode" id="cb32"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(treatment<span class="sc">-</span>control <span class="sc">~</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(treatment<span class="sc">-</span>control <span class="sc">~</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 lm(formula = treatment - control ~ 1)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--2.1294 -0.8198 -0.1054  0.7833  2.0250 
+-2.8026 -0.8407  0.2060  0.8599  1.5478 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)   
-(Intercept)   1.0701     0.2817   3.798  0.00196 **
+(Intercept)   1.1461     0.3052   3.754  0.00213 **
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 1.091 on 14 degrees of freedom</code></pre>
+Residual standard error: 1.182 on 14 degrees of freedom</code></pre>
 </div>
 </div>
 </div>
@@ -1169,7 +1159,7 @@ Residual standard error: 1.091 on 14 degrees of freedom</code></pre>
 <section id="pictures-please-4" class="slide level2">
 <h2>Pictures, please</h2>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-56-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-28-1.png" width="960" class="r-stretch"></section>
 <section id="just-an-extension" class="slide level2">
 <h2>Just an extension</h2>
 <p>If we know how to simulate a t-test, we know how to simulate an ANOVA (because both are just linear models): Imitate the data generating process.</p>
@@ -1177,7 +1167,7 @@ Residual standard error: 1.091 on 14 degrees of freedom</code></pre>
 &amp; y = \beta_0 + \beta_1x_1 + \beta_2x_2
 \end{align}\]</span>
 <div class="cell">
-<div class="sourceCode" id="cb34"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5</span></span>
 <span id="cb34-2"><a href="#cb34-2"></a></span>
 <span id="cb34-3"><a href="#cb34-3"></a>control <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">100</span>, <span class="dv">15</span>)</span>
 <span id="cb34-4"><a href="#cb34-4"></a>low <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">120</span>, <span class="dv">15</span>)</span>
@@ -1194,11 +1184,11 @@ Residual standard error: 1.091 on 14 degrees of freedom</code></pre>
 <section id="add-our-dummy-codes" class="slide level2">
 <h2>Add our dummy codes</h2>
 <div class="cell">
-<div class="sourceCode" id="cb35"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>d<span class="sc">$</span>group_low <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>), <span class="at">each =</span> n)</span>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>d<span class="sc">$</span>group_low <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>), <span class="at">each =</span> n)</span>
 <span id="cb35-2"><a href="#cb35-2"></a>d<span class="sc">$</span>group_high <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>), <span class="at">each =</span> n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code>           y condition group_low group_high
 1  106.49227   control         0          0
 2   87.82910   control         0          0
@@ -1223,8 +1213,8 @@ Residual standard error: 1.091 on 14 degrees of freedom</code></pre>
 <div class="columns">
 <div class="column">
 <div class="cell">
-<div class="cell-output-stdout">
-<pre><code># A tibble: 3 x 2
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
   condition  mean
   &lt;fct&gt;     &lt;dbl&gt;
 1 control    104.
@@ -1234,10 +1224,10 @@ Residual standard error: 1.091 on 14 degrees of freedom</code></pre>
 </div>
 </div><div class="column">
 <div class="cell">
-<div class="sourceCode" id="cb38"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> group_low <span class="sc">+</span> group_high, <span class="at">data =</span> d)</span>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> group_low <span class="sc">+</span> group_high, <span class="at">data =</span> d)</span>
 <span id="cb38-2"><a href="#cb38-2"></a></span>
 <span id="cb38-3"><a href="#cb38-3"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 lm(formula = y ~ group_low + group_high, data = d)
@@ -1267,10 +1257,10 @@ F-statistic: 4.475 on 2 and 12 DF,  p-value: 0.03532</code></pre>
 <div class="columns">
 <div class="column">
 <div class="cell">
-<div class="sourceCode" id="cb40"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>our_anova <span class="ot">&lt;-</span> <span class="fu">aov</span>(y <span class="sc">~</span> condition, <span class="at">data =</span> d)</span>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>our_anova <span class="ot">&lt;-</span> <span class="fu">aov</span>(y <span class="sc">~</span> condition, <span class="at">data =</span> d)</span>
 <span id="cb40-2"><a href="#cb40-2"></a></span>
 <span id="cb40-3"><a href="#cb40-3"></a><span class="fu">summary</span>(our_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code>            Df Sum Sq Mean Sq F value Pr(&gt;F)  
 condition    2   2549  1274.4   4.475 0.0353 *
 Residuals   12   3417   284.8                 
@@ -1280,10 +1270,10 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div><div class="column">
 <div class="cell">
-<div class="sourceCode" id="cb42"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>our_regression <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> group_low <span class="sc">+</span> group_high, <span class="at">data =</span> d)</span>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>our_regression <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> group_low <span class="sc">+</span> group_high, <span class="at">data =</span> d)</span>
 <span id="cb42-2"><a href="#cb42-2"></a></span>
 <span id="cb42-3"><a href="#cb42-3"></a><span class="fu">summary</span>(our_regression)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 lm(formula = y ~ group_low + group_high, data = d)
@@ -1312,8 +1302,8 @@ F-statistic: 4.475 on 2 and 12 DF,  p-value: 0.03532</code></pre>
 <h2>No need to use dummies</h2>
 <p>The <code>lm</code> call will automatically dummy code factors.</p>
 <div class="cell">
-<div class="sourceCode" id="cb44"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(y <span class="sc">~</span> condition, <span class="at">data =</span> d))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(y <span class="sc">~</span> condition, <span class="at">data =</span> d))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 lm(formula = y ~ condition, data = d)
@@ -1339,7 +1329,7 @@ F-statistic: 4.475 on 2 and 12 DF,  p-value: 0.03532</code></pre>
 <section id="in-a-power-simulation" class="slide level2">
 <h2>In a power simulation</h2>
 <div class="cell">
-<div class="sourceCode" id="cb46"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a>n <span class="ot">&lt;-</span> <span class="dv">40</span></span>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a>n <span class="ot">&lt;-</span> <span class="dv">40</span></span>
 <span id="cb46-2"><a href="#cb46-2"></a>m1 <span class="ot">&lt;-</span> <span class="dv">100</span></span>
 <span id="cb46-3"><a href="#cb46-3"></a>m2 <span class="ot">&lt;-</span> <span class="dv">103</span></span>
 <span id="cb46-4"><a href="#cb46-4"></a>m3 <span class="ot">&lt;-</span> <span class="dv">105</span></span>
@@ -1365,7 +1355,7 @@ F-statistic: 4.475 on 2 and 12 DF,  p-value: 0.03532</code></pre>
 <span id="cb46-24"><a href="#cb46-24"></a>}</span>
 <span id="cb46-25"><a href="#cb46-25"></a></span>
 <span id="cb46-26"><a href="#cb46-26"></a><span class="fu">sum</span>(pvalues <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">/</span> <span class="fu">length</span>(pvalues)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.7</code></pre>
 </div>
 </div>
@@ -1378,7 +1368,7 @@ F-statistic: 4.475 on 2 and 12 DF,  p-value: 0.03532</code></pre>
 <h2>About that effect size</h2>
 <p>Let’s just swap the low and high conditions.</p>
 <div class="cell">
-<div class="sourceCode" id="cb48"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a>d2 <span class="ot">&lt;-</span> d</span>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a>d2 <span class="ot">&lt;-</span> d</span>
 <span id="cb48-2"><a href="#cb48-2"></a></span>
 <span id="cb48-3"><a href="#cb48-3"></a><span class="fu">levels</span>(d2<span class="sc">$</span>condition) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"control"</span>, <span class="st">"low"</span>, <span class="st">"high"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1386,13 +1376,13 @@ F-statistic: 4.475 on 2 and 12 DF,  p-value: 0.03532</code></pre>
 <div class="column">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-78-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-39-1.png" width="960"></p>
 </div>
 </div>
 </div><div class="column">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-80-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-40-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1403,8 +1393,8 @@ F-statistic: 4.475 on 2 and 12 DF,  p-value: 0.03532</code></pre>
 <div class="columns">
 <div class="column">
 <div class="cell">
-<div class="sourceCode" id="cb49"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(y <span class="sc">~</span> condition, d))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(y <span class="sc">~</span> condition, d))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 lm(formula = y ~ condition, data = d)
@@ -1428,8 +1418,8 @@ F-statistic: 4.475 on 2 and 12 DF,  p-value: 0.03532</code></pre>
 </div>
 </div><div class="column">
 <div class="cell">
-<div class="sourceCode" id="cb51"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(y <span class="sc">~</span> condition, d2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(y <span class="sc">~</span> condition, d2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 lm(formula = y ~ condition, data = d2)
@@ -1457,25 +1447,25 @@ F-statistic: 4.475 on 2 and 12 DF,  p-value: 0.03532</code></pre>
 <section id="what-about-the-effect-size" class="slide level2">
 <h2>What about the effect size?</h2>
 <div class="cell">
-<div class="sourceCode" id="cb53"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a>effectsize<span class="sc">::</span><span class="fu">eta_squared</span>(<span class="fu">lm</span>(y <span class="sc">~</span> condition, d))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a>effectsize<span class="sc">::</span><span class="fu">eta_squared</span>(<span class="fu">lm</span>(y <span class="sc">~</span> condition, d))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code># Effect Size for ANOVA
 
 Parameter | Eta2 |       95% CI
 -------------------------------
 condition | 0.43 | [0.03, 1.00]
 
-- One-sided CIs: upper bound fixed at (1).</code></pre>
+- One-sided CIs: upper bound fixed at [1.00].</code></pre>
 </div>
-<div class="sourceCode" id="cb55"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a>effectsize<span class="sc">::</span><span class="fu">eta_squared</span>(<span class="fu">lm</span>(y <span class="sc">~</span> condition, d2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a>effectsize<span class="sc">::</span><span class="fu">eta_squared</span>(<span class="fu">lm</span>(y <span class="sc">~</span> condition, d2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code># Effect Size for ANOVA
 
 Parameter | Eta2 |       95% CI
 -------------------------------
 condition | 0.43 | [0.03, 1.00]
 
-- One-sided CIs: upper bound fixed at (1).</code></pre>
+- One-sided CIs: upper bound fixed at [1.00].</code></pre>
 </div>
 </div>
 </section>
@@ -1514,7 +1504,7 @@ cov &amp; cov &amp; var
 <p><span class="math display">\[
 \begin{bmatrix}
 SD_{x_1} &amp; r_{x_1x_2} &amp; r_{x_1x_3}\\
-r_{x_2x_1} &amp; SD_{x_2} &amp; r_{x_2x_2}\\
+r_{x_2x_1} &amp; SD_{x_2} &amp; r_{x_2x_3}\\
 r_{x_3x_1} &amp; r_{x_3x_2} &amp; SD_{x_3}
 \end{bmatrix}
 \]</span></p>
@@ -1523,7 +1513,7 @@ r_{x_3x_1} &amp; r_{x_3x_2} &amp; SD_{x_3}
 <h2>Same as before</h2>
 <p>Define our parameters and get variance-covariance matrix.</p>
 <div class="cell">
-<div class="sourceCode" id="cb57"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a>means <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">control =</span> <span class="dv">100</span>, <span class="at">low =</span> <span class="dv">103</span>, <span class="at">high =</span> <span class="dv">105</span>)</span>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a>means <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">control =</span> <span class="dv">100</span>, <span class="at">low =</span> <span class="dv">103</span>, <span class="at">high =</span> <span class="dv">105</span>)</span>
 <span id="cb57-2"><a href="#cb57-2"></a>sd <span class="ot">&lt;-</span> <span class="dv">8</span></span>
 <span id="cb57-3"><a href="#cb57-3"></a>correlation <span class="ot">&lt;-</span> <span class="fl">0.4</span></span>
 <span id="cb57-4"><a href="#cb57-4"></a>covariance <span class="ot">&lt;-</span> correlation <span class="sc">*</span> sd <span class="sc">*</span> sd</span>
@@ -1538,7 +1528,7 @@ r_{x_3x_1} &amp; r_{x_3x_2} &amp; SD_{x_3}
 <span id="cb57-13"><a href="#cb57-13"></a>)</span>
 <span id="cb57-14"><a href="#cb57-14"></a></span>
 <span id="cb57-15"><a href="#cb57-15"></a>our_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2] [,3]
 [1,] 64.0 25.6 25.6
 [2,] 25.6 64.0 25.6
@@ -1549,7 +1539,7 @@ r_{x_3x_1} &amp; r_{x_3x_2} &amp; SD_{x_3}
 <section id="then-draw-from-multivariate-normal" class="slide level2">
 <h2>Then draw from multivariate normal</h2>
 <div class="cell">
-<div class="sourceCode" id="cb59"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a><span class="fu">library</span>(MASS)</span>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a><span class="fu">library</span>(MASS)</span>
 <span id="cb59-2"><a href="#cb59-2"></a></span>
 <span id="cb59-3"><a href="#cb59-3"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
 <span id="cb59-4"><a href="#cb59-4"></a></span>
@@ -1562,7 +1552,7 @@ r_{x_3x_1} &amp; r_{x_3x_2} &amp; SD_{x_3}
 <span id="cb59-11"><a href="#cb59-11"></a>d <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(d)</span>
 <span id="cb59-12"><a href="#cb59-12"></a>d<span class="sc">$</span>id <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">200</span>)</span>
 <span id="cb59-13"><a href="#cb59-13"></a><span class="fu">head</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code>    control       low      high id
 1 102.65124  93.16169  86.70051  1
 2  98.88458 109.62849 109.98486  2
@@ -1577,34 +1567,34 @@ r_{x_3x_1} &amp; r_{x_3x_2} &amp; SD_{x_3}
 <h2>Let’s check</h2>
 <p>Can we recover our numbers of means = <code>c(100, 103, 105)</code>, SD of 8, and correlation of 0.4?</p>
 <div class="cell">
-<div class="sourceCode" id="cb61"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a><span class="fu">mean</span>(d<span class="sc">$</span>control); <span class="fu">mean</span>(d<span class="sc">$</span>low); <span class="fu">mean</span>(d<span class="sc">$</span>high)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a><span class="fu">mean</span>(d<span class="sc">$</span>control); <span class="fu">mean</span>(d<span class="sc">$</span>low); <span class="fu">mean</span>(d<span class="sc">$</span>high)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] 99.89351</code></pre>
 </div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] 103.4035</code></pre>
 </div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] 105.214</code></pre>
 </div>
-<div class="sourceCode" id="cb65"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a><span class="fu">sd</span>(d<span class="sc">$</span>control); <span class="fu">sd</span>(d<span class="sc">$</span>low); <span class="fu">sd</span>(d<span class="sc">$</span>high)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a><span class="fu">sd</span>(d<span class="sc">$</span>control); <span class="fu">sd</span>(d<span class="sc">$</span>low); <span class="fu">sd</span>(d<span class="sc">$</span>high)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] 7.854443</code></pre>
 </div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] 7.706208</code></pre>
 </div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] 8.024822</code></pre>
 </div>
-<div class="sourceCode" id="cb69"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1"></a><span class="fu">cor</span>(d<span class="sc">$</span>control, d<span class="sc">$</span>low); <span class="fu">cor</span>(d<span class="sc">$</span>control, d<span class="sc">$</span>high); <span class="fu">cor</span>(d<span class="sc">$</span>low, d<span class="sc">$</span>high);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1"></a><span class="fu">cor</span>(d<span class="sc">$</span>control, d<span class="sc">$</span>low); <span class="fu">cor</span>(d<span class="sc">$</span>control, d<span class="sc">$</span>high); <span class="fu">cor</span>(d<span class="sc">$</span>low, d<span class="sc">$</span>high);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.3166429</code></pre>
 </div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.4616155</code></pre>
 </div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.3740047</code></pre>
 </div>
 </div>
@@ -1614,7 +1604,7 @@ r_{x_3x_1} &amp; r_{x_3x_2} &amp; SD_{x_3}
 <p>The linear model has several assumptions, one of which is that observations are independent. They clearly aren’t (we specified a correlation between them after all). So we need to go for models that take this dependence into account.</p>
 <p>For most cases, data need to be in the long format:</p>
 <div class="cell">
-<div class="sourceCode" id="cb73"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1"></a><span class="fu">library</span>(tidyr)</span>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1"></a><span class="fu">library</span>(tidyr)</span>
 <span id="cb73-2"><a href="#cb73-2"></a></span>
 <span id="cb73-3"><a href="#cb73-3"></a>d2 <span class="ot">&lt;-</span> </span>
 <span id="cb73-4"><a href="#cb73-4"></a>  <span class="fu">pivot_longer</span>(</span>
@@ -1627,36 +1617,115 @@ r_{x_3x_1} &amp; r_{x_3x_2} &amp; SD_{x_3}
 </section>
 <section id="long-format" class="slide level2">
 <h2>Long format</h2>
+<div class="columns">
+<div class="column">
 <div class="cell">
-<div class="sourceCode" id="cb74"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1"></a><span class="fu">head</span>(d); <span class="fu">head</span>(d2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>    control       low      high id
-1 102.65124  93.16169  86.70051  1
-2  98.88458 109.62849 109.98486  2
-3  94.79098  97.77544 108.68290  3
-4  90.66920  94.06642 111.49926  4
-5  98.78622 106.29663  95.40168  5
-6  99.54111 110.82243  99.60934  6</code></pre>
+<div class="cell-output-display">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">control</th>
+<th style="text-align: right;">low</th>
+<th style="text-align: right;">high</th>
+<th style="text-align: left;">id</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">102.65124</td>
+<td style="text-align: right;">93.16169</td>
+<td style="text-align: right;">86.70051</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">98.88458</td>
+<td style="text-align: right;">109.62849</td>
+<td style="text-align: right;">109.98486</td>
+<td style="text-align: left;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">94.79098</td>
+<td style="text-align: right;">97.77544</td>
+<td style="text-align: right;">108.68290</td>
+<td style="text-align: left;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">90.66920</td>
+<td style="text-align: right;">94.06642</td>
+<td style="text-align: right;">111.49926</td>
+<td style="text-align: left;">4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">98.78622</td>
+<td style="text-align: right;">106.29663</td>
+<td style="text-align: right;">95.40168</td>
+<td style="text-align: left;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">99.54111</td>
+<td style="text-align: right;">110.82243</td>
+<td style="text-align: right;">99.60934</td>
+<td style="text-align: left;">6</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div class="cell-output-stdout">
-<pre><code># A tibble: 6 x 3
-  id    condition score
-  &lt;fct&gt; &lt;chr&gt;     &lt;dbl&gt;
-1 1     control   103. 
-2 1     low        93.2
-3 1     high       86.7
-4 2     control    98.9
-5 2     low       110. 
-6 2     high      110. </code></pre>
+</div>
+</div><div class="column">
+<div class="cell">
+<div class="cell-output-display">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">id</th>
+<th style="text-align: left;">condition</th>
+<th style="text-align: right;">score</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">control</td>
+<td style="text-align: right;">102.65124</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">low</td>
+<td style="text-align: right;">93.16169</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">high</td>
+<td style="text-align: right;">86.70051</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">control</td>
+<td style="text-align: right;">98.88458</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">low</td>
+<td style="text-align: right;">109.62849</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">high</td>
+<td style="text-align: right;">109.98486</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 </section>
 <section id="lets-run-the-rm-anova" class="slide level2">
 <h2>Let’s run the RM ANOVA</h2>
 <div class="cell">
-<div class="sourceCode" id="cb77"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1"></a>model <span class="ot">&lt;-</span> <span class="fu">aov</span>(score <span class="sc">~</span> condition <span class="sc">+</span> <span class="fu">Error</span>(id), d2)</span>
-<span id="cb77-2"><a href="#cb77-2"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1"></a>model <span class="ot">&lt;-</span> <span class="fu">aov</span>(score <span class="sc">~</span> condition <span class="sc">+</span> <span class="fu">Error</span>(id), d2)</span>
+<span id="cb74-2"><a href="#cb74-2"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>
 Error: id
            Df Sum Sq Mean Sq F value Pr(&gt;F)
@@ -1676,8 +1745,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <div class="columns">
 <div class="column">
 <div class="cell">
-<div class="sourceCode" id="cb79"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>
 Error: id
            Df Sum Sq Mean Sq F value Pr(&gt;F)
@@ -1693,11 +1762,11 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div><div class="column">
 <div class="cell">
-<div class="sourceCode" id="cb81"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1"></a><span class="fu">library</span>(lme4)</span>
-<span id="cb81-2"><a href="#cb81-2"></a></span>
-<span id="cb81-3"><a href="#cb81-3"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(score <span class="sc">~</span> condition <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> id), d2)</span>
-<span id="cb81-4"><a href="#cb81-4"></a><span class="fu">anova</span>(model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb78-2"><a href="#cb78-2"></a></span>
+<span id="cb78-3"><a href="#cb78-3"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(score <span class="sc">~</span> condition <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> id), d2)</span>
+<span id="cb78-4"><a href="#cb78-4"></a><span class="fu">anova</span>(model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Variance Table
           npar Sum Sq Mean Sq F value
 condition    2   2927  1463.5  38.484</code></pre>
@@ -1724,7 +1793,7 @@ condition    2   2927  1463.5  38.484</code></pre>
 <h1>Let’s get simulating</h1>
 
 <div class="footer footer-default">
-<p><a href="https://niklasjohannes.github.io/power-workshop/" class="uri">https://niklasjohannes.github.io/power-workshop/</a></p>
+<p><a href="https://niklasjohannes.github.io/power-workshop/">Home</a></p>
 </div>
 </section>
     </div>
@@ -1732,7 +1801,6 @@ condition    2   2927  1463.5  38.484</code></pre>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
   <script src="../../../site_libs/revealjs/dist/reveal.js"></script>
-
   <!-- reveal.js plugins -->
   <script src="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
   <script src="../../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
@@ -1740,12 +1808,13 @@ condition    2   2927  1463.5  38.484</code></pre>
   <script src="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
   <script src="../../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
   <script src="../../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
   <script src="../../../site_libs/revealjs/plugin/notes/notes.js"></script>
   <script src="../../../site_libs/revealjs/plugin/search/search.js"></script>
   <script src="../../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
   <script src="../../../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
-
 
   <script>
 
@@ -1759,11 +1828,10 @@ condition    2   2927  1463.5  38.484</code></pre>
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
-
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":false},
 'smaller': false,
-
+ 
         // Display controls in the bottom right corner
         controls: false,
 
@@ -1983,8 +2051,26 @@ condition    2   2927  1463.5  38.484</code></pre>
       })();
     </script>
 
-    <script type="application/javascript">
+    <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
       const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
       tabsets.forEach(function(tabset) {
         const tabby = new Tabby('#' + tabset.id);
@@ -2001,7 +2087,10 @@ condition    2   2927  1463.5  38.484</code></pre>
         button.blur();
         // flash "checked"
         button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
         setTimeout(function() {
+          button.setAttribute("title", currentTitle);
           button.classList.remove('code-copy-button-checked');
         }, 1000);
         // clear code selection
