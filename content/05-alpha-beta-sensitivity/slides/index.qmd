@@ -8,7 +8,7 @@ format:
     slide-number: true
     chalkboard: 
       buttons: false
-    footer: <https://niklasjohannes.github.io/power-workshop/>
+    footer: "[Home](https://niklasjohannes.github.io/power-workshop/)"
 execute:
   echo: true
 bibliography: references.bib
@@ -47,6 +47,8 @@ How likely is it that our significant result represents a true effect? Depends o
 PPV = \frac{power \times R}{power \times R + \alpha}
 \end{gather*}
 ```
+
+
 ## Reversing the logic
 
 False positive rate: How likely is it that our significant result represents a, well, false positive:
@@ -202,7 +204,7 @@ Probability of committing a false positive: How many nulls are there and what's 
 ```{=tex}
 \begin{gather*}
 Probability \ H_0 \ is \ true \times Probability \ Type \ I \ error \\
-P(H_0)*\alpha
+P(H_0) \times \alpha
 \end{gather*}
 ```
 ## What's our (real) Type II error rate?
