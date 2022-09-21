@@ -8,7 +8,7 @@ format:
     slide-number: true
     chalkboard: 
       buttons: false
-    footer: <https://niklasjohannes.github.io/power-workshop/>
+    footer: "[Home](https://niklasjohannes.github.io/power-workshop/)"
 execute:
   echo: true
 ---
