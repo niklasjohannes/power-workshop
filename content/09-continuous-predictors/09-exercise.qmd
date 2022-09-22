@@ -15,7 +15,7 @@ execute:
 
 # Overview {.unnumbered}
 
-You made it: last set of exercises. Nothing new here; you'll simulate power for continuous predictors and interactions.
+You made it: last set of exercises. Nothing new here; just an extension of the skills you already have at this point. You'll simulate power for continuous predictors and interactions.
 
 ## Exercise
 
@@ -101,6 +101,81 @@ library(ggplot2)
 ggplot(outcomes, aes(x = sample_size, y = power, color = type)) + geom_line() + theme_bw()
 ```
 
+:::{.callout-tip collapse="true"}
+## Expand to get a tip
+
+The only new part is that you're relying on a linear model for creating scores and that you're storing more than one p-value from the model. Let's declare our variables first.
+
+```{r}
+#| echo: true
+#| eval: false
+
+b0 <- ? # outcome when all predictors are at 0
+b1 <- ? # independent effect of x1
+b2 <- ? # indenepdent effect of x2
+b3 <- ? # independent effect of x3
+sizes <- ? # the sample sizes we're iterating over
+runs <- ? # number of simulations
+
+# somewhere to store our results (type indicates which type of power estimate it is)
+outcomes <- 
+  data.frame(
+    sample_size = NULL,
+    type = NULL,
+    power = NULL
+  )
+```
+
+Now we just need to fill those parameters into the linear model, put the linear model into a loop that iterates over the sample sizes, and store the results from each run.
+
+```{r}
+#| echo: true
+#| eval: false
+
+# iterate over the sample sizes
+for (? in ?) {
+  
+  # somewhere to store each type of p-value
+  pvalues_all <- NULL
+  pvalues_x1 <- NULL
+  pvalues_x2 <- NULL
+  pvalues_x3 <- NULL
+  
+  for (? in 1:?) {
+    
+    error <- ?
+    
+    x1 <- ? # uniform predictor
+    x2 <- ? # uniform predictor
+    x3 <- ? # uniform predictor
+    
+    # put predictors into a data frame and create the outcome score
+    d <- 
+      data.frame(
+        x1 = ?,
+        x2 = ?,
+        x3 = ?,
+        y = ? + error
+      )
+    
+    m <- summary(lm(y ~ x1 + x2 + x3, d))
+    
+    pvalues_all[?] <- broom::glance(m)$p.value
+    pvalues_x1[?] <- ?
+    pvalues_x2[?] <- ?
+    pvalues_x3[?] <- ?
+  }
+  
+  # store results somewhere
+  outcomes <- 
+    ?
+}
+```
+
+You'll notice that manually creating one "container" per type of p-value isn't great coding. It gets the job done, but in your own work, you should consider a programmatic solution. 
+
+:::
+
 ## Exercise
 
 Create a correlation between two variables of 0.2. Use a correlation matrix. How many participants do you need for 95% power with an alpha of 0.01? Go about this as you think is best. Verify your estimate with GPower.
@@ -161,16 +236,50 @@ while (power < 0.95) {
 plot(outcomes$sample_size, outcomes$power)
 ```
 
+:::{.callout-tip collapse="true"}
+## Expand to get a tip
+
+You're creating correlated scores, so it's probably most straight forward to draw from a multivariate distribution. For that, we need a correlation matrix (aka a variance-covariance matrix with 0s and $r$s). So how will we get that matrix? Well, all we need, really, is the correlation because we already know the variance is 1:
+
+```{r}
+#| echo: true
+#| eval: false
+
+sigma <- 
+  matrix(
+    c(1, 0.2, 0.2, 1),
+    ncol = 2
+  )
+```
+
+Then we can get a sample as always:
+
+```{r}
+#| echo: true
+#| eval: false
+
+d <- 
+  mvrnorm(
+    n,
+    c(0,0), # our means are 0 because the "variables" are standardized
+    sigma
+  )
+```
+
+Now you can put that into a for loop or while statement, and voila. For getting the p-value for the correlation, look at `?cor.test` and inspect the object.
+
+:::
+
 ## Exercise
 
-In the correlation matrix, you specifically say how variables are related, but also when they aren't related (i.e., when you assign zero for a correlation). For the data generating process, this is important, because it specifies the causal structure. Going simply by $R^2$ will often be misleading. For exmaple, what if you have a third variable that creates a spurious effect? You can simulate that as well. Say you measure how much ice cream a person consumes on average and expect that eating a lot of sweet ice cream makes people crave savoury foods, which you measure as the portions of fries consumed in a beer garden. However, there truly is no effect of ice cream on eating fries; it's just that both are influenced by the number of sun hours: More sun hours will lead people to eat more ice cream but also to spend more time in beer gardens and, inevitably, eat fries there.
+In the correlation matrix, you specifically say how variables are related, but also when they aren't related (i.e., when you assign zero for a correlation). For the data generating process, this is important, because it specifies the causal structure. Going simply by $R^2$ or significance will often be misleading. For example, what if you have a third variable that creates a spurious effect? You can simulate that as well. Say you measure how much ice cream a person consumes in a year and expect that eating a lot of sweet, sweet ice cream makes people crave savory foods, which you measure as the portions of fries consumed in a beer garden. However, there truly is no effect of ice cream on eating fries; it's just that both are influenced by the number of sun hours: More sun hours will lead people to eat more ice cream but also to spend more time in beer gardens and, inevitably, eat fries there.
 
-Simulate that and inspect the $R^2$ of the models. Use a sample size of 10,000. First, create a sun hours variable. Then, predict ice cream eating with sun hours. Next, predict fries eating with sun hours. Now run two regression models:
+Simulate that: Use a sample size of 10,000. First, create a sun hours variable (`rnorm` will be enough). Then, have sun hours cause ice cream eating with an effect size of your choosing (don't forget some error) . Next, also have sun hours cause fries eating. Now run two regression models:
 
 - one where you predict fries with ice cream alone
-- one where you predict fries with icre cream and sun hours
+- one where you predict fries with ice cream and sun hours
 
-Which model is the correct causal structure? But which one has the higher $R^2$? If this tickled your interest, have a look [here](https://www.r-bloggers.com/2016/01/how-to-create-confounders-with-regression-a-lesson-from-causal-inference/) and [here](https://journals.sagepub.com/doi/full/10.1177/2515245917745629).
+Which model gives you the correct causal effect of ice cream eating? But which one has a lower p-value for the ice cream variables? Do you see how it makes little sense to just go for significance and how you must consider the causal process when simulating data? If this tickled your interest, have a look [here](https://www.r-bloggers.com/2016/01/how-to-create-confounders-with-regression-a-lesson-from-causal-inference/) and [here](https://journals.sagepub.com/doi/full/10.1177/2515245917745629).
 
 ```{r}
 n <- 1e4
@@ -183,13 +292,33 @@ summary(lm(fries ~ ice_cream))
 summary(lm(fries ~ ice_cream + sun))
 ```
 
+:::{.callout-tip collapse="true"}
+## Expand to get a tip
+
+No need to overthink this. Just follow the instructions closely. This is more of a conceptual exercise:
+
+```{r}
+#| echo: true
+#| eval: false
+
+n <- ? # sample size
+
+sun <- rnorm(n) # yup, that's all it takes here; we don't care about the actual values
+ice_cream <- ?*sun + rnorm(n) # just put in a number; that's it
+fries <- ? # same here
+
+summary(lm(fries ~ ice_cream))
+summary(lm(fries ~ ice_cream + sun))
+```
+
+:::
+
 ## Exercise
 
-Your colleague comes to you and tells you that they predicted satisfaction with a film with people's enjoyment. However, they only had 20 people in their sample. Run a sensitivity analysis and check for what $r$ 20 people give you 90% power, even if you allow a more liberal alpha of 0.10. Increase $r$ in steps of 0.01 and go the full distance, checking all effect sizes from 0 to 1. Do 500 runs per step. Verify with GPower.
+Your colleague comes to you and tells you that they predicted satisfaction with a film with people's enjoyment: The higher the enjoyment, the more they reported to be satisfied with the film. However, they only had 20 people in their sample. Run a sensitivity analysis and check for what $r$ 20 people give you 90% power, even if you allow a more liberal alpha of 0.10. Increase $r$ in steps of 0.01 and go the full distance, checking all effect sizes from 0 to 1. Do 500 runs per step. Verify with GPower.
 
 ```{r}
 n <- 20
-r <- 0
 alpha <- 0.10
 effects <- seq(0, 1, 0.01)
 runs <- 1e3
@@ -235,11 +364,67 @@ for (anr in effects) {
 plot(outcomes$effect_size, outcomes$power)
 ```
 
+:::{.callout-tip collapse="true"}
+## Expand to get a tip
+
+Think back about sensitivity analysis. Here, we don't iterate over sample sizes; we iterate over effect sizes. Because the effect size is on the standardized scale, we'll use a correlation matrix to generate the data. The $r$ will go into that correlation matrix, so we'll need to create a correlation matrix for each iteration of effect size, then get a sample, run a test, and calculate power.
+
+Let's start with declaring our variables:
+
+```{r}
+#| echo: true
+#| eval: false
+
+n <- ? # sample size
+alpha <- ? # the alpha
+effects <- seq(?, ?, 0.01) # create all rs between 0 and 1
+runs <- ? # how many runs
+
+# somewhere to store the outcome
+outcomes <- 
+  data.frame(
+    effect_size = NULL,
+    power = NULL
+  )
+```
+
+Alright, now let's iterate over effect sizes:
+
+```{r}
+#| echo: true
+#| eval: false
+
+for (? in ?) { # for an r in our vector of effect sizes
+  
+  for (i in 1:runs) {
+    
+    sigma <- matrix(
+        c(1, ?, ?, 1), # here, we need the correlation (aka effect size) per run
+        ncol = 2
+      )
+      
+    # create a data frame
+      d <- mvrnorm(
+        ?,
+        ?,
+        sigma
+      )
+      
+    # run cor.test and store p-value
+  }
+  
+  outcomes <- 
+    ?
+}
+```
+
+:::
+
 ## Exercise
 
-You design a follow-up study where you measure enjoyment and satisfaction with films, but this time you want to determine a SESOI and do a power analysis before-hand. You measure both variables on a 5-point  index Likert-scale (by index I mean it's the average of several items). You know enjoyment usually scores above the midpoint, say a mean of 3.9 sounds realistic. The SD will be narrow: 0.5. For satisfaction, you expect a score below the midpoint of the scale, at 2.1, but with a larger SD of 1. Your smallest effect size of interest is 0.7 points because a previous analysis shows that this is the point where satisfaction translates to higher well-being for the day.
+You design a follow-up study where you measure enjoyment and satisfaction with films, but this time you want to determine a SESOI and do a power analysis before-hand. You measure both variables on a 5-point  index Likert-scale (by index I mean it's the average of several items). You know enjoyment usually scores above the midpoint; say a mean of 3.9 sounds realistic. The SD will be narrow: 0.5. For satisfaction, you expect a score below the midpoint of the scale, at 2.1, but with a larger SD of 1. Your smallest effect size of interest is 0.7 points because a previous analysis shows that this is the point where satisfaction translates to higher well-being for the day.
 
-You want to be strict, so you set your alpha to 0.005, but at the same time, you don't mind missing a true effect just as much, which is why you set your power goal to 85%. Run the power analysis (1000 runs per combo). Start at 50 people and go up in steps of 1 until you reach your desired power level. (Tip: Use the raw effect and SDs to get $r$ to use in a variance-covariance matrix). Verify with GPower.
+You want to be strict, so you set your alpha to 0.005, but at the same time, you don't mind missing a true effect just as much, which is why you set your power goal to 85%. Run the power analysis (1000 runs per combo). Start at 50 people and go up in steps of 1 until you reach your desired power level (translation: use a `while` statement). Tip: Use the raw effect and SDs to get $r$, which you then use in a variance-covariance matrix to simulate a data set for a given sample size. Verify with GPower.
 
 ```{r}
 goal <- 0.85
@@ -303,13 +488,89 @@ while (power < goal) {
 plot(outcomes$sample_size, outcomes$power)
 ```
 
+:::{.callout-tip collapse="true"}
+## Expand to get a tip
+
+As always, declaring our variables is a good starting point:
+
+```{r}
+#| echo: true
+#| eval: false
+
+goal <- 0.85 # our goal for power
+alpha <- ? # our stringent alpha
+sesoi <- ? # what's the smallest effect size we care about?
+n <- ? # what's our starting sample size?
+means <- c(enjoyment = ?, satisfaction = ?)
+sd_enjoy <- ? # SD of enjoyment
+sd_sat <- ? # SD of satisfaction
+r <- ? # what's our sesoi on the standardized scale? use the SDs of the two variables
+covariance <- ? # calculate the covariance with the correlation (from the previous line) and multiply by the two SDs
+runs <- 1e3
+```
+
+Once we have those variables, it's a standard `while` statement that we've also done in the previous exercises.
+
+```{r}
+#| echo: true
+#| eval: false
+
+power <- 0 # starting value for power
+
+while (power < ?) { # keep going as long as power is below our goal (wink, wink)
+  
+  # somewhere to store our p-values
+  
+  # then we do our 1,000 simulations
+  for (i in 1:?) {
+    
+    # create data frame with mvrnorm
+    d <- ?
+    
+    # get your p-value from the correlation
+    ? <- ?
+  }
+  
+  # calculate power so that the while statement can check whether we reached our goal
+  power <- ?
+  
+  # store it all somewhere
+  
+  # update something so that the power increases with each iteration
+}
+```
+
+:::
+
 ## Exercise
 
 A colleague has found that films with higher ratings on IMDB bring in more money at the box office. However, you think this effect is mostly due to genre: for comedies, there is an effect of quality on success, but for action films this doesn't matter. In other words, you predict an interaction, such that the positive effect of quality (i.e., IMDB rating) is only present in one condition (genre: comedies), but not in the other condition.
 
-You want to test that hypothesis and start your power simulation. Specifically, you want to power for the interaction effect. IMDB ratings range from 0-10. Success is measured in million dollar steps. For genre, action films will be your baseline. You'll also center the rating so that 0 represents an average rating. Overall, when a film is an action flick and has an average rating, you expect it to bring in 20 million. You don't expect a main effect of quality because the quality effect will depend on genre. You do expect, however, a main effect of genre, such that, at average quality, action flicks bring in 5 million more than comedies. Crucially, you expect an interaction effect: For comedies, each 1-point increase in quality will generate 2 million extra at the box office.
+You want to test that hypothesis and start your power simulation. Specifically, you want to power for the interaction effect. IMDB ratings range from 0-10. Success is measured in million dollar steps. For genre, action films will be your baseline. You'll also center the rating so that 0 represents an average rating. Overall, when a film is an action flick and has an average rating, you expect it to bring in 20 million. You don't expect a main effect of quality because the quality effect will depend on genre. You do expect, however, a main effect of genre, such that, at average quality, comedies bring in 5 million more than action flicks. Crucially, you expect an interaction effect: For comedies, each 1-point increase in quality will generate 2 million extra at the box office.
 
-As for error: You expect a normally distributed error with a mean of 0 and an SD of 15. Simulate the data and see how many films you need to code to have enough power to detect the interaction effect with 95% power with an alpha of 0.05. Start at 10 and go up in steps of 10 to a maximum of 250. Do 1,000 runs per combo. (Tip: Generate a large data set with the linear model formula first and plot the means before getting into the simulation.)
+As for error: You expect a normally distributed error with a mean of 0 and an SD of 15. Simulate the data and see how many films you need to have enough power to detect the interaction effect with 95% power with an alpha of 0.05. Start at 10 and go up in steps of 10 to a maximum of 250. Do 1,000 runs per combo.
+
+Like before, when you work with the linear model, it will help write out the model. So maybe start with the formula below:
+
+```{=tex}
+\begin{align}
+millions = \beta_0 + \beta_1 Quality + \beta_2 Genre + \beta_3 Quality \times Genre + \epsilon
+\end{align}
+```
+
+First start by filling in the betas and using them to simulate a massive data set (say 10,000 cases) before you start simulating. Plot the data set with:
+
+```{r}
+#| echo: true
+#| eval: false
+
+ggplot(d, aes(x = quality, y = success, color = genre)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm") +
+  theme_bw()
+```
+
+Does the plot look like what we specified? Make sure you code the factor correctly: `genre` should have action films as the baseline; otherwise, the meaning of $\beta_2$ and $\beta_3$ changes.
 
 ```{r}
 b0 <- 50
@@ -361,13 +622,60 @@ for (n in sizes) {
     )
 }
 
-ggplot(d, aes(x = quality, y = success, color = as.factor(genre))) +
-  geom_point(alpha = 0.5) +
-  geom_smooth(method = "lm") +
-  theme_bw()
-
 with(outcomes, plot(sample_size, power))
 ```
+
+:::{.callout-tip collapse="true"}
+## Expand to get a tip
+
+We need to fill in the betas for the linear model formula, so let's define them:
+
+```{r}
+#| echo: true
+#| eval: false
+
+b0 <- ? # action flick at average quality
+b1 <- ? # main effect quality: going 1 up on quality for action films 
+b2 <- ? # main effect genre: going from action to comedy at average quality
+b3 <- ? # the extra information when being a comedy and increasing in quality
+sizes <- seq(?, ?, ?)
+runs <- 1e3
+```
+
+After that, we can simply run a loop. Just remember to create "fresh" error per run and not define it as a constant with the other parameters above.
+
+```{r}
+#| echo: true
+#| eval: false
+
+for (? in ?) {
+  
+  pvalues <- NULL
+  
+  for (i in 1:?) {
+    
+    error <- ?
+    genre <-  rep(0:1, ?)
+    quality <-  runif(?, ?, ?)
+    # don't forget to center
+    
+    d <- 
+      data.frame(
+        genre = ?,
+        quality = ?,
+        success = b0 + b1*? + b2*? + b3*?*? + ?
+      )
+    
+    # success can't be less than 0
+    
+    # get p-value for interaction
+    
+  }
+}
+
+```
+
+:::
 
 ## Exercise
 
@@ -423,21 +731,24 @@ for (n in sizes) {
     )
 }
 
-ggplot(d, aes(x = quality, y = success, color = as.factor(genre))) +
-  geom_point(alpha = 0.5) +
-  geom_smooth(method = "lm") +
-  theme_bw()
-
 with(outcomes, plot(sample_size, power))
 ```
 
 ## Exercise
 
-You want to know how much listening to music leads to feelings of being relaxed. You expect a linear effect of the number of songs someone listens to on them feeling relaxed. However, you suspect that whether this effect occurs will strongly depend on how much people like these songs. You measure feelings of relaxation on a Likert-type index variable with a range of 1-7. The number of songs is measured as a count with a maximum of 30 songs--you counted songs over a 1h period. After that period, you also asked how much people enjoyed the songs they were listening to on a scale from 0-100.
+You want to know how much listening to music leads to feelings of being relaxed. You expect a linear effect of the number of songs someone listens to on them feeling relaxed. After all, if listening to music relaxes you, then the more music, the more relaxed you get.
 
-Simulate (uniformly) number of songs (use `sample`) and liking. Transform the number of songs so that 1 up on the variable means listening to 5 more songs. As for liking, you want to go in steps of 10. Center both. These transformations make it easier to get an intuition about the effect sizes. At average listening and liking, you think relaxation should be somewhat below the midpoint of the scale: 3.1. You don't expect main effects of either predictor: Liking music shouldn't relax you unless you listen to some of it, and listening to music alone shouldn't do much unless you like the music. However, you expect a fairly sizeable interaction effect, such that the combination of liking and listening will increase relaxation by 0.2 points. Remember the transformations: We say that listening to 5 songs (going up 1 on listening) will increase relaxation 0.2 when liking also goes up by 10 points (going up 1 on liking).
+However, you suspect that whether this effect occurs will strongly depend on how much people like these songs. Can't relax if you listen to lots of crap (notice how I didn't mention an artist here to be nice).
 
-For error, you expect a normally distributed error with mean 0 and an SD of 2. Simulate power for the interaction effect, starting at 10 and ending at a sample size of 100. Go in steps of 5.  Do 1,000 runs per combo. Also use `interactions::interaction_plot` to plot a random model to check how the data look like.
+You measure feelings of relaxation on a Likert-type index variable with a range of 1-7. The number of songs is measured as a count with a maximum of 30 songs--you counted songs over a 1h period. After that period, you also asked how much people enjoyed the songs they were listening to on a scale from 0-100.
+
+Simulate number of songs (use `sample`) and liking (uniform). Transform the number of songs so that 1 up on the variable means listening to 5 more songs. As for liking, you want to go in steps of 10. Center both. These transformations make it easier to get an intuition about the effect sizes.
+
+At average listening and liking, you think relaxation should be somewhat below the midpoint of the scale: 3.1. You don't expect main effects of either predictor: Liking music shouldn't relax you unless you listen to some of it, and listening to music alone shouldn't do much unless you like the music.
+
+However, you expect a fairly sizable interaction effect, such that the combination of liking and listening will increase relaxation by 0.2 points. Remember the transformations: We say that listening to 5 songs (which is going up 1 on the listening variable) will increase relaxation 0.2 when liking also goes up by 10 points (which is going up 1 on the liking variable).
+
+For error, you expect a normally distributed error with mean 0 and an SD of 2. Simulate power for the interaction effect, starting at 10 and ending at a sample size of 100. Go in steps of 5.Do 1,000 runs per combo. Also use `interactions::interaction_plot` to plot a random model to check how the data look like.
 
 ```{r}
 b0 <- 3.1
@@ -493,3 +804,45 @@ plot(outcomes$sample_size, outcomes$power)
 
 interactions::interact_plot(lm(relaxation ~ listening*liking, d), pred = "listening", modx = "liking")
 ```
+
+:::{.callout-tip collapse="true"}
+## Expand to get a tip
+
+The actual work here is thinking through correctly defining and transforming the variables. So let's declare first, then think about the transformations.
+
+```{r}
+#| echo: true
+#| eval: false
+
+b0 <- ? # relaxation when both liking and number of songs variables are at average
+b1 <- ? # main effect listening: going up 1 on number of songs variable while liking variable is at average
+b2 <- ? # main effect liking: going up 1 on liking variable whilst number of songs variable is at average
+b3 <- ? # the extra information when we listen to 5 songs (= going 1 up on number of songs variable) and like them 10 points more (= going up 1 on liking variable)
+sizes <- seq(?, ?, ?)
+runs <- 1e3
+```
+
+Okay, that still doesn't solve the transformation problem. How do we make the variables? Well, there's 3 steps each for the `listening` and the `liking` variable:
+
+1. Get the raw variable (with `sample` or `runif`)
+2. Transform it such that 1 point on the variable now means something different
+3. Center this transformed variable
+
+```{r}
+#| echo: true
+#| eval: false
+
+# gets us a uniform distribution of songs
+listening <- sample(1:30, ?, replace = ?)
+
+# easy as that: divide by 5 to change a 1-unite increase on the variable
+listening <- listening / 5
+
+# center
+listening <- scale(?)
+
+```
+
+The process for `liking` is similar. Once you have that figured out, the rest of the steps are as known: For each simulation, create those variables and use them in the linear model to generate a relaxation score; obtain p-values; calculate power.
+
+:::

@@ -73,4 +73,4 @@ The goal of the workshop is for you to (1) have an understanding of the philosop
 - [Primer](https://journals.sagepub.com/doi/pdf/10.1177/2515245920965119) for mixed-effects models
 - [Primer](https://philippmasur.de/2020/03/11/how-to-estimate-power-for-structural-equation-models-simulations-in-r/) and [paper](https://journals.sagepub.com/doi/full/10.1177/2515245920918253) for SEM models
 
-# Thank you and good night!
+# Bye now.

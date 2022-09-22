@@ -405,65 +405,413 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell" data-hash="09-exercise_cache/html/unnamed-chunk-2_3a3af25b90b96a6113e686cebb09b085">
 
 </div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Expand to get a tip
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The only new part is that you’re relying on a linear model for creating scores and that you’re storing more than one p-value from the model. Let’s declare our variables first.</p>
+<div class="cell" data-hash="09-exercise_cache/html/unnamed-chunk-3_bb91c3b07bff592dde02e9a5b24bed3f">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>b0 <span class="ot">&lt;-</span> ? <span class="co"># outcome when all predictors are at 0</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>b1 <span class="ot">&lt;-</span> ? <span class="co"># independent effect of x1</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>b2 <span class="ot">&lt;-</span> ? <span class="co"># indenepdent effect of x2</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>b3 <span class="ot">&lt;-</span> ? <span class="co"># independent effect of x3</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>sizes <span class="ot">&lt;-</span> ? <span class="co"># the sample sizes we're iterating over</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>runs <span class="ot">&lt;-</span> ? <span class="co"># number of simulations</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># somewhere to store our results (type indicates which type of power estimate it is)</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>outcomes <span class="ot">&lt;-</span> </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">sample_size =</span> <span class="cn">NULL</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="cn">NULL</span>,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">power =</span> <span class="cn">NULL</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now we just need to fill those parameters into the linear model, put the linear model into a loop that iterates over the sample sizes, and store the results from each run.</p>
+<div class="cell" data-hash="09-exercise_cache/html/unnamed-chunk-4_9fad5dacceab49358e8f79317fa62c6a">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># iterate over the sample sizes</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (? <span class="cf">in</span> ?) {</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># somewhere to store each type of p-value</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  pvalues_all <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  pvalues_x1 <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  pvalues_x2 <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  pvalues_x3 <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (? <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>?) {</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    error <span class="ot">&lt;-</span> ?</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    x1 <span class="ot">&lt;-</span> ? <span class="co"># uniform predictor</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    x2 <span class="ot">&lt;-</span> ? <span class="co"># uniform predictor</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    x3 <span class="ot">&lt;-</span> ? <span class="co"># uniform predictor</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># put predictors into a data frame and create the outcome score</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    d <span class="ot">&lt;-</span> </span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>      <span class="fu">data.frame</span>(</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">x1 =</span> ?,</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">x2 =</span> ?,</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">x3 =</span> ?,</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> ? <span class="sc">+</span> error</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    m <span class="ot">&lt;-</span> <span class="fu">summary</span>(<span class="fu">lm</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> x3, d))</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    pvalues_all[?] <span class="ot">&lt;-</span> broom<span class="sc">::</span><span class="fu">glance</span>(m)<span class="sc">$</span>p.value</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    pvalues_x1[?] <span class="ot">&lt;-</span> ?</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    pvalues_x2[?] <span class="ot">&lt;-</span> ?</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    pvalues_x3[?] <span class="ot">&lt;-</span> ?</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>  <span class="co"># store results somewhere</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>  outcomes <span class="ot">&lt;-</span> </span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>    ?</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You’ll notice that manually creating one “container” per type of p-value isn’t great coding. It gets the job done, but in your own work, you should consider a programmatic solution.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="exercise-1" class="level2" data-number="0.2">
 <h2 data-number="0.2" class="anchored" data-anchor-id="exercise-1"><span class="header-section-number">0.2</span> Exercise</h2>
 <p>Create a correlation between two variables of 0.2. Use a correlation matrix. How many participants do you need for 95% power with an alpha of 0.01? Go about this as you think is best. Verify your estimate with GPower.</p>
-<div class="cell" data-hash="09-exercise_cache/html/unnamed-chunk-3_0fd6fff95381c1a0c6e508cd0f8e2c8d">
+<div class="cell" data-hash="09-exercise_cache/html/unnamed-chunk-5_6b598f8fa215d8399771a5e81f11b732">
 
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Expand to get a tip
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>You’re creating correlated scores, so it’s probably most straight forward to draw from a multivariate distribution. For that, we need a correlation matrix (aka a variance-covariance matrix with 0s and <span class="math inline">\(r\)</span>s). So how will we get that matrix? Well, all we need, really, is the correlation because we already know the variance is 1:</p>
+<div class="cell" data-hash="09-exercise_cache/html/unnamed-chunk-6_a530f564af4e0e2762eb25d0366843ae">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">matrix</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="dv">1</span>),</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">ncol =</span> <span class="dv">2</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Then we can get a sample as always:</p>
+<div class="cell" data-hash="09-exercise_cache/html/unnamed-chunk-7_9b4633d3202e62d567c5c594a5165297">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mvrnorm</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    n,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>), <span class="co"># our means are 0 because the "variables" are standardized</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    sigma</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now you can put that into a for loop or while statement, and voila. For getting the p-value for the correlation, look at <code>?cor.test</code> and inspect the object.</p>
+</div>
+</div>
 </div>
 </section>
 <section id="exercise-2" class="level2" data-number="0.3">
 <h2 data-number="0.3" class="anchored" data-anchor-id="exercise-2"><span class="header-section-number">0.3</span> Exercise</h2>
-<p>In the correlation matrix, you specifically say how variables are related, but also when they aren’t related (i.e., when you assign zero for a correlation). For the data generating process, this is important, because it specifies the causal structure. Going simply by <span class="math inline">\(R^2\)</span> will often be misleading. For exmaple, what if you have a third variable that creates a spurious effect? You can simulate that as well. Say you measure how much ice cream a person consumes on average and expect that eating a lot of sweet ice cream makes people crave savoury foods, which you measure as the portions of fries consumed in a beer garden. However, there truly is no effect of ice cream on eating fries; it’s just that both are influenced by the number of sun hours: More sun hours will lead people to eat more ice cream but also to spend more time in beer gardens and, inevitably, eat fries there.</p>
-<p>Simulate that and inspect the <span class="math inline">\(R^2\)</span> of the models. Use a sample size of 10,000. First, create a sun hours variable. Then, predict ice cream eating with sun hours. Next, predict fries eating with sun hours. Now run two regression models:</p>
+<p>In the correlation matrix, you specifically say how variables are related, but also when they aren’t related (i.e., when you assign zero for a correlation). For the data generating process, this is important, because it specifies the causal structure. Going simply by <span class="math inline">\(R^2\)</span> or significance will often be misleading. For exmaple, what if you have a third variable that creates a spurious effect? You can simulate that as well. Say you measure how much ice cream a person consumes in a year and expect that eating a lot of sweet, sweet ice cream makes people crave savoury foods, which you measure as the portions of fries consumed in a beer garden. However, there truly is no effect of ice cream on eating fries; it’s just that both are influenced by the number of sun hours: More sun hours will lead people to eat more ice cream but also to spend more time in beer gardens and, inevitably, eat fries there.</p>
+<p>Simulate that: Use a sample size of 10,000. First, create a sun hours variable (<code>rnorm</code> will be enough). Then, have sun hours cause ice cream eating with an effect size of your choosing (don’t forget some error) . Next, also have sun hours cause fries eating. Now run two regression models:</p>
 <ul>
 <li>one where you predict fries with ice cream alone</li>
 <li>one where you predict fries with icre cream and sun hours</li>
 </ul>
-<p>Which model is the correct causal structure? But which one has the higher <span class="math inline">\(R^2\)</span>? If this tickled your interest, have a look <a href="https://www.r-bloggers.com/2016/01/how-to-create-confounders-with-regression-a-lesson-from-causal-inference/">here</a> and <a href="https://journals.sagepub.com/doi/full/10.1177/2515245917745629">here</a>.</p>
-<div class="cell" data-hash="09-exercise_cache/html/unnamed-chunk-4_81f7312c1d3c774e3210dfc3d369a365">
+<p>Which model gives you the correct causal effect of ice cream eating? But which one has a lower p-value for the ice cream variables? Do you see how it makes little sense to just go significance and how you must consider the causal process when simulating data? If this tickled your interest, have a look <a href="https://www.r-bloggers.com/2016/01/how-to-create-confounders-with-regression-a-lesson-from-causal-inference/">here</a> and <a href="https://journals.sagepub.com/doi/full/10.1177/2515245917745629">here</a>.</p>
+<div class="cell" data-hash="09-exercise_cache/html/unnamed-chunk-8_01207e983ce8fec251d459072a835640">
 
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Expand to get a tip
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>No need to overthink this. Just follow the instructions closely. This is more of a conceptual exercise:</p>
+<div class="cell" data-hash="09-exercise_cache/html/unnamed-chunk-9_22072fbd0d9449e8a40396e919d9d4f3">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> ? <span class="co"># sample size</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>sun <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n) <span class="co"># yup, that's all it takes here; we don't care about the actual values</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>ice_cream <span class="ot">&lt;-</span> ?<span class="sc">*</span>sun <span class="sc">+</span> <span class="fu">rnorm</span>(n) <span class="co"># just put in a number; that's it</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>fries <span class="ot">&lt;-</span> ? <span class="co"># same here</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(fries <span class="sc">~</span> ice_cream))</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(fries <span class="sc">~</span> ice_cream <span class="sc">+</span> sun))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 </div>
 </section>
 <section id="exercise-3" class="level2" data-number="0.4">
 <h2 data-number="0.4" class="anchored" data-anchor-id="exercise-3"><span class="header-section-number">0.4</span> Exercise</h2>
-<p>Your colleague comes to you and tells you that they predicted satisfaction with a film with people’s enjoyment. However, they only had 20 people in their sample. Run a sensitivity analysis and check for what <span class="math inline">\(r\)</span> 20 people give you 90% power, even if you allow a more liberal alpha of 0.10. Increase <span class="math inline">\(r\)</span> in steps of 0.01 and go the full distance, checking all effect sizes from 0 to 1. Do 500 runs per step. Verify with GPower.</p>
-<div class="cell" data-hash="09-exercise_cache/html/unnamed-chunk-5_4b4c674730b8c6688403e1166f2b76da">
+<p>Your colleague comes to you and tells you that they predicted satisfaction with a film with people’s enjoyment: The higher the enjoyment, the more they reported to be satisfied with the film. However, they only had 20 people in their sample. Run a sensitivity analysis and check for what <span class="math inline">\(r\)</span> 20 people give you 90% power, even if you allow a more liberal alpha of 0.10. Increase <span class="math inline">\(r\)</span> in steps of 0.01 and go the full distance, checking all effect sizes from 0 to 1. Do 500 runs per step. Verify with GPower.</p>
+<div class="cell" data-hash="09-exercise_cache/html/unnamed-chunk-10_26bf6af6ee4a0769e62b8fad8b24a9e3">
 
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Expand to get a tip
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Think back about sensitivity analysis. Here, we don’t iterate over sample sizes; we iterate over effect sizes. Because the effect size is on the standardized scale, we’ll use a correlation matrix to generate the data. The <span class="math inline">\(r\)</span> will go into that correlation matrix, so we’ll need to create a correlation matrix for each iteration of effect size, then get a sample, run a test, and calculate power.</p>
+<p>Let’s start with declaring our variables:</p>
+<div class="cell" data-hash="09-exercise_cache/html/unnamed-chunk-11_dbffce5f7292a3695aec495cdaa9ccaf">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> ? <span class="co"># sample size</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> ? <span class="co"># the alpha</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>effects <span class="ot">&lt;-</span> <span class="fu">seq</span>(?, ?, <span class="fl">0.01</span>) <span class="co"># create all rs between 0 and 1</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>runs <span class="ot">&lt;-</span> ? <span class="co"># how many runs</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># somewhere to store the outcome</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>outcomes <span class="ot">&lt;-</span> </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">effect_size =</span> <span class="cn">NULL</span>,</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">power =</span> <span class="cn">NULL</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Alright, now let’s iterate over effect sizes:</p>
+<div class="cell" data-hash="09-exercise_cache/html/unnamed-chunk-12_594624e08c017091df43b9904cef64e7">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (? <span class="cf">in</span> ?) { <span class="co"># for an r in our vector of effect sizes</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>runs) {</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    sigma <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">c</span>(<span class="dv">1</span>, ?, ?, <span class="dv">1</span>), <span class="co"># here, we need the correlation (aka effect size) per run</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">ncol =</span> <span class="dv">2</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># create a data frame</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>      d <span class="ot">&lt;-</span> <span class="fu">mvrnorm</span>(</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>        ?,</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>        ?,</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>        sigma</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># run cor.test and store p-value</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  outcomes <span class="ot">&lt;-</span> </span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    ?</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 </div>
 </section>
 <section id="exercise-4" class="level2" data-number="0.5">
 <h2 data-number="0.5" class="anchored" data-anchor-id="exercise-4"><span class="header-section-number">0.5</span> Exercise</h2>
 <p>You design a follow-up study where you measure enjoyment and satisfaction with films, but this time you want to determine a SESOI and do a power analysis before-hand. You measure both variables on a 5-point index Likert-scale (by index I mean it’s the average of several items). You know enjoyment usually scores above the midpoint, say a mean of 3.9 sounds realistic. The SD will be narrow: 0.5. For satisfaction, you expect a score below the midpoint of the scale, at 2.1, but with a larger SD of 1. Your smallest effect size of interest is 0.7 points because a previous analysis shows that this is the point where satisfaction translates to higher well-being for the day.</p>
-<p>You want to be strict, so you set your alpha to 0.005, but at the same time, you don’t mind missing a true effect just as much, which is why you set your power goal to 85%. Run the power analysis (1000 runs per combo). Start at 50 people and go up in steps of 1 until you reach your desired power level. (Tip: Use the raw effect and SDs to get <span class="math inline">\(r\)</span> to use in a variance-covariance matrix). Verify with GPower.</p>
-<div class="cell" data-hash="09-exercise_cache/html/unnamed-chunk-6_8289cb4a940e7d0c0def2a9a7daed508">
+<p>You want to be strict, so you set your alpha to 0.005, but at the same time, you don’t mind missing a true effect just as much, which is why you set your power goal to 85%. Run the power analysis (1000 runs per combo). Start at 50 people and go up in steps of 1 until you reach your desired power level (translation: use a <code>while</code> statement). Tip: Use the raw effect and SDs to get <span class="math inline">\(r\)</span>, which you then use in a variance-covariance matrix to simulate a data set for a given sample size. Verify with GPower.</p>
+<div class="cell" data-hash="09-exercise_cache/html/unnamed-chunk-13_dc0548420182d0a5599993a494ddb542">
 
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Expand to get a tip
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>As always, declaring our variables is a good starting point:</p>
+<div class="cell" data-hash="09-exercise_cache/html/unnamed-chunk-14_aad6b778092453e06ec95d6c50f3ba43">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>goal <span class="ot">&lt;-</span> <span class="fl">0.85</span> <span class="co"># our goal for power</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> ? <span class="co"># our stringent alpha</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>sesoi <span class="ot">&lt;-</span> ? <span class="co"># what's the smallest effect size we care about?</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> ? <span class="co"># what's our starting sample size?</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">enjoyment =</span> ?, <span class="at">satisfaction =</span> ?)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>sd_enjoy <span class="ot">&lt;-</span> ? <span class="co"># SD of enjoyment</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>sd_sat <span class="ot">&lt;-</span> ? <span class="co"># SD of satisfaction</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> ? <span class="co"># what's our sesoi on the standardized scale? use the SDs of the two variables</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>covariance <span class="ot">&lt;-</span> ? <span class="co"># calculate the covariance with the correlation (from the previous line) and multiply by the two SDs</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>runs <span class="ot">&lt;-</span> <span class="fl">1e3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Once we have those variables, it’s a standard <code>while</code> statement that we’ve also done in the previous exercises.</p>
+<div class="cell" data-hash="09-exercise_cache/html/unnamed-chunk-15_f8bbf08f298f419b93da6b9ca9f5e375">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>power <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co"># starting value for power</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (power <span class="sc">&lt;</span> ?) { <span class="co"># keep going as long as power is below our goal (wink, wink)</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># somewhere to store our p-values</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># then we do our 1,000 simulations</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>?) {</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># create data frame with mvrnorm</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    d <span class="ot">&lt;-</span> ?</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># get your p-value from the correlation</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    ? <span class="ot">&lt;-</span> ?</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># calculate power so that the while statement can check whether we reached our goal</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  power <span class="ot">&lt;-</span> ?</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># store it all somewhere</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># update something so that the power increases with each iteration</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 </div>
 </section>
 <section id="exercise-5" class="level2" data-number="0.6">
 <h2 data-number="0.6" class="anchored" data-anchor-id="exercise-5"><span class="header-section-number">0.6</span> Exercise</h2>
 <p>A colleague has found that films with higher ratings on IMDB bring in more money at the box office. However, you think this effect is mostly due to genre: for comedies, there is an effect of quality on success, but for action films this doesn’t matter. In other words, you predict an interaction, such that the positive effect of quality (i.e., IMDB rating) is only present in one condition (genre: comedies), but not in the other condition.</p>
-<p>You want to test that hypothesis and start your power simulation. Specifically, you want to power for the interaction effect. IMDB ratings range from 0-10. Success is measured in million dollar steps. For genre, action films will be your baseline. You’ll also center the rating so that 0 represents an average rating. Overall, when a film is an action flick and has an average rating, you expect it to bring in 20 million. You don’t expect a main effect of quality because the quality effect will depend on genre. You do expect, however, a main effect of genre, such that, at average quality, action flicks bring in 5 million more than comedies. Crucially, you expect an interaction effect: For comedies, each 1-point increase in quality will generate 2 million extra at the box office.</p>
-<p>As for error: You expect a normally distributed error with a mean of 0 and an SD of 15. Simulate the data and see how many films you need to code to have enough power to detect the interaction effect with 95% power with an alpha of 0.05. Start at 10 and go up in steps of 10 to a maximum of 250. Do 1,000 runs per combo. (Tip: Generate a large data set with the linear model formula first and plot the means before getting into the simulation.)</p>
-<div class="cell" data-hash="09-exercise_cache/html/unnamed-chunk-7_94785cf47ac3d89b351cf0993c4a3867">
+<p>You want to test that hypothesis and start your power simulation. Specifically, you want to power for the interaction effect. IMDB ratings range from 0-10. Success is measured in million dollar steps. For genre, action films will be your baseline. You’ll also center the rating so that 0 represents an average rating. Overall, when a film is an action flick and has an average rating, you expect it to bring in 20 million. You don’t expect a main effect of quality because the quality effect will depend on genre. You do expect, however, a main effect of genre, such that, at average quality, comedies bring in 5 million more than action flicks. Crucially, you expect an interaction effect: For comedies, each 1-point increase in quality will generate 2 million extra at the box office.</p>
+<p>As for error: You expect a normally distributed error with a mean of 0 and an SD of 15. Simulate the data and see how many films you need to have enough power to detect the interaction effect with 95% power with an alpha of 0.05. Start at 10 and go up in steps of 10 to a maximum of 250. Do 1,000 runs per combo.</p>
+<p>Like before, when you work with the linear model, it will help write out the model. So maybe start with the formula below:</p>
+<span class="math display">\[\begin{align}
+millions = \beta_0 + \beta_1 Quality + \beta_2 Genre + \beta_3 Quality \times Genre + \epsilon
+\end{align}\]</span>
+<p>First start by filling in the betas and using them to simulate a massive data set (say 10,000 cases) before you start simulating. Plot the data set with:</p>
+<div class="cell" data-hash="09-exercise_cache/html/unnamed-chunk-16_81c269d294c42df13b0955e4a54f6954">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> quality, <span class="at">y =</span> success, <span class="at">color =</span> genre)) <span class="sc">+</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Make sure you code the factor correctly: <code>genre</code> should have action films as the baseline; otherwise, the meaning of <span class="math inline">\(\beta_2\)</span> and <span class="math inline">\(\beta_3\)</span> changes.</p>
+<div class="cell" data-hash="09-exercise_cache/html/unnamed-chunk-17_13cbe329ec593818afc35a573a65cbb5">
 
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Expand to get a tip
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We need to fill in the betas for the linear model formula, so let’s define them:</p>
+<div class="cell" data-hash="09-exercise_cache/html/unnamed-chunk-18_2651a17f8be1f94259e89b86f406f547">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>b0 <span class="ot">&lt;-</span> ? <span class="co"># action flick at average quality</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>b1 <span class="ot">&lt;-</span> ? <span class="co"># main effect quality: going 1 up on quality for action films </span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>b2 <span class="ot">&lt;-</span> ? <span class="co"># main effect genre: going from action to comedy at average quality</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>b3 <span class="ot">&lt;-</span> ? <span class="co"># the extra information when being a comedy and increasing in quality</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>sizes <span class="ot">&lt;-</span> <span class="fu">seq</span>(?, ?, ?)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>runs <span class="ot">&lt;-</span> <span class="fl">1e3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>After that, we can simply run a loop. Just remember to create “fresh” error per run and not define it as a constant with the other parameters above.</p>
+<div class="cell" data-hash="09-exercise_cache/html/unnamed-chunk-19_df72ca51ce81696d048a0cf4891f4038">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (? <span class="cf">in</span> ?) {</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  pvalues <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>?) {</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    error <span class="ot">&lt;-</span> ?</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    genre <span class="ot">&lt;-</span>  <span class="fu">rep</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, ?)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    quality <span class="ot">&lt;-</span>  <span class="fu">runif</span>(?, ?, ?)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># don't forget to center</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    d <span class="ot">&lt;-</span> </span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">data.frame</span>(</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">genre =</span> ?,</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">quality =</span> ?,</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">success =</span> b0 <span class="sc">+</span> b1<span class="sc">*</span>? <span class="sc">+</span> b2<span class="sc">*</span>? <span class="sc">+</span> b3<span class="sc">*</span>?<span class="sc">*</span>? <span class="sc">+</span> ?</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># success can't be less than 0</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># get p-value for interaction</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 </div>
 </section>
 <section id="exercise-6" class="level2" data-number="0.7">
 <h2 data-number="0.7" class="anchored" data-anchor-id="exercise-6"><span class="header-section-number">0.7</span> Exercise</h2>
 <p>Simulate the above again, but this time increase the main effects of both quality and genre to 10 million. Leave the interaction effect at 2. What do you think – will this have an effect on power? If so, how and why?</p>
-<div class="cell" data-hash="09-exercise_cache/html/unnamed-chunk-8_15dc2242ad309db48f03ed2e78ae8db6">
+<div class="cell" data-hash="09-exercise_cache/html/unnamed-chunk-20_cc22ea5d31ed9ff8913c38bace494c22">
 
 </div>
 </section>
 <section id="exercise-7" class="level2" data-number="0.8">
 <h2 data-number="0.8" class="anchored" data-anchor-id="exercise-7"><span class="header-section-number">0.8</span> Exercise</h2>
-<p>You want to know how much listening to music leads to feelings of being relaxed. You expect a linear effect of the number of songs someone listens to on them feeling relaxed. However, you suspect that whether this effect occurs will strongly depend on how much people like these songs. You measure feelings of relaxation on a Likert-type index variable with a range of 1-7. The number of songs is measured as a count with a maximum of 30 songs–you counted songs over a 1h period. After that period, you also asked how much people enjoyed the songs they were listening to on a scale from 0-100.</p>
-<p>Simulate (uniformly) number of songs (use <code>sample</code>) and liking. Transform the number of songs so that 1 up on the variable means listening to 5 more songs. As for liking, you want to go in steps of 10. Center both. These transformations make it easier to get an intuition about the effect sizes. At average listening and liking, you think relaxation should be somewhat below the midpoint of the scale: 3.1. You don’t expect main effects of either predictor: Liking music shouldn’t relax you unless you listen to some of it, and listening to music alone shouldn’t do much unless you like the music. However, you expect a fairly sizeable interaction effect, such that the combination of liking and listening will increase relaxation by 0.2 points. Remember the transformations: We say that listening to 5 songs (going up 1 on listening) will increase relaxation 0.2 when liking also goes up by 10 points (going up 1 on liking).</p>
+<p>You want to know how much listening to music leads to feelings of being relaxed. You expect a linear effect of the number of songs someone listens to on them feeling relaxed. After all, if listening to music relaxes you, then the more music, the more relaxed you get.</p>
+<p>However, you suspect that whether this effect occurs will strongly depend on how much people like these songs. Can’t relax if you listen to lots of crap (notice how I didn’t mention an artist here to be nice).</p>
+<p>You measure feelings of relaxation on a Likert-type index variable with a range of 1-7. The number of songs is measured as a count with a maximum of 30 songs–you counted songs over a 1h period. After that period, you also asked how much people enjoyed the songs they were listening to on a scale from 0-100.</p>
+<p>Simulate number of songs (use <code>sample</code>) and liking (uniform). Transform the number of songs so that 1 up on the variable means listening to 5 more songs. As for liking, you want to go in steps of 10. Center both. These transformations make it easier to get an intuition about the effect sizes. At average listening and liking, you think relaxation should be somewhat below the midpoint of the scale: 3.1. You don’t expect main effects of either predictor: Liking music shouldn’t relax you unless you listen to some of it, and listening to music alone shouldn’t do much unless you like the music. However, you expect a fairly sizable interaction effect, such that the combination of liking and listening will increase relaxation by 0.2 points. Remember the transformations: We say that listening to 5 songs (which is going up 1 on the listening variable) will increase relaxation 0.2 when liking also goes up by 10 points (which is going up 1 on the liking variable).</p>
 <p>For error, you expect a normally distributed error with mean 0 and an SD of 2. Simulate power for the interaction effect, starting at 10 and ending at a sample size of 100. Go in steps of 5. Do 1,000 runs per combo. Also use <code>interactions::interaction_plot</code> to plot a random model to check how the data look like.</p>
-<div class="cell" data-hash="09-exercise_cache/html/unnamed-chunk-9_9164d605153a6f00fca4843fd5c70ada">
+<div class="cell" data-hash="09-exercise_cache/html/unnamed-chunk-21_8058eeae94a64b62b692ebe137cfa546">
 
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Expand to get a tip
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The actual work here is thinking through correctly defining and transforming the variables. So let’s declare first, then think about the transformations.</p>
+<div class="cell" data-hash="09-exercise_cache/html/unnamed-chunk-22_d9b2aae0a1de3e1bdf024b987975ad7d">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>b0 <span class="ot">&lt;-</span> ? <span class="co"># relaxation when both liking and number of songs variables are at average</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>b1 <span class="ot">&lt;-</span> ? <span class="co"># main effect listening: going up 1 on number of songs variable while liking variable is at average</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>b2 <span class="ot">&lt;-</span> ? <span class="co"># main effect liking: going up 1 on liking variable whilst number of songs variable is at average</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>b3 <span class="ot">&lt;-</span> ? <span class="co"># the extra information when we listen to 5 songs (= going 1 up on number of songs variable) and like them 10 points more (= going up 1 on liking variable)</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>sizes <span class="ot">&lt;-</span> <span class="fu">seq</span>(?, ?, ?)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>runs <span class="ot">&lt;-</span> <span class="fl">1e3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Okay, that still doesn’t solve the transformation problem. How do we make the variables? Well, there’s 3 steps each for the <code>listening</code> and the <code>liking</code> variable:</p>
+<ol type="1">
+<li>Get the raw variable (with <code>sample</code> or <code>runif</code>)</li>
+<li>Transform it such that 1 point on the variable now means something different</li>
+<li>Center this transformed variable</li>
+</ol>
+<div class="cell" data-hash="09-exercise_cache/html/unnamed-chunk-23_2a9a218aa99db473fe077d5af612bf00">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># gets us a uniform distribution of songs</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>listening <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>, ?, <span class="at">replace =</span> ?)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># easy as that: divide by 5 to change a 1-unite increase on the variable</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>listening <span class="ot">&lt;-</span> listening <span class="sc">/</span> <span class="dv">5</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># center</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>listening <span class="ot">&lt;-</span> <span class="fu">scale</span>(?)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The process for <code>liking</code> is similar. Once you have that figured out, the rest of the steps are as known: For each simulation, create those variables and use them in the linear model to generate a relaxation score; obtain p-values; calculate power.</p>
+</div>
+</div>
 </div>
 
 

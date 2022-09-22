@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-  <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.9.88">
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.0.38">
+
   <meta name="author" content="Niklas Johannes">
   <title>Continuous predictors</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -10,9 +17,6 @@
   <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reveal.css">
   <style>
-    .reveal .sourceCode {  /* see #7635 */
-      overflow: visible;
-    }
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     span.underline{text-decoration: underline;}
@@ -49,49 +53,61 @@
       }
     pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
     div.sourceCode
-      {   }
+      { color: #003b4f; background-color: #f1f3f5; }
     @media screen {
     pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
     }
-    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-    code span.at { color: #7d9029; } /* Attribute */
-    code span.bn { color: #40a070; } /* BaseN */
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
     code span.bu { } /* BuiltIn */
-    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #4070a0; } /* Char */
-    code span.cn { color: #880000; } /* Constant */
-    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-    code span.dt { color: #902000; } /* DataType */
-    code span.dv { color: #40a070; } /* DecVal */
-    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
     code span.ex { } /* Extension */
-    code span.fl { color: #40a070; } /* Float */
-    code span.fu { color: #06287e; } /* Function */
-    code span.im { } /* Import */
-    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-    code span.op { color: #666666; } /* Operator */
-    code span.ot { color: #007020; } /* Other */
-    code span.pp { color: #bc7a00; } /* Preprocessor */
-    code span.sc { color: #4070a0; } /* SpecialChar */
-    code span.ss { color: #bb6688; } /* SpecialString */
-    code span.st { color: #4070a0; } /* String */
-    code span.va { color: #19177c; } /* Variable */
-    code span.vs { color: #4070a0; } /* VerbatimString */
-    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
   </style>
   <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto.css" id="theme">
-
-  <script src="../../../site_libs/clipboard/clipboard.min.js"></script>
-  <script src="../../../site_libs/quarto-html/tabby.min.js"></script>
-  <script src="../../../site_libs/quarto-html/popper.min.js"></script>
-  <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-  <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-  <link href="../../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet">
-  <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
   <link href="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -107,7 +123,7 @@
   }
 
   .callout.callout-style-simple { 
-    padding: 0em 0.7em;
+    padding: 0em 0.5em;
     border-left: solid #acacac .3rem;
     border-right: solid 1px silver;
     border-top: solid 1px silver;
@@ -218,8 +234,7 @@
     display: none !important;
   }
 
-  .callout.callout-captioned .callout-body > :last-child,
-  .callout.callout-captioned .callout-body > div > :last-child {
+  .callout.callout-captioned .callout-body > .callout-content > :last-child {
     margin-bottom: 0.5rem;
   }
 
@@ -308,12 +323,6 @@
     .reveal .slide:not(.center) {
       height: 100%;
     }
-    .reveal #title-slide.center,
-    .reveal .title-slide.center,
-    .reveal .controls .navigate-left .controls-arrow,
-    .reveal .controls .navigate-right .controls-arrow {
-      margin-top: -15px;
-    }
     .reveal .slide.scrollable {
       overflow-y: auto;
     }
@@ -390,7 +399,7 @@
     }
   </style>
 </head>
-<body>
+<body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
@@ -411,23 +420,29 @@
 </section>
 <section id="back-to-the-linear-model" class="slide level2">
 <h2>Back to the linear model</h2>
-<p>So far our predictors have been categorical. Say we have two groups predicting an outcome. If our predictor is 0:</p>
+<p>So far our predictors have been categorical. If we have two groups predicting an outcome and our predictor is 0:</p>
 <span class="math display">\[\begin{align}
 &amp; y = \beta_0 + \beta_1x\\
-&amp; y = \beta_0 + beta_1 \times 0\\
+&amp; y = \beta_0 + \beta_1 \times 0\\
 &amp; y = \beta_0
 \end{align}\]</span>
 <p>If it’s 1:</p>
 <span class="math display">\[\begin{align}
 &amp; y = \beta_0 + \beta_1x\\
-&amp; y = \beta_0 + beta_1 \times 1\\
-&amp; y = \beta_0 + beta_1
+&amp; y = \beta_0 + \beta_1 \times 1\\
+&amp; y = \beta_0 + \beta_1
 \end{align}\]</span>
 </section>
 <section id="changing-x" class="slide level2">
 <h2>Changing <span class="math inline">\(x\)</span></h2>
-<p>Nothing new: We’re basically looking at what happens if <span class="math inline">\(x\)</span> goes up by 1. So if our measure isn’t categorical (aka dummy coded), but continuous, we’re asking the same question. Only now, <span class="math inline">\(x\)</span> can be more than 0/1.</p>
-<p><span class="math inline">\(y = \beta_0 + \beta_1x\)</span></p>
+<p>A continuous predictor is nothing new: We’re basically looking at what happens if <span class="math inline">\(x\)</span> goes up by 1. So if our measure isn’t categorical (aka dummy coded), but continuous, we’re asking the same question. Only now, <span class="math inline">\(x\)</span> can be more than 0 or 1.</p>
+<span class="math display">\[\begin{align}
+y &amp;= \beta_0 + \beta_1x \\
+y &amp;= \beta_0 + \beta_11 \\
+y &amp;= \beta_0 + \beta_12 \\
+y &amp;= \beta_0 + \beta_13 \\
+y &amp;= \dots
+\end{align}\]</span>
 </section>
 <section id="full-range-of-x" class="slide level2">
 <h2>Full range of <span class="math inline">\(x\)</span></h2>
@@ -439,68 +454,70 @@
 <p>Now getting the score for someone aged 50 is trivial:</p>
 <p><span class="math inline">\(disagreeableness = 0 + 1 \times 50\)</span></p>
 </section>
-<section id="simulating-this-process-is-trivial" class="slide level2">
-<h2>Simulating this process is trivial</h2>
+<section id="simulating-this-process-is-easy" class="slide level2">
+<h2>Simulating this process is easy</h2>
 <p>We get our age, put it into the formula, and we have our outcome.</p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>age <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">50</span>, <span class="dv">20</span>)</span>
-<span id="cb1-2"><a href="#cb1-2"></a>disagreeableness <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="sc">+</span> age</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>age <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">50</span>, <span class="dv">20</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a>disagreeableness <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">*</span> age</span>
 <span id="cb1-3"><a href="#cb1-3"></a></span>
 <span id="cb1-4"><a href="#cb1-4"></a><span class="fu">summary</span>(<span class="fu">lm</span>(disagreeableness <span class="sc">~</span> age))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 lm(formula = disagreeableness ~ age)
 
 Residuals:
        Min         1Q     Median         3Q        Max 
--6.981e-15 -1.300e-15 -6.860e-16 -3.560e-16  8.763e-14 
+-1.287e-13  3.740e-16  9.290e-16  1.765e-15  1.018e-14 
 
 Coefficients:
               Estimate Std. Error    t value Pr(&gt;|t|)    
-(Intercept) -2.274e-14  2.432e-15 -9.349e+00 3.13e-15 ***
-age          1.000e+00  4.775e-17  2.094e+16  &lt; 2e-16 ***
+(Intercept) -2.274e-14  3.426e-15 -6.637e+00 1.78e-09 ***
+age          1.000e+00  6.370e-17  1.570e+16  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 9.03e-15 on 98 degrees of freedom
+Residual standard error: 1.323e-14 on 98 degrees of freedom
 Multiple R-squared:      1, Adjusted R-squared:      1 
-F-statistic: 4.387e+32 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
+F-statistic: 2.465e+32 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </section>
 <section id="perfect-fit" class="slide level2">
 <h2>Perfect fit</h2>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">plot</span>(age, disagreeableness)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">plot</span>(age, disagreeableness)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="index_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
 <section id="adding-error" class="slide level2">
 <h2>Adding error</h2>
-<p>If there’s lots of error, it’ll be harder to separate signal (aka our true 1-point effect) from noise (the total variation in our outcome).</p>
+<p>If there’s lots of error, it’ll be harder to separate signal (aka our true 1-point effect) from noise (the additional variation in our outcome).</p>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>error <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">100</span>)</span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>error <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">100</span>)</span>
 <span id="cb4-2"><a href="#cb4-2"></a>disagreeableness <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="sc">+</span> age <span class="sc">+</span> error</span>
 <span id="cb4-3"><a href="#cb4-3"></a></span>
 <span id="cb4-4"><a href="#cb4-4"></a><span class="fu">summary</span>(<span class="fu">lm</span>(disagreeableness <span class="sc">~</span> age))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 lm(formula = disagreeableness ~ age)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--296.06  -57.49   -3.00   56.26  326.82 
+-182.39  -65.60  -12.45   61.45  300.97 
 
 Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept)  39.8809    25.8983   1.540    0.127
-age           0.6907     0.5084   1.359    0.177
+            Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept)  -0.5999    25.4154  -0.024   0.9812  
+age           1.1264     0.4725   2.384   0.0191 *
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 96.15 on 98 degrees of freedom
-Multiple R-squared:  0.01849,   Adjusted R-squared:  0.008471 
-F-statistic: 1.846 on 1 and 98 DF,  p-value: 0.1774</code></pre>
+Residual standard error: 98.13 on 98 degrees of freedom
+Multiple R-squared:  0.05481,   Adjusted R-squared:  0.04517 
+F-statistic: 5.683 on 1 and 98 DF,  p-value: 0.01906</code></pre>
 </div>
 </div>
 </section>
@@ -508,13 +525,13 @@ F-statistic: 1.846 on 1 and 98 DF,  p-value: 0.1774</code></pre>
 <h2>Psst, scale</h2>
 <p>Adding this much error will bring our outcome measure out of bounds. For a proper simulation where we’re interested in the data generating process, we need to deal with this (by truncating etc.).</p>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
 <section id="thats-it-really" class="slide level2">
 <h2>That’s it, really</h2>
-<p>From the linear model, it doesn’t matter on what level our predictor is. Categorical or continuous, we can simulate any outcome with this formula–including multiple predictors and interactions between different levels of predictors.</p>
+<p>For the linear model, it doesn’t matter on what level our predictor is. Categorical or continuous, we can simulate any outcome with this formula—including multiple predictors and interactions between different levels of predictors.</p>
 <p>Let’s assume number of relatives living close-by is also causing disagreeableness:</p>
 <div class="cell">
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>age <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">50</span>, <span class="dv">20</span>)</span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>age <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">50</span>, <span class="dv">20</span>)</span>
 <span id="cb6-2"><a href="#cb6-2"></a>relatives <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="dv">100</span>, <span class="dv">5</span>)</span>
 <span id="cb6-3"><a href="#cb6-3"></a>error <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">10</span>)</span>
 <span id="cb6-4"><a href="#cb6-4"></a></span>
@@ -524,27 +541,40 @@ F-statistic: 1.846 on 1 and 98 DF,  p-value: 0.1774</code></pre>
 <section id="two-independent-effects" class="slide level2">
 <h2>Two independent effects</h2>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(disagreeableness <span class="sc">~</span> age <span class="sc">+</span> relatives))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(disagreeableness <span class="sc">~</span> age <span class="sc">+</span> relatives))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 lm(formula = disagreeableness ~ age + relatives)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--25.665  -5.787  -0.056   7.175  17.149 
+-27.018  -6.560   0.326   6.535  23.319 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) -0.67789    2.91348  -0.233   0.8165    
-age          1.01196    0.04777  21.185   &lt;2e-16 ***
-relatives    0.91097    0.37696   2.417   0.0175 *  
+(Intercept)  -2.4204     3.2527  -0.744   0.4586    
+age           1.0096     0.0470  21.480   &lt;2e-16 ***
+relatives     1.1264     0.4591   2.453   0.0159 *  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 9.218 on 97 degrees of freedom
-Multiple R-squared:  0.8354,    Adjusted R-squared:  0.832 
-F-statistic: 246.1 on 2 and 97 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 9.882 on 97 degrees of freedom
+Multiple R-squared:  0.8301,    Adjusted R-squared:  0.8266 
+F-statistic:   237 on 2 and 97 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</section>
+<section id="a-tangent" class="slide level2">
+<h2>A tangent</h2>
+<div class="columns">
+<div class="column">
+<p>Causality is hard. Best to stay away from multiple predictors unless we’re prepared to defend our causal model.</p>
+<blockquote>
+<p>When both the predictor and control variable are unreliable measures of the same construct, the true predictive effect of the construct gets partitioned into two coefficients, neither of which capture the full causal effect. <span class="citation" data-cites="wysocki2022">(<a href="#/ref-wysocki2022" role="doc-biblioref" onclick="return false;">Wysocki, Lawson, and Rhemtulla 2022</a>)</span></p>
+</blockquote>
+</div><div class="column">
+<p><img data-src="proxy.jpg"></p>
 </div>
 </div>
 </section>
@@ -559,34 +589,35 @@ F-statistic: 246.1 on 2 and 97 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="in-r" class="slide level2">
 <h2>In R</h2>
 <div class="cell">
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>disagreeableness <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="sc">+</span> <span class="fl">0.25</span><span class="sc">*</span>age <span class="sc">+</span> <span class="dv">5</span><span class="sc">*</span>relatives <span class="sc">+</span> error</span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>disagreeableness <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="sc">+</span> <span class="fl">0.25</span><span class="sc">*</span>age <span class="sc">+</span> <span class="dv">5</span><span class="sc">*</span>relatives <span class="sc">+</span> error</span>
 <span id="cb9-2"><a href="#cb9-2"></a><span class="fu">summary</span>(<span class="fu">lm</span>(disagreeableness <span class="sc">~</span> age <span class="sc">+</span> relatives))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 lm(formula = disagreeableness ~ age + relatives)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--25.665  -5.787  -0.056   7.175  17.149 
+-27.018  -6.560   0.326   6.535  23.319 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) -0.67789    2.91348  -0.233    0.817    
-age          0.26196    0.04777   5.484  3.3e-07 ***
-relatives    4.91097    0.37696  13.028  &lt; 2e-16 ***
+(Intercept)  -2.4204     3.2527  -0.744    0.459    
+age           0.2596     0.0470   5.523 2.79e-07 ***
+relatives     5.1264     0.4591  11.166  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 9.218 on 97 degrees of freedom
-Multiple R-squared:  0.7085,    Adjusted R-squared:  0.7025 
-F-statistic: 117.9 on 2 and 97 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 9.882 on 97 degrees of freedom
+Multiple R-squared:  0.6252,    Adjusted R-squared:  0.6175 
+F-statistic: 80.91 on 2 and 97 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </section>
 <section id="thats-the-data-generating-process" class="slide level2">
 <h2>That’s the data generating process</h2>
-<p>In our simulation, we yet again make our assumptions explicit about how the data are generated: According to this linear model and our inputs (aka numbers). Error adds uncertainty to our data generating process. It specifies that our linear model doesn’t 100% explain the causal structures and that there are influences on our outcome that we haven’t accounted for.</p>
+<p>In our simulation, we yet again make our assumptions explicit about how the data are generated: According to this linear model and our inputs (aka numbers).</p>
+<p>Error adds uncertainty to our data generating process. It specifies that our linear model doesn’t 100% explain the causal structures and that there are influences on our outcome that we haven’t accounted for (or that an effect is heterogeneous).</p>
 </section>
 <section id="about-that-intercept" class="slide level2">
 <h2>About that intercept</h2>
@@ -596,38 +627,38 @@ F-statistic: 117.9 on 2 and 97 DF,  p-value: &lt; 2.2e-16</code></pre>
 </section>
 <section id="in-r-1" class="slide level2">
 <h2>In R</h2>
-<p>The effect for age doesn’t change, but the interpretation of the intercept does: Now it’s the disagreeableness when there’s no relatives and average age.</p>
+<p>The effect for age doesn’t change, but the interpretation of the intercept does: Now it’s the disagreeableness when there’s no relatives and age is at average.</p>
 <div class="cell">
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>centered_age <span class="ot">&lt;-</span> <span class="fu">scale</span>(age, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale =</span> <span class="cn">FALSE</span>)</span>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>centered_age <span class="ot">&lt;-</span> <span class="fu">scale</span>(age, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb11-2"><a href="#cb11-2"></a></span>
 <span id="cb11-3"><a href="#cb11-3"></a><span class="fu">summary</span>(<span class="fu">lm</span>(disagreeableness <span class="sc">~</span> centered_age <span class="sc">+</span> relatives))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 lm(formula = disagreeableness ~ centered_age + relatives)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--25.665  -5.787  -0.056   7.175  17.149 
+-27.018  -6.560   0.326   6.535  23.319 
 
 Coefficients:
              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  12.63222    2.08125   6.070 2.49e-08 ***
-centered_age  0.26196    0.04777   5.484 3.30e-07 ***
-relatives     4.91097    0.37696  13.028  &lt; 2e-16 ***
+(Intercept)   10.7744     2.3192   4.646 1.07e-05 ***
+centered_age   0.2596     0.0470   5.523 2.79e-07 ***
+relatives      5.1264     0.4591  11.166  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 9.218 on 97 degrees of freedom
-Multiple R-squared:  0.7085,    Adjusted R-squared:  0.7025 
-F-statistic: 117.9 on 2 and 97 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 9.882 on 97 degrees of freedom
+Multiple R-squared:  0.6252,    Adjusted R-squared:  0.6175 
+F-statistic: 80.91 on 2 and 97 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </section>
 <section id="simulate-power" class="slide level2">
 <h2>Simulate power</h2>
 <div class="cell">
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<div class="sourceCode cell-code" id="cb13" data-code-line-numbers="15-16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
 <span id="cb13-2"><a href="#cb13-2"></a>effect <span class="ot">&lt;-</span> <span class="fl">0.10</span></span>
 <span id="cb13-3"><a href="#cb13-3"></a>runs <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
 <span id="cb13-4"><a href="#cb13-4"></a></span>
@@ -650,8 +681,8 @@ F-statistic: 117.9 on 2 and 97 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb13-21"><a href="#cb13-21"></a>}</span>
 <span id="cb13-22"><a href="#cb13-22"></a></span>
 <span id="cb13-23"><a href="#cb13-23"></a><span class="fu">sum</span>(pvalues <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">/</span> <span class="fu">length</span>(pvalues)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>[1] 0.497</code></pre>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.485</code></pre>
 </div>
 </div>
 </section>
@@ -659,7 +690,7 @@ F-statistic: 117.9 on 2 and 97 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h2>Standardized effects?</h2>
 <p>What if we want to work with standardized effects? Remember that a standardized effect is just an expression of standard deviation units? So we can standardize our variables and voila: <span class="math inline">\(r\)</span>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>age <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">50</span>, <span class="dv">20</span>)</span>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>age <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">50</span>, <span class="dv">20</span>)</span>
 <span id="cb15-2"><a href="#cb15-2"></a>disagreeableness <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="sc">+</span> <span class="fl">0.25</span><span class="sc">*</span>age <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">10</span>)</span>
 <span id="cb15-3"><a href="#cb15-3"></a></span>
 <span id="cb15-4"><a href="#cb15-4"></a></span>
@@ -670,38 +701,38 @@ F-statistic: 117.9 on 2 and 97 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="lets-compare" class="slide level2">
 <h2>Let’s compare</h2>
 <div class="cell">
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">cor</span>(age, disagreeableness)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>[1] 0.525593</code></pre>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">cor</span>(age, disagreeableness)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4281227</code></pre>
 </div>
-<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(stan_dis <span class="sc">~</span> stan_age))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(stan_dis <span class="sc">~</span> stan_age))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 lm(formula = stan_dis ~ stan_age)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--2.3563 -0.5546  0.1184  0.6515  1.9272 
+-2.3554 -0.5474 -0.1218  0.4755  2.5096 
 
 Coefficients:
              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) 5.381e-17  8.551e-02   0.000        1    
-stan_age    5.256e-01  8.594e-02   6.116 1.97e-08 ***
+(Intercept) 2.064e-17  9.083e-02    0.00        1    
+stan_age    4.281e-01  9.129e-02    4.69 8.86e-06 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.8551 on 98 degrees of freedom
-Multiple R-squared:  0.2762,    Adjusted R-squared:  0.2689 
-F-statistic: 37.41 on 1 and 98 DF,  p-value: 1.967e-08</code></pre>
+Residual standard error: 0.9083 on 98 degrees of freedom
+Multiple R-squared:  0.1833,    Adjusted R-squared:  0.175 
+F-statistic: 21.99 on 1 and 98 DF,  p-value: 8.86e-06</code></pre>
 </div>
 </div>
 </section>
 <section id="not-super-clean" class="slide level2">
 <h2>Not super clean</h2>
-<p>This doesn’t give us a lot of control over the standardized effect size. How about we just start off with standardized variables? If we want <span class="math inline">\(r\)</span> = 0.20, we can do that as follows:</p>
+<p>This doesn’t give us a lot of control over the standardized effect size (our raw effect of 0.25 just happened to be 0.22 SDs). How about we just start off with standardized variables? If we want <span class="math inline">\(r\)</span> = 0.20, we can do that as follows:</p>
 <div class="cell">
-<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>n <span class="ot">&lt;-</span> <span class="fl">1e4</span></span>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>n <span class="ot">&lt;-</span> <span class="fl">1e4</span></span>
 <span id="cb20-2"><a href="#cb20-2"></a></span>
 <span id="cb20-3"><a href="#cb20-3"></a>stan_age <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">1</span>)</span>
 <span id="cb20-4"><a href="#cb20-4"></a>stan_dis <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="sc">+</span> <span class="fl">0.2</span><span class="sc">*</span>stan_age <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="fl">0.3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -710,26 +741,26 @@ F-statistic: 37.41 on 1 and 98 DF,  p-value: 1.967e-08</code></pre>
 <section id="r-0.20" class="slide level2">
 <h2><span class="math inline">\(r\)</span> = 0.20?</h2>
 <div class="cell">
-<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(stan_dis <span class="sc">~</span> stan_age))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(stan_dis <span class="sc">~</span> stan_age))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 lm(formula = stan_dis ~ stan_age)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--1.01726 -0.20057 -0.00206  0.20381  1.13437 
+-1.09330 -0.20679  0.00066  0.20381  1.02869 
 
 Coefficients:
               Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) -4.277e-05  2.999e-03  -0.014    0.989    
-stan_age     1.997e-01  2.962e-03  67.428   &lt;2e-16 ***
+(Intercept) -0.0005512  0.0030027  -0.184    0.854    
+stan_age     0.1957996  0.0029714  65.895   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.2999 on 9998 degrees of freedom
-Multiple R-squared:  0.3126,    Adjusted R-squared:  0.3125 
-F-statistic:  4546 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 0.3003 on 9998 degrees of freedom
+Multiple R-squared:  0.3028,    Adjusted R-squared:  0.3027 
+F-statistic:  4342 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </section>
@@ -737,9 +768,9 @@ F-statistic:  4546 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h2>Wait a second</h2>
 <p>Why isn’t the effect as we specified?</p>
 <div class="cell">
-<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">cor</span>(stan_dis, stan_age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>[1] 0.5590987</code></pre>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">cor</span>(stan_dis, stan_age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5502689</code></pre>
 </div>
 </div>
 </section>
@@ -747,16 +778,16 @@ F-statistic:  4546 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h2>Because we didn’t standardize</h2>
 <p>We created the standardized version of disagreeableness with</p>
 <div class="cell">
-<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>stan_dis <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="sc">+</span> <span class="fl">0.2</span><span class="sc">*</span>stan_age <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="fl">0.3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>stan_dis <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="sc">+</span> <span class="fl">0.2</span><span class="sc">*</span>stan_age <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="fl">0.3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>That means the variable isn’t actually standardized:</p>
 <div class="cell">
-<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">mean</span>(stan_dis); <span class="fu">sd</span>(stan_dis)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>[1] -0.002704294</code></pre>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">mean</span>(stan_dis); <span class="fu">sd</span>(stan_dis)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0005116522</code></pre>
 </div>
-<div class="cell-output-stdout">
-<pre><code>[1] 0.3617113</code></pre>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3595904</code></pre>
 </div>
 </div>
 </section>
@@ -764,7 +795,7 @@ F-statistic:  4546 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h2>How do we fix this?</h2>
 <p>Luckily, we encountered a way to simulate variables, including their means, standard deviations, and correlations: The variance-covariance matrix. Now, we just make sure the means are 0 and standard deviations are 1.</p>
 <div class="cell">
-<div class="sourceCode" id="cb29"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>sd <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>sd <span class="ot">&lt;-</span> <span class="dv">1</span></span>
 <span id="cb29-2"><a href="#cb29-2"></a>correlation <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
 <span id="cb29-3"><a href="#cb29-3"></a>covariance <span class="ot">&lt;-</span> correlation <span class="sc">*</span> sd <span class="sc">*</span> sd</span>
 <span id="cb29-4"><a href="#cb29-4"></a></span>
@@ -807,7 +838,7 @@ r\times sd \times sd &amp; sd^2 \\
 <section id="lets-simulate-that" class="slide level2">
 <h2>Let’s simulate that</h2>
 <div class="cell">
-<div class="sourceCode" id="cb30"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">library</span>(MASS)</span>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">library</span>(MASS)</span>
 <span id="cb30-2"><a href="#cb30-2"></a></span>
 <span id="cb30-3"><a href="#cb30-3"></a>means <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">age =</span> <span class="dv">0</span>, <span class="at">disagreeableness =</span> <span class="dv">0</span>)</span>
 <span id="cb30-4"><a href="#cb30-4"></a></span>
@@ -827,8 +858,8 @@ r\times sd \times sd &amp; sd^2 \\
 <span id="cb30-18"><a href="#cb30-18"></a>d <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(d)</span>
 <span id="cb30-19"><a href="#cb30-19"></a></span>
 <span id="cb30-20"><a href="#cb30-20"></a><span class="fu">cor</span>(d<span class="sc">$</span>age, d<span class="sc">$</span>disagreeableness)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>[1] 0.2051548</code></pre>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1861377</code></pre>
 </div>
 </div>
 </section>
@@ -840,13 +871,13 @@ r\times sd \times sd &amp; sd^2 \\
 <li>Specify both predictor and outcome on the standardized scale, full control over means, SDs, but we prefer unstandardized</li>
 </ul>
 <p>How do we specify an effect on the raw scale, but use the multivariate normal distribution? Remember the formula for <span class="math inline">\(r\)</span>?</p>
-<p><span class="math inline">\(r = B_{xy} \frac{\sigma_x}{\sigma_Y}\)</span></p>
+<p><span class="math inline">\(r = B_{xy} \frac{\sigma_x}{\sigma_y}\)</span></p>
 </section>
 <section id="just-plug-in-the-number-then" class="slide level2">
 <h2>Just plug in the number then</h2>
 <p>Say we want a raw effect of age on disagreeableness of 0.5 points. We want age to have a mean of 50 and an SD of 20. We want disagreeableness to have a mean of 60 and an SD of 15. Let’s use the raw score and SDs first.</p>
 <div class="cell">
-<div class="sourceCode" id="cb32"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>sd_age <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>sd_age <span class="ot">&lt;-</span> <span class="dv">20</span></span>
 <span id="cb32-2"><a href="#cb32-2"></a>sd_dis <span class="ot">&lt;-</span> <span class="dv">15</span></span>
 <span id="cb32-3"><a href="#cb32-3"></a>effect <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
 <span id="cb32-4"><a href="#cb32-4"></a></span>
@@ -857,7 +888,7 @@ r\times sd \times sd &amp; sd^2 \\
 <h2>Then we get the covariances</h2>
 <p>Now that we have our correlation, we can get the covariates and fill everything into our variance covariance matrix.</p>
 <div class="cell">
-<div class="sourceCode" id="cb33"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>covariance <span class="ot">&lt;-</span> r <span class="sc">*</span> sd_age <span class="sc">*</span> sd_dis</span>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>covariance <span class="ot">&lt;-</span> r <span class="sc">*</span> sd_age <span class="sc">*</span> sd_dis</span>
 <span id="cb33-2"><a href="#cb33-2"></a></span>
 <span id="cb33-3"><a href="#cb33-3"></a>sigma <span class="ot">&lt;-</span> </span>
 <span id="cb33-4"><a href="#cb33-4"></a>  <span class="fu">matrix</span>(</span>
@@ -873,7 +904,7 @@ r\times sd \times sd &amp; sd^2 \\
 <h2>Get some data</h2>
 <p>Now all we need are some means, and we’re good to go.</p>
 <div class="cell">
-<div class="sourceCode" id="cb34"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>means <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">age =</span> <span class="dv">50</span>, <span class="at">disagreeableness =</span> <span class="dv">60</span>)</span>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>means <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">age =</span> <span class="dv">50</span>, <span class="at">disagreeableness =</span> <span class="dv">60</span>)</span>
 <span id="cb34-2"><a href="#cb34-2"></a></span>
 <span id="cb34-3"><a href="#cb34-3"></a>d <span class="ot">&lt;-</span> <span class="fu">mvrnorm</span>(</span>
 <span id="cb34-4"><a href="#cb34-4"></a>  n,</span>
@@ -888,26 +919,26 @@ r\times sd \times sd &amp; sd^2 \\
 <h2>Let’s check it all worked</h2>
 <p>Can we recover our raw effect of 0.5?</p>
 <div class="cell">
-<div class="sourceCode" id="cb35"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(disagreeableness <span class="sc">~</span> age, d))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(disagreeableness <span class="sc">~</span> age, d))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 lm(formula = disagreeableness ~ age, data = d)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--39.918  -7.507  -0.077   7.479  55.882 
+-39.376  -7.649  -0.091   7.637  39.706 
 
 Coefficients:
              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) 34.756844   0.297655   116.8   &lt;2e-16 ***
-age          0.503430   0.005508    91.4   &lt;2e-16 ***
+(Intercept) 34.870513   0.299804  116.31   &lt;2e-16 ***
+age          0.502866   0.005571   90.27   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 11.15 on 9998 degrees of freedom
-Multiple R-squared:  0.4552,    Adjusted R-squared:  0.4551 
-F-statistic:  8354 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 11.2 on 9998 degrees of freedom
+Multiple R-squared:  0.449, Adjusted R-squared:  0.449 
+F-statistic:  8148 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </section>
@@ -915,15 +946,15 @@ F-statistic:  8354 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h2>Standardized effect size</h2>
 <p><span class="math inline">\(r = B_{xy} \frac{\sigma_x}{\sigma_Y}\)</span></p>
 <div class="cell">
-<div class="sourceCode" id="cb37"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>b <span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">summary</span>(<span class="fu">lm</span>(disagreeableness <span class="sc">~</span> age, d)))[<span class="dv">2</span>]</span>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>b <span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">summary</span>(<span class="fu">lm</span>(disagreeableness <span class="sc">~</span> age, d)))[<span class="dv">2</span>]</span>
 <span id="cb37-2"><a href="#cb37-2"></a></span>
 <span id="cb37-3"><a href="#cb37-3"></a>b <span class="sc">*</span> <span class="fu">sd</span>(d<span class="sc">$</span>age)<span class="sc">/</span><span class="fu">sd</span>(d<span class="sc">$</span>disagreeableness)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>[1] 0.6746864</code></pre>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6701006</code></pre>
 </div>
-<div class="sourceCode" id="cb39"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="fu">cor</span>(d<span class="sc">$</span>age, d<span class="sc">$</span>disagreeableness)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>[1] 0.6746864</code></pre>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="fu">cor</span>(d<span class="sc">$</span>age, d<span class="sc">$</span>disagreeableness)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6701006</code></pre>
 </div>
 </div>
 </section>
@@ -932,8 +963,8 @@ F-statistic:  8354 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p><span class="math inline">\(r = B_{xy} \frac{\sigma_x}{\sigma_Y}\)</span></p>
 <p>What if we had specified an SD of 20 for age (<span class="math inline">\(x\)</span>) and an SD of 5 for disagreeableness (<span class="math inline">\(y\)</span>)?</p>
 <div class="cell">
-<div class="sourceCode" id="cb41"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="fl">0.5</span> <span class="sc">*</span> <span class="dv">20</span><span class="sc">/</span><span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="fl">0.5</span> <span class="sc">*</span> <span class="dv">20</span><span class="sc">/</span><span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] 2</code></pre>
 </div>
 </div>
@@ -941,66 +972,66 @@ F-statistic:  8354 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
 </section>
 <section id="data-generating-process-creates-limits" class="slide level2">
 <h2>Data generating process creates limits</h2>
-<p>When we determine the “raw” regression slope, we also determine the causal structure. In other words: If we say Y is caused by X, the SD of Y will be dependent on the SD of X.</p>
-<p>Perfect correlation: SD is exactly half.</p>
+<p>When we determine the “raw” regression slope, we also determine the causal structure. In other words: If we say Y is caused by X, the SD of Y will be dependent on the SD of X and the effec size.</p>
+<p>Perfect correlation: <span class="math inline">\(y\)</span> is ten times the size of <span class="math inline">\(x\)</span>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb43"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">50</span>, <span class="dv">20</span>)</span>
-<span id="cb43-2"><a href="#cb43-2"></a>y <span class="ot">&lt;-</span> <span class="fl">0.5</span><span class="sc">*</span>x</span>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">50</span>, <span class="dv">20</span>)</span>
+<span id="cb43-2"><a href="#cb43-2"></a>y <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">*</span>x</span>
 <span id="cb43-3"><a href="#cb43-3"></a></span>
 <span id="cb43-4"><a href="#cb43-4"></a><span class="fu">sd</span>(x); <span class="fu">sd</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>[1] 20.11672</code></pre>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 19.56937</code></pre>
 </div>
-<div class="cell-output-stdout">
-<pre><code>[1] 10.05836</code></pre>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 195.6937</code></pre>
 </div>
 </div>
 </section>
 <section id="maximum-correlation" class="slide level2">
 <h2>Maximum correlation</h2>
 <div class="cell">
-<div class="sourceCode" id="cb46"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(y <span class="sc">~</span> x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(y <span class="sc">~</span> x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 lm(formula = y ~ x)
 
 Residuals:
        Min         1Q     Median         3Q        Max 
--1.145e-14 -3.700e-16 -1.100e-16  1.400e-16  1.161e-12 
+-6.221e-11 -2.500e-14 -2.000e-15  2.000e-14  1.114e-10 
 
 Coefficients:
-             Estimate Std. Error   t value Pr(&gt;|t|)    
-(Intercept) 2.728e-14  3.125e-16 8.732e+01   &lt;2e-16 ***
-x           5.000e-01  5.785e-18 8.643e+16   &lt;2e-16 ***
+              Estimate Std. Error    t value Pr(&gt;|t|)    
+(Intercept) -5.093e-13  3.510e-14 -1.451e+01   &lt;2e-16 ***
+x            1.000e+01  6.523e-16  1.533e+16   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 1.164e-14 on 9998 degrees of freedom
+Residual standard error: 1.276e-12 on 9998 degrees of freedom
 Multiple R-squared:      1, Adjusted R-squared:      1 
-F-statistic: 7.47e+33 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
+F-statistic: 2.35e+32 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </section>
 <section id="maximum-correlation-1" class="slide level2">
 <h2>Maximum correlation</h2>
-<p>Now if we use the formula, we can get the maximum correlation of 1 because one SD is exactly half of the other SD.</p>
+<p>Now if we use the formula, we can get the maximum correlation of 1 because the outcome SD is exactly 10 times the predictor SD, which is exactly our effect:</p>
 <div class="cell">
-<div class="sourceCode" id="cb48"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a>b <span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">lm</span>(y<span class="sc">~</span>x))[<span class="dv">2</span>]</span>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a>b <span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">lm</span>(y<span class="sc">~</span>x))[<span class="dv">2</span>]</span>
 <span id="cb48-2"><a href="#cb48-2"></a>b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>  x 
-0.5 </code></pre>
+<div class="cell-output cell-output-stdout">
+<pre><code> x 
+10 </code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb50"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a>b <span class="sc">*</span> <span class="fu">sd</span>(x)<span class="sc">/</span><span class="fu">sd</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a>b <span class="sc">*</span> <span class="fu">sd</span>(x)<span class="sc">/</span><span class="fu">sd</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>x 
 1 </code></pre>
 </div>
-<div class="sourceCode" id="cb52"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a><span class="fu">cor</span>(x,y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a><span class="fu">cor</span>(x,y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] 1</code></pre>
 </div>
 </div>
@@ -1008,43 +1039,44 @@ F-statistic: 7.47e+33 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="lets-add-some-error" class="slide level2">
 <h2>Let’s add some error</h2>
 <div class="cell">
-<div class="sourceCode" id="cb54"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">50</span>, <span class="dv">20</span>)</span>
-<span id="cb54-2"><a href="#cb54-2"></a>y <span class="ot">&lt;-</span> <span class="fl">0.5</span><span class="sc">*</span>x <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">50</span>)</span>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">50</span>, <span class="dv">20</span>)</span>
+<span id="cb54-2"><a href="#cb54-2"></a>y <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">*</span>x <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">50</span>)</span>
 <span id="cb54-3"><a href="#cb54-3"></a></span>
 <span id="cb54-4"><a href="#cb54-4"></a><span class="fu">sd</span>(x); <span class="fu">sd</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>[1] 19.98208</code></pre>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 19.97822</code></pre>
 </div>
-<div class="cell-output-stdout">
-<pre><code>[1] 50.66711</code></pre>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 206.2865</code></pre>
 </div>
 </div>
 </section>
 <section id="now-our-correlation-is-lower" class="slide level2">
 <h2>Now our correlation is lower</h2>
 <div class="cell">
-<div class="sourceCode" id="cb57"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a>b <span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">lm</span>(y<span class="sc">~</span>x))[<span class="dv">2</span>]</span>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a>b <span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">lm</span>(y<span class="sc">~</span>x))[<span class="dv">2</span>]</span>
 <span id="cb57-2"><a href="#cb57-2"></a>b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>        x 
-0.4817307 </code></pre>
+<div class="cell-output cell-output-stdout">
+<pre><code>      x 
+10.0238 </code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb59"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a>b <span class="sc">*</span> <span class="fu">sd</span>(x)<span class="sc">/</span><span class="fu">sd</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a>b <span class="sc">*</span> <span class="fu">sd</span>(x)<span class="sc">/</span><span class="fu">sd</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>        x 
-0.1899849 </code></pre>
+0.9707744 </code></pre>
 </div>
-<div class="sourceCode" id="cb61"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a><span class="fu">cor</span>(x,y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>[1] 0.1899849</code></pre>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a><span class="fu">cor</span>(x,y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9707744</code></pre>
 </div>
 </div>
 </section>
 <section id="bottom-line" class="slide level2">
 <h2>Bottom line</h2>
-<p>If you’re saying that one variable is caused by another, you’re not free to choose the variation of the outcome variable. The variation is a result of the data generating process and you’re determining what the data generating process is with your linear model. For our example, with this raw slops of 0.5, the smallest SD we can choose for the outcome is half that of the cause.</p>
+<p>If you’re saying that one variable is caused by another, you’re not free to choose the variation of the outcome variable. The variation is a result of the data generating process and you’re determining what the data generating process is with your linear model. For our example, with a raw effect of 10, the smallest SD we can choose for the outcome is 10 times that of the cause.</p>
+<p>Back to our example: If age causes disagreeableness with an effect of 0.5, then the SD of disagreeableness can only be as small as half the SD of age.</p>
 </section>
 <section id="bottom-line-1" class="slide level2">
 <h2>Bottom line</h2>
@@ -1054,8 +1086,8 @@ F-statistic: 7.47e+33 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h2>Likert setup</h2>
 <p>Let’s say both predictor and outcome are on a 7-point Likert-scale. You think that both should be roughly on the mid-point with a 1.2-point SD for predictor and 0.9 for outcome. As a raw effect, you assume 0.3 points as your SESOI. Do those SDs make sense? Would they produce a sensible <span class="math inline">\(r\)</span>?</p>
 <div class="cell">
-<div class="sourceCode" id="cb63"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a><span class="fl">0.3</span> <span class="sc">*</span> <span class="fl">1.2</span><span class="sc">/</span><span class="fl">0.9</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a><span class="fl">0.3</span> <span class="sc">*</span> <span class="fl">1.2</span><span class="sc">/</span><span class="fl">0.9</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.4</code></pre>
 </div>
 </div>
@@ -1063,7 +1095,7 @@ F-statistic: 7.47e+33 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="power" class="slide level2">
 <h2>Power</h2>
 <div class="cell">
-<div class="sourceCode" id="cb65"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a>means <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">x =</span> <span class="dv">4</span>, <span class="at">y =</span> <span class="dv">4</span>)</span>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a>means <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">x =</span> <span class="dv">4</span>, <span class="at">y =</span> <span class="dv">4</span>)</span>
 <span id="cb65-2"><a href="#cb65-2"></a>sd_x <span class="ot">&lt;-</span> <span class="fl">1.2</span></span>
 <span id="cb65-3"><a href="#cb65-3"></a>sd_y <span class="ot">&lt;-</span> <span class="fl">0.9</span></span>
 <span id="cb65-4"><a href="#cb65-4"></a>sesoi <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
@@ -1095,14 +1127,14 @@ F-statistic: 7.47e+33 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb65-30"><a href="#cb65-30"></a>}</span>
 <span id="cb65-31"><a href="#cb65-31"></a></span>
 <span id="cb65-32"><a href="#cb65-32"></a><span class="fu">sum</span>(pvalues <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">/</span> <span class="fu">length</span>(pvalues)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
-<pre><code>[1] 0.812</code></pre>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.778</code></pre>
 </div>
 </div>
 </section>
 <section id="more-than-one-cause" class="slide level2">
 <h2>More than one cause</h2>
-<p>If we have more than one predictor, we need to specify effect sizes for each. Also, we need to be clear what our causal model is: We’re saying that both predictors are independently influencing our outcome. Otherwise we commit the <a href="https://academic.oup.com/aje/article/177/4/292/147738">Table II fallacy</a>. Simulating data also means simulating the causal structure.</p>
+<p>If we have more than one predictor, we need to specify effect sizes for each. Also, we need to be clear what our causal model is: We’re saying that both predictors are independently influencing our outcome. Otherwise we commit the <a href="https://academic.oup.com/aje/article/177/4/292/147738">Table II fallacy</a> <span class="citation" data-cites="westreich2013">(<a href="#/ref-westreich2013" role="doc-biblioref" onclick="return false;">Westreich and Greenland 2013</a>)</span>. Simulating data also means simulating the causal structure.</p>
 </section>
 <section id="what-power" class="slide level2">
 <h2>What power?</h2>
@@ -1116,7 +1148,7 @@ F-statistic: 7.47e+33 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
 </section>
 <section id="what-we-need" class="slide level2">
 <h2>What we need</h2>
-<p>Ideally, we power for <strong>all effects</strong>, meaning the smallest independent effect:</p>
+<p>Ideally, we power for <strong>all effectts</strong> meaning the smallest independent effect:</p>
 <ul>
 <li>Slope for each predictor</li>
 <li>Correlation between each predictor</li>
@@ -1124,6 +1156,11 @@ F-statistic: 7.47e+33 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <li>All means and SDs</li>
 </ul>
 <p>How to simulate power for multiple causes? Next exercise.</p>
+</section></section>
+<section>
+<section id="lets-do-interactions" class="title-slide slide level1 center">
+<h1>Let’s do interactions</h1>
+
 </section>
 <section id="categorical-by-continuous-interactions" class="slide level2">
 <h2>Categorical by continuous interactions</h2>
@@ -1141,7 +1178,7 @@ y = \beta_0 + \beta_1x_1 + \beta_2x_2 + \beta_3x_1x_2
 <h2>Pictures, plase</h2>
 <p>Therefore, we expect the effect to look something like this, if we were to plot means per group and liking:</p>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-68-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-34-1.png" width="960" class="r-stretch"></section>
 <section id="how-to-translate" class="slide level2">
 <h2>How to translate</h2>
 <p><span class="math display">\[
@@ -1172,7 +1209,7 @@ y = \beta_0 + \beta_1condition + \beta_2liking + \beta_3 \times condition \times
 &amp; y = 50 + 5 \times condition + 0 \times liking + 1 \times condition \times liking
 \end{align}\]</span>
 <ul>
-<li><span class="math inline">\(\beta_0\)</span>: The outcome when condition is neutral and liking is 0: 50</li>
+<li><span class="math inline">\(\beta_0\)</span>: The outcome when condition is neutral and liking is 0 (i.e., average): 50</li>
 <li><span class="math inline">\(\beta_1\)</span>: Difference between condition neutral and liking 0 and condition positive and liking 0 (aka main effect of condition): 5</li>
 <li><span class="math inline">\(\beta_2\)</span>: Difference between condition neutral and liking 0 and condition neutral and liking 1 (aka main effect liking): 0</li>
 <li><span class="math inline">\(\beta_3\)</span>: In addition to the condition effect, what does going up in liking by 1 add (or subtract) from the outcome?: 1</li>
@@ -1181,7 +1218,7 @@ y = \beta_0 + \beta_1condition + \beta_2liking + \beta_3 \times condition \times
 <section id="in-r-2" class="slide level2">
 <h2>In R</h2>
 <div class="cell">
-<div class="sourceCode" id="cb67"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
 <span id="cb67-2"><a href="#cb67-2"></a></span>
 <span id="cb67-3"><a href="#cb67-3"></a>b0 <span class="ot">&lt;-</span> <span class="dv">50</span></span>
 <span id="cb67-4"><a href="#cb67-4"></a>b1 <span class="ot">&lt;-</span> <span class="dv">5</span></span>
@@ -1209,8 +1246,8 @@ y = \beta_0 + \beta_1condition + \beta_2liking + \beta_3 \times condition \times
 <section id="lets-find-our-numbers" class="slide level2">
 <h2>Let’s find our numbers</h2>
 <div class="cell">
-<div class="sourceCode" id="cb68"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(agree <span class="sc">~</span> condition<span class="sc">*</span>liking, d))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(agree <span class="sc">~</span> condition<span class="sc">*</span>liking, d))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 lm(formula = agree ~ condition * liking, data = d)
@@ -1237,16 +1274,16 @@ F-statistic: 148.2 on 3 and 19996 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="pictures-please" class="slide level2">
 <h2>Pictures, please</h2>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-74-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-37-1.png" width="960" class="r-stretch"></section>
 <section id="two-way-interaction" class="slide level2">
 <h2>Two-way interaction</h2>
 <p>The interaction can also go way the other way around: The effect of A under B or the effect of B under A. In our case, we could also ask how the effect of liking a message is modified through framing. Same data, different plot:</p>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-76-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-38-1.png" width="960" class="r-stretch"></section>
 <section id="lets-redo-the-logic" class="slide level2">
 <h2>Let’s redo the logic</h2>
 <div class="cell">
-<div class="sourceCode" id="cb70"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
 <span id="cb70-2"><a href="#cb70-2"></a></span>
 <span id="cb70-3"><a href="#cb70-3"></a>b0 <span class="ot">&lt;-</span> <span class="dv">50</span></span>
 <span id="cb70-4"><a href="#cb70-4"></a>b1 <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co"># no main effect of condition</span></span>
@@ -1274,12 +1311,7 @@ F-statistic: 148.2 on 3 and 19996 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="now-were-looking-at-slopes" class="slide level2">
 <h2>Now we’re looking at slopes</h2>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-80-1.png" width="960" class="r-stretch"></section>
-<section id="alternative-way-of-thinking-about-it" class="slide level2">
-<h2>Alternative way of thinking about it</h2>
-<p>Let’s go back to our original example. At average liking, there’ll be a 5-point difference. What’s the maximum effect we can expect? If someone scores 7/7 on liking. Because we centered (and the mean was 3.5), that means someone who scores 3.5 above 0.</p>
-<p>So the maximum effect is 5 (main effect) + 3.5 * 1 (interaction effect) = 8.5 points difference. The minimum effect is 5 - 3.5 = 1.5 points. The maximum range, therefore, is 7 points.</p>
-</section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-40-1.png" width="960" class="r-stretch"></section>
 <section id="continuous-interactions" class="slide level2">
 <h2>Continuous interactions</h2>
 <p>Same logic as before: What extra information do we gain if we go up on both variables compared to going up on them individually?</p>
@@ -1293,7 +1325,7 @@ F-statistic: 148.2 on 3 and 19996 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h2>Pictures, plase</h2>
 <p>We expect the effect to look something like this, if we were to plot a line per trustworthiness rating:</p>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-82-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-41-1.png" width="960" class="r-stretch"></section>
 <section id="how-to-translate-1" class="slide level2">
 <h2>How to translate</h2>
 <p><span class="math display">\[
@@ -1333,7 +1365,7 @@ y = \beta_0 + \beta_1liking + \beta_2trust + \beta_3 \times liking \times trust
 <section id="in-r-3" class="slide level2">
 <h2>In R</h2>
 <div class="cell">
-<div class="sourceCode" id="cb71"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
 <span id="cb71-2"><a href="#cb71-2"></a></span>
 <span id="cb71-3"><a href="#cb71-3"></a>b0 <span class="ot">&lt;-</span> <span class="dv">50</span></span>
 <span id="cb71-4"><a href="#cb71-4"></a>b1 <span class="ot">&lt;-</span> <span class="dv">3</span></span>
@@ -1361,8 +1393,8 @@ y = \beta_0 + \beta_1liking + \beta_2trust + \beta_3 \times liking \times trust
 <section id="lets-find-our-numbers-1" class="slide level2">
 <h2>Let’s find our numbers</h2>
 <div class="cell">
-<div class="sourceCode" id="cb72"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(agree <span class="sc">~</span> liking<span class="sc">*</span>trustworthiness, d))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(agree <span class="sc">~</span> liking<span class="sc">*</span>trustworthiness, d))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 lm(formula = agree ~ liking * trustworthiness, data = d)
@@ -1389,7 +1421,7 @@ F-statistic:   982 on 3 and 9996 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="pictures-plesase" class="slide level2">
 <h2>Pictures, plesase</h2>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-88-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-44-1.png" width="960" class="r-stretch"></section>
 <section id="interaction-plots" class="slide level2">
 <h2>Interaction plots</h2>
 <p>In the above plot, I cheated a bit by rounding trustworthiness so that we can get only 7 “levels”. With truly continuous variables, we usually operate with standard deviations: What’s the effect of liking on agreeing when trustworthiness is 1 SD above or below its mean? You can create those plots yourself or rely on other <a href="https://cran.r-project.org/web/packages/interactions/vignettes/interactions.html">packages</a>.</p>
@@ -1397,16 +1429,16 @@ F-statistic:   982 on 3 and 9996 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="prediction-plots" class="slide level2">
 <h2>Prediction plots</h2>
 <div class="cell">
-<div class="sourceCode" id="cb74"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lm</span>(agree <span class="sc">~</span> liking<span class="sc">*</span>trustworthiness, d)</span>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lm</span>(agree <span class="sc">~</span> liking<span class="sc">*</span>trustworthiness, d)</span>
 <span id="cb74-2"><a href="#cb74-2"></a></span>
 <span id="cb74-3"><a href="#cb74-3"></a>interactions<span class="sc">::</span><span class="fu">interact_plot</span>(m, <span class="at">pred =</span> <span class="st">"liking"</span>, <span class="at">modx =</span> <span class="st">"trustworthiness"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="index_files/figure-revealjs/unnamed-chunk-90-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-45-1.png" width="960" class="r-stretch"></section>
 <section id="from-the-matrix" class="slide level2">
 <h2>From the matrix</h2>
 <p><span class="math inline">\(y = \beta_0 + \beta_1x_1 + \beta_2x_2 + \beta_3x_1x_2\)</span></p>
-<p>The interaction term is really just a product, so we can treat it as its own variable. We can simply create a correlation matrix where we specify how the product of two variables (aka <span class="math inline">\(x_1 \times x_2\)</span>) should correlate to our outcome.</p>
+<p>The interaction term is really just a product, so we can treat it as its own variable. We can simply create a correlation matrix where we specify how the product of two variables (aka <span class="math inline">\(x_1 \times x_2\)</span>) should correlate with our outcome.</p>
 <p><span class="math display">\[
 \begin{bmatrix}
 &amp; x_1 &amp; x_2 &amp; x_1x_2 &amp; y \\
@@ -1433,7 +1465,7 @@ y &amp; 0.2 &amp; 0.25 &amp; 0.1 &amp; 1
 <section id="in-r-4" class="slide level2">
 <h2>In R</h2>
 <div class="cell">
-<div class="sourceCode" id="cb75"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1"></a><span class="fu">library</span>(MASS)</span>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1"></a><span class="fu">library</span>(MASS)</span>
 <span id="cb75-2"><a href="#cb75-2"></a></span>
 <span id="cb75-3"><a href="#cb75-3"></a>means <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">x1 =</span> <span class="dv">0</span>, <span class="at">x2 =</span> <span class="dv">0</span>, <span class="at">x1x2 =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="dv">0</span>)</span>
 <span id="cb75-4"><a href="#cb75-4"></a></span>
@@ -1461,8 +1493,8 @@ y &amp; 0.2 &amp; 0.25 &amp; 0.1 &amp; 1
 <section id="lets-find-our-numbers-2" class="slide level2">
 <h2>Let’s find our numbers</h2>
 <div class="cell">
-<div class="sourceCode" id="cb76"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1"></a><span class="fu">cor</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1"></a><span class="fu">cor</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>              x1           x2         x1x2         y
 x1   1.000000000  0.422176276  0.002282137 0.2097402
 x2   0.422176276  1.000000000 -0.002203798 0.2535390
@@ -1475,8 +1507,8 @@ y    0.209740212  0.253539037  0.108276236 1.0000000</code></pre>
 <h2>Summary</h2>
 <p>Remember: Those are conditional effects, not just 1-to-1 correlations.</p>
 <div class="cell">
-<div class="sourceCode" id="cb78"><pre class="sourceCode numberSource r cell-code number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> x1x2, d))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-stdout">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> x1x2, d))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 lm(formula = y ~ x1 + x2 + x1x2, data = d)
@@ -1511,9 +1543,21 @@ F-statistic:   325 on 3 and 9996 DF,  p-value: &lt; 2.2e-16</code></pre>
 <li>Extend this understanding to continuous (by categorical) interactions</li>
 <li>Be able to translate that extension to generating data</li>
 </ul>
+</section>
+
+<section id="references" class="title-slide slide level1 smaller scrollable">
+<h1>References</h1>
 
 <div class="footer footer-default">
-<p><a href="https://niklasjohannes.github.io/power-workshop/" class="uri">https://niklasjohannes.github.io/power-workshop/</a></p>
+<p><a href="https://niklasjohannes.github.io/power-workshop/">Home</a></p>
+</div>
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-westreich2013" class="csl-entry" role="doc-biblioentry">
+Westreich, Daniel, and Sander Greenland. 2013. <span>“The Table&nbsp;2 Fallacy: Presenting and Interpreting Confounder and Modifier Coefficients.”</span> <em>American Journal of Epidemiology</em> 177 (4): 292–98. <a href="https://doi.org/10.1093/aje/kws412">https://doi.org/10.1093/aje/kws412</a>.
+</div>
+<div id="ref-wysocki2022" class="csl-entry" role="doc-biblioentry">
+Wysocki, Anna C., Katherine M. Lawson, and Mijke Rhemtulla. 2022. <span>“Statistical Control Requires Causal Justification.”</span> <em>Advances in Methods and Practices in Psychological Science</em> 5 (2): 25152459221095823. <a href="https://doi.org/10.1177/25152459221095823">https://doi.org/10.1177/25152459221095823</a>.
+</div>
 </div>
 </section>
     </div>
@@ -1521,7 +1565,6 @@ F-statistic:   325 on 3 and 9996 DF,  p-value: &lt; 2.2e-16</code></pre>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
   <script src="../../../site_libs/revealjs/dist/reveal.js"></script>
-
   <!-- reveal.js plugins -->
   <script src="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
   <script src="../../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
@@ -1529,12 +1572,13 @@ F-statistic:   325 on 3 and 9996 DF,  p-value: &lt; 2.2e-16</code></pre>
   <script src="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
   <script src="../../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
   <script src="../../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
   <script src="../../../site_libs/revealjs/plugin/notes/notes.js"></script>
   <script src="../../../site_libs/revealjs/plugin/search/search.js"></script>
   <script src="../../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
   <script src="../../../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
-
 
   <script>
 
@@ -1548,11 +1592,10 @@ F-statistic:   325 on 3 and 9996 DF,  p-value: &lt; 2.2e-16</code></pre>
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
-
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":false},
 'smaller': false,
-
+ 
         // Display controls in the bottom right corner
         controls: false,
 
@@ -1772,8 +1815,26 @@ F-statistic:   325 on 3 and 9996 DF,  p-value: &lt; 2.2e-16</code></pre>
       })();
     </script>
 
-    <script type="application/javascript">
+    <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
       const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
       tabsets.forEach(function(tabset) {
         const tabby = new Tabby('#' + tabset.id);
@@ -1790,7 +1851,10 @@ F-statistic:   325 on 3 and 9996 DF,  p-value: &lt; 2.2e-16</code></pre>
         button.blur();
         // flash "checked"
         button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
         setTimeout(function() {
+          button.setAttribute("title", currentTitle);
           button.classList.remove('code-copy-button-checked');
         }, 1000);
         // clear code selection

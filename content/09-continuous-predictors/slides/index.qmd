@@ -8,45 +8,51 @@ format:
     slide-number: true
     chalkboard: 
       buttons: false
-    footer: <https://niklasjohannes.github.io/power-workshop/>
+    footer: "[Home](https://niklasjohannes.github.io/power-workshop/)"
 execute:
   echo: true
+bibliography: references.bib
 ---
 
 # Takeaways
 
-- Understand that continuous predictors are just another case of the linear model
-- Extend this understanding to continuous (by categorical) interactions
-- Be able to translate that extension to generating data
+-   Understand that continuous predictors are just another case of the linear model
+-   Extend this understanding to continuous (by categorical) interactions
+-   Be able to translate that extension to generating data
 
 ## Back to the linear model
 
-So far our predictors have been categorical. Say we have two groups predicting an outcome. If our predictor is 0:
+So far our predictors have been categorical. If we have two groups predicting an outcome and our predictor is 0:
 
 ```{=tex}
 \begin{align}
 & y = \beta_0 + \beta_1x\\
-& y = \beta_0 + beta_1 \times 0\\
+& y = \beta_0 + \beta_1 \times 0\\
 & y = \beta_0
 \end{align}
 ```
-
 If it's 1:
 
 ```{=tex}
 \begin{align}
 & y = \beta_0 + \beta_1x\\
-& y = \beta_0 + beta_1 \times 1\\
-& y = \beta_0 + beta_1
+& y = \beta_0 + \beta_1 \times 1\\
+& y = \beta_0 + \beta_1
 \end{align}
 ```
-
 ## Changing $x$
 
-Nothing new: We're basically looking at what happens if $x$ goes up by 1. So if our measure isn't categorical (aka dummy coded), but continuous, we're asking the same question. Only now, $x$ can be more than 0/1. 
+A continuous predictor is nothing new: We're basically looking at what happens if $x$ goes up by 1. So if our measure isn't categorical (aka dummy coded), but continuous, we're asking the same question. Only now, $x$ can be more than 0 or 1.
 
-$y = \beta_0 + \beta_1x$ 
-
+```{=tex}
+\begin{align}
+y &= \beta_0 + \beta_1x \\
+y &= \beta_0 + \beta_11 \\
+y &= \beta_0 + \beta_12 \\
+y &= \beta_0 + \beta_13 \\
+y &= \dots
+\end{align}
+```
 ## Full range of $x$
 
 If we assume linearity, then getting $y$ is easy. Assume we predict disagreeableness from age. With each year people grow older, they become 1 point more disagreeable on a 100-point scale. (And when they're 0 years old, they're also 0 disagreeable.)
@@ -57,18 +63,17 @@ If we assume linearity, then getting $y$ is easy. Assume we predict disagreeable
 & disagreeableness = 0 + 1 \times age
 \end{align}
 ```
-
 Now getting the score for someone aged 50 is trivial:
 
 $disagreeableness = 0 + 1 \times 50$
 
-## Simulating this process is trivial
+## Simulating this process is easy
 
 We get our age, put it into the formula, and we have our outcome.
 
 ```{r}
 age <- rnorm(100, 50, 20)
-disagreeableness <- 0 + age
+disagreeableness <- 0 + 1 * age
 
 summary(lm(disagreeableness ~ age))
 ```
@@ -81,7 +86,7 @@ plot(age, disagreeableness)
 
 ## Adding error
 
-If there's lots of error, it'll be harder to separate signal (aka our true 1-point effect) from noise (the total variation in our outcome).
+If there's lots of error, it'll be harder to separate signal (aka our true 1-point effect) from noise (the additional variation in our outcome).
 
 ```{r}
 error <- rnorm(100, 0, 100)
@@ -90,8 +95,7 @@ disagreeableness <- 0 + age + error
 summary(lm(disagreeableness ~ age))
 ```
 
-
-##  Psst, scale
+## Psst, scale
 
 Adding this much error will bring our outcome measure out of bounds. For a proper simulation where we're interested in the data generating process, we need to deal with this (by truncating etc.).
 
@@ -103,7 +107,7 @@ hist(disagreeableness)
 
 ## That's it, really
 
-From the linear model, it doesn't matter on what level our predictor is. Categorical or continuous, we can simulate any outcome with this formula--including multiple predictors and interactions between different levels of predictors.
+For the linear model, it doesn't matter on what level our predictor is. Categorical or continuous, we can simulate any outcome with this formula---including multiple predictors and interactions between different levels of predictors.
 
 Let's assume number of relatives living close-by is also causing disagreeableness:
 
@@ -121,6 +125,20 @@ disagreeableness <- 0 + age + relatives + error
 summary(lm(disagreeableness ~ age + relatives))
 ```
 
+## A tangent
+
+::: columns
+::: column
+Causality is hard. Best to stay away from multiple predictors unless we're prepared to defend our causal model.
+
+> When both the predictor and control variable are unreliable measures of the same construct, the true predictive effect of the construct gets partitioned into two coefficients, neither of which capture the full causal effect. [@wysocki2022]
+:::
+
+::: column
+![](proxy.jpg)
+:::
+:::
+
 ## Varying effect sizes
 
 What if we believe the effect of age is smaller, but that of number of relatives much larger. No problem, we just adjust our betas. Say each year only contributes 0.25 higher grumpiness, but each extra relative contributes 5 points on grumpiness.
@@ -131,7 +149,6 @@ What if we believe the effect of age is smaller, but that of number of relatives
 & disagreeableness = 0 + 0.25 \times age + 5 \times relatives
 \end{align}
 ```
-
 ## In R
 
 ```{r}
@@ -141,7 +158,9 @@ summary(lm(disagreeableness ~ age + relatives))
 
 ## That's the data generating process
 
-In our simulation, we yet again make our assumptions explicit about how the data are generated: According to this linear model and our inputs (aka numbers). Error adds uncertainty to our data generating process. It specifies that our linear model doesn't 100% explain the causal structures and that there are influences on our outcome that we haven't accounted for.
+In our simulation, we yet again make our assumptions explicit about how the data are generated: According to this linear model and our inputs (aka numbers).
+
+Error adds uncertainty to our data generating process. It specifies that our linear model doesn't 100% explain the causal structures and that there are influences on our outcome that we haven't accounted for (or that an effect is heterogeneous).
 
 ## About that intercept
 
@@ -153,7 +172,7 @@ Now the meaning intercept changes: Disagreeableness at average age and 0 relativ
 
 ## In R
 
-The effect for age doesn't change, but the interpretation of the intercept does: Now it's the disagreeableness when there's no relatives and average age.
+The effect for age doesn't change, but the interpretation of the intercept does: Now it's the disagreeableness when there's no relatives and age is at average.
 
 ```{r}
 centered_age <- scale(age, center = TRUE, scale = FALSE)
@@ -164,6 +183,8 @@ summary(lm(disagreeableness ~ centered_age + relatives))
 ## Simulate power
 
 ```{r}
+#| code-line-numbers: "15-16"
+
 n <- 100
 effect <- 0.10
 runs <- 1000
@@ -211,7 +232,7 @@ summary(lm(stan_dis ~ stan_age))
 
 ## Not super clean
 
-This doesn't give us a lot of control over the standardized effect size. How about we just start off with standardized variables? If we want $r$ = 0.20, we can do that as follows:
+This doesn't give us a lot of control over the standardized effect size (our raw effect of 0.25 just happened to be 0.22 SDs). How about we just start off with standardized variables? If we want $r$ = 0.20, we can do that as follows:
 
 ```{r}
 n <- 1e4
@@ -226,7 +247,6 @@ stan_dis <- 0 + 0.2*stan_age + rnorm(n, 0, 0.3)
 summary(lm(stan_dis ~ stan_age))
 ```
 
-
 ## Wait a second
 
 Why isn't the effect as we specified?
@@ -237,8 +257,7 @@ cor(stan_dis, stan_age)
 
 ## Because we didn't standardize
 
-We created the standardized version of disagreeableness with 
-
+We created the standardized version of disagreeableness with
 
 ```{r}
 #| eval: false
@@ -328,12 +347,12 @@ cor(d$age, d$disagreeableness)
 
 So now we know how to:
 
-- Specify an outcome on the raw scale, but we sort of eyeball the error
-- Specify both predictor and outcome on the standardized scale, full control over means, SDs, but we prefer unstandardized
+-   Specify an outcome on the raw scale, but we sort of eyeball the error
+-   Specify both predictor and outcome on the standardized scale, full control over means, SDs, but we prefer unstandardized
 
 How do we specify an effect on the raw scale, but use the multivariate normal distribution? Remember the formula for $r$?
 
-$r = B_{xy} \frac{\sigma_x}{\sigma_Y}$
+$r = B_{xy} \frac{\sigma_x}{\sigma_y}$
 
 ## Just plug in the number then
 
@@ -345,7 +364,6 @@ Say we want a raw effect of age on disagreeableness of 0.5 points. We want age t
 & r = 0.5 \frac{20}{10}
 \end{align}
 ```
-
 ```{r}
 sd_age <- 20
 sd_dis <- 15
@@ -420,13 +438,13 @@ But $r$ can't be larger than 1--what's going on??
 
 ## Data generating process creates limits
 
-When we determine the "raw" regression slope, we also determine the causal structure. In other words: If we say Y is caused by X, the SD of Y will be dependent on the SD of X.
+When we determine the "raw" regression slope, we also determine the causal structure. In other words: If we say Y is caused by X, the SD of Y will be dependent on the SD of X and the effec size.
 
-Perfect correlation: SD is exactly half.
+Perfect correlation: $y$ is ten times the size of $x$.
 
 ```{r}
 x <- rnorm(n, 50, 20)
-y <- 0.5*x
+y <- 10*x
 
 sd(x); sd(y)
 ```
@@ -439,7 +457,7 @@ summary(lm(y ~ x))
 
 ## Maximum correlation
 
-Now if we use the formula, we can get the maximum correlation of 1 because one SD is exactly half of the other SD.
+Now if we use the formula, we can get the maximum correlation of 1 because the outcome SD is exactly 10 times the predictor SD, which is exactly our effect:
 
 ```{r}
 b <- coef(lm(y~x))[2]
@@ -455,7 +473,7 @@ cor(x,y)
 
 ```{r}
 x <- rnorm(n, 50, 20)
-y <- 0.5*x + rnorm(n, 0, 50)
+y <- 10*x + rnorm(n, 0, 50)
 
 sd(x); sd(y)
 ```
@@ -474,7 +492,9 @@ cor(x,y)
 
 ## Bottom line
 
-If you're saying that one variable is caused by another, you're not free to choose the variation of the outcome variable. The variation is a result of the data generating process and you're determining what the data generating process is with your linear model. For our example, with this raw slops of 0.5, the smallest SD we can choose for the outcome is half that of the cause.
+If you're saying that one variable is caused by another, you're not free to choose the variation of the outcome variable. The variation is a result of the data generating process and you're determining what the data generating process is with your linear model. For our example, with a raw effect of 10, the smallest SD we can choose for the outcome is 10 times that of the cause.
+
+Back to our example: If age causes disagreeableness with an effect of 0.5, then the SD of disagreeableness can only be as small as half the SD of age.
 
 ## Bottom line
 
@@ -527,27 +547,29 @@ sum(pvalues < 0.05) / length(pvalues)
 
 ## More than one cause
 
-If we have more than one predictor, we need to specify effect sizes for each. Also, we need to be clear what our causal model is: We're saying that both predictors are independently influencing our outcome. Otherwise we commit the [Table II fallacy](https://academic.oup.com/aje/article/177/4/292/147738). Simulating data also means simulating the causal structure.
+If we have more than one predictor, we need to specify effect sizes for each. Also, we need to be clear what our causal model is: We're saying that both predictors are independently influencing our outcome. Otherwise we commit the [Table II fallacy](https://academic.oup.com/aje/article/177/4/292/147738) [@westreich2013]. Simulating data also means simulating the causal structure.
 
 ## What power?
 
-If we want to simulate power for multiple predictors, powering for $R^2$ is possible, but strange: It means powering for the total effect of all predictors. Just like with group differences, powering for a total effect can mean many underlying patterns: 
+If we want to simulate power for multiple predictors, powering for $R^2$ is possible, but strange: It means powering for the total effect of all predictors. Just like with group differences, powering for a total effect can mean many underlying patterns:
 
-- $x_1$ explaining everything, but $x_2$ and $x_3$ explaining nothing
-- $x_1$ and $x_2$ both explaining a moderate amount, but $x_3$ explaining nothing
-- All 3 explaining a little
-- Etc.
+-   $x_1$ explaining everything, but $x_2$ and $x_3$ explaining nothing
+-   $x_1$ and $x_2$ both explaining a moderate amount, but $x_3$ explaining nothing
+-   All 3 explaining a little
+-   Etc.
 
 ## What we need
 
-Ideally, we power for **all effects**, meaning the smallest independent effect:
+Ideally, we power for **all effectts**  meaning the smallest independent effect:
 
-- Slope for each predictor
-- Correlation between each predictor
-- Correlation between each predictor and the outcome
-- All means and SDs
+-   Slope for each predictor
+-   Correlation between each predictor
+-   Correlation between each predictor and the outcome
+-   All means and SDs
 
 How to simulate power for multiple causes? Next exercise.
+
+# Let's do interactions
 
 ## Categorical by continuous interactions
 
@@ -561,7 +583,7 @@ In effect, we ask what information increasing both predictors adds to increasing
 
 ## Example
 
-Say we want to know the effect of framing of a message (positive vs. neutral) on how much people agree with it, but we expect the effect to depend on how much people like positive framing. 
+Say we want to know the effect of framing of a message (positive vs. neutral) on how much people agree with it, but we expect the effect to depend on how much people like positive framing.
 
 ## Pictures, plase
 
@@ -603,20 +625,20 @@ $$
 y = \beta_0 + \beta_1condition + \beta_2liking + \beta_3 \times condition \times liking
 $$
 
-- $\beta_0$: The outcome when condition is neutral and liking is 0
-- $\beta_1$: Difference between condition neutral and liking 0 and condition positive and liking 0 (aka main effect of condition)
-- $\beta_2$: Difference between condition neutral and liking 0 and condition neutral and liking 1 (aka main effect liking)
-- $\beta_3$: In addition to the condition effect, what does going up in liking by 1 add (or subtract) from the outcome?
+-   $\beta_0$: The outcome when condition is neutral and liking is 0
+-   $\beta_1$: Difference between condition neutral and liking 0 and condition positive and liking 0 (aka main effect of condition)
+-   $\beta_2$: Difference between condition neutral and liking 0 and condition neutral and liking 1 (aka main effect liking)
+-   $\beta_3$: In addition to the condition effect, what does going up in liking by 1 add (or subtract) from the outcome?
 
 ## Let's create those scores
 
 Let's say we measure agreement on a 100-point scale. We make several assumptions:
 
-- There's probably no main effect of liking: Why would how much you like a positive message influence the effect of any message? It should only enhance the positive one.
-- We'll center liking: It makes it easier to think about what our coefficients mean.
-- Let's say at average liking (0 = centered), agreement is on the mid-point of the scale: 50
-- We expect a positive message to "work" at average liking, so we put down a main effect of 5 points as our SESOI
-- We expect that going up 1 point on liking will enhance our framing effect by 1 point
+-   There's probably no main effect of liking: Why would how much you like a positive message influence the effect of any message? It should only enhance the positive one.
+-   We'll center liking: It makes it easier to think about what our coefficients mean.
+-   Let's say at average liking (0 = centered), agreement is on the mid-point of the scale: 50
+-   We expect a positive message to "work" at average liking, so we put down a main effect of 5 points as our SESOI
+-   We expect that going up 1 point on liking will enhance our framing effect by 1 point
 
 ## Put into numbers
 
@@ -626,11 +648,10 @@ Let's say we measure agreement on a 100-point scale. We make several assumptions
 & y = 50 + 5 \times condition + 0 \times liking + 1 \times condition \times liking
 \end{align}
 ```
-
-- $\beta_0$: The outcome when condition is neutral and liking is 0: 50
-- $\beta_1$: Difference between condition neutral and liking 0 and condition positive and liking 0 (aka main effect of condition): 5
-- $\beta_2$: Difference between condition neutral and liking 0 and condition neutral and liking 1 (aka main effect liking): 0
-- $\beta_3$: In addition to the condition effect, what does going up in liking by 1 add (or subtract) from the outcome?: 1
+-   $\beta_0$: The outcome when condition is neutral and liking is 0 (i.e., average): 50
+-   $\beta_1$: Difference between condition neutral and liking 0 and condition positive and liking 0 (aka main effect of condition): 5
+-   $\beta_2$: Difference between condition neutral and liking 0 and condition neutral and liking 1 (aka main effect liking): 0
+-   $\beta_3$: In addition to the condition effect, what does going up in liking by 1 add (or subtract) from the outcome?: 1
 
 ## In R
 
@@ -750,12 +771,6 @@ ggplot(d, aes(x = liking, y = agree, color = condition)) +
   theme_bw()
 ```
 
-## Alternative way of thinking about it
-
-Let's go back to our original example. At average liking, there'll be a 5-point difference. What's the maximum effect we can expect? If someone scores 7/7 on liking. Because we centered (and the mean was 3.5), that means someone who scores 3.5 above 0.
-
-So the maximum effect is 5 (main effect) + 3.5 * 1 (interaction effect) = 8.5 points difference. The minimum effect is 5 - 3.5 = 1.5 points. The maximum range, therefore, is 7 points.
-
 ## Continuous interactions
 
 Same logic as before: What extra information do we gain if we go up on both variables compared to going up on them individually?
@@ -801,23 +816,22 @@ ggplot(
 
 $$
 y = \beta_0 + \beta_1liking + \beta_2trust + \beta_3 \times liking \times trust
-$$
-Both predictors are centered, so 0 is their mean:
+$$ Both predictors are centered, so 0 is their mean:
 
-- $\beta_0$: The outcome when both liking and trustworthiness are 0 (at their means)
-- $\beta_1$: Outcome when liking goes 1 up, but trustworthiness remains at average (= 0) (aka main effect of liking)
-- $\beta_2$: Outcome when trustworthiness goes 1 up, but liking remains at average (= 0) (aka the main effect of trustworthiness)
-- $\beta_3$: In addition to the effect of liking going up 1, what does going up in trustworthiness by 1 add (or subtract) from the outcome?
+-   $\beta_0$: The outcome when both liking and trustworthiness are 0 (at their means)
+-   $\beta_1$: Outcome when liking goes 1 up, but trustworthiness remains at average (= 0) (aka main effect of liking)
+-   $\beta_2$: Outcome when trustworthiness goes 1 up, but liking remains at average (= 0) (aka the main effect of trustworthiness)
+-   $\beta_3$: In addition to the effect of liking going up 1, what does going up in trustworthiness by 1 add (or subtract) from the outcome?
 
 ## Let's create those scores
 
 Once more, we measure agreement on a 100-point scale. We make several assumptions:
 
-- We'll center both predictors: It makes it easier to think about the interaction.
-- At average liking and trustworthiness (0 = centered), agreement is on the mid-point of the scale: 50
-- There's a main effect of liking: With each extra point (at average trustworthiness), agreement should go up by 3 points.
-- There's a main effect of trustworthiness: With each extra point (at average liking), agreement should go up by 2 points.
-- We expect that going up on trustworthiness will enhance our liking effect by 2 points
+-   We'll center both predictors: It makes it easier to think about the interaction.
+-   At average liking and trustworthiness (0 = centered), agreement is on the mid-point of the scale: 50
+-   There's a main effect of liking: With each extra point (at average trustworthiness), agreement should go up by 3 points.
+-   There's a main effect of trustworthiness: With each extra point (at average liking), agreement should go up by 2 points.
+-   We expect that going up on trustworthiness will enhance our liking effect by 2 points
 
 ## Put into numbers
 
@@ -827,11 +841,10 @@ Once more, we measure agreement on a 100-point scale. We make several assumption
 & y = 50 + 3 \times liking + 2 \times trust + 2 \times liking \times trust
 \end{align}
 ```
-
-- $\beta_0$: The outcome when both liking and trustworthiness are 0: 50
-- $\beta_1$: Outcome when liking goes 1 up, but trustworthiness remains at average: +3
-- $\beta_2$: Outcome when trustworthiness goes 1 up, but liking remains at average: +2
-- $\beta_3$: In addition to the effect of liking going up 1, also going up in trustworthiness 1 adds to the outcome: 2
+-   $\beta_0$: The outcome when both liking and trustworthiness are 0: 50
+-   $\beta_1$: Outcome when liking goes 1 up, but trustworthiness remains at average: +3
+-   $\beta_2$: Outcome when trustworthiness goes 1 up, but liking remains at average: +2
+-   $\beta_3$: In addition to the effect of liking going up 1, also going up in trustworthiness 1 adds to the outcome: 2
 
 ## In R
 
@@ -901,7 +914,7 @@ interactions::interact_plot(m, pred = "liking", modx = "trustworthiness")
 
 $y = \beta_0 + \beta_1x_1 + \beta_2x_2 + \beta_3x_1x_2$
 
-The interaction term is really just a product, so we can treat it as its own variable. We can simply create a correlation matrix where we specify how the product of two variables (aka $x_1 \times x_2$) should correlate to our outcome.
+The interaction term is really just a product, so we can treat it as its own variable. We can simply create a correlation matrix where we specify how the product of two variables (aka $x_1 \times x_2$) should correlate with our outcome.
 
 $$
 \begin{bmatrix} 
@@ -975,6 +988,8 @@ If we want to work on the raw scale, we once more need the standard deviations. 
 
 # Takeaways
 
-- Understand that continuous predictors are just another case of the linear model
-- Extend this understanding to continuous (by categorical) interactions
-- Be able to translate that extension to generating data
+-   Understand that continuous predictors are just another case of the linear model
+-   Extend this understanding to continuous (by categorical) interactions
+-   Be able to translate that extension to generating data
+
+# References
