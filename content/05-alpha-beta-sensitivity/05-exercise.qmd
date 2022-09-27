@@ -8,7 +8,7 @@ format:
 execute: 
   cache: true
   eval: false
-  echo: false
+  echo: true
   message: false
   warning: false
 ---
