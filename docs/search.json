@@ -2566,7 +2566,7 @@
     "href": "content/08-interactions/slides/index.html#is-there-an-interaction",
     "title": "Interactions",
     "section": "Is there an interaction?",
-    "text": "Is there an interaction?"
+    "text": "Is there an interaction?\n\n\n── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──\n✔ ggplot2 3.3.6     ✔ purrr   0.3.4\n✔ tibble  3.1.7     ✔ dplyr   1.0.9\n✔ tidyr   1.2.0     ✔ stringr 1.4.0\n✔ readr   2.1.2     ✔ forcats 0.5.1\n\n\nWarning: package 'ggplot2' was built under R version 4.2.1\n\n\nWarning: package 'tibble' was built under R version 4.2.1\n\n\nWarning: package 'tidyr' was built under R version 4.2.1\n\n\nWarning: package 'dplyr' was built under R version 4.2.1\n\n\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()"
   },
   {
     "objectID": "content/08-interactions/slides/index.html#how-about-now",
@@ -2832,7 +2832,7 @@
     "href": "content/08-interactions/slides/index.html#different-results",
     "title": "Interactions",
     "section": "Different results",
-    "text": "Different results\n\nsummary(aov(Aggression ~ Game*Difficulty, d))\n\n                 Df Sum Sq Mean Sq F value Pr(>F)    \nGame              1    0.9     0.9   1.078  0.301    \nDifficulty        1    0.3     0.3   0.306  0.581    \nGame:Difficulty   1  412.0   412.0 495.391 <2e-16 ***\nResiduals       181  150.5     0.8                   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\nsummary(afex::aov_car(Aggression ~ Game*Difficulty + Error(id), d %>% mutate(id=1:nrow(d)), type = 3))\n\nAnova Table (Type 3 tests)\n\nResponse: Aggression\n                num Df den Df     MSE        F     ges Pr(>F)    \nGame                 1    181 0.83162   0.8505 0.00468 0.3576    \nDifficulty           1    181 0.83162   0.4517 0.00249 0.5024    \nGame:Difficulty      1    181 0.83162 495.3912 0.73240 <2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+    "text": "Different results\n\nsummary(aov(Aggression ~ Game*Difficulty, d))\n\n                 Df Sum Sq Mean Sq F value Pr(>F)    \nGame              1    0.9     0.9   1.078  0.301    \nDifficulty        1    0.3     0.3   0.306  0.581    \nGame:Difficulty   1  412.0   412.0 495.391 <2e-16 ***\nResiduals       181  150.5     0.8                   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\nsummary(afex::aov_car(Aggression ~ Game*Difficulty + Error(id), d %>% mutate(id=1:nrow(d)), type = 3))\n\nConverting to factor: Game, Difficulty\n\n\nContrasts set to contr.sum for the following variables: Game, Difficulty\n\n\nAnova Table (Type 3 tests)\n\nResponse: Aggression\n                num Df den Df     MSE        F     ges Pr(>F)    \nGame                 1    181 0.83162   0.8505 0.00468 0.3576    \nDifficulty           1    181 0.83162   0.4517 0.00249 0.5024    \nGame:Difficulty      1    181 0.83162 495.3912 0.73240 <2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
   },
   {
     "objectID": "content/08-interactions/slides/index.html#the-lm-solution",
@@ -2881,7 +2881,7 @@
     "href": "content/08-interactions/slides/index.html#back-to-our-example",
     "title": "Interactions",
     "section": "Back to our example",
-    "text": "Back to our example\nOverall results tells us whether the interaction provides extra information:\n\n# get id variables\nd$id <- 1:nrow(d)\n\n# give actual names to factor leves\nd$Game <- as.factor(d$Game)\nd$Difficulty <- as.factor(d$Difficulty)\nlevels(d$Game) <- c(\"Peaceful\", \"Violent\")\nlevels(d$Difficulty) <- c(\"easy\", \"hard\")\n\nm <- afex::aov_car(Aggression ~ Game*Difficulty + Error(id), d %>% mutate(id=1:nrow(d)), type = 3)"
+    "text": "Back to our example\nOverall results tells us whether the interaction provides extra information:\n\n# get id variables\nd$id <- 1:nrow(d)\n\n# give actual names to factor leves\nd$Game <- as.factor(d$Game)\nd$Difficulty <- as.factor(d$Difficulty)\nlevels(d$Game) <- c(\"Peaceful\", \"Violent\")\nlevels(d$Difficulty) <- c(\"easy\", \"hard\")\n\nm <- afex::aov_car(Aggression ~ Game*Difficulty + Error(id), d %>% mutate(id=1:nrow(d)), type = 3)\n\nContrasts set to contr.sum for the following variables: Game, Difficulty"
   },
   {
     "objectID": "content/08-interactions/slides/index.html#back-to-our-example-1",
