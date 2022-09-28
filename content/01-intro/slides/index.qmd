@@ -151,7 +151,7 @@ We'll follow the same routine over and over: Learn, do, recall.
 - Just download everything as a zip file (Code -> Zip)
 - Rendered to follow along here: <https://niklasjohannes.github.io/power-workshop/>
 - There, you'll also find instructions on how to download R, RStudio, and GPower
-- For discussions we use Discord: <https://discord.gg/XXtE2AgG>
+- For discussions we use Discord: <https://discord.gg/AGCnH69F>
 
 ## Stealing stuff
 

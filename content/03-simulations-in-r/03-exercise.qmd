@@ -11,7 +11,7 @@ callout-appearance: simple
 execute: 
   cache: true
   eval: false
-  echo: true
+  echo: false
   message: false
   warning: false
 ---
@@ -166,7 +166,7 @@ Use the `prob` argument. You need one probability for each letter. That probabil
 Create a data set. In the data set, each participant has an identifier (called `id`), a group identifier (`condition`), and an identifier of what number of measurement we have for this participant (`trial`). There are 3 participants in each of three groups with 5 trials in each group.
 
 ```{r}
-#| eval: true
+#| eval: false
 #| echo: false
 
 groups <- letters[1:3]
@@ -189,8 +189,8 @@ d
 Ultimately, you want to have something of the following form:
 
 ```{r}
-#| eval: false
-#| echo: true
+#| eval: true
+#| echo: false
 
 groups <- letters[1:3]
 participants <- length(groups) * 3
