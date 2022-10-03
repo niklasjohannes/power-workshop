@@ -7,8 +7,8 @@ format:
     number-sections: true
 execute: 
   cache: true
-  eval: false
-  echo: false
+  eval: true
+  echo: true
   message: false
   warning: false
 ---
@@ -174,7 +174,7 @@ plot(outcomes$sample_size, outcomes$power)
 :::{.callout-tip collapse="true"}
 ## Expand to get a tip
 
-At this point, you'll know what comes here. We first delcare our parameters:
+At this point, you'll know what comes here. We first declare our parameters:
 
 ```{r}
 #| echo: true
@@ -594,6 +594,7 @@ Last, you determined that you're early in the research process, so you definitel
 You can afford to collect 100 participants in total (that's where you'll stop with the simulation). Simulate power (500 runs each); go in steps of 5 (start with 20). How many participants do you need for 95% power? Will 100 even get you there? Use contrast coding.
 
 Several tips:
+
 * For the variance-covariance matrix, you'll need to get different covariances based on the groups
 * Remember the data format the data have to be in. You'll need to transform them from wide to long format. Have a look at the slides or good old Google
 * You might have to Google how to get the p-value out of `aov` (one method that worked for me was `unlist(model)["Error: Within.Pr(>F)1"]`)

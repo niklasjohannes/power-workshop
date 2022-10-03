@@ -10,8 +10,8 @@ callout-appearance: simple
 
 execute: 
   cache: true
-  eval: false
-  echo: false
+  eval: true
+  echo: true
   message: false
   warning: false
 ---
