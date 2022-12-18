@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.0.38">
+<meta name="generator" content="quarto-1.2.280">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,10 +11,15 @@
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -53,7 +58,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -66,7 +71,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -353,18 +358,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc">
+        <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a>
   <ul class="collapse">
-  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise"> <span class="header-section-number">0.1</span> Exercise</a></li>
-  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1"> <span class="header-section-number">0.2</span> Exercise</a></li>
-  <li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2"> <span class="header-section-number">0.3</span> Exercise</a></li>
-  <li><a href="#exercise-3" id="toc-exercise-3" class="nav-link" data-scroll-target="#exercise-3"> <span class="header-section-number">0.4</span> Exercise</a></li>
-  <li><a href="#exercise-4" id="toc-exercise-4" class="nav-link" data-scroll-target="#exercise-4"> <span class="header-section-number">0.5</span> Exercise</a></li>
-  <li><a href="#exercise-5" id="toc-exercise-5" class="nav-link" data-scroll-target="#exercise-5"> <span class="header-section-number">0.6</span> Exercise</a></li>
+  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise"><span class="toc-section-number">0.1</span>  Exercise</a></li>
+  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1"><span class="toc-section-number">0.2</span>  Exercise</a></li>
+  <li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2"><span class="toc-section-number">0.3</span>  Exercise</a></li>
+  <li><a href="#exercise-3" id="toc-exercise-3" class="nav-link" data-scroll-target="#exercise-3"><span class="toc-section-number">0.4</span>  Exercise</a></li>
+  <li><a href="#exercise-4" id="toc-exercise-4" class="nav-link" data-scroll-target="#exercise-4"><span class="toc-section-number">0.5</span>  Exercise</a></li>
+  <li><a href="#exercise-5" id="toc-exercise-5" class="nav-link" data-scroll-target="#exercise-5"><span class="toc-section-number">0.6</span>  Exercise</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -382,6 +387,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="quarto-title-meta">
 
     
+  
     
   </div>
   
@@ -429,7 +435,7 @@ False \ positive \ rate = \frac{\phi * \alpha}{\phi * \alpha + power * (1 - \phi
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> phis, <span class="at">y =</span> fpr, <span class="at">color =</span> <span class="fu">as.factor</span>(alphas))) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span> power) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-hash="05-exercise_cache/html/unnamed-chunk-3_83b2f37b7fe4b2fea107d75b72d1c08e">
+<div class="cell" data-hash="05-exercise_cache/html/unnamed-chunk-3_a4fc872804e26146daa3a717c6842144">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>phis <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.01</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>alphas <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">standard =</span> .<span class="dv">05</span>, <span class="at">low =</span> .<span class="dv">01</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>power <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.80</span>, <span class="fl">0.95</span>)</span>
@@ -440,12 +446,9 @@ False \ positive \ rate = \frac{\phi * \alpha}{\phi * \alpha + power * (1 - \phi
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> phis, <span class="at">y =</span> fpr, <span class="at">color =</span> <span class="fu">as.factor</span>(alphas))) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span> power) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="05-exercise_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
-</div>
 </div>
 <p>In physics, they use a five sigma rule. That means their alpha is <span class="math inline">\(3*10^{-7}\)</span> or 1 in 3.5 million. Do the above again, but this time plot “our” 0.05 against five sigma and compare false positive rates.</p>
-<div class="cell" data-hash="05-exercise_cache/html/unnamed-chunk-4_99277ca57759dfe8d7693a8a38485a53">
+<div class="cell" data-hash="05-exercise_cache/html/unnamed-chunk-4_0ca291389c3e2713c08192f3cbd3dca6">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>phis <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.01</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>alphas <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">standard =</span> .<span class="dv">05</span>, <span class="at">physics =</span> <span class="dv">3</span><span class="sc">*</span><span class="dv">10</span><span class="sc">^-</span><span class="dv">7</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>power <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.80</span>, <span class="fl">0.95</span>)</span>
@@ -455,9 +458,6 @@ False \ positive \ rate = \frac{\phi * \alpha}{\phi * \alpha + power * (1 - \phi
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>fpr <span class="ot">&lt;-</span> (d<span class="sc">$</span>phis <span class="sc">*</span> d<span class="sc">$</span>alphas) <span class="sc">/</span> ((d<span class="sc">$</span>phis <span class="sc">*</span> d<span class="sc">$</span>alphas) <span class="sc">+</span> (d<span class="sc">$</span>power <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> d<span class="sc">$</span>phis)))</span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> phis, <span class="at">y =</span> fpr, <span class="at">color =</span> <span class="fu">as.factor</span>(alphas))) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span> power) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="05-exercise_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
-</div>
 </div>
 </section>
 <section id="exercise-1" class="level2" data-number="0.2">
@@ -482,7 +482,7 @@ False \ positive \ rate = \frac{\phi * \alpha}{\phi * \alpha + power * (1 - \phi
 <span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(outcomes, <span class="fu">aes</span>(<span class="at">x =</span> sample_size, <span class="at">y =</span> power, <span class="at">color =</span> <span class="fu">as.factor</span>(alpha))) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.95</span>) <span class="sc">%&gt;%</span>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-hash="05-exercise_cache/html/unnamed-chunk-6_46355866bb14ac7206943dbd329fcb7d">
+<div class="cell" data-hash="05-exercise_cache/html/unnamed-chunk-6_2fdbff9d3bc1a5e6371ad5e967b1dd47">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">pre =</span> <span class="dv">4</span>, <span class="at">post =</span> <span class="fl">4.3</span>)</span>
@@ -551,9 +551,6 @@ False \ positive \ rate = \frac{\phi * \alpha}{\phi * \alpha + power * (1 - \phi
 <span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(outcomes, <span class="fu">aes</span>(<span class="at">x =</span> sample_size, <span class="at">y =</span> power, <span class="at">color =</span> <span class="fu">as.factor</span>(alpha))) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.95</span>) <span class="sc">+</span> <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="05-exercise_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
-</div>
 </div>
 <div class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
@@ -649,7 +646,7 @@ Expand to get a tip
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> pvalue, <span class="at">color =</span> type)) <span class="sc">+</span> <span class="fu">geom_density</span>() <span class="sc">+</span> <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.02</span>)) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="dv">0</span>, draws<span class="sc">/</span><span class="dv">10</span>)) <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> alpha) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-hash="05-exercise_cache/html/unnamed-chunk-11_b34eba8f3271ca0c632673c1954a4d80">
+<div class="cell" data-hash="05-exercise_cache/html/unnamed-chunk-11_4b4ffc62c8070223558a1223898b000e">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fl">1e3</span></span>
@@ -683,9 +680,6 @@ Expand to get a tip
 <span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> pvalue, <span class="at">color =</span> type)) <span class="sc">+</span> <span class="fu">geom_density</span>() <span class="sc">+</span> <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.02</span>)) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="dv">0</span>, draws<span class="sc">/</span><span class="dv">10</span>)) <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> alpha) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="05-exercise_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
-</div>
 </div>
 <div class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
@@ -745,7 +739,7 @@ Expand to get a tip
 <section id="exercise-3" class="level2" data-number="0.4">
 <h2 data-number="0.4" class="anchored" data-anchor-id="exercise-3"><span class="header-section-number">0.4</span> Exercise</h2>
 <p>For your master thesis, you ran a study where you conducted a paired-samples t-test. At the time, you didn’t know about power analysis. Now as you write the paper up for publication, you state that you didn’t conduct a power analysis, but you want to at least report the sensitivity of the test. Your sample size was 27 and you conducted a two-tailed test. Your alpha was 0.05. Simulate the sensitivity of your study (1,000 runs) for standardized effects ranging from 0 to 1 for 95% power. Verify with GPower. (Tip: Remember that the test is just on the difference of the two scores, so you can directly draw the difference. So <code>rnorm(n, difference_score, sd)</code>, then <code>t.test(differences, mu = 0)</code>).</p>
-<div class="cell" data-hash="05-exercise_cache/html/unnamed-chunk-15_d9ce5726770ca79993408ecf62514d47">
+<div class="cell" data-hash="05-exercise_cache/html/unnamed-chunk-15_6c939709136f15e1bc476bcd1de9fff7">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">27</span></span>
@@ -784,9 +778,6 @@ Expand to get a tip
 <span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(outcomes, <span class="fu">plot</span>(effect_size, power))</span>
 <span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="05-exercise_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
-</div>
 </div>
 <div class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
@@ -868,7 +859,7 @@ Expand to get a tip
 <span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-hash="05-exercise_cache/html/unnamed-chunk-20_daccdb0526ab21ad8f60505d555b11e5">
+<div class="cell" data-hash="05-exercise_cache/html/unnamed-chunk-20_bf41d42b3d554d97a7e7a1d07cac6d78">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">32</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>sd_control <span class="ot">&lt;-</span> <span class="dv">16</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>sd_treatment <span class="ot">&lt;-</span> <span class="dv">13</span></span>
@@ -938,9 +929,6 @@ Expand to get a tip
 <span id="cb21-67"><a href="#cb21-67" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb21-68"><a href="#cb21-68" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-69"><a href="#cb21-69" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(outcomes, <span class="fu">aes</span>(<span class="at">x =</span> effect_size, <span class="at">y =</span> power, <span class="at">color =</span> <span class="fu">as.factor</span>(alpha))) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.9</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="05-exercise_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
-</div>
 </div>
 <div class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
@@ -1046,7 +1034,7 @@ Expand to get a tip
 <p>Do the above again, but this time on the standardized scale. Verify your results with GPower. With this exercise, you can’t plot the raw effect size anymore; you’ll you need to plot the standardized one. However, remember the formula for Cohe’s <span class="math inline">\(d\)</span> for correlated samples?</p>
 <p><span class="math inline">\(Cohen's \ d = \frac{M_{diff}-\mu_o}{SD_{diff}}\)</span></p>
 <p>The standardized effect in this simulation will depend on the SD of the difference–and SDs will vary for each simulation. Therefore, you need to calculate the empirical Cohen’s <span class="math inline">\(d\)</span> (i.e., calculate it with the formula above) for each run, store it, and then take the mean of all <span class="math inline">\(d\)</span>s per combination. Ultimately, you only need to add a couple of lines (calculating and storing Cohen’s <span class="math inline">\(d\)</span>) to the code from the exercise above.</p>
-<div class="cell" data-hash="05-exercise_cache/html/unnamed-chunk-23_416dce7cbee0ba39d1ba9801cae1bc33">
+<div class="cell" data-hash="05-exercise_cache/html/unnamed-chunk-23_733fd018c187d5f5a631829ca6fbafa5">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">32</span></span>
@@ -1120,9 +1108,6 @@ Expand to get a tip
 <span id="cb24-71"><a href="#cb24-71" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb24-72"><a href="#cb24-72" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-73"><a href="#cb24-73" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(outcomes, <span class="fu">aes</span>(<span class="at">x =</span> effect_size, <span class="at">y =</span> power, <span class="at">color =</span> <span class="fu">as.factor</span>(alpha))) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.9</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="05-exercise_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
-</div>
 </div>
 <div class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
@@ -1202,7 +1187,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -1230,31 +1232,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
     });
   }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
 });
 </script>

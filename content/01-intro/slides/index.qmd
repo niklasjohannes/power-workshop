@@ -73,7 +73,7 @@ We'll follow the same routine over and over: Learn, do, recall.
 
 | What?       | When?                    |
 |-------------|--------------------------|
-| 9:00-9:45   | Intro (now)              |
+| 9:30-9:45   | Intro                    |
 | 10:00-10:45 | What's power?            |
 | 11:00-11:45 | Simulations in R         |
 | 12:00-13:00 | Exercise 1               |
@@ -87,15 +87,14 @@ We'll follow the same routine over and over: Learn, do, recall.
 
 | What?       | When?                    |
 |-------------|--------------------------|
-| 9:00-9:45   | Recap                    |
+| 9:30-9:45   | Recap                    |
 | 10:00-10:45 | Categorical predictors   |
 | 11:00-11:45 | Exercise 4               |
 | 12:00-13:00 | Interactions             |
 | 14:00-14:45 | Exercise 5               |
 | 15:00-15:45 | Continuous predictors    |
 | 16:00-16:45 | Exercise 6               |
-| 17:00-17:45 | Buffer                   |
-| 17:45-18:00 | Recap                    |
+| 16:45-17:00 | Recap                    |
 
 ## What's power
 
