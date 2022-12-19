@@ -103,7 +103,7 @@ What you'll need for the workshop:
 - A laptop
 - A working installation of [R](https://www.r-project.org/) and preferably [RStudio](https://www.rstudio.com/)
 - [GPower](https://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower) installed
-- For communication, please join this discord channel that we'll use throughout the 2 days:
+- For communication, please join this discord channel that we'll use throughout the 2 days: <https://discord.gg/8keTxNAy>
 
 ## Structure
 
