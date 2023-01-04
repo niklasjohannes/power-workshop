@@ -7,7 +7,7 @@
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.2.280">
+  <meta name="generator" content="quarto-1.0.38">
 
   <meta name="author" content="Niklas Johannes">
   <title>Welcome</title>
@@ -19,15 +19,10 @@
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
   </style>
   <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto.css" id="theme">
   <link href="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -325,19 +320,12 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="quarto-title-block center">
+<section id="title-slide" class="center">
   <h1 class="title">Welcome</h1>
   <p class="subtitle">Power analysis through simulation in R</p>
-
-<div class="quarto-title-authors">
-<div class="quarto-title-author">
-<div class="quarto-title-author-name">
-Niklas Johannes 
-</div>
-</div>
-</div>
-
+  <p class="author">Niklas Johannes</p>
 </section>
+
 <section id="why-this-workshop" class="slide level2">
 <h2>Why this workshop</h2>
 <ul>
@@ -416,8 +404,8 @@ Niklas Johannes
 </thead>
 <tbody>
 <tr class="odd">
-<td>9:30-9:45</td>
-<td>Intro</td>
+<td>9:00-9:45</td>
+<td>Intro (now)</td>
 </tr>
 <tr class="even">
 <td>10:00-10:45</td>
@@ -465,7 +453,7 @@ Niklas Johannes
 </thead>
 <tbody>
 <tr class="odd">
-<td>9:30-9:45</td>
+<td>9:00-9:45</td>
 <td>Recap</td>
 </tr>
 <tr class="even">
@@ -493,7 +481,11 @@ Niklas Johannes
 <td>Exercise 6</td>
 </tr>
 <tr class="even">
-<td>16:45-17:00</td>
+<td>17:00-17:45</td>
+<td>Buffer</td>
+</tr>
+<tr class="odd">
+<td>17:45-18:00</td>
 <td>Recap</td>
 </tr>
 </tbody>
@@ -570,7 +562,7 @@ Niklas Johannes
 <li>Just download everything as a zip file (Code -&gt; Zip)</li>
 <li>Rendered to follow along here: <a href="https://niklasjohannes.github.io/power-workshop/" class="uri">https://niklasjohannes.github.io/power-workshop/</a></li>
 <li>There, you’ll also find instructions on how to download R, RStudio, and GPower</li>
-<li>For discussions we use Discord: <a href="https://discord.gg/8keTxNAy" class="uri">https://discord.gg/8keTxNAy</a></li>
+<li>For discussions we use Discord:</li>
 </ul>
 </section>
 <section id="stealing-stuff" class="slide level2">
@@ -850,24 +842,7 @@ Niklas Johannes
         button.classList.add('code-copy-button-checked');
         var currentTitle = button.getAttribute("title");
         button.setAttribute("title", "Copied!");
-        let tooltip;
-        if (window.bootstrap) {
-          button.setAttribute("data-bs-toggle", "tooltip");
-          button.setAttribute("data-bs-placement", "left");
-          button.setAttribute("data-bs-title", "Copied!");
-          tooltip = new bootstrap.Tooltip(button, 
-            { trigger: "manual", 
-              customClass: "code-copy-button-tooltip",
-              offset: [0, -8]});
-          tooltip.show();    
-        }
         setTimeout(function() {
-          if (tooltip) {
-            tooltip.hide();
-            button.removeAttribute("data-bs-title");
-            button.removeAttribute("data-bs-toggle");
-            button.removeAttribute("data-bs-placement");
-          }
           button.setAttribute("title", currentTitle);
           button.classList.remove('code-copy-button-checked');
         }, 1000);
@@ -897,50 +872,31 @@ Niklas Johannes
       for (var i=0; i<noterefs.length; i++) {
         const ref = noterefs[i];
         tippyHover(ref, function() {
-          // use id or data attribute instead here
-          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          let href = ref.getAttribute('href');
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
           return note.innerHTML;
         });
       }
-      const findCites = (el) => {
-        const parentEl = el.parentElement;
-        if (parentEl) {
-          const cites = parentEl.dataset.cites;
-          if (cites) {
-            return {
-              el,
-              cites: cites.split(' ')
-            };
-          } else {
-            return findCites(el.parentElement)
-          }
-        } else {
-          return undefined;
-        }
-      };
       var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
       for (var i=0; i<bibliorefs.length; i++) {
         const ref = bibliorefs[i];
-        const citeInfo = findCites(ref);
-        if (citeInfo) {
-          tippyHover(citeInfo.el, function() {
-            var popup = window.document.createElement('div');
-            citeInfo.cites.forEach(function(cite) {
-              var citeDiv = window.document.createElement('div');
-              citeDiv.classList.add('hanging-indent');
-              citeDiv.classList.add('csl-entry');
-              var biblioDiv = window.document.getElementById('ref-' + cite);
-              if (biblioDiv) {
-                citeDiv.innerHTML = biblioDiv.innerHTML;
-              }
-              popup.appendChild(citeDiv);
-            });
-            return popup.innerHTML;
+        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+        tippyHover(ref, function() {
+          var popup = window.document.createElement('div');
+          cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
           });
-        }
+          return popup.innerHTML;
+        });
       }
     });
     </script>

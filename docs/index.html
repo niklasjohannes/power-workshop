@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.280">
+<meta name="generator" content="quarto-1.0.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,15 +11,10 @@
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
-ul.task-list li input[type="checkbox"] {
-  width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
-  vertical-align: middle;
-}
 </style>
 
 
@@ -308,7 +303,6 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-title-meta">
 
     
-  
     
   </div>
   
@@ -319,7 +313,7 @@ ul.task-list li input[type="checkbox"] {
 <p><img src="https://media.giphy.com/media/MCZ39lz83o5lC/giphy.gif" class="img-fluid"></p>
 <section id="this-website" class="level2">
 <h2 class="anchored" data-anchor-id="this-website">This website</h2>
-<p>This website collects the materials for a 2-day workshop on simulating power with R that <a href="https://www.niklasjohannes.com/">I’m</a> giving at the University of Leuven.</p>
+<p>This website collects the materials for a 2-day workshop on simulating power with R that <a href="https://www.niklasjohannes.com/">I’ve</a> given at the Universities of Vienna, Zurich, and Mainz (to thundering applause and <em>very</em> few boos). Shoot me an email if you’re interested in giving the workshop at your uni/company.</p>
 <p>Rather than dumping the materials in zip folder somewhere, I thought this format will be better for a) participants to revisit, b) those who might be interested in the content but couldn’t make it. That’s also the reason most of the materials are so annoyingly verbose: I wanted readers to be able to follow along by themselves and re-visit.</p>
 </section>
 <section id="goal" class="level2">
@@ -339,7 +333,7 @@ ul.task-list li input[type="checkbox"] {
 </thead>
 <tbody>
 <tr class="odd">
-<td>9:30-9:45</td>
+<td>9:00-9:45</td>
 <td>Intro</td>
 </tr>
 <tr class="even">
@@ -386,7 +380,7 @@ ul.task-list li input[type="checkbox"] {
 </thead>
 <tbody>
 <tr class="odd">
-<td>9:30-9:45</td>
+<td>9:00-9:45</td>
 <td>Recap</td>
 </tr>
 <tr class="even">
@@ -414,7 +408,11 @@ ul.task-list li input[type="checkbox"] {
 <td>Exercise 6</td>
 </tr>
 <tr class="even">
-<td>16:45-17:00</td>
+<td>17:00-17:45</td>
+<td>Buffer</td>
+</tr>
+<tr class="odd">
+<td>17:45-18:00</td>
 <td>Recap</td>
 </tr>
 </tbody>
@@ -488,7 +486,7 @@ ul.task-list li input[type="checkbox"] {
 <li>A laptop</li>
 <li>A working installation of <a href="https://www.r-project.org/">R</a> and preferably <a href="https://www.rstudio.com/">RStudio</a></li>
 <li><a href="https://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower">GPower</a> installed</li>
-<li>For communication, please join this discord channel that we’ll use throughout the 2 days: <a href="https://discord.gg/8keTxNAy" class="uri">https://discord.gg/8keTxNAy</a></li>
+<li>For communication, please join this discord channel that we’ll use throughout the 2 days:</li>
 </ul>
 </section>
 <section id="structure" class="level2">
@@ -499,7 +497,6 @@ ul.task-list li input[type="checkbox"] {
 <section id="getting-a-local-copy" class="level2">
 <h2 class="anchored" data-anchor-id="getting-a-local-copy">Getting a local copy</h2>
 <p>If you want a local copy of this website, just download the entire project from Github: <a href="https://github.com/niklasjohannes/power-workshop" class="uri">https://github.com/niklasjohannes/power-workshop</a> (Code –&gt; Download Zip). Unzip and then go to the <code>docs</code> folder, where you can double click on <code>index</code>. Alternatively, you can select individual slides/exercises within the docs folder. If you want to look at the source code, check the <code>content</code> folder. (Here you’ll also find the code for the solutions for the exercises.)</p>
-<p>During the workshop, the solutions aren’t rendered and the project will be set to private. I find it important not to show the solutions to exercises until after we’ve worked through them. Everything will be up after the workshop.</p>
 </section>
 <section id="copyright" class="level2">
 <h2 class="anchored" data-anchor-id="copyright">Copyright</h2>
@@ -550,24 +547,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
     setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -595,50 +575,31 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      let href = ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
     });
   }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
       });
-    }
+      return popup.innerHTML;
+    });
   }
 });
 </script>
