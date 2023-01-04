@@ -735,8 +735,9 @@ for (asize in c(0.5, 1)) {
     for (i in 1:runs) {
     }
     power <- ?
+      
+    n <- n + 1
   }
-  n <- n + 1
   
 }
 
