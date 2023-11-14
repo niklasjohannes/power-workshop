@@ -7,8 +7,8 @@ format:
     number-sections: true
 execute: 
   cache: true
-  eval: false
-  echo: false
+  eval: true
+  echo: true
   message: false
   warning: false
 ---
