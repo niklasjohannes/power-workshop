@@ -366,8 +366,6 @@ d <-
     group = rep(c(letters[1:4]), times = n),
     score = rnorm(n*4, means, sds)
   )
-
-aggregate(d$score, mean, by = list(d$group))
 ```
 
 :::{.callout-tip collapse="true"}

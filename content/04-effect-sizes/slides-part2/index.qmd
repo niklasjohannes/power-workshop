@@ -220,7 +220,7 @@ t.test(
 
 At this point, we've worked with `for` loops and went from a minimum to a maximum. If that maximum is large, that can take quite some time. You can also consider the `while` function to stop when you've reached the point you want to be at.
 
-![](https://www.datamentor.io/sites/tutorial2program/files/r-while-loop.jpg)
+![](https://cdn.datamentor.io/wp-content/uploads/2017/11/r-while-loop.jpg)
 [Source](https://www.datamentor.io/r-programming/while-loop/)
 
 ## Easy example

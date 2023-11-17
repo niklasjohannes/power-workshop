@@ -2,13 +2,13 @@
 title: "Welcome"
 ---
 
-Hello there. Internet etiquette dictates that any website that deals with stats starts with a GIF to signal that this will be fun. I'm not one to breach etiquette, so here we go:
+Hello there. Internet etiquette dictates that any website that deals with stats starts with a GIF to signal that this'll be fun. I'm not one to breach etiquette, so here we go:
 
 ![](https://media.giphy.com/media/MCZ39lz83o5lC/giphy.gif)
 
 ## This website
 
-This website collects the materials for a 2-day workshop on simulating power with R that [I'm](https://www.niklasjohannes.com/) giving as part of the [GESIS training portfolio](https://training.gesis.org/?site=pDetails&child=full&pID=0xE0F8F1C4FE124C6CB7B6AAC9E2E83E61).
+This website collects the materials for a 2-day workshop on simulating power with R that [I've](https://www.niklasjohannes.com/) given at several universities (to thundering applause and *very* few boos). Shoot me an email if you're interested in giving the workshop at your uni/company.
 
 Rather than dumping the materials in zip folder somewhere, I thought this format will be better for a) participants to revisit, b) those who might be interested in the content but couldn't make it. That's also the reason most of the materials are so annoyingly verbose: I wanted readers to be able to follow along by themselves and re-visit.
 
@@ -22,19 +22,31 @@ Below is the 2-day schedule. From experience, there's quite a lot of variability
 
 **Day 1**
 
-| When          | What                                                                 |
-| ------------- | -------------------------------------------------------------------- |
-| 09:30 - 12:30 | Intro<br>What's power?<br>Simulations in R<br>Exercise 1             |
-| 12:30 - 14:00 | Lunch break                                                          |
-| 14:00-17:30   | Effect sizes<br>Exercise 2<br>Alpha, beta, sensitivity<br>Exercise 3 |
+| What?       | When?                    |
+|-------------|--------------------------|
+| 9:00-9:45   | Intro                    |
+| 10:00-10:45 | What's power?            |
+| 11:00-11:45 | Simulations in R         |
+| 12:00-13:00 | Exercise 1               |
+| 14:00-14:45 | Effect sizes             |
+| 15:00-15:45 | Exercise 2               |
+| 16:00-16:45 | Alpha, beta, sensitivity |
+| 17:00-17:45 | Exercise 3               |
+| 17:45-18:00 | Recap                    |
 
 **Day 2**
 
-| When          | What                                                                 |
-| ------------- | -------------------------------------------------------------------- |
-| 09:30 - 12:30 | Categorical predictors<br>Exercise 4<br>Interactions                 |
-| 12:30 - 14:00 | Lunch break                                                          |
-| 14:00-17:30   | Exercise 5<br>Continnuous predictors<br>Exercise 6                   |
+| What?       | When?                    |
+|-------------|--------------------------|
+| 9:00-9:45   | Recap                    |
+| 10:00-10:45 | Categorical predictors   |
+| 11:00-11:45 | Exercise 4               |
+| 12:00-13:00 | Interactions             |
+| 14:00-14:45 | Exercise 5               |
+| 15:00-15:45 | Continuous predictors    |
+| 16:00-16:45 | Exercise 6               |
+| 17:00-17:45 | Buffer                   |
+| 17:45-18:00 | Recap                    |
 
 ## Takeaways
 
@@ -50,7 +62,7 @@ Each of these blocks has a several learning outcomes. They are:
 
 - Understand why simulations are useful
 - Logic of Monte Carlo Simulations
-- Learn basic tools in R for simulating data
+- Basic tools
 
 ### Effect sizes
 
@@ -89,10 +101,10 @@ I expect that you're somewhat familiar (though not deeply) with R and vaguely re
 
 What you'll need for the workshop:
 
-- A laptop (with a webcam, preferably)
+- A laptop
 - A working installation of [R](https://www.r-project.org/) and preferably [RStudio](https://www.rstudio.com/)
 - [GPower](https://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower) installed
-- For communication, please join this discord channel that we'll use throughout the 2 days: <https://discord.gg/EeEWx4r5>
+- For communication, please join this discord channel that we'll use throughout the 2 days:
 
 ## Structure
 
